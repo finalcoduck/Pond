@@ -25,11 +25,29 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:Mappers/**/*Mapper.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
 	</bean>
 	<!-- SqlSession설정 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	<!-- 메일보내기 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="soulstrk1234@gmail.com" />
+      <property name="password" value="soul4310" />
+      
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+    </bean>
+	
 	
 	<context:component-scan base-package="com.coduck.pond">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
