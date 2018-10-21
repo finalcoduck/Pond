@@ -8,34 +8,34 @@ package com.coduck.pond.core.constant;
 
 public class ErrorCodeConstant {
 	/** 정상적으로 처리된 경우 */
-	private static final String SUCCESS = "0000";
+	public static final String SUCCESS = "0000";
 	
 	/** 일반적인 실패 */
-	private static final String FAILURE = "E001";
+	public static final String FAILURE = "E001";
 	
 	/** 중복으로 인한 오류 */
-	private static final String DUPLICATED = "E002";
+	public static final String DUPLICATED = "E002";
 	
 	/** 처리대상 미존재 */
-	private static final String NOT_FOUND = "E003";	
+	public static final String NOT_FOUND = "E003";	
 	
 	/** 이미 등록된 경우  */
-	private static final String REGISTERED = "E004";
+	public static final String REGISTERED = "E004";
 	
 	/** 필수항목 오류 */
-	private static final String EMPTY_REQUIRED = "E005";
+	public static final String EMPTY_REQUIRED = "E005";
 	
 	/** 권한부족 */
-	private static final String UNAUTHORIZED = "E006";
+	public static final String UNAUTHORIZED = "E006";
 	
 	/** DB관련 오류 */
-	private static final String DB_ERROR = "E007";
+	public static final String DB_ERROR = "E007";
 	
 	/** 시스템오류 */
-	private static final String SYSTEM_ERROR = "E008";
+	public static final String SYSTEM_ERROR = "E008";
 	
 	/** 오류 */
-	private static final String ERROR = "E009";
+	public static final String ERROR = "E009";
 	
 	
 	
@@ -43,16 +43,16 @@ public class ErrorCodeConstant {
 	 * 로그인시 계정확인
 	 * 로그인시 아이디와 비밀번호에 해당하는 계정 조회안됨 
 	 */
-	private static final String WRNG_ID_PWD = "E011";
+	public static final String WRNG_ID_PWD = "E011";
 	
 	/**
 	 * 비정상 계정
 	 * 계정이 미승인상태이거나 퇴사 업무 전환된 경우
 	 */
-	private static final String ACCN_ABNRML = "E012";
+	public static final String ACCN_ABNRML = "E012";
 	
 	/** 계정잠김 */
-	private static final String ACCN_LCK = "E013";
+	public static final String ACCN_LCK = "E013";
 
 	/**
 	 * 에러 메시지 반환
