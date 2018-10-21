@@ -10,7 +10,7 @@ public class ErrorCodeConstant {
 	/** 정상적으로 처리된 경우 */
 	public static final String SUCCESS = "0000";
 	
-	/** 일반적인 실패  hi*/
+	/** 일반적인 실패 */
 	public static final String FAILURE = "E001";
 	
 	/** 중복으로 인한 오류 */
