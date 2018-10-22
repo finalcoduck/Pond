@@ -1,7 +1,7 @@
 package com.coduck.pond.member.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,5 +11,11 @@ public class HomeController {
 	public String home() { //zz
 		System.out.println("!");
 		return "/erd";
+	}
+	
+	@RequestMapping(value = "group/erd", method = RequestMethod.GET)
+	public String home1() { //zz
+		System.out.println("!");
+		return "/erd1";
 	}
 }
