@@ -31,7 +31,6 @@
 		<beans:property name="order" value="1"/>
 	</beans:bean>
 	
-	
 	<!-- ////////////////// tiles설정 ////////////////////-->
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
@@ -43,7 +42,7 @@
 	</beans:bean>
 	<!-- /////////////////////////////////////////////// -->
 	
-	<context:component-scan base-package="com.coduck.pond.controller" />
+	<context:component-scan base-package="com.coduck.pond.member.controller" />
 	
 	
 	
