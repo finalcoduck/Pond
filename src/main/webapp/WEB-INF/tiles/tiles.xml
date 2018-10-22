@@ -36,4 +36,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
 	</definition>
 	
+	<!-- 마이페이지 -->
+	<definition name="/erd1" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	</definition>
+	
 </tiles-definitions>
