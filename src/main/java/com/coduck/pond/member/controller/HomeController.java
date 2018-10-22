@@ -11,4 +11,9 @@ public class HomeController {
 	public String home(Model model) { //zz
 		return "home";
 	}
+	
+	@RequestMapping(value = "/group/test", method = RequestMethod.GET)
+	public String test(Model model) { //zz
+		return "/group/test";
+	}	
 }
