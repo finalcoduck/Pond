@@ -1,4 +1,4 @@
-package com.coduck.pond.controller;
+package com.coduck.pond.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
