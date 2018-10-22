@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- main Definition -->
+	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+	</definition>
+	
+	<!-- member Definition -->
+	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+	</definition>
+	
+	<!-- group Definition -->
+	<definition name="group.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="left" />
+		<put-attribute name="body" />
+	</definition>
+	
+	<!-- groupSelect Definition -->
+	<definition name="groupSelect.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="body" />
+	</definition>
+	
+	
+	
+	<!-- 마이페이지 -->
+	<definition name="/erd" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 -->
+	<definition name="/erd1" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	</definition>
+	
+</tiles-definitions>
