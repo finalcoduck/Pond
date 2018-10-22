@@ -2,37 +2,37 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<!-- mainpage Definition -->
-	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" />
+	<!-- main Definition -->
+	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
 		<put-attribute name="body" />
-		<put-attribute name="footer"/>
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
 	</definition>
 	
-	<!-- member definition -->
-	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+	<!-- member Definition -->
+	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
 		<put-attribute name="body" />
-		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
-	</definition>
-	
-	<!-- groupSelect Definition -->
-	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
-		<put-attribute name="body" />
-		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
 	</definition>
 	
 	<!-- group Definition -->
-	<definition name="counsel.definition" template="/WEB-INF/layout/template-counsel.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
-		<put-attribute name="left" value="/WEB-INF/layout/left-side-counsel.jsp" />
+	<definition name="group.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="left" />
 		<put-attribute name="body" />
-		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 	
+	<!-- groupSelect Definition -->
+	<definition name="groupSelect.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+		<put-attribute name="body" />
+	</definition>
+	
+	
+	
 	<!-- 마이페이지 -->
-	<definition name="/main" extends="base.definition">
+	<definition name="/erd" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
 	</definition>
 	
