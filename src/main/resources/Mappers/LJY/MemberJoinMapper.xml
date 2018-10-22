@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mappers.MemberJoinMapper">
 	<!-- 최초 가입 가회원테이블 인서트 -->
-	<insert id="insertPreMember" parameterType="com.coduck.pond.vo.PreMemVo">
+	<insert id="insertPreMember" parameterType="com.coduck.pond.member.vo.PreMemVo">
 		insert into pre_mem values(#{preEmail},#{prePassword},#{preName},#{prePhone})
 	</insert>
 	<!-- 인증키 저장 -->
@@ -12,7 +12,7 @@
 		insert into mem_auth values(#{email},#{authKey})
 	</insert>
 	<!-- 인증된 회원 인서트 -->
-	<insert id="insertMember" parameterType="com.coduck.pond.vo.PreMemVo">
+	<insert id="insertMember" parameterType="com.coduck.pond.member.vo.PreMemVo">
 		insert into mem values(#{preEmail},#{prePassword},#{preName},#{prePhone},'V','0',sysdate,null)
 	</insert>
 	<!-- 네이버 연동 회원 인서트 -->
@@ -20,13 +20,13 @@
 		insert into mem values(#{email},'naver',#{name},'0','V',#{id},sysdate,#{profilePic})
 	</insert>
 	<!-- 인증키 확인 후 삭제 -->
-	<delete id="deletePreMem" parameterType="com.coduck.pond.vo.MemAuthVo">
+	<delete id="deletePreMem" parameterType="com.coduck.pond.member.vo.MemAuthVo">
 		delete from pre_mem
 		<![CDATA[ where (select count(*) from mem_auth where email = #{email} and auth_key = #{authKey}) > 0]]> 
 			and pre_Email = #{email}
 	</delete>
 	<!-- preMem 정보 받아오기 -->
-	<select id="getPreMem" parameterType="string" resultType="com.coduck.pond.vo.PreMemVo">
+	<select id="getPreMem" parameterType="string" resultType="com.coduck.pond.member.vo.PreMemVo">
 		select * from pre_mem where pre_email = #{email}
 	</select>
 	<!-- 가입완료후 인증키 삭제 -->

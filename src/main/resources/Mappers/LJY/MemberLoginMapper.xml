@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mappers.MemberLoginMapper">
-	<select id="getOneMem" resultType="com.coduck.pond.vo.MemVo">
+	<select id="getOneMem" resultType="com.coduck.pond.member.vo.MemVo">
 		select * from mem where mem_email = #{value} and mem_pwd != 'naver'
 	</select>
-	<select id="getNaverMem" resultType="com.coduck.pond.vo.MemVo">
+	<select id="getNaverMem" resultType="com.coduck.pond.member.vo.MemVo">
 		select * from mem where mem_id = #{value} 
 	</select>
-	<select id="checkMem" resultType="com.coduck.pond.vo.MemVo" parameterType="map">
+	<select id="checkMem" resultType="com.coduck.pond.member.vo.MemVo" parameterType="map">
 		select * from mem where mem_email = #{email} and mem_pwd = #{pwd} 
 		  and mem_status = 'V' and mem_pwd != 'naver'
 	</select>
