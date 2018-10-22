@@ -47,6 +47,17 @@
          </props>
       </property>
     </bean>
+    <!-- Google 소셜 로그인 뎐결 설정 -->
+    <bean id = "googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+	<constructor-arg value="537547564600-gp76g50d9v93h9cv38aqm0idb39chhsf.apps.googleusercontent.com"/>
+	<constructor-arg value="85qZ9LCnhqFP7gr1MOA71RdM"/>    
+	</bean>
+	 
+	<bean id = "googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+	<property name="scope" value="https://www.googleapis.com/auth/plus.login"></property>
+	<property name="redirectUri" value="http://localhost:8090/pond/member/login/googlecallback"/>
+	</bean>
+    
 	
 	
 	<context:component-scan base-package="com.coduck.pond">
