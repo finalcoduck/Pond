@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- mainpage Definition -->
+	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" />
+		<put-attribute name="body" />
+		<put-attribute name="footer"/>
+	</definition>
+	
+	<!-- member definition -->
+	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	
+	<!-- groupSelect Definition -->
+	<definition name="base.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	
+	<!-- group Definition -->
+	<definition name="counsel.definition" template="/WEB-INF/layout/template-counsel.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/layout/left-side-counsel.jsp" />
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 -->
+	<definition name="/main" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	</definition>
+	
+</tiles-definitions>

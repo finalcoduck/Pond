@@ -36,7 +36,7 @@
 		<beans:property name="definitions">
 			<beans:list>
 				<!-- tiles설정파일 -->
-				<beans:value>/WEB-INF/tiles/testTiles.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
