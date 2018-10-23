@@ -14,8 +14,6 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-
-
 		
 	<!-- 타일즈로 이동하는 뷰리절버 설정--> 
 	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
