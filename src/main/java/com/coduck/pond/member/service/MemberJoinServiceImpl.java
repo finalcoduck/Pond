@@ -7,11 +7,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.coduck.pond.core.utils.mail.MailService;
+import com.coduck.pond.core.utils.mail.TempKey;
 import com.coduck.pond.member.dao.MemberJoinDao;
 import com.coduck.pond.member.vo.MemAuthVo;
 import com.coduck.pond.member.vo.PreMemVo;
-import com.coduck.pond.util.mail.MailService;
-import com.coduck.pond.util.mail.TempKey;
 
 @Service
 public class MemberJoinServiceImpl implements MemberJoinService{

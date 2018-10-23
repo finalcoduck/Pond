@@ -35,11 +35,15 @@
 	<definition name="/erd" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
 	</definition>
+
+	<!-- 마이페이지 -->
+	<definition name="/erd1" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	</definition>
 	
 	<!-- 그룹선택페이지 -->
 	<definition name="/test" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/test.jsp" />
-	</definition>
-		
+	</definition>	
 	
 </tiles-definitions>
