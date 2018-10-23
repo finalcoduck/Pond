@@ -7,9 +7,10 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;}
 
 html,body{word-break:break-word;}
-body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222; background-color:#f7f7f7;}
-
+body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222;}
+h1{font-size:24px;}
 ul, li, ol { list-style: none; }
+
 a { text-decoration: none; }
 img{border:0; vertical-align:middle;}
 a{color: #222; text-decoration: none; }
@@ -17,7 +18,7 @@ a:hover{text-decoration:none;}
 caption{font-size:0}
 table{border-collapse:collapse;border-spacing:0}
 em, i, address{font-style:normal;}
-input[type=text], input[type=password], select, textarea, button {font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222; background-color:#f7f7f7;}
+input[type=text], input[type=password], select, textarea, button {font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222;;}
 button{cursor:pointer;}
 select{background-color:#FFF;}
 
@@ -82,3 +83,15 @@ select{background-color:#FFF;}
 .vh70{height:70vh !important}
 .vh80{height:80vh !important}
 .vh90{height:90vh !important}
+
+
+.fill-vh5{min-height:5vh !important}
+.fill-vh10{min-height:10vh !important}
+.fill-vh20{min-height:20vh !important}
+.fill-vh30{min-height:30vh !important}
+.fill-vh40{min-height:40vh !important}
+.fill-vh50{min-height:50vh !important}
+.fill-vh60{min-height:60vh !important}
+.fill-vh70{min-height:70vh !important}
+.fill-vh80{min-height:80vh !important}
+.fill-vh90{min-height:90vh !important}
