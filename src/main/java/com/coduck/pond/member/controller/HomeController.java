@@ -13,8 +13,8 @@ public class HomeController {
 		return "/erd";
 	}
 	
-	@RequestMapping(value = "/group/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model) { //zz
-		return "/group/test";
+		return "/test";
 	}	
 }

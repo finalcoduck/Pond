@@ -11,14 +11,14 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="Keywords" content="">
 <meta name="Description" content="">
-<link rel="stylesheet" type="text/css" href="/css/general.css">
+<link rel="stylesheet" type="text/css" href="resources/build/css/general.css">
 <title>POND</title>
 </head>
 <body>
-	<tiles:insertAttribute name="body" />
+	<tiles:insertAttribute name="header" />
 	
 	<tiles:insertAttribute name="body" />
 	
-	<tiles:insertAttribute name="body" />
+	<tiles:insertAttribute name="footer" />
 </body>
 </html>
