@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.coduck.pond.member.vo.MemAuthVo;
+import com.coduck.pond.member.vo.MemVo;
 import com.coduck.pond.member.vo.PreMemVo;
 
 @Repository
@@ -42,5 +43,9 @@ public class MemberJoinDao {
 	
 	public void deleteAuthKey(String email) {
 		session.delete(NAMESPACE+"deleteAuthKey", email);
+	}
+	
+	public MemVo getGoogleMem(String id) {
+		return session.selectOne(NAMESPACE+"getGoogleMem", id);
 	}
 }

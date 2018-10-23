@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coduck.pond.member.service.MemberJoinService;
+import com.coduck.pond.member.service.MemberJoinServiceImpl;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.vo.MemVo;
 
