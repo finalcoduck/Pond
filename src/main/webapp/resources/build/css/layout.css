@@ -1,4 +1,17 @@
 @charset "UTF-8";
 
-.group_header{height:50px; background-color:#fff; line-height:50px;}
-.group_header .inner{max-width:1000px; margin:0 auto;}
+.group-header{}
+.group-header .inner{max-width:50%; margin:0 auto;}
+
+h2.sub_title{font-size:18px; color:#222; font-weight:normal;}
+h2.sub_title span.num{color:#007bff;}
+
+.group-wrap{background-color:#f7f7f7; padding:.5rem 1rem;}
+.group-wrap .inner{max-width:50%; margin:0 auto; padding:20px 0; }
+
+
+.group-list{font-size:0;}
+.group-list li{display:inline-block; vertical-align:middle; width:18%; margin-right:2%; margin-bottom:10px; box-sizing:border-box; background-color:#FFF; box-shadow:0 1px 3px 0 rgba(0,0,0,.1); text-align:center; transition:all .1s ease-in-out;}
+.group-list li:hover{transform:translateY(-2px); transition:all .1s ease-in-out; box-shadow:0 5px 9px 1px rgba(0,0,0,.08);}
+.group-list li a{display:block; padding:40px 0; height:161px;}
+.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center; background-image:url(../../imgs/ico_plus.png); background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
