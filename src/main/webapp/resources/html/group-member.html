@@ -12,8 +12,10 @@
     <link rel="stylesheet" type="text/css" href="../build/css/general.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
-   
+
     <title>POND</title>
+    <style>
+    </style>
 </head>
 
 <body>
@@ -45,8 +47,106 @@
 
     <section>
         <div class="container">
-            <div class="row">
-                
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <h6>선생님</h6>
+                            <a href=""><i class="fas fa-user-plus"></i></a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
+                                    <h6>강덕영</h6>
+                                </div>
+                                <div class="dropdown dropleft">
+                                    <a href="" class="" data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">이메일</a>
+                                        <a class="dropdown-item" href="#">삭제</a>
+                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
+                                    <h6>이재용</h6>
+                                </div>
+                                <div class="dropdown dropleft">
+                                    <a href="" class="" data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">이메일</a>
+                                        <a class="dropdown-item" href="#">삭제</a>
+                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between">
+                            <h6>학생</h6>
+                            <a href=""><i class="fas fa-user-plus"></i></a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="mr-1" value="">
+                                    <h6>전체</h6>
+                                </div>
+                                <div class="dropdown dropleft">
+                                    <a href="" class="" data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">차단</a>
+                                        <a class="dropdown-item" href="#">삭제</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="mr-1" value="">
+                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
+                                    <h6>강덕영</h6>
+                                </div>
+                                <div class="dropdown dropleft">
+                                    <a href="" class="" data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">이메일</a>
+                                        <a class="dropdown-item" href="#">삭제</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" class="mr-1" value="">
+                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
+                                    <h6>이재용</h6>
+                                </div>
+                                <div class="dropdown dropleft">
+                                    <a href="" class="" data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">이메일</a>
+                                        <a class="dropdown-item" href="#">삭제</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -59,20 +159,6 @@
     <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
 
     <script>
-        //floating Button
-        $("#floatingBtn").on("click", function () {
-            setTimeout(function () {
-                $("#HWBtn").popover('toggle')
-                $("#noticeBtn").popover('toggle')
-            }, 175)
-        });
-
-        $(document).ready(function () {
-            $('.material-button-toggle').on("click", function () {
-                $(this).toggleClass('open');
-                $('.option').toggleClass('scale-on');
-            });
-        });
     </script>
 
 </body>
