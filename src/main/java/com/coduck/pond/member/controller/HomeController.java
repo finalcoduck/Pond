@@ -13,6 +13,11 @@ public class HomeController {
 		return "/erd";
 	}
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() { //zz
+		return "/test";
+	}	
+	
 	@RequestMapping(value = "group/erd", method = RequestMethod.GET)
 	public String home1() { //zz
 		System.out.println("!");

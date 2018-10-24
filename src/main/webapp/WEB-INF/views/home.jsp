@@ -20,5 +20,7 @@
 	<h4>${sessionScope.memVo.memEmail }</h4>
 	
 	<a href="<c:url value='/member/main/logout'/>">로그아웃</a>
+	
+	<a href="<c:url value='/group/test'/>">테스트</a>
 </body>
 </html>
