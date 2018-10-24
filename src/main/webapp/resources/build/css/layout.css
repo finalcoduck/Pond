@@ -1,0 +1,4 @@
+@charset "UTF-8";
+
+.group_header{height:50px; background-color:#fff; line-height:50px;}
+.group_header .inner{max-width:1000px; margin:0 auto;}
