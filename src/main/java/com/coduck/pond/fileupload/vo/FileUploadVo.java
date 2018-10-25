@@ -7,9 +7,18 @@ public class FileUploadVo {
 	private String orgFileName;
 	private String saveFileName;
 	private long fileSize;
+	private String fileType;
 	
 	public FileUploadVo() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
 	public int getFileNum() {
@@ -61,7 +70,7 @@ public class FileUploadVo {
 	}
 
 	public FileUploadVo(int fileNum, int groupNum, int refBoardNum, String orgFileName, String saveFileName,
-			long fileSize) {
+			long fileSize, String fileType) {
 		super();
 		this.fileNum = fileNum;
 		this.groupNum = groupNum;
@@ -69,12 +78,13 @@ public class FileUploadVo {
 		this.orgFileName = orgFileName;
 		this.saveFileName = saveFileName;
 		this.fileSize = fileSize;
+		this.fileType = fileType;
 	}
 
 	@Override
 	public String toString() {
 		return "FileUploadController [fileNum=" + fileNum + ", groupNum=" + groupNum + ", refBoardNum=" + refBoardNum
-				+ ", orgFileName=" + orgFileName + ", saveFileName=" + saveFileName + ", fileSize=" + fileSize + "]";
+				+ ", orgFileName=" + orgFileName + ", saveFileName=" + saveFileName + ", fileSize=" + fileSize + "fileType:"+fileType+"]";
 	}
 	
 	

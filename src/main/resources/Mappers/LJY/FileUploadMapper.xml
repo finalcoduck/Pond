@@ -5,14 +5,19 @@
 <mapper namespace="Mappers.FileUploadMapper">
 	<!-- 파일 정보 인서트 -->
 	<insert id="insertFileInfo" parameterType="com.coduck.pond.fileupload.vo.FileUploadVo">
-		insert into upload_file values(file_num_seq.nextval,#{groupNum},#{refBoardNum},#{orgFileName},#{saveFileName},#{fileSize})
+		insert into upload_file values(file_num_seq.nextval,#{groupNum},#{refBoardNum},#{orgFileName},#{saveFileName},#{fileSize},#{fileType})
 	</insert>
 	<!-- 그룹별 파알 정보 가져오기 -->
-	<select id="getFilesByGroup">
-		select * from upload_file where group_num = #{value}
+	<select id="getFilesByGroup" resultType="com.coduck.pond.fileupload.vo.FileListVo" parameterType="int">
+		select * from upload_file u, testboard1 t where u.ref_board_num = t.num and
+		  u.group_num = t.group_num and u.group_num = #{value}
+	</select>
+	<!-- 파일번호로 파일 정보 가져오기 -->
+	<select id="getFileByNum" resultType="com.coduck.pond.fileupload.vo.FileUploadVo">
+		select * from upload_file where file_num = #{value}
 	</select>
 	<!-- 파일 삭제 -->
-	<delete id="deleteFile" parameterType="map">
-		delete from upload_file where group_num = #{groupNum} and ref_board_num = #{refBoardNum}
+	<delete id="deleteFile" parameterType="int">
+		delete from upload_file where file_num = #{value}
 	</delete>
 </mapper> 
