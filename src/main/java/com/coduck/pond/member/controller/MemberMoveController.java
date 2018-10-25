@@ -22,7 +22,10 @@ public class MemberMoveController {
 	private OAuth2Operations oauthOperations;
 	
 	/*@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpServletResponse response) { 
+	public String home(Model model, HttpServletResponse response) {
+		
+		 * 최초 실행할때 구글 url 정보들고 view로 이동
+		 
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, googleOauth2Parameters);
 		System.out.println("/googleLogin, url" + url);

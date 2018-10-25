@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.coduck.pond.core.utils.mail.MailService;
 import com.coduck.pond.core.utils.mail.TempKey;
@@ -22,7 +23,7 @@ public class MemberJoinServiceImpl implements MemberJoinService{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	// @@@@@@@@@@@@@ 트랜젝션 처리 해줘야함 
+	@Transactional
 	public void insertPreMember(PreMemVo preMemVo) {
 		String encPwd = passwordEncoder.encode(preMemVo.getPrePassword()); //비밀번호 암호화
 		preMemVo.setPrePassword(encPwd);
@@ -41,6 +42,7 @@ public class MemberJoinServiceImpl implements MemberJoinService{
 		}
 	}
 	
+	@Transactional
 	public int insertMember(String authKey, String email) { 
 		PreMemVo preMemVo = memberJoinDao.getPreMem(email);
 		System.out.println(preMemVo);

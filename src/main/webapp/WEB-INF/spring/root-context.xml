@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:property-placeholder location="/*.properties"/>	
@@ -20,6 +25,10 @@
 				<property name="sqlPrefix" value="SQL         :  " />
 			</bean>
 		</property>
+	</bean>
+	<!-- 트랜잭션 처리 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	<!-- SqlSessionFactory설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -49,8 +58,8 @@
     </bean>
     <!-- Google 소셜 로그인 뎐결 설정 -->
     <bean id = "googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
-	<constructor-arg value="537547564600-gp76g50d9v93h9cv38aqm0idb39chhsf.apps.googleusercontent.com"/>
-	<constructor-arg value="85qZ9LCnhqFP7gr1MOA71RdM"/>    
+	<constructor-arg value="${googleClientId}"/>
+	<constructor-arg value="${googleSecretId}"/>    
 	</bean>
 	 
 	<bean id = "googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
@@ -58,7 +67,8 @@
 	<property name="redirectUri" value="http://localhost:8090/pond/member/login/googlecallback"/>
 	</bean>
     
-	
+    <!-- Transactional 어노테이션을 scan하기 위한 설정 -->
+	<tx:annotation-driven/>
 	
 	<context:component-scan base-package="com.coduck.pond">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	

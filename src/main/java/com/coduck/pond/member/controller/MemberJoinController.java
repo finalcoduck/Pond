@@ -6,13 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.coduck.pond.member.service.MemberJoinServiceImpl;
+import com.coduck.pond.member.service.MemberJoinService;
 import com.coduck.pond.member.vo.PreMemVo;
 
 @Controller
 public class MemberJoinController {
 	@Autowired
-	private MemberJoinServiceImpl memberJoinService;
+	private MemberJoinService memberJoinService;
 	
 	/*
 	 * 	메일 인증전 pre_mem 테이블에 담기

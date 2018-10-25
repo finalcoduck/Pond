@@ -17,7 +17,7 @@
 	</select>
 	<!-- 네이버 로그인 핸드폰 추가 입력 -->
 	<update id="updatePhone" parameterType="map">
-		update mem set mem_phone = #{phone} where mem_email = #{email} and mem_pwd = 'naver' 
+		update mem set mem_phone = #{phone} where mem_email = #{email} and (mem_pwd = 'naver' or mem_pwd = 'google') 
 	</update>
 	<!-- 새 비밀번호 변경 -->
 	<update id="changeNewPwd" parameterType="map">
@@ -27,4 +27,8 @@
 	<select id="authConfirm" parameterType="map" resultType="int">
 		select count(*) from mem_auth where email = #{email} and auth_key = #{authKey}
 	</select>
+	<!-- 구글 로그인 정보 인서트 -->
+	<insert id="googleToInsertMember" parameterType="map">
+		insert into mem values(#{id},'google',#{name},'0','V','google@google.com',sysdate,#{profilePic})
+	</insert>
 </mapper>  

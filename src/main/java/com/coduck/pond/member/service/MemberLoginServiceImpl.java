@@ -75,4 +75,16 @@ public class MemberLoginServiceImpl {
 		map.put("email", email);
 		return memberLoginDao.authConfirm(map);
 	}
+	
+	/*
+	 *	구글 로그인시 인서트 
+	 */
+	public void googleToInsertMember(Map<String, String> map) {
+		memberLoginDao.googleToInsertMember(map);
+	}
+	
+	public MemVo getGoogleMem(String id) {
+		return memberJoinDao.getGoogleMem(id);
+	}
+	
 }

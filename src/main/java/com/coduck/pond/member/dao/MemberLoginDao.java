@@ -37,4 +37,8 @@ public class MemberLoginDao {
 	public int authConfirm(Map<String, String> map) {
 		return session.selectOne(NAMESPACE+"authConfirm", map);
 	}
+	
+	public void googleToInsertMember(Map<String, String> map) {
+		session.insert(NAMESPACE+"googleToInsertMember", map);
+	}
 }
