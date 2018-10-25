@@ -15,6 +15,9 @@
 
     <title>POND</title>
     <style>
+        .removeRightPadding{
+            padding-right: 0px !important;
+        }
     </style>
 </head>
 
@@ -52,7 +55,7 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h6>선생님</h6>
-                            <a href="" data-toggle="modal" data-target="#inviteTeacherModal"><i class="fas fa-user-plus"></i></a>
+                            <a id="inviteTeacherBtn" href="" data-toggle="modal" data-target="#inviteTeacherModal"><i class="fas fa-user-plus"><!--선생님초대아이콘--></i></a>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between">
@@ -93,7 +96,7 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h6>학생</h6>
-                            <a href="" data-toggle="modal" data-target="#inviteStudentModal"><i class="fas fa-user-plus"></i></a>
+                            <a href="" id="inviteStudentBtn" data-toggle="modal" data-target="#inviteStudentModal"><i class="fas fa-user-plus"></i></a>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between">
@@ -224,6 +227,12 @@
     <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
 
     <script>
+        // Shorthand for $( document ).ready()
+        $(function(){
+            $("#inviteStudentBtn, #inviteTeacherBtn").on("click",function(){
+                $("body").addClass("removeRightPadding");
+            });
+        })
     </script>
 
 </body>
