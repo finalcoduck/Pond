@@ -95,3 +95,14 @@ select{background-color:#FFF;}
 .fill-vh70{min-height:70vh !important}
 .fill-vh80{min-height:80vh !important}
 .fill-vh90{min-height:90vh !important}
+
+.max-vh5{max-height:5vh !important}
+.max-vh10{max-height:10vh !important}
+.max-vh20{max-height:20vh !important}
+.max-vh30{max-height:30vh !important}
+.max-vh40{max-height:40vh !important}
+.max-vh50{max-height:50vh !important}
+.max-vh60{max-height:60vh !important}
+.max-vh70{max-height:70vh !important}
+.max-vh80{max-height:80vh !important}
+.max-vh90{max-height:90vh !important}
