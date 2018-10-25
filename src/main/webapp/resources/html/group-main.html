@@ -15,6 +15,7 @@
         crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="../build/css/floating_btn.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/quill/quill.snow.css">
 
 
     <title>POND</title>
@@ -105,8 +106,8 @@
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button class="btn btn-link" type="button" id="gedf-drop1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
@@ -147,8 +148,8 @@
                                 </div>
                                 <div>
                                     <div class="dropdown">
-                                        <button class="btn btn-link" type="button" id="gedf-drop1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
@@ -182,36 +183,37 @@
     </section>
     <!-- content -->
 
-     <!-- The Modal -->
-     <div class="modal fade" id="noticeModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-    
-                    <!-- Modal Header -->
-                    <div class="modal-header bg-primary">
-                        <h4 class="modal-title">공지</h4>
-                    </div>
-    
-                    <!-- Modal body -->
-                    <div class="modal-body">
+    <!-- The Modal -->
+    <div class="modal fade" id="noticeModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title text-white">공지</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="">
                         <div class="form-group">
-                            <label class="col-12 control-label" for="textinput">이메일 주소</label>
-                            <div class="col-12 mb-2">
-                                <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                            <input name="about" type="hidden">
+                            <div id="editor-container">
                             </div>
                         </div>
-                    </div>
-    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <a href="" data-dismiss="modal">취소</a>
-                        <a href="" data-dismiss="modal text-muted">초대하기</a>
-                    </div>
-    
+                    </form>
                 </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <a href="" class="text-muted" data-dismiss="modal">제출</a>
+                </div>
+
             </div>
         </div>
-
+    </div>
+    <!-- The Modal -->
 
     <!-- floating Button-->
     <div class="material-button-anim">
@@ -240,6 +242,7 @@
         crossorigin="anonymous"></script>
     <script src="../vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
+    <script src="../vendor/quill/quill.min.js"></script>
 
     <script>
         const slideExcutionTime = 178;
@@ -251,15 +254,36 @@
                 $("#noticeBtn").popover('toggle')
             }, slideExcutionTime) // floating button의 animation이 끝난 후 실행
         });
-        
+
         $(document).ready(function () {
             $('.material-button-toggle').on("click", function () {
                 $(this).toggleClass('open');
                 $('.option').toggleClass('scale-on');
-                $("#noticeBtn").on("click",function(){
-                   $("#noticeModal").modal('show')
+                $("#noticeBtn").on("click", function () {
+                    $("#noticeModal").modal('show')
                 })
             });
+            var quill = new Quill('#editor-container', {
+ 
+                placeholder: '공지를 입력하세요',
+                
+            });
+
+            $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
+
+            var form = document.querySelector('form');
+            form.onsubmit = function () {
+                // Populate hidden form on submit
+                var about = document.querySelector('input[name=about]');
+                about.value = JSON.stringify(quill.getContents());
+
+                console.log("Submitted", $(form).serialize(), $(form).serializeArray());
+
+                // No back end to actually submit to!
+                alert('Open the console to see the submit data!')
+                return false;
+            };
+
         });
     </script>
 
