@@ -10,7 +10,7 @@ public class HomeController {
 	@RequestMapping(value = "/erd", method = RequestMethod.GET)
 	public String home() { //zz
 		System.out.println("!");
-		return "/erd";
+		return "/main";
 	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
