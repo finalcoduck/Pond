@@ -44,7 +44,7 @@
 
     <!-- content -->
 
-    <section>
+    <section id="main">
         <div class="container">
             <div class="row">
                 <!--           left side            -->
@@ -142,7 +142,7 @@
                                         <img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0">강덕영</div>
+                                        <div class="h5 m-0"  onclick="console.log($('body').hasScrollBar())">강덕영</div>
                                         <div class="h7 text-muted">10월 12일</div>
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
     <!-- content -->
 
     <!-- The Modal -->
-    <div class="modal fade" id="noticeModal">
+    <div class="modal" id="noticeModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
 
@@ -262,6 +262,12 @@
 
     <script>
         const slideExcutionTime = 178;
+        // 세로 스크롤바
+        $.fn.hasScrollBar = function() {
+            return (this.prop("scrollHeight") == 0 && this.prop("clientHeight") == 0)
+                || (this.prop("scrollHeight") > this.prop("clientHeight"));
+        };
+
 
         //floating Button
         $("#floatingBtn").on("click", function () {
@@ -278,6 +284,7 @@
         });
 
         $(document).ready(function () {
+            
             $('.material-button-toggle').on("click", function () {
                 $(this).toggleClass('open');
                 $('.option').toggleClass('scale-on');
@@ -290,7 +297,15 @@
             
             $('#noticeModal').on('show.bs.modal', function (e) {
                 $("#floatingBtn").trigger("click");
-                $("#floatingBtnDiv").addClass("add-right")
+                
+                console.log($("body").css("padding-right"));
+            });
+
+            $('#noticeModal').on('shown.bs.modal', function (e) {
+                if($("body").css("padding-right")!=="0px"){
+                    $("#floatingBtnDiv").addClass("add-right");
+                }
+                
             });
             $('#noticeModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
