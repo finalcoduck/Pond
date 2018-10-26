@@ -41,6 +41,9 @@ public class FileUploadServiceImpl implements FileUploadService{
 	@Transactional
 	public int insertFiles(List<MultipartFile> fileList, int groupNum, int refBoardNum, String uploadPath) {
 		for (MultipartFile file : fileList) {
+			if(file.getOriginalFilename() == null || file.getOriginalFilename() == "") {
+				continue; //클라이언트가 아무 파일도 전송하지 않았을시 처리 
+			}
 			String orgFileName = file.getOriginalFilename(); //전송된 파일명
 			String saveFileName = UUID.randomUUID()+"_"+ orgFileName; //저장할 파일명
 			String fileType = FileUtils.getFileType(orgFileName);
