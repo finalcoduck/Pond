@@ -2,6 +2,7 @@
 
 .group-header{}
 .group-header .inner{max-width:50%; margin:0 auto;}
+.group-header .btn{background-color:transparent; border:0;}
 
 h2.sub_title{font-size:18px; color:#222; font-weight:normal;}
 h2.sub_title span.num{color:#007bff;}
@@ -46,3 +47,26 @@ h2.sub_title span.num{color:#007bff;}
 .mypageLeft.card{background-color:#FFF; border:0; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02);}
 .mypageLeft.card .list-group-item{border:0; border-top:1px solid rgba(0,0,0,.04); z-index:auto;}
 .mypageLeft.card .list-group-item:first-child{border-top:0;}
+
+.profileWrap{background-color:#FFF; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02); padding:0;}
+.profileWrap .title{font-size:18px; line-height:60px; padding-left:30px;}
+
+.profile{border-top:1px solid #e3e3e3;}
+.profile .myProfile{display:table; font-size:0; padding:20px 30px; width:100%;}
+.profile .myProfile p.txt{display:table-cell; vertical-align:top; font-size:14px; width:20%;}
+.profile .myProfile .profileArea{display:table-cell; vertical-align:top; width:80%; overflow:hidden;}
+.profile .myProfile .profileArea li{display:table; width:100%;}
+.profile .myProfile .profileArea div.profileImg{display:table-cell;}
+.profile .myProfile .profileArea div.profileImg .name{display:inline-block; vertical-align:middle; font-size:14px; line-height:50px; margin-left:10px;}
+.profile .myProfile .profileArea div.profileBtn{display:table-cell; text-align:right;}
+.profile .myProfile .profileArea div.profileBtn a{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px;}
+
+.profile .myProfile .profileArea li{padding:10px 0;}
+.profile .myProfile .profileArea li:first-child{padding:0 0 10px 0;}
+.profile .myProfile .profileArea div.profileInfo .txt{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; width:100px;}
+.profile .myProfile .profileArea div.profileInfo .mail{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; margin-left:30px;}
+.profile .myProfile .profileArea div.profileInfo input{display:inline-block; vertical-align:middle; margin-left:30px; border:0; border-bottom:1px solid #d7d7d7; height:40px; width:250px; outline:0;}
+
+.profile .myProfile .profileArea div.profileInfo img{width:50px; margin-right:10px; border:1px solid #d7d7d7; border-radius:5px;}
+.profile .myProfile .profileArea.group li{border-top:1px solid #d7d7d7;}
+.profile .myProfile .profileArea.group li:first-child{border-top:0;}
