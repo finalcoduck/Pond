@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
+    
+    
 <section id="" class="bg-primary">
         <div class="container">
             <div class="row align-items-center">
@@ -32,10 +35,10 @@
                             </g>
                         </svg>
                         <input type="text" placeholder="email@domain.com">
-                        <input type="password" placeholder="Password">
+                        <input type="current-password" placeholder="Password">
                         <input type="submit" class="btn btn-dark text-white" value="로그인">
-                        <img class="input-img" src="../build/image/btn_google_signin_light.png" alt="google login">
-                        <img class="input-img" src="../build/image/naver-green.PNG" alt="naver login">
+                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login">
+                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login">
                     </form>
                 </div>
             </div>
@@ -53,3 +56,5 @@
             </div>
         </div>
     </section>
+    <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script> 
+   

@@ -15,7 +15,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() { //zz
-		return "/test";
+		return "/main/join/member";
 	}	
 	
 	@RequestMapping(value = "group/erd", method = RequestMethod.GET)
