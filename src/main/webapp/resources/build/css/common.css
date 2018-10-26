@@ -5,8 +5,11 @@
 /* CSS Document */
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,
 dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;}
+
 html,body{word-break:break-word;padding-right: 0px !important;}
+
 body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222; background-color:#f7f7f7;}
+
 h1{font-size:24px;}
 ul, li, ol { list-style: none; }
 
@@ -94,3 +97,14 @@ select{background-color:#FFF;}
 .fill-vh70{min-height:70vh !important}
 .fill-vh80{min-height:80vh !important}
 .fill-vh90{min-height:90vh !important}
+
+.max-vh5{max-height:5vh !important}
+.max-vh10{max-height:10vh !important}
+.max-vh20{max-height:20vh !important}
+.max-vh30{max-height:30vh !important}
+.max-vh40{max-height:40vh !important}
+.max-vh50{max-height:50vh !important}
+.max-vh60{max-height:60vh !important}
+.max-vh70{max-height:70vh !important}
+.max-vh80{max-height:80vh !important}
+.max-vh90{max-height:90vh !important}

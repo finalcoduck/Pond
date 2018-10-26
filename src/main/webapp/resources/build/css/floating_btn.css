@@ -1,14 +1,18 @@
 
-        .material-button-anim {
-            position: fixed;
-            right: 10px;
-            bottom : 1rem;
-            padding: 127px 15px 27px;
-            text-align: center;
-            max-width: 320px;
-            margin: 0 auto 20px;
-        }
+.material-button-anim {
+    position: fixed;
+    right: 10px;
+    bottom : 1rem;
+    padding: 127px 15px 27px;
+    text-align: center;
+    max-width: 320px;
+    margin: 0 auto 20px;
+}
 
+/*Bootstrap modal show할 때 추가 hide일때 삭제*/
+.add-right{
+    right:26px;
+}
 .material-button {
     position: relative;
     top: 0;
