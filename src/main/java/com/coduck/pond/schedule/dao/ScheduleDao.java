@@ -1,6 +1,7 @@
 package com.coduck.pond.schedule.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,19 @@ public class ScheduleDao {
 		session.insert(NAMESPACE+"addSchedule", vo);
 	}
 	
-	public List<ScheduleVo> getSchedule_month(String yymm){
-		return session.selectList(NAMESPACE+"getSchedule_month", yymm);
+	public List<ScheduleVo> getSchedule_month(Map<String, String> map){
+		return session.selectList(NAMESPACE+"getSchedule_month", map);
+	}
+	
+	public int updateSchedule(ScheduleVo vo) {
+		return session.update(NAMESPACE+"updateSchedule", vo);
+	}
+	
+	public int deleteSchedule(String scheduleNum) {
+		return session.update(NAMESPACE+"deleteSchedule", scheduleNum);
+	}
+	
+	public ScheduleVo getScheduleOne(int scheduleNum) {
+		return session.selectOne(NAMESPACE+"getScheduleOne", scheduleNum);
 	}
 }

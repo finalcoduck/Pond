@@ -9,11 +9,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,16 +27,16 @@ public class ScheduleBasicController {
 	@Autowired
 	private ScheduleServiceImpl scheduleService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
 		return "home";
-	}
+	}*/
 	
 	/*
 	 * 	최초에 데이터 받아오기
 	 */
 	@RequestMapping(value = "/schedule/info", method = RequestMethod.GET)
-	public String getDateInfo(Model model, int groupNum) {
+	public String getDateInfo(Model model, @RequestParam(value="groupNum", defaultValue="30") int groupNum) {
 		List<ScheduleVo> list = scheduleService.getDateInfo(groupNum);
 		model.addAttribute("list", list);
 		
@@ -65,9 +67,9 @@ public class ScheduleBasicController {
 	 *  해당 년도 / 월별로 데이터 뽑아오기
 	 */
 	@RequestMapping(value = "/schedule/getInfo", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getInfo(String year, String month) {
-		List<ScheduleVo> list = scheduleService.getSchedule_month(year, month);
+	@ResponseBody // @@@@@@@@@@@@@@@@@ 추후에 groupNum 처리해주어야함
+	public Map<String, Object> getInfo(String year, String month, @RequestParam(value="groupNum", defaultValue="30") String groupNum) {
+		List<ScheduleVo> list = scheduleService.getSchedule_month(year, month, groupNum);
 		Map<String, Object> json = new HashMap<>();
 		List<Map<String, Object>> jsonList = new ArrayList<>();
 		

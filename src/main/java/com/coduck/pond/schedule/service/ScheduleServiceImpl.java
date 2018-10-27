@@ -1,6 +1,8 @@
 package com.coduck.pond.schedule.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,29 @@ public class ScheduleServiceImpl {
 		scheduleDao.addSchedule(vo);
 	}
 	
-	public List<ScheduleVo> getSchedule_month(String year, String month){
+	public List<ScheduleVo> getSchedule_month(String year, String month, String groupNum){
 		if(month.length() == 1) {
 			month = "0"+month;
 		}
 		System.out.println("month"+month);
 		System.out.println("year"+year);
 		String yymm = year + month;
-		List<ScheduleVo> list = scheduleDao.getSchedule_month(yymm);
+		Map<String, String> map = new HashMap<>();
+		map.put("yymm", yymm);
+		map.put("groupNum", groupNum);
+		List<ScheduleVo> list = scheduleDao.getSchedule_month(map);
 		return list;
+	}
+	
+	public int updateSchedule(ScheduleVo vo) {
+		return scheduleDao.updateSchedule(vo);
+	}
+	
+	public int deleteSchedule(String scheduleNum) {
+		return scheduleDao.deleteSchedule(scheduleNum);
+	}
+	
+	public ScheduleVo getScheduleOne(int scheduleNum) {
+		return scheduleDao.getScheduleOne(scheduleNum);
 	}
 }

@@ -12,7 +12,20 @@
 		select * from schedule where group_num = #{value}
 	</select>
 	<!-- 년/월로 스케쥴 정보 가져오기 -->
-	<select id="getSchedule_month" parameterType="string" resultType="com.coduck.pond.schedule.vo.ScheduleVo">
-		select * from schedule where to_char(schedule_start_date, 'YYMM') = #{value}
+	<select id="getSchedule_month" parameterType="map" resultType="com.coduck.pond.schedule.vo.ScheduleVo">
+		select * from schedule where to_char(schedule_start_date, 'YYMM') = #{yymm} and group_num = #{groupNum}
 	</select>
+	<!-- 일정번호로 정보 가져오기 -->
+	<select id="getScheduleOne" parameterType="int" resultType="com.coduck.pond.schedule.vo.ScheduleVo">
+		select * from schedule where schedule_num = #{value}
+	</select>
+	<!-- 그룹 일정 수정 -->
+	<update id="updateSchedule" parameterType="com.coduck.pond.schedule.vo.ScheduleVo">
+		update schedule set schedule_start_date = #{scheduleStartDate}, schedule_end_date = #{scheduleEndDate}, schedule_title = #{scheduleTitle},
+		schedule_content = #{scheduleContent} where schedule_num = #{scheduleNum}  
+	</update>
+	<!-- 그룹 일정 삭제 -->
+	<delete id="deleteSchedule" parameterType="string">
+		delete from schedule where schedule_Num = #{value}	
+	</delete>
 </mapper>  

@@ -41,8 +41,14 @@ $('#addCal').click(function() {
 	location.href="${pageContext.request.contextPath}/schedule/addCal";
 });
 
+//replaceAll 메소드 만들기
+String.prototype.replaceAll = function (org, dest) {
+	return this.split(org).join(dest);
+}
+
 var colorList = ['blue','black','red','green','pink'];
 $(function() {
+	  getInfo_Month(18, 10);
 	  // page is now ready, initialize the calendar...
 	  $('#calendar').fullCalendar({
 		  dayClick: function(event) {
@@ -73,7 +79,7 @@ $(function() {
          }   
 	  });
 		// 이전,다음 버튼을 누를 때 실행되는 메소드
-		$('button.fc-prev-button').click(function() {
+		$('button.fc-prev-button, .fc-next-button').click(function() {
 			var dd = $('#calendar').fullCalendar("getDate");
 			var date = new Date(dd);
 			var month = date.getMonth() + 1;
@@ -87,31 +93,62 @@ $(function() {
 		return date.getMonth();
 	}
 	
+	//이전,다음 버튼을 눌렀을때 해당 년 월에 해당하는 정보를 가져오는 메소드
 	function getInfo_Month(year, month) {
+		$('#testRow').empty();
 		$.ajax({
 			url : "<c:url value='/schedule/getInfo'/>",
 			dataType : 'json',
 			type : 'post',
-			data : {'year':year, 'month':month},
+			data : {'year':year, 'month':month, 'groupNum':30},
 			success: function(data) {
-				/* $('#calbox').children().eq(0).text(data.result_list[0].scheduleTitle); */
 				var html = "";
 				$.each(data.result_list, function(i, vo) {
 					html += $('#template-list-item').html().replace("{title}", vo.scheduleTitle)
 														   .replace("{content}", vo.scheduleContent)
-														   .replace("{start}", vo.scheduleStartDate)
-														   .replace("{end}", vo.scheduleEndDate);
+														   .replaceAll("{start}", vo.scheduleStartDate)
+														   .replaceAll("{end}", vo.scheduleEndDate)
+														   .replaceAll("{num}", vo.scheduleNum);
 				});
 				$('#testRow').append(html);
 			}
 		});
 	}
+	
+	//ajax 일정 삭제 메소드
+	function deleteSchedule(num, start) {
+		var ok = window.confirm("정말로 삭제 하시겠습니까?");
+		if(ok){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/schedule/delete",
+				dataType : 'json',
+				type : 'post',
+				data : {'scheduleNum' : num, 'scheduleStartDate' : start},
+				success: function(data) {
+					if(data.msg === 'true'){
+						getInfo_Month(data.year, data.month);
+						location.href="${pageContext.request.contextPath}/schedule/info?groupNum=${list[0].groupNum}";
+					}else{
+						alert('삭제실패');	
+					}
+				}
+			});
+		}else{
+			return false;
+		}
+	}
+	
+	function updateSchedule(num, start, end){
+		location.href="${pageContext.request.contextPath}/schedule/updatepage?num="+num+"&start="+start+"&end="+end;
+	};
 </script>
 <script type="text/template" id="template-list-item">
 <div style="border: 1px solid black; width: 100%; height: 30%;" id="calbox">
 		<span>{title}</span><br> 
 		<span>{content}</span><br>
 		<span>{start} ~ {end}</span>
+		<button type="button" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
+		<button type="button" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
 </div>
 </script>
 </html>
