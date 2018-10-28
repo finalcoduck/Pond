@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.member.vo.MemVo;
+
 @Controller
 public class MemberMoveController {
 	@Autowired
@@ -48,10 +50,21 @@ public class MemberMoveController {
 	}
 	
 	@RequestMapping("/test1")
-	public String testPage() {
+	public String testPage(MemVo memVo) {
+		System.out.println(memVo.getMemEmail());
+		System.out.println(memVo.getMemName());
 		return "/test1";
 	}
 	
+	@RequestMapping("/emailConfirm")
+	public String emailConfirm() {
+		return "/emailConfirm";
+	}
+	
+	@RequestMapping("/login/sendMail")
+	public String setNewPwd() {
+		return "/login/sendMail";
+	}
 	/*@RequestMapping("/member/main/loginForm")
 	public String loginForm() {
 		return "loginForm";

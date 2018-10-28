@@ -51,6 +51,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/social-login-information.jsp" />
 	</definition>
 	
+	<!-- 새 비밀번호 설정 페이지 (이메일)-->
+	<definition name="/login/sendMail" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/find-password.jsp" />
+	</definition>
+	
+	<!-- 새 비밀번호 설정 페이지 (비밀번호 설정)-->
+	<definition name="/login/setNewPwd" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/setNewPwd.jsp" />
+	</definition>
+	
 	<!-- 로그인 후 임시 페이지 -->
 	<definition name="/test1" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/test.jsp" />

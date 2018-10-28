@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <section id="">
 	<h1>로그인 후 확인</h1>
-	${memVo.memEmail }
+	${memVo.memEmail }<br>
+	<a href="${pageContext.request.contextPath }/member/logout">로그아웃</a>	
 </section>
 </html>

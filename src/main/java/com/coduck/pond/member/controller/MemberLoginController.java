@@ -138,7 +138,7 @@ public class MemberLoginController {
 			memVo = memberLoginService.getOneMem(memEmail); // 존재하는 이메일 인지 확인
 			if(passwordEncoder.matches(memPwd, memVo.getMemPwd())) { //입력받은 패스워드를 암호화시켜 비교후 같으면 true
 				session.setAttribute("memVo", memVo); //로그인 성공! 세션저장
-				return "/test1";
+				return "redirect:/test1";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 				return "redirect:/";
@@ -164,41 +164,42 @@ public class MemberLoginController {
 	}
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
-	@RequestMapping("/member/main/login/changeEmail")
+	@RequestMapping("/member/login/sendEmail")
 	public String changeEmail(String memEmail, Model model) {
 		//없는 이메일 처리 
 		MemVo memVo = memberLoginService.getOneMem(memEmail);
 		if(memVo == null) {
 			model.addAttribute("findMsg","NotExistence");
-			return "findPwd";
+			return "/login/sendMail";
 		}else {
 			memberLoginService.mailTofindPwd(memEmail); // 메일 인증 보내기
-			return "mailconfirm";
+			return "redirect:/emailConfirm";
 		}
 	}
 	
 	//이메일 인증후 새로운 비밀번호 설정
-	@RequestMapping("/member/main/login/emailConfirmNewPwd")
+	@RequestMapping("/member/login/emailConfirmNewPwd")
 	public String newPwd(String key, String email, Model model) {
 		int n = memberLoginService.authConfirm(key, email);
 		if(n>0) {
 			model.addAttribute("email",email);
-			return "newPwdSet";
+			return "/login/setNewPwd";
 		}else {
-			return "loginForm";
+			System.out.println("새로운 비밀번호 설정 오류");
+			return "redirect:/";
 		}
 	}
 	
 	//새로운 비밀번호 받아 암호화 처리후 업데이트
-	@RequestMapping(value="/member/main/login/changePwd", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login/changePwd", method=RequestMethod.POST)
 	public String changePwd(String newPwd, String email, Model model) {
 		 String encPwd = passwordEncoder.encode(newPwd);
 		 try {
 			 memberLoginService.changeNewPwd(email, encPwd);
-			 return "loginForm";
+			 return "redirect:/";
 		 }catch (Exception e) {
 			 System.out.println(e.getMessage());
-			 return "home";
+			 return "redirect:/";
 		 }
 		 
 	}
