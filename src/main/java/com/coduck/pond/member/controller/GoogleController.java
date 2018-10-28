@@ -40,7 +40,6 @@ public class GoogleController {
 	public String googleLoginSet(Model model, HttpServletRequest request, HttpSession session) {
 		String code = request.getParameter("code");
 		
-		
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
         AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(), null);
         

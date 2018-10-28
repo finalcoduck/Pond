@@ -30,10 +30,10 @@ public class FileUploadController {
 	/*
 	 *  이동 컨트롤러
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
 		return "fileupload";
-	}
+	}*/
 	
 	/*
 	 * 단인 파일 업로드 처리

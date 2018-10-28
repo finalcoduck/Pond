@@ -32,12 +32,12 @@
 	
 	
 	<!-- 마이페이지 -->
-	<definition name="/main" extends="main.definition">
+	<definition name="/" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/main-body.jsp" />
 	</definition>
 	
 	<!-- 회원가입 -->
-	<definition name="/main/join/member" extends="main.definition">
+	<definition name="/join/member" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/join-member.jsp" />
 	</definition>
 	
