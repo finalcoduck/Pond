@@ -1,4 +1,87 @@
 @charset "UTF-8";
 
-.group_header{height:50px; background-color:#fff; line-height:50px;}
-.group_header .inner{max-width:1000px; margin:0 auto;}
+.group-header{}
+.group-header .inner{max-width:50%; margin:0 auto;}
+.group-header .btn{background-color:transparent; border:0;}
+
+h2.sub_title{font-size:18px; color:#222; font-weight:normal;}
+h2.sub_title span.num{color:#007bff;}
+
+.group-wrap{background-color:#f7f7f7; padding:.5rem 1rem;}
+.group-wrap .inner{max-width:50%; margin:0 auto; padding:20px 0; }
+.group-wrap .inner .input_box{display: block; height: 54px; padding: 0;}
+.group-wrap .inner .input_box input{line-height: 54px; border:0; border-bottom: 1px solid #ccc; font-size: 30px; font-weight: 400; color: #333; position: relative; width: 100%; height: 100%; padding: 0; background: 0 0; outline:0;}
+.group-wrap .inner .input_box input:focus{border-bottom: 1px solid #333;}
+
+
+.group-list{font-size:0;}
+.group-list li{display:inline-block; vertical-align:middle; width:18%; margin-right:2%; margin-bottom:10px; box-sizing:border-box; background-color:#FFF; box-shadow:0 1px 3px 0 rgba(0,0,0,.1); text-align:center; transition:all .1s ease-in-out;}
+.group-list li:hover{transform:translateY(-2px); transition:all .1s ease-in-out; box-shadow:0 5px 9px 1px rgba(0,0,0,.08);}
+.group-list li a{display:block; padding:40px 0; height:161px;}
+.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center; background-image:url(../../imgs/ico_plus.png); background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
+
+.coverSelect{margin-left:0; margin-right:0; position:relative; overflow:hidden;}
+.coverSelect > div{height:100%;float:left;}
+
+.coverSelect > div.mainCover{float:left; width:320px; height:240px; background-color:cyan; margin-top:15px;}
+.coverSelect > div.mainCover .wrapper{position: relative; padding-top: 75%; overflow: hidden;}
+.coverSelect > div.mainCover .wrapper img{position: absolute; top: 0; left: 0; right: 0; bottom: 0; max-width: 100%; height: auto;}
+
+.coverSelect > div.coverList{float:right; width:600px;}
+.coverSelect > div.coverList .head{padding-left:10px;}
+.coverSelect > div.coverList .head h3{font-size:15px; line-height:25px; margin-top:0; margin-bottom:0;}
+.coverSelect > div.coverList .head .navi{position:absolute; top:0; right:0; width:80px; height:25px; background-color:#999;}
+
+.coverSelect > div.coverList ul{font-size:0; margin-bottom:0; margin-top:10px;}
+.coverSelect > div.coverList ul li{display:inline-block; vertical-align:middle; width:140px; margin-left:10px; height:105px; margin-bottom:10px; border-radius:2px;}
+.coverSelect > div.coverList ul li a{display:block; width:100%; position: relative; padding-top: 75%; overflow: hidden;}
+.coverSelect > div.coverList ul li a img{position: absolute; top: 0; left: 0; right: 0; bottom: 0; max-width: 100%; height: auto;}
+.coverSelect > div.coverList ul li a span.mask{display: none; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: rgba(0, 123, 255, .8); border-radius: 1px; background-image:url(../../imgs/ico_check.png); background-repeat:no-repeat; background-position:center center;}
+.coverSelect > div.coverList ul li.on a span.mask{display:block;}
+
+.coverSelect > div.coverList ul li input[type=file]{display:none; font-size:14px;}
+.coverSelect > div.coverList ul li label{display:block; width:100%; padding:24.5px 0; background-color:#ebebeb; font-size:14px; cursor:pointer; margin-bottom:0;}
+.coverSelect > div.coverList ul li label span{display:block; text-align:center; background-image:url(../../imgs/ico_camera.png); background-repeat:no-repeat; background-position:center top; padding-top:35px;}
+
+
+.mypageLeft.card{background-color:#FFF; border:0; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02);}
+.mypageLeft.card .list-group-item{border:0; border-top:1px solid rgba(0,0,0,.04); z-index:auto;}
+.mypageLeft.card .list-group-item:first-child{border-top:0;}
+.mypageLeft.card .list-group-item.on{background-color:#e6e6e6; background-image:url(../../imgs/arrow_right.png); background-repeat:no-repeat; background-position:95% center; background-size: 18px 18px;}
+.mypageLeft.card .list-group-item a{display:block; width:100%; height:100%;}
+
+.profileWrap{background-color:#FFF; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02); padding:0;}
+.profileWrap .title{font-size:18px; line-height:60px; padding-left:30px;}
+
+.profile{border-top:1px solid #e3e3e3;}
+.profile .myProfile{display:table; font-size:0; padding:20px 30px; width:100%;}
+.profile .myProfile p.txt{display:table-cell; vertical-align:top; font-size:14px; width:20%;}
+.profile .myProfile .profileArea{display:table-cell; vertical-align:top; width:80%; overflow:hidden;}
+.profile .myProfile .profileArea li{display:table; width:100%;}
+.profile .myProfile .profileArea div.profileImg{display:table-cell;}
+.profile .myProfile .profileArea div.profileImg .name{display:inline-block; vertical-align:middle; font-size:14px; line-height:50px; margin-left:10px;}
+.profile .myProfile .profileArea div.profileBtn{display:table-cell; text-align:right;}
+.profile .myProfile .profileArea div.profileBtn a{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px; margin-top:12px;}
+.profile .myProfile .profileArea div.profileBtn button{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px; background-color:#FFF; margin-top:12px;}
+
+.profile .myProfile .profileArea li{padding:10px 0;}
+.profile .myProfile .profileArea li:first-child{padding:0 0 10px 0;}
+.profile .myProfile .profileArea div.profileInfo .txt{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; width:100px;}
+.profile .myProfile .profileArea div.profileInfo .mail{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; margin-left:30px;}
+.profile .myProfile .profileArea div.profileInfo input{display:inline-block; vertical-align:middle; margin-left:30px; border:0; border-bottom:1px solid #d7d7d7; height:40px; width:250px; outline:0;}
+
+.profile .myProfile .profileArea div.profileInfo img{width:50px; margin-right:10px; border:1px solid #d7d7d7; border-radius:5px;}
+.profile .myProfile .profileArea.group li{border-top:1px solid #d7d7d7;}
+.profile .myProfile .profileArea.group li:first-child{border-top:0;}
+
+.modal-body .profileImg{position:relative; display:block; width:120px; height:120px; margin:0 auto;}
+.modal-body .profileImg span{display:block; width:120px; height:120px; border-radius:50%; overflow:hidden;}
+.modal-body .profileImg span img{display:block; width:100%;}
+.modal-body .profileImg label{position:absolute; right:0; bottom:0; width:40px; height:40px; border-radius:50%; background-color:#b3b3b3; border:1px solid #fff; background-image:url(../../imgs/ico_camera_w.png); background-repeat:no-repeat; background-position:center center; font-size:0; background-size:60% 60%;}
+.modal-body .profileImg input{display:none;}
+.modal-body .profileInput{display:block; width:100%; height:40px; border:1px solid #dcdcdc; padding-left:10px; box-sizing:border-box; font-size:14px; color:#333; margin-top:30px;}
+
+.post .title_area{background-color:#FFF;}
+.post .title_area .title{font-size:18px; line-height:60px; padding-left:30px;}
+
+.post .card{margin-top:15px;}

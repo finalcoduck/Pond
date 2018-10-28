@@ -7,7 +7,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;}
 
 html,body{word-break:break-word;}
-body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222;}
+
+body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222; background-color:#f7f7f7;}
+
 h1{font-size:24px;}
 ul, li, ol { list-style: none; }
 
