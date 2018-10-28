@@ -47,6 +47,8 @@ h2.sub_title span.num{color:#007bff;}
 .mypageLeft.card{background-color:#FFF; border:0; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02);}
 .mypageLeft.card .list-group-item{border:0; border-top:1px solid rgba(0,0,0,.04); z-index:auto;}
 .mypageLeft.card .list-group-item:first-child{border-top:0;}
+.mypageLeft.card .list-group-item.on{background-color:#e6e6e6; background-image:url(../../imgs/arrow_right.png); background-repeat:no-repeat; background-position:95% center; background-size: 18px 18px;}
+.mypageLeft.card .list-group-item a{display:block; width:100%; height:100%;}
 
 .profileWrap{background-color:#FFF; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02); padding:0;}
 .profileWrap .title{font-size:18px; line-height:60px; padding-left:30px;}
@@ -59,7 +61,8 @@ h2.sub_title span.num{color:#007bff;}
 .profile .myProfile .profileArea div.profileImg{display:table-cell;}
 .profile .myProfile .profileArea div.profileImg .name{display:inline-block; vertical-align:middle; font-size:14px; line-height:50px; margin-left:10px;}
 .profile .myProfile .profileArea div.profileBtn{display:table-cell; text-align:right;}
-.profile .myProfile .profileArea div.profileBtn a{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px;}
+.profile .myProfile .profileArea div.profileBtn a{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px; margin-top:12px;}
+.profile .myProfile .profileArea div.profileBtn button{display:inline-block; width:41px; height:26px; border:1px solid #ccc; font-size:12px; text-align:center; line-height:24px; background-color:#FFF; margin-top:12px;}
 
 .profile .myProfile .profileArea li{padding:10px 0;}
 .profile .myProfile .profileArea li:first-child{padding:0 0 10px 0;}
@@ -70,3 +73,15 @@ h2.sub_title span.num{color:#007bff;}
 .profile .myProfile .profileArea div.profileInfo img{width:50px; margin-right:10px; border:1px solid #d7d7d7; border-radius:5px;}
 .profile .myProfile .profileArea.group li{border-top:1px solid #d7d7d7;}
 .profile .myProfile .profileArea.group li:first-child{border-top:0;}
+
+.modal-body .profileImg{position:relative; display:block; width:120px; height:120px; margin:0 auto;}
+.modal-body .profileImg span{display:block; width:120px; height:120px; border-radius:50%; overflow:hidden;}
+.modal-body .profileImg span img{display:block; width:100%;}
+.modal-body .profileImg label{position:absolute; right:0; bottom:0; width:40px; height:40px; border-radius:50%; background-color:#b3b3b3; border:1px solid #fff; background-image:url(../../imgs/ico_camera_w.png); background-repeat:no-repeat; background-position:center center; font-size:0; background-size:60% 60%;}
+.modal-body .profileImg input{display:none;}
+.modal-body .profileInput{display:block; width:100%; height:40px; border:1px solid #dcdcdc; padding-left:10px; box-sizing:border-box; font-size:14px; color:#333; margin-top:30px;}
+
+.post .title_area{background-color:#FFF;}
+.post .title_area .title{font-size:18px; line-height:60px; padding-left:30px;}
+
+.post .card{margin-top:15px;}
