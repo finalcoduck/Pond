@@ -1,9 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%
+    String clientId = "cXnG4ZMsAU0UT9_rvvIe";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8090/pond/login/navercallback", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+	session.setAttribute("state", state);
+%>     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
     
-    
 <section id="" class="bg-primary">
+<c:if test="${!empty loginFail }"><script type="text/javascript">alert('${loginFail}');</script></c:if>
+<c:if test="${!empty dpMsg }"><script type="text/javascript">alert('${dpMsg}');</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">
@@ -12,7 +28,7 @@
                     <p class="lead text-white">출결 관리, 공지, 학원생들을 위한 커뮤니티 지원</p>
                 </div>
                 <div class="col-12 col-md-6 justify-content-center">
-                    <form class="justify-content-center">
+                    <form class="justify-content-center" action="${pageContext.request.contextPath }/login/normal" method="post">
                         <svg id="ryan" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0,150 C0,65 120,65 120,150" fill="#ffcb01" stroke="#000" stroke-width="2" />
                             <circle cx="60" cy="60" r="40" fill="#ffcb01" stroke="#000" stroke-width="2" />
@@ -34,11 +50,12 @@
                                     stroke-linejoin="round" />
                             </g>
                         </svg>
-                        <input type="text" placeholder="email@domain.com">
-                        <input type="current-password" placeholder="Password">
+                        <input type="email" placeholder="email@domain.com" name="memEmail">
+                        <input type="current-password" placeholder="Password" name="memPwd">
                         <input type="submit" class="btn btn-dark text-white" value="로그인">
-                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login">
-                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login">
+                        <a href="#">비밀번호를 잊었삼</a>
+                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
+                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
                     </form>
                 </div>
             </div>

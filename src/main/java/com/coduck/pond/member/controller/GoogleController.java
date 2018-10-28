@@ -36,7 +36,7 @@ public class GoogleController {
 	/*
 	 * 	구글 소셜 로그인시 DB저장 및 세션 처리
 	 */
-	@RequestMapping(value = "/member/login/googlecallback", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/login/googlecallback", method = {RequestMethod.GET, RequestMethod.POST})
 	public String googleLoginSet(Model model, HttpServletRequest request, HttpSession session) {
 		String code = request.getParameter("code");
 		
@@ -70,10 +70,10 @@ public class GoogleController {
 	        memberLoginService.googleToInsertMember(map);
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
 	        session.setAttribute("memVo", memVo);
-	        return "addPhone";
+	        return "/login/addPhone";
         }else {
         	session.setAttribute("memVo", memVo);
-        	return "home";
+        	return "/test1";
         }
 	}
 }

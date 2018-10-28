@@ -8,7 +8,7 @@
             </a>
         </h1>
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="text-white" href="">회원가입</a></li>
+            <li class="nav-item"><a class="text-white" href="${pageContext.request.contextPath }/join">회원가입</a></li>
         </ul>
     </nav>
     </header>

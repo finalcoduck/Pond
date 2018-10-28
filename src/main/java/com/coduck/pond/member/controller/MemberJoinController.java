@@ -17,30 +17,30 @@ public class MemberJoinController {
 	/*
 	 * 	메일 인증전 pre_mem 테이블에 담기
 	 */
-	@RequestMapping(value="/member/main/join", method=RequestMethod.POST)
+	@RequestMapping(value="/joinOk", method=RequestMethod.POST)
 	public String join(PreMemVo vo, Model model) {
 		try {
 			memberJoinService.insertPreMember(vo);
 		}catch (Exception e) {
 			return "error";
 		}
-		return "mailconfirm";
+		return "/emailConfirm";
 	}
 	
 	/*
 	 * 메일 인증 확인
 	 * pre_mem --> mem 테이블로 이동 후 pre_mem 정보삭제
 	 */
-	@RequestMapping(value="/member/main/join/emailConfirm", method=RequestMethod.GET)
+	@RequestMapping(value="/join/emailConfirm", method=RequestMethod.GET)
 	public String emailConfirm(String key, String email, Model model) {
 		try {
 			int n = memberJoinService.insertMember(key, email);
 			model.addAttribute("joinMsg","success");
 			model.addAttribute("memEamil",email);
-			return "loginForm";
+			return "redirect:/";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
-			return "home";
+			return "redirect:/";
 		}
 	}
 }

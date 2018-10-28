@@ -37,10 +37,24 @@
 	</definition>
 	
 	<!-- 회원가입 -->
-	<definition name="/join/member" extends="main.definition">
+	<definition name="/join" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/join-member.jsp" />
 	</definition>
 	
+	<!-- 이메일 확인  -->
+	<definition name="/emailConfirm" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/emailConfirm.jsp" />
+	</definition>
+	
+	<!-- 소셜 로그인 핸드폰 추가입력 페이지 -->
+	<definition name="/login/addPhone" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/social-login-information.jsp" />
+	</definition>
+	
+	<!-- 로그인 후 임시 페이지 -->
+	<definition name="/test1" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/test.jsp" />
+	</definition>
 	
 	<!-- 마이페이지 -->
 	<definition name="/erd1" extends="main.definition">

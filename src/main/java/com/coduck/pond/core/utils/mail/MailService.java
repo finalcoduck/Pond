@@ -12,7 +12,7 @@ public class MailService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[메일인증]");
 		sendMail.setText(new StringBuffer().append("<h1>인증해주세여</h1>")
-		.append("<a href='http://localhost:8090/pond/member/main/join/emailConfirm?key=")
+		.append("<a href='http://localhost:8090/pond/join/emailConfirm?key=")
 		.append(authKey)
 		.append("&email=")
 		.append(email)

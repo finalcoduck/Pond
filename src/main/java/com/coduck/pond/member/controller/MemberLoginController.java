@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coduck.pond.member.service.MemberJoinService;
 import com.coduck.pond.member.service.MemberJoinServiceImpl;
@@ -32,9 +33,9 @@ public class MemberLoginController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@RequestMapping("/member/main/login/callback")
+	@RequestMapping("/login/navercallback")
 	// 네이버 로그인 연동후 사용자 정보 요청후 디비 작업
-	public String naverCallback(String code, String state, Model model, HttpSession session) {
+	public String naverCallback(String code, String state, Model model, HttpSession session, RedirectAttributes ra) {
 		String clientId = "cXnG4ZMsAU0UT9_rvvIe";//애플리케이션 클라이언트 아이디값";
 		String clientSecret = "lwPvvFgpsq";//애플리케이션 클라이언트 시크릿값";
 		try {
@@ -100,8 +101,8 @@ public class MemberLoginController {
 				// 소셜 로그인 연동 메일이 이미 등록된 메일일 경우
 				MemVo memVo = memberLoginService.getOneMem(email);
 				if(memVo != null) {
-					model.addAttribute("dpMsg","이미 가입된 이메일 입니다");
-					return "loginForm";
+					ra.addAttribute("dpMsg","이미 가입된 이메일 입니다");
+					return "redirect:/";
 				}
 				String name = (String)obj1.get("name");
 				String id = (String)obj1.get("id");
@@ -110,7 +111,7 @@ public class MemberLoginController {
 				memVo = memberLoginService.getNaverMem(id);
 				if(memVo != null) {
 					session.setAttribute("memVo", memVo);
-					return "home";
+					return "/test1";
 				}
 				String profilePic = (String)obj1.get("profile_image");
 				HashMap<String, String> map = new HashMap<>();
@@ -122,43 +123,44 @@ public class MemberLoginController {
 				memVo = memberLoginService.getNaverMem(id);
 				session.setAttribute("memVo", memVo);
 				////////////// 네이버 회원 정보 디비에 넣기 ////////////////
-				return "addPhone";
+				return "/login/addPhone";
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
-				return "home";
+				return "redirect:/";
 			}
 	}
 	
 	// 일반회원 로그인 컨트롤러
-	@RequestMapping(value="/member/main/login/normal", method=RequestMethod.POST)
-	public String normalLogin(String memEmail, String memPwd, Model model, HttpSession session) {
+	@RequestMapping(value="/login/normal", method=RequestMethod.POST)
+	public String normalLogin(String memEmail, String memPwd, Model model, HttpSession session, RedirectAttributes ra) {
 		MemVo memVo = null;
 		try {
 			memVo = memberLoginService.getOneMem(memEmail); // 존재하는 이메일 인지 확인
 			if(passwordEncoder.matches(memPwd, memVo.getMemPwd())) { //입력받은 패스워드를 암호화시켜 비교후 같으면 true
-				session.setAttribute("memVo", memVo);
-				return "home";
+				session.setAttribute("memVo", memVo); //로그인 성공! 세션저장
+				return "/test1";
 			}else {
-				model.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
-				return "loginForm";
+				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
+				return "redirect:/";
 			}
 		}catch (Exception e) {
 			System.out.println("%%/login/normal 컨트롤러 에러%%");
-			model.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
-			return "loginForm";
+			ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
+			return "redirect:/";
 		}}
 	
 	//로그아웃 컨트롤러
-	@RequestMapping("/member/main/logout")
+	@RequestMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
-	@RequestMapping("/member/main/updatePhone")
+	//핸드폰 추가 입력 컨트롤러
+	@RequestMapping("/member/updatePhone")
 	public String updatePhone(String memPhone, String memEmail) {
 		memberLoginService.updatePhone(memEmail, memPhone);
-		return "home";
+		return "/test1";
 	}
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
