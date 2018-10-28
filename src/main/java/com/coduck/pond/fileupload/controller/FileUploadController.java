@@ -8,9 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.oauth2.GrantType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -21,13 +19,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.coduck.pond.core.utils.file.FileUtils;
 import com.coduck.pond.fileupload.service.FileUploadService;
-import com.coduck.pond.fileupload.vo.FileListVo;
 import com.coduck.pond.fileupload.vo.FileUploadVo;
 
 @Controller
 public class FileUploadController {
 	@Autowired
 	private FileUploadService fileUploadService;
+
+	
+	/*
+	 *  이동 컨트롤러
+	 */
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model, HttpServletResponse response) {
+		return "fileupload";
+	}*/
 	
 	/*
 	 * 단인 파일 업로드 처리
@@ -72,11 +78,4 @@ public class FileUploadController {
 		return "fileupload";
 	}
 	
-	/*
-	 *  이동 컨트롤러
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpServletResponse response) {
-		return "fileupload";
-	}
 }

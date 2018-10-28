@@ -22,5 +22,7 @@
 	<a href="<c:url value='/member/main/logout'/>">로그아웃</a>
 	
 	<a href="<c:url value='/group/test'/>">테스트</a>
+	
+	<a href="<c:url value='/schedule/info?groupNum=30'/>">일정관리</a>
 </body>
 </html>

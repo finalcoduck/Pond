@@ -9,9 +9,7 @@ public class FileUploadVo {
 	private long fileSize;
 	private String fileType;
 	
-	public FileUploadVo() {
-		// TODO Auto-generated constructor stub
-	}
+	public FileUploadVo() {}
 	
 	public String getFileType() {
 		return fileType;
