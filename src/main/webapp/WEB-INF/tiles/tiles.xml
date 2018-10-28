@@ -3,14 +3,14 @@
 <tiles-definitions>
 
 	<!-- main Definition -->
-	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+	<definition name="main.definition" template="/WEB-INF/layout/main-template.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
 		<put-attribute name="body" />
 		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
 	<!-- member Definition -->
-	<definition name="main.definition" template="/WEB-INF/layout/template.jsp">
+	<definition name="member.definition" template="/WEB-INF/layout/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
 		<put-attribute name="body" />
 		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
@@ -32,10 +32,16 @@
 	
 	
 	<!-- 마이페이지 -->
-	<definition name="/erd" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
+	<definition name="/main" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/main-body.jsp" />
 	</definition>
-
+	
+	<!-- 회원가입 -->
+	<definition name="/main/join/member" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/join-member.jsp" />
+	</definition>
+	
+	
 	<!-- 마이페이지 -->
 	<definition name="/erd1" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
