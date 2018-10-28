@@ -9,6 +9,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.member.vo.MemVo;
 
 public class MemVoArgumentResolver implements HandlerMethodArgumentResolver {
@@ -26,7 +27,7 @@ public class MemVoArgumentResolver implements HandlerMethodArgumentResolver {
 		// TODO Auto-generated method stub
 		
 		//webRequest 객체의  세션스코프에서  키가 "memVo"인걸 꺼내옴
-		MemVo memVo =  (MemVo)webRequest.getAttribute("memVo",webRequest.SCOPE_SESSION);
+		MemVo memVo =  (MemVo)webRequest.getAttribute(CommonConstant.USER_SESSION_KEY,webRequest.SCOPE_SESSION);
 		
 		return memVo;
 	}
