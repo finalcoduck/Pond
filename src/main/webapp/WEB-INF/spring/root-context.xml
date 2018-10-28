@@ -64,7 +64,7 @@
 	 
 	<bean id = "googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
 	<property name="scope" value="https://www.googleapis.com/auth/plus.login"></property>
-	<property name="redirectUri" value="http://localhost:8090/pond/member/login/googlecallback"/>
+	<property name="redirectUri" value="http://localhost:8090/pond/login/googlecallback"/>
 	</bean>
     
     <!-- Transactional 어노테이션을 scan하기 위한 설정 -->

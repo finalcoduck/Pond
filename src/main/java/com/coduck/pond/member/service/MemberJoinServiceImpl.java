@@ -46,6 +46,7 @@ public class MemberJoinServiceImpl implements MemberJoinService{
 	public int insertMember(String authKey, String email) { 
 		PreMemVo preMemVo = memberJoinDao.getPreMem(email);
 		System.out.println(preMemVo);
+		if(preMemVo.getPrePhone() == null) { preMemVo.setPrePhone("0"); }
 		MemAuthVo memAuthVo = new MemAuthVo(authKey, email); 
 		int n = memberJoinDao.deletePreMem(memAuthVo); // 인증키와 이메일 존재시 삭제
 		memberJoinDao.deleteAuthKey(email);

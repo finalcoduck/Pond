@@ -290,15 +290,14 @@
                 $('.option').toggleClass('scale-on');
             });
 
+            
             $("#noticeBtn").on("click", function () {
                 $("#noticeModal").modal('show')       
-                $("#noticeBtn").popover('show');
+                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
             
             $('#noticeModal').on('show.bs.modal', function (e) {
                 $("#floatingBtn").trigger("click");
-                
-                console.log($("body").css("padding-right"));
             });
 
             $('#noticeModal').on('shown.bs.modal', function (e) {

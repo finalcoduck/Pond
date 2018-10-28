@@ -21,29 +21,38 @@ public class MemberMoveController {
 	
 	private OAuth2Operations oauthOperations;
 	
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpServletResponse response) {
+	/*
+	 *  최초 실행시 구글 URL정보 들고 이동
+	 *  mainPage에서 구글 소셜로그인 버튼에 URL등록을 위해 
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
 		
-		 * 최초 실행할때 구글 url 정보들고 view로 이동
-		 
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, googleOauth2Parameters);
 		System.out.println("/googleLogin, url" + url);
 		model.addAttribute("google_url", url);
-		return "join";
-	}*/
+		model.addAttribute("dpMsg", dpMsg);
+		model.addAttribute("loginFail", loginFail);
+		return "/";
+	}
 	
-	@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
 	public String go(Model model) { 
 		return "home";
-	}
+	}*/
 	
-	@RequestMapping("/member/main/join")
+	@RequestMapping("/join")
 	public String joinPage() {
-		return "join";
+		return "/join";
 	}
 	
-	@RequestMapping("/member/main/loginForm")
+	@RequestMapping("/test1")
+	public String testPage() {
+		return "/test1";
+	}
+	
+	/*@RequestMapping("/member/main/loginForm")
 	public String loginForm() {
 		return "loginForm";
 	}
@@ -51,6 +60,6 @@ public class MemberMoveController {
 	@RequestMapping("/member/main/findPwd")
 	public String findPwd() {
 		return "findPwd";
-	}
+	}*/
 	
 }
