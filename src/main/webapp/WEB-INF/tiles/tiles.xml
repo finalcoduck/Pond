@@ -37,19 +37,19 @@
 	
 	<!-- ///////////////////////// member /////////////////////////// -->
 	
-	<definition name="/member/*" extends="main.definition">
+	<definition name="/member/*" extends="member.definition">
 		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
 	</definition>
 	
 	<!-- ///////////////////////// group /////////////////////////// -->
 	
-	<definition name="/group/*" extends="main.definition">
+	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
 	</definition>
 	
 	<!-- ///////////////////////// selectgroup /////////////////////////// -->
 	<!-- 마이페이지 -->
-	<definition name="/selectgroup" extends="main.definition">
+	<definition name="/selectgroup" extends="groupSelect.definition">
 		<put-attribute name="body" value="/WEB-INF/views/selectgroup/{1}.jsp" />
 	</definition>
 	

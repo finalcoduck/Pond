@@ -91,7 +91,9 @@
 											<input type="password" value="123123123">
 										</div>
 										<div class="profileBtn">
-											<a href="#">수정</a>
+											<button type="button" data-toggle="modal" data-target="#pwdModal">
+												수정
+											</button>
 										</div>
 									</li>
 								</ul>
@@ -177,6 +179,42 @@
 		</div>
 	</div>
 	<!-- //프로필수정 모달 -->
+	
+		<!-- 비밀번호 수정 모달 -->
+	<div class="modal fade" id="pwdModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">비밀번호 수정</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<ul class="pwd_modify">
+						<li>
+							<span class="txt">현재 비밀번호</span>
+							<input type="password" value="">
+						</li>
+						<li>
+							<span class="txt">새 비밀번호</span>
+							<input type="password" value="">
+						</li>
+						<li>
+							<span class="txt">새 비밀번호 확인</span>
+							<input type="password" value="">
+						</li>
+					</ul>
+				</div>
+				<!-- Modal footer -->
+				<div class="align_c" style="padding:1rem;">
+					<!-- data-dismiss="modal" << 모달창 자동 닫기 해제  -->
+					<button type="submit" class="btn btn-secondary">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //비밀번호 수정 모달 -->
 	
 	<script	src="${pageContext.request.contextPath }/resources/vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
 	<script	src="${pageContext.request.contextPath }/resources/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
