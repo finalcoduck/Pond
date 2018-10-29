@@ -24,7 +24,7 @@ public class MemberJoinController {
 		}catch (Exception e) {
 			return "error";
 		}
-		return "/emailConfirm";
+		return "/email-confirm";
 	}
 	
 	/*

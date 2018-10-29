@@ -111,7 +111,7 @@ public class MemberLoginController {
 				memVo = memberLoginService.getNaverMem(id);
 				if(memVo != null) {
 					session.setAttribute("memVo", memVo);
-					return "/test1";
+					return "/test";
 				}
 				String profilePic = (String)obj1.get("profile_image");
 				HashMap<String, String> map = new HashMap<>();
@@ -123,7 +123,7 @@ public class MemberLoginController {
 				memVo = memberLoginService.getNaverMem(id);
 				session.setAttribute("memVo", memVo);
 				////////////// 네이버 회원 정보 디비에 넣기 ////////////////
-				return "/login/addPhone";
+				return "/social-login-information";
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 				return "redirect:/";
@@ -160,7 +160,7 @@ public class MemberLoginController {
 	@RequestMapping("/member/updatePhone")
 	public String updatePhone(String memPhone, String memEmail) {
 		memberLoginService.updatePhone(memEmail, memPhone);
-		return "/test1";
+		return "/test";
 	}
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
@@ -170,7 +170,7 @@ public class MemberLoginController {
 		MemVo memVo = memberLoginService.getOneMem(memEmail);
 		if(memVo == null) {
 			model.addAttribute("findMsg","NotExistence");
-			return "/login/sendMail";
+			return "/find-password";
 		}else {
 			memberLoginService.mailTofindPwd(memEmail); // 메일 인증 보내기
 			return "redirect:/emailConfirm";
@@ -183,7 +183,7 @@ public class MemberLoginController {
 		int n = memberLoginService.authConfirm(key, email);
 		if(n>0) {
 			model.addAttribute("email",email);
-			return "/login/setNewPwd";
+			return "/setNewPwd";
 		}else {
 			System.out.println("새로운 비밀번호 설정 오류");
 			return "redirect:/";

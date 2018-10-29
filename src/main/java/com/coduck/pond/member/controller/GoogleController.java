@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.vo.MemVo;
 
@@ -69,11 +70,11 @@ public class GoogleController {
 	        map.put("profilePic", profile.getImageUrl());
 	        memberLoginService.googleToInsertMember(map);
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
-	        session.setAttribute("memVo", memVo);
-	        return "/login/addPhone";
+	        session.setAttribute(CommonConstant.USER_SESSION_KEY, memVo);
+	        return "/social-login-infomation";
         }else {
-        	session.setAttribute("memVo", memVo);
-        	return "/test1";
+        	session.setAttribute(CommonConstant.USER_SESSION_KEY, memVo);
+        	return "/test";
         }
 	}
 }

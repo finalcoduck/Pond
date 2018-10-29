@@ -29,51 +29,28 @@
 		<put-attribute name="body" />
 	</definition>
 	
+	<!-- ///////////////////////// main //////////////////////////// -->
 	
+	<definition name="/*" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
+	</definition>
 	
+	<!-- ///////////////////////// member /////////////////////////// -->
+	
+	<definition name="/member/*" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	
+	<!-- ///////////////////////// group /////////////////////////// -->
+	
+	<definition name="/group/*" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
+	</definition>
+	
+	<!-- ///////////////////////// selectgroup /////////////////////////// -->
 	<!-- 마이페이지 -->
-	<definition name="/" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/main-body.jsp" />
+	<definition name="/selectgroup" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/selectgroup/{1}.jsp" />
 	</definition>
-	
-	<!-- 회원가입 -->
-	<definition name="/join" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/join-member.jsp" />
-	</definition>
-	
-	<!-- 이메일 확인  -->
-	<definition name="/emailConfirm" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/emailConfirm.jsp" />
-	</definition>
-	
-	<!-- 소셜 로그인 핸드폰 추가입력 페이지 -->
-	<definition name="/login/addPhone" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/social-login-information.jsp" />
-	</definition>
-	
-	<!-- 새 비밀번호 설정 페이지 (이메일)-->
-	<definition name="/login/sendMail" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/find-password.jsp" />
-	</definition>
-	
-	<!-- 새 비밀번호 설정 페이지 (비밀번호 설정)-->
-	<definition name="/login/setNewPwd" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/setNewPwd.jsp" />
-	</definition>
-	
-	<!-- 로그인 후 임시 페이지 -->
-	<definition name="/test1" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/test.jsp" />
-	</definition>
-	
-	<!-- 마이페이지 -->
-	<definition name="/erd1" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
-	</definition>
-	
-	<!-- 그룹선택페이지 -->
-	<definition name="/test" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/group/test.jsp" />
-	</definition>	
 	
 </tiles-definitions>

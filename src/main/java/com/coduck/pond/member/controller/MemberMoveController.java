@@ -36,7 +36,7 @@ public class MemberMoveController {
 		model.addAttribute("google_url", url);
 		model.addAttribute("dpMsg", dpMsg);
 		model.addAttribute("loginFail", loginFail);
-		return "/";
+		return "/main-body";
 	}
 	
 	/*@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
@@ -46,25 +46,24 @@ public class MemberMoveController {
 	
 	@RequestMapping("/join")
 	public String joinPage() {
-		return "/join";
+		return "/join-member";
 	}
 	
 	@RequestMapping("/test1")
 	public String testPage(MemVo memVo) {
-		System.out.println(memVo.getMemEmail());
-		System.out.println(memVo.getMemName());
-		return "/test1";
+		return "/test";
 	}
 	
 	@RequestMapping("/emailConfirm")
 	public String emailConfirm() {
-		return "/emailConfirm";
+		return "/email-confirm";
 	}
 	
 	@RequestMapping("/login/sendMail")
 	public String setNewPwd() {
-		return "/login/sendMail";
+		return "/set-new-pwd";
 	}
+	
 	/*@RequestMapping("/member/main/loginForm")
 	public String loginForm() {
 		return "loginForm";
@@ -74,5 +73,6 @@ public class MemberMoveController {
 	public String findPwd() {
 		return "findPwd";
 	}*/
+	
 	
 }
