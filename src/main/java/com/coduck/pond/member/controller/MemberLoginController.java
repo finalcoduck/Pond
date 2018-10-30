@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.member.service.MemberJoinService;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.service.ProfileService;
@@ -114,7 +115,7 @@ public class MemberLoginController {
 				memVo = memberLoginService.getNaverMem(id);
 				if(memVo != null) {
 					Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
-					MemDto memDto = new MemDto(memVo, memGroupMap);
+					MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 					session.setAttribute("memDto", memDto);
 					return "/test";
 				}
@@ -127,7 +128,7 @@ public class MemberLoginController {
 				memberJoinService.naverToInsertMember(map);
 				memVo = memberLoginService.getNaverMem(id);
 				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
-				MemDto memDto = new MemDto(memVo, memGroupMap);
+				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 				session.setAttribute("memDto", memDto);
 				////////////// 네이버 회원 정보 디비에 넣기 ////////////////
 				return "/social-login-information";
@@ -144,8 +145,9 @@ public class MemberLoginController {
 		try {
 			memVo = memberLoginService.getOneMem(memEmail); // 존재하는 이메일 인지 확인
 			if(passwordEncoder.matches(memPwd, memVo.getMemPwd())) { //입력받은 패스워드를 암호화시켜 비교후 같으면 true
+				System.out.println(memVo.getMemEmail());
 				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
-				MemDto memDto = new MemDto(memVo, memGroupMap);
+				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 				session.setAttribute("memDto", memDto);
 				return "redirect:/test1";
 			}else {
@@ -153,7 +155,8 @@ public class MemberLoginController {
 				return "redirect:/";
 			}
 		}catch (Exception e) {
-			System.out.println("%%/login/normal 컨트롤러 에러%%");
+			System.out.println("여기맞나??");
+			e.printStackTrace();
 			ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 			return "redirect:/";
 		}}

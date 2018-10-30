@@ -21,7 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.coduck.pond.core.constant.CommonConstant;
+import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.service.ProfileService;
 import com.coduck.pond.member.vo.MemDto;
@@ -74,13 +74,13 @@ public class GoogleController {
 	        map.put("profilePic", profile.getImageUrl());
 	        memberLoginService.googleToInsertMember(map);
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
-			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
-			MemDto memDto = new MemDto(memVo, memGroupMap);
+	        Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+			MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 			session.setAttribute("memDto", memDto);
 	        return "/social-login-information";
         }else {
-			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
-			MemDto memDto = new MemDto(memVo, memGroupMap);
+        	Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+			MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 			session.setAttribute("memDto", memDto);
         	return "/test";
         }
