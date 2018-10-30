@@ -18,15 +18,16 @@
 	
 	<!-- group Definition -->
 	<definition name="group.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
-		<put-attribute name="left" />
+		<put-attribute name="header" value="/WEB-INF/layout/group-header.jsp"/>
 		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
 	<!-- groupSelect Definition -->
 	<definition name="groupSelect.definition" template="/WEB-INF/layout/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
 		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
 	<!-- ///////////////////////// main //////////////////////////// -->
