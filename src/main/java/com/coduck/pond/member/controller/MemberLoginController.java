@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,12 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coduck.pond.member.service.MemberJoinService;
-import com.coduck.pond.member.service.MemberJoinServiceImpl;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
+import com.coduck.pond.member.service.ProfileService;
+import com.coduck.pond.member.vo.MemDto;
 import com.coduck.pond.member.vo.MemVo;
 
 @Controller
@@ -32,6 +33,8 @@ public class MemberLoginController {
 	private MemberLoginServiceImpl memberLoginService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping("/login/navercallback")
 	// 네이버 로그인 연동후 사용자 정보 요청후 디비 작업
@@ -110,7 +113,9 @@ public class MemberLoginController {
 				// 소셜 로그인 연동을 이미 한번 했을 경우
 				memVo = memberLoginService.getNaverMem(id);
 				if(memVo != null) {
-					session.setAttribute("memVo", memVo);
+					Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+					MemDto memDto = new MemDto(memVo, memGroupMap);
+					session.setAttribute("memDto", memDto);
 					return "/test";
 				}
 				String profilePic = (String)obj1.get("profile_image");
@@ -121,7 +126,9 @@ public class MemberLoginController {
 				map.put("profilePic", profilePic);
 				memberJoinService.naverToInsertMember(map);
 				memVo = memberLoginService.getNaverMem(id);
-				session.setAttribute("memVo", memVo);
+				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+				MemDto memDto = new MemDto(memVo, memGroupMap);
+				session.setAttribute("memDto", memDto);
 				////////////// 네이버 회원 정보 디비에 넣기 ////////////////
 				return "/social-login-information";
 			}catch (Exception e) {
@@ -137,7 +144,9 @@ public class MemberLoginController {
 		try {
 			memVo = memberLoginService.getOneMem(memEmail); // 존재하는 이메일 인지 확인
 			if(passwordEncoder.matches(memPwd, memVo.getMemPwd())) { //입력받은 패스워드를 암호화시켜 비교후 같으면 true
-				session.setAttribute("memVo", memVo); //로그인 성공! 세션저장
+				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+				MemDto memDto = new MemDto(memVo, memGroupMap);
+				session.setAttribute("memDto", memDto);
 				return "redirect:/test1";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");

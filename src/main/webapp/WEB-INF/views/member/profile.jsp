@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-	<!-- <header	class="group-header bg-primary">
-		<div class="inner">
-			<nav class="navbar vh5">
-				<h1>
-					<a href="#">
-						<b class="text-white">POND</b>
-					</a>
-				</h1>
-				<div class="dropdown">
-					<button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img class="rounded-circle header-profile-img" src="https://picsum.photos/50/50" alt="">
-					</button>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-						<a class="dropdown-item" href="#">마이페이지</a>
-						<a class="dropdown-item" href="#">초대코드 입력</a>
-						<a class="dropdown-item" href="#">로그아웃</a>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header> -->
 	<style type="text/css">
 		*, a{color:#333;}
 	</style>
@@ -216,6 +195,4 @@
 	</div>
 	<!-- //비밀번호 수정 모달 -->
 	
-	<script	src="${pageContext.request.contextPath }/resources/vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
-	<script	src="${pageContext.request.contextPath }/resources/vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 	<script	src="${pageContext.request.contextPath }/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>

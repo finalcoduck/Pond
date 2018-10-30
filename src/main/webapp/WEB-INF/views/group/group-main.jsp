@@ -1,49 +1,11 @@
-<!DOCTYPE html>
-<html lang="ko">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1,	user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap-4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../build/css/general.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-        crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../build/css/floating_btn.css">
-    <link rel="stylesheet" type="text/css" href="../vendor/quill/quill.snow.css">
-    <title>POND</title>
-</head>
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
 
-<body>
-
-    <header>
-        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary mb-3">
-            <h1>
-                <a class=" text-white" href="#">
-                    <b>POND</b>
-                </a>
-            </h1>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="">스트림</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="">사용자</a>
-                </li>
-            </ul>
-            <div class="mr-2">
-                <a href="">
-                    <img class="rounded-circle header-profile-img" src="https://picsum.photos/50/50" alt="">
-                </a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- content -->
-
+ <!-- content -->
     <section id="main">
         <div class="container">
             <div class="row">
@@ -251,16 +213,13 @@
             <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
     </div>
+    
+    
     <!-- floating Button-->
-
-    <script src="../vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="../vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-    <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
-    <script src="../vendor/quill/quill.min.js"></script>
-
-    <script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+	
+	
+	    <script>
         const slideExcutionTime = 178;
 
         //floating Button
@@ -327,7 +286,3 @@
 
         });
     </script>
-
-</body>
-
-</html>

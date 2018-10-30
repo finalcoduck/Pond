@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
+import com.coduck.pond.member.service.ProfileService;
+import com.coduck.pond.member.vo.MemDto;
 import com.coduck.pond.member.vo.MemVo;
 
 @Controller
@@ -34,6 +36,8 @@ public class GoogleController {
     private OAuth2Operations oauthOperations;
     @Autowired
     private MemberLoginServiceImpl memberLoginService;
+    @Autowired
+    private ProfileService profileService;
 	/*
 	 * 	구글 소셜 로그인시 DB저장 및 세션 처리
 	 */
@@ -70,10 +74,14 @@ public class GoogleController {
 	        map.put("profilePic", profile.getImageUrl());
 	        memberLoginService.googleToInsertMember(map);
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
-	        session.setAttribute(CommonConstant.USER_SESSION_KEY, memVo);
-	        return "/social-login-infomation";
+			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+			MemDto memDto = new MemDto(memVo, memGroupMap);
+			session.setAttribute("memDto", memDto);
+	        return "/social-login-information";
         }else {
-        	session.setAttribute(CommonConstant.USER_SESSION_KEY, memVo);
+			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+			MemDto memDto = new MemDto(memVo, memGroupMap);
+			session.setAttribute("memDto", memDto);
         	return "/test";
         }
 	}
