@@ -22,8 +22,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<link href="<c:url value='/resources/build/css/fullcalendar.min.css'/>" rel="stylesheet">
-<script src="<c:url value='/resources/build/js/fullcalendar.min.js'/>" type="text/javascript"></script>
+<link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
+<script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
 </head>
 <body>
 <div class="container">

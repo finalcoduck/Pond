@@ -5,7 +5,6 @@
 		*, a{color:#333;}
 	</style>
 	<section class="content">
-		 <h1>${test }</h1>
 		<div class="container mt30">
 			<div class="row">
 				<div class="col-12 col-md-3">
@@ -31,8 +30,10 @@
 								<ul>
 									<li>
 										<div class="profileImg">
-											<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
-											<span class="name">배재정</span>
+											<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
+											<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
+											<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/${memDto.memVo.memProfilePic }" alt="">
+											<span class="name">${memDto.memVo.memName }</span>
 										</div>
 										<div class="profileBtn">
 											<button type="button" data-toggle="modal" data-target="#myModal">
@@ -52,27 +53,49 @@
 									<li>
 										<div class="profileInfo">
 											<span class="txt">이메일</span>
-											<span class="mail">bjj9804@naver.com</span>
+											<c:choose>
+												<c:when test="${memDto.memVo.memPwd ne 'google'}">
+												<span class="mail">${memDto.memVo.memEmail }</span>
+												</c:when>
+												<c:otherwise>
+												<span class="mail" style="color:blue;">Google 계정 연동중</span>
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</li>
 									<li>
 										<div class="profileInfo">
 											<span class="txt">휴대폰 번호</span>
-											<input type="text" value="01073077408">
+											<c:choose>
+											<c:when test="${memDto.memVo.memPhone ne 0 }">
+												<input type="text" value="${memDto.memVo.memPhone }"  id="phoneNum">
+											</c:when>
+											<c:otherwise>
+												<input type="text" placeholder="휴대폰 번호를 등록해 주세요."  id="phoneNum">
+											</c:otherwise>
+											</c:choose>
 										</div>
 										<div class="profileBtn">
-											<a href="#">수정</a>
+											<button id="updatePhoneBtn">수정</button>
 										</div>
 									</li>
 									<li>
 										<div class="profileInfo">
 											<span class="txt">비밀번호</span>
-											<input type="password" value="123123123">
 										</div>
 										<div class="profileBtn">
-											<button type="button" data-toggle="modal" data-target="#pwdModal">
-												수정
-											</button>
+											<c:choose>
+											<c:when test="${memDto.memVo.memPwd eq 'naver' && memDto.memVo.memPwd eq 'google' }">
+												<button type="button" data-toggle="modal" disabled="disabled" class="btn-secondary">
+													수정 
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button type="button" data-toggle="modal" data-target="#pwdModal">
+													수정 
+												</button>
+											</c:otherwise>
+											</c:choose>
 										</div>
 									</li>
 								</ul>
@@ -86,12 +109,27 @@
 								<ul>
 									<li>
 										<div class="profileInfo">
-											<span class="txt">네이버</span>
+										<c:choose>
+											<c:when test="${memDto.memVo.memPwd eq 'naver' }">
+												<span class="txt" style="color:green;">네이버</span>
+												<span>연동중 입니다</span>
+											</c:when>
+											<c:otherwise>
+												<span class="txt">네이버</span>
+											</c:otherwise>
+										</c:choose>
 										</div>
 									</li>
 									<li>
 										<div class="profileInfo">
-											<span class="txt">구글</span>
+										<c:choose>
+											<c:when test="${memDto.memVo.memPwd eq 'google' }">
+												<span class="txt" style="color:blue;">구글</span>
+											</c:when>
+											<c:otherwise>
+												<span class="txt">구글</span>
+											</c:otherwise>
+										</c:choose>
 										</div>
 									</li>
 								</ul>
@@ -103,24 +141,14 @@
 							<p class="txt pt10">가입된 그룹</p>
 							<div class="profileArea group">
 								<ul>
+								<c:forEach items="${memDto.keySet }" var="groupNum">
 									<li>
-										<div class="profileInfo">
+										<div class="profileInfo"><!-- 그룹이미지 나중에 처리 -->
 											<img src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="" />
-											<span class="txt group_name">중앙HTA 1803기</span>
+											<span class="txt group_name">${groupMap[groupNum].groupName }</span>
 										</div>
 									</li>
-									<li>
-										<div class="profileInfo">
-											<img src="${pageContext.request.contextPath }/resources/build/image/img2.jpg" alt="" />
-											<span class="txt group_name">중앙HTA 1802기</span>
-										</div>
-									</li>
-									<li>
-										<div class="profileInfo">
-											<img src="${pageContext.request.contextPath }/resources/build/image/img3.jpg" alt="" />
-											<span class="txt group_name">중앙HTA 1801기</span>
-										</div>
-									</li>
+								</c:forEach>	
 								</ul>
 							</div>
 						</div>
@@ -173,26 +201,70 @@
 					<ul class="pwd_modify">
 						<li>
 							<span class="txt">현재 비밀번호</span>
-							<input type="password" value="">
+							<input type="password" value="" id="nowPwd">
 						</li>
 						<li>
 							<span class="txt">새 비밀번호</span>
-							<input type="password" value="">
+							<input type="password" value="" id="newPwd">
 						</li>
 						<li>
 							<span class="txt">새 비밀번호 확인</span>
-							<input type="password" value="">
+							<input type="password" value="" id="newPwd2">
 						</li>
 					</ul>
 				</div>
 				<!-- Modal footer -->
 				<div class="align_c" style="padding:1rem;">
 					<!-- data-dismiss="modal" << 모달창 자동 닫기 해제  -->
-					<button type="submit" class="btn btn-secondary">확인</button>
+					<button type="button" class="btn btn-secondary" id="pwdUpdateBtn">확인</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- //비밀번호 수정 모달 -->
-	
+	<script	src="${pageContext.request.contextPath }/resources/build/js/joinValidityCheck.js"></script>
 	<script	src="${pageContext.request.contextPath }/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
+	<script type="text/javascript">
+		$('#updatePhoneBtn').on('click',function(){
+			var phoneNum = $('#phoneNum').val();
+			if(confirm(phoneNum+"으로 수정하시겠습니까?")){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/member/update-phone/proc",
+					dataType : "json",
+					data : {"phone":phoneNum, "email":'${memDto.memVo.memEmail}'},
+					success: function(data) {
+						alert('수정 완료');
+					}
+				});
+			}else{
+				return;
+			}
+		});
+		
+		$('#pwdUpdateBtn').on('click',function(){
+			var nowPwd = $('#nowPwd').val();
+			var newPwd = $('#newPwd').val();
+			var newPwd2 = $('#newPwd2').val();
+			
+			var pwd = ${memDto.memVo.memPwd};
+			if(pwd == nowPwd){
+				if(newPwd == newPwd2){
+					var bool = regxPwd.test(newPwd);
+					if(bool){
+						/* $.ajax({
+							
+						}); */
+					}else{
+						alert('비밀번호는 8~20글자 영문,숫자,특수문자를 포함해야 합니다.');
+						return;
+					}
+				}else{
+					alert('입력한 비밀번호가 틀립니다');
+					return;
+				}
+			}else{
+				alert('현재 비밀번호가 틀립니다.');
+				return;
+			}
+		});
+	</script>

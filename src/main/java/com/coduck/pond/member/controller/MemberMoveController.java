@@ -27,6 +27,7 @@ public class MemberMoveController {
 	 *  최초 실행시 구글 URL정보 들고 이동
 	 *  mainPage에서 구글 소셜로그인 버튼에 URL등록을 위해 
 	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
 		
@@ -50,7 +51,7 @@ public class MemberMoveController {
 	}
 	
 	@RequestMapping("/test1")
-	public String testPage(MemVo memVo) {
+	public String testPage() {
 		return "/test";
 	}
 	
