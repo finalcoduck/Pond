@@ -1,4 +1,4 @@
-package com.coduck.pond.selectgroup.controller;
+package com.coduck.pond.group.controller;
 
 import org.springframework.stereotype.Controller;
 
