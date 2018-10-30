@@ -10,7 +10,7 @@ package com.coduck.pond.core.constant;
 public class CommonConstant {
 	
 	/** User Session Key **/
-	public static final String USER_SESSION_KEY = "memVo";
+	public static final String USER_SESSION_KEY = "mdmDto";
 	
 	/** Zero & One */
 	public static final String STR_ZERO = "0";
