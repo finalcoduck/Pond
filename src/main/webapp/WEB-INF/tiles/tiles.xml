@@ -11,7 +11,7 @@
 	
 	<!-- member Definition -->
 	<definition name="member.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/layout/member-header.jsp"/>
 		<put-attribute name="body" />
 		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
@@ -49,7 +49,7 @@
 	
 	<!-- ///////////////////////// selectgroup /////////////////////////// -->
 	<!-- 마이페이지 -->
-	<definition name="/selectgroup" extends="groupSelect.definition">
+	<definition name="/selectgroup/*" extends="groupSelect.definition">
 		<put-attribute name="body" value="/WEB-INF/views/selectgroup/{1}.jsp" />
 	</definition>
 	
