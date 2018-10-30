@@ -69,8 +69,6 @@
 		<beans:property name="maxUploadSize" value="5242880"/> <!-- 1024*1024*5 -->
 	</beans:bean>
 	
-	<context:component-scan base-package="com.coduck.pond.schedule.controller" />
-	<context:component-scan base-package="com.coduck.pond.member.controller" />
-	<context:component-scan base-package="com.coduck.pond.fileupload.controller" />
+	<context:component-scan base-package="com.coduck.pond.*.controller" />
 	
 </beans:beans>
