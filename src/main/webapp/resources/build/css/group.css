@@ -8,7 +8,7 @@ h2.sub_title{font-size:18px; color:#222; font-weight:normal;}
 h2.sub_title span.num{color:#007bff;}
 
 .group-wrap{background-color:#f7f7f7; padding:.5rem 1rem;}
-.group-wrap .inner{max-width:50%; margin:0 auto; padding:20px 0; }
+.group-wrap .inner{max-width:1000px; margin:0 auto; padding:20px 0; }
 .group-wrap .inner .input_box{display: block; height: 54px; padding: 0;}
 .group-wrap .inner .input_box input{line-height: 54px; border:0; border-bottom: 1px solid #ccc; font-size: 30px; font-weight: 400; color: #333; position: relative; width: 100%; height: 100%; padding: 0; background: 0 0; outline:0;}
 .group-wrap .inner .input_box input:focus{border-bottom: 1px solid #333;}
@@ -17,8 +17,16 @@ h2.sub_title span.num{color:#007bff;}
 .group-list{font-size:0;}
 .group-list li{display:inline-block; vertical-align:middle; width:18%; margin-right:2%; margin-bottom:10px; box-sizing:border-box; background-color:#FFF; box-shadow:0 1px 3px 0 rgba(0,0,0,.1); text-align:center; transition:all .1s ease-in-out;}
 .group-list li:hover{transform:translateY(-2px); transition:all .1s ease-in-out; box-shadow:0 5px 9px 1px rgba(0,0,0,.08);}
-.group-list li a{display:block; padding:40px 0; height:161px;}
+.group-list li a{display:block;height:210px;}
+.group-list li.group-make a{padding:64.5px 0;}
 .group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center; background-image:url(../../imgs/ico_plus.png); background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
+
+.group-list li.group a span.wrapper{display:block; position:relative; padding-top:75%; overflow:hidden;}
+.group-list li.group a span.wrapper img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; display:block;}
+.group-list li.group a span.info{display:block; padding:10px 10px 20px;}
+.group-list li.group a span.info span{display:block; text-align:left;}
+.group-list li.group a span.info span.group_name{font-size:15px; color:#222; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.group-list li.group a span.info span.num{font-size:13px; color:#999}
 
 .coverSelect{margin-left:0; margin-right:0; position:relative; overflow:hidden;}
 .coverSelect > div{height:100%;float:left;}
@@ -81,7 +89,94 @@ h2.sub_title span.num{color:#007bff;}
 .modal-body .profileImg input{display:none;}
 .modal-body .profileInput{display:block; width:100%; height:40px; border:1px solid #dcdcdc; padding-left:10px; box-sizing:border-box; font-size:14px; color:#333; margin-top:30px;}
 
-.post .title_area{background-color:#FFF;}
-.post .title_area .title{font-size:18px; line-height:60px; padding-left:30px;}
+.modal-body .pwd_modify li{font-size:0; margin-top:15px;}
+.modal-body .pwd_modify li:first-child{margin-top:0;}
+.modal-body .pwd_modify span.txt{display:inline-block; vertical-align:middle; width:30%; font-size:14px; line-height:35px;}
+.modal-body .pwd_modify input[type=password]{display:inline-block; vertical-align:middle; width:50%; border:0; border-bottom:1px solid #ddd; height:35px; outline:0; padding-left:10px; box-sizing:border-box;}
+.modal-body .pwd_modify input[type=password]:focus{border-bottom:1px solid #222;}
+
+.post .title_area{background-color:#FFF; box-shadow:0 1px 1px 0 rgba(0,0,0,.09), 0 0 1px 0 rgba(0,0,0,.02);}
+.post .title_area .title{position:relative; font-size:20px; line-height:50px; border-bottom:1px solid #dedede; padding:0 20px}
+.post .title_area .title button{position:absolute; top:12.5px; right:20px; padding:0 10px 0 25px; background-image:url(../image/ico_list.png); background-repeat:no-repeat; background-position:5px center; border:1px solid #ccc; font-size:12px; height:25px; box-sizing:border-box; line-height:25px; font-weight:normal; background-color:#fafafa;}
+.post .title_area .tab{font-size:0;}
+.post .title_area .tab li{display:inline-block; vertical-align:middle; width:50%; text-align:center;}
+.post .title_area .tab li a{display:block; width:100%; height:40px; line-height:40px; font-size:15px; background-color:#efefef;}
+.post .title_area .tab li.on a{border-bottom:3px solid #000;}
 
 .post .card{margin-top:15px;}
+.post .card .mygroup{padding:.75rem 1.25rem; border-bottom:1px solid rgba(0,0,0,.125);}
+
+.post .comment_card li{
+    position: relative;
+    width: 100%;
+    padding: 0;
+    background: #fff;
+    border-radius: 1px;
+	box-shadow:0 1px 1px 0 rgba(0,0,0,.09),0 0 1px 0 rgba(0,0,0,.02)!important;
+	margin-top:15px;
+}
+.post .comment_card a{
+    position: relative;
+    display: block;
+    padding: 19px 22px 18px;
+	border-bottom:1px solid #f5f5f5;
+}
+.post .comment_card a.comment_link span{display:block; margin-top:5px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; line-height:28px; font-size:0;}
+.post .comment_card a.comment_link span em{display:inline-block; vertical-align:middle; color:#666; font-size:16px; margin-left:10px;}
+.post .comment_card a.comment_link span strong{display:inline-block; vertical-align:middle; font-size:16px;}
+.post .comment_card a.comment_link span:first-child{margin-top:0;}
+.post .comment_card a.comment_link span.comment{font-size:15px; color:#222;}
+.post .comment_card a.comment_link span.body{font-size:14px; color:#999}
+.post .comment_card a.comment_link span.date{font-size:13px; color:#999}
+
+.post .comment_card a.mygroup{font-size:0; padding:10px 22px;}
+.post .comment_card a.mygroup img{display:inline-block; vertical-align:middle; width:50px; margin-right:10px; border:1px solid #d7d7d7; border-radius:5px;}
+.post .comment_card a.mygroup span.txt{
+	font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+	margin-left:5px;
+}
+
+.modal-body .group_select{padding:0 15px;}
+.modal-body .group_select li{border-top:1px solid #d7d7d7; padding:10px 0;}
+.modal-body .group_select li:first-child{border-top:0;}
+.modal-body .group_select li a.profileInfo{display:block; width:100%; background-image:url(../image/arrow_right.png); background-repeat:no-repeat; background-position:right center; background-size:20px 20px;}
+.modal-body .group_select li a.profileInfo img{width:50px; margin-right:10px; border:1px solid #d7d7d7; border-radius:5px;}
+.modal-body .group_select li a.profileInfo span.txt{font-size: 14px; display: inline-block; vertical-align: middle; margin-left:5px;}
+.modal-body .group_select li a.profileInfo li:first-child{border-top:0;}
+
+
+/*tablet*/
+@media only screen and (min-width:769px) and (max-width:1023px){
+
+}
+
+/*tablet*/
+@media only screen and (max-width:1023px){
+	.group-wrap .inner{max-width:800px;}
+
+	.group-list li a{display:block;height:180px;}
+	.group-list li.group-make a{padding:49.5px 0;}
+}
+
+@media only screen and (max-width:850px){
+	.group-wrap .inner{max-width:650px;}
+
+	.group-list li a{display:block;height:160px;}
+	.group-list li.group-make a{padding:39.5px 0;}
+
+}
+
+@media only screen and (max-width:769px){
+	.group-list li{width:49%; margin-right:0; margin-left:2%;}
+	.group-list li:nth-child(2n+1){margin-left:0;}
+	.group-wrap .inner{max-width:80%;}
+	.group-list li a{height:210px;}
+	.group-list li.group-make a{padding:64.5px 0;}
+}
+
+@media only screen and (max-width:480px){
+	.group-list li a{height:160px;}
+	.group-list li.group-make a{padding:39.5px 0;}
+}

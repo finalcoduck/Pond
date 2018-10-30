@@ -11,59 +11,47 @@
 	
 	<!-- member Definition -->
 	<definition name="member.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/layout/member-header.jsp"/>
 		<put-attribute name="body" />
 		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
 	<!-- group Definition -->
 	<definition name="group.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
-		<put-attribute name="left" />
+		<put-attribute name="header" value="/WEB-INF/layout/group-header.jsp"/>
 		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
 	<!-- groupSelect Definition -->
-	<definition name="groupSelect.definition" template="/WEB-INF/layout/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/main-header.jsp"/>
+	<definition name="selectgroup.definition" template="/WEB-INF/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/member-header.jsp"/>
 		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
 	</definition>
 	
+	<!-- ///////////////////////// main //////////////////////////// -->
 	
+	<definition name="/*" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
+	</definition>
 	
+	<!-- ///////////////////////// member /////////////////////////// -->
+	
+	<definition name="/member/*" extends="member.definition">
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	
+	<!-- ///////////////////////// group /////////////////////////// -->
+	
+	<definition name="/group/*" extends="group.definition">
+		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
+	</definition>
+	
+	<!-- ///////////////////////// selectgroup /////////////////////////// -->
 	<!-- 마이페이지 -->
-	<definition name="/" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/main-body.jsp" />
+	<definition name="/selectgroup/*" extends="selectgroup.definition">
+		<put-attribute name="body" value="/WEB-INF/views/selectgroup/{1}.jsp" />
 	</definition>
-	
-	<!-- 회원가입 -->
-	<definition name="/join" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/join-member.jsp" />
-	</definition>
-	
-	<!-- 이메일 확인  -->
-	<definition name="/emailConfirm" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/emailConfirm.jsp" />
-	</definition>
-	
-	<!-- 소셜 로그인 핸드폰 추가입력 페이지 -->
-	<definition name="/login/addPhone" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/social-login-information.jsp" />
-	</definition>
-	
-	<!-- 로그인 후 임시 페이지 -->
-	<definition name="/test1" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/test.jsp" />
-	</definition>
-	
-	<!-- 마이페이지 -->
-	<definition name="/erd1" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp" />
-	</definition>
-	
-	<!-- 그룹선택페이지 -->
-	<definition name="/test" extends="main.definition">
-		<put-attribute name="body" value="/WEB-INF/views/group/test.jsp" />
-	</definition>	
 	
 </tiles-definitions>

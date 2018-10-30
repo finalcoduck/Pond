@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.member.vo.MemVo;
+
 @Controller
 public class MemberMoveController {
 	@Autowired
@@ -25,6 +27,7 @@ public class MemberMoveController {
 	 *  최초 실행시 구글 URL정보 들고 이동
 	 *  mainPage에서 구글 소셜로그인 버튼에 URL등록을 위해 
 	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
 		
@@ -34,7 +37,7 @@ public class MemberMoveController {
 		model.addAttribute("google_url", url);
 		model.addAttribute("dpMsg", dpMsg);
 		model.addAttribute("loginFail", loginFail);
-		return "/";
+		return "/main-body";
 	}
 	
 	/*@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
@@ -44,12 +47,22 @@ public class MemberMoveController {
 	
 	@RequestMapping("/join")
 	public String joinPage() {
-		return "/join";
+		return "/join-member";
 	}
 	
 	@RequestMapping("/test1")
 	public String testPage() {
-		return "/test1";
+		return "/test";
+	}
+	
+	@RequestMapping("/emailConfirm")
+	public String emailConfirm() {
+		return "/email-confirm";
+	}
+	
+	@RequestMapping("/login/sendMail")
+	public String setNewPwd() {
+		return "/set-new-pwd";
 	}
 	
 	/*@RequestMapping("/member/main/loginForm")
@@ -61,5 +74,6 @@ public class MemberMoveController {
 	public String findPwd() {
 		return "findPwd";
 	}*/
+	
 	
 }

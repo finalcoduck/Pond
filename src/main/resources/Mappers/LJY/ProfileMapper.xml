@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Mappers.ProfileMapper">
+ 	<!-- 회원의 소속된 그룹 가져오기 -->
+ 	<select id="getMemberGroupInfo" parameterType="String" resultType="com.coduck.pond.group.vo.GroupMemVo">
+ 		select * from group_mem where mem_email = #{value} 
+ 	</select>
+ 	<!-- 그룹정보 가져오기 -->
+ 	<select id="getGroupInfo" parameterType="int" resultType="com.coduck.pond.group.vo.GroupVo"><!-- 수정 -->
+		select * from pond_group where group_num = #{value} 
+ 	</select>
+ 	<!-- 휴대폰 번호 수정 -->
+ 	<update id="updatePhone" parameterType="map">
+ 		update mem set mem_phone = #{phone} where mem_email = #{email}
+ 	</update>
+ </mapper>

@@ -9,7 +9,7 @@ import com.coduck.pond.core.argumentResolver.HeaderInfo;
 
 @Controller
 public class HomeController {
-	@RequestMapping(value = "/erd", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/erd", method = RequestMethod.GET)
 	public String home(HeaderInfo headerInfo) { //zz
 
 		System.out.println("-----------------------------------------------------");
@@ -27,5 +27,5 @@ public class HomeController {
 	public String home1() { //zz
 		System.out.println("!");
 		return "/erd1";
-	}
+	}*/
 }

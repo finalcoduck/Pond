@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,12 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.member.service.MemberJoinService;
-import com.coduck.pond.member.service.MemberJoinServiceImpl;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
+import com.coduck.pond.member.service.ProfileService;
+import com.coduck.pond.member.vo.MemDto;
 import com.coduck.pond.member.vo.MemVo;
 
 @Controller
@@ -32,6 +34,8 @@ public class MemberLoginController {
 	private MemberLoginServiceImpl memberLoginService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private ProfileService profileService;
 	
 	@RequestMapping("/login/navercallback")
 	// 네이버 로그인 연동후 사용자 정보 요청후 디비 작업
@@ -110,8 +114,10 @@ public class MemberLoginController {
 				// 소셜 로그인 연동을 이미 한번 했을 경우
 				memVo = memberLoginService.getNaverMem(id);
 				if(memVo != null) {
-					session.setAttribute("memVo", memVo);
-					return "/test1";
+					Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+					MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
+					session.setAttribute("memDto", memDto);
+					return "/test";
 				}
 				String profilePic = (String)obj1.get("profile_image");
 				HashMap<String, String> map = new HashMap<>();
@@ -121,9 +127,11 @@ public class MemberLoginController {
 				map.put("profilePic", profilePic);
 				memberJoinService.naverToInsertMember(map);
 				memVo = memberLoginService.getNaverMem(id);
-				session.setAttribute("memVo", memVo);
+				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
+				session.setAttribute("memDto", memDto);
 				////////////// 네이버 회원 정보 디비에 넣기 ////////////////
-				return "/login/addPhone";
+				return "/social-login-information";
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 				return "redirect:/";
@@ -137,14 +145,18 @@ public class MemberLoginController {
 		try {
 			memVo = memberLoginService.getOneMem(memEmail); // 존재하는 이메일 인지 확인
 			if(passwordEncoder.matches(memPwd, memVo.getMemPwd())) { //입력받은 패스워드를 암호화시켜 비교후 같으면 true
-				session.setAttribute("memVo", memVo); //로그인 성공! 세션저장
-				return "/test1";
+				System.out.println(memVo.getMemEmail());
+				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
+				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
+				session.setAttribute("memDto", memDto);
+				return "redirect:/test1";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 				return "redirect:/";
 			}
 		}catch (Exception e) {
-			System.out.println("%%/login/normal 컨트롤러 에러%%");
+			System.out.println("여기맞나??");
+			e.printStackTrace();
 			ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 			return "redirect:/";
 		}}
@@ -160,45 +172,46 @@ public class MemberLoginController {
 	@RequestMapping("/member/updatePhone")
 	public String updatePhone(String memPhone, String memEmail) {
 		memberLoginService.updatePhone(memEmail, memPhone);
-		return "/test1";
+		return "/test";
 	}
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
-	@RequestMapping("/member/main/login/changeEmail")
+	@RequestMapping("/member/login/sendEmail")
 	public String changeEmail(String memEmail, Model model) {
 		//없는 이메일 처리 
 		MemVo memVo = memberLoginService.getOneMem(memEmail);
 		if(memVo == null) {
 			model.addAttribute("findMsg","NotExistence");
-			return "findPwd";
+			return "/find-password";
 		}else {
 			memberLoginService.mailTofindPwd(memEmail); // 메일 인증 보내기
-			return "mailconfirm";
+			return "redirect:/emailConfirm";
 		}
 	}
 	
 	//이메일 인증후 새로운 비밀번호 설정
-	@RequestMapping("/member/main/login/emailConfirmNewPwd")
+	@RequestMapping("/member/login/emailConfirmNewPwd")
 	public String newPwd(String key, String email, Model model) {
 		int n = memberLoginService.authConfirm(key, email);
 		if(n>0) {
 			model.addAttribute("email",email);
-			return "newPwdSet";
+			return "/setNewPwd";
 		}else {
-			return "loginForm";
+			System.out.println("새로운 비밀번호 설정 오류");
+			return "redirect:/";
 		}
 	}
 	
 	//새로운 비밀번호 받아 암호화 처리후 업데이트
-	@RequestMapping(value="/member/main/login/changePwd", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login/changePwd", method=RequestMethod.POST)
 	public String changePwd(String newPwd, String email, Model model) {
 		 String encPwd = passwordEncoder.encode(newPwd);
 		 try {
 			 memberLoginService.changeNewPwd(email, encPwd);
-			 return "loginForm";
+			 return "redirect:/";
 		 }catch (Exception e) {
 			 System.out.println(e.getMessage());
-			 return "home";
+			 return "redirect:/";
 		 }
 		 
 	}
