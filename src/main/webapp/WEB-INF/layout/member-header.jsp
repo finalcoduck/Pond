@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <header	class="group-header bg-primary">
 	<div class="inner">
-		<nav class="navbar vh5">
+		<nav class="navbar vh10">
 			<h1>
 				<a href="#">
 					<b class="text-white">POND</b>

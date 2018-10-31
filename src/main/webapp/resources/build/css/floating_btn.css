@@ -32,6 +32,10 @@
     width: 60px;
     height: 60px;
     margin: 0 auto;
+    outline:0 !important;
+}
+.material-button-toggle:focus{
+    outline:0 !important;
 }
 .material-button-toggle span {
     -webkit-transform: none;
@@ -61,6 +65,7 @@
 .option .option2 {
     -webkit-transition: all .175s;
     transition:         all .175s;
+    outline:0;
 }
 .option .option1 {
     -webkit-transform: translate3d(0,70px,0) scale(.8,.8);
@@ -79,6 +84,7 @@
     transform:         none;
     -webkit-transition: all .175s;
     transition:         all .175s;
+    outline:0;
 }
 .option.scale-on .option1 {
     -webkit-transform: translateY(-80px) translateZ(0);

@@ -2,7 +2,7 @@
 
 const ryan = document.querySelector('#ryan');
 const face = document.querySelectorAll('.ears, .eyes, .muzzle');
-const email = document.querySelector('input[type="text"]');
+const email = document.querySelector('input[type="email"]');
 const password = document.querySelector('input[type="current-password"]');
 const fauxInput = document.createElement('div');
 const span = document.createElement('span');
