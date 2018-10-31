@@ -117,7 +117,7 @@ public class MemberLoginController {
 					Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 					MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 					session.setAttribute("memDto", memDto);
-					return "/test";
+					return "forward:/selectgroup/index";
 				}
 				String profilePic = (String)obj1.get("profile_image");
 				HashMap<String, String> map = new HashMap<>();
@@ -149,7 +149,7 @@ public class MemberLoginController {
 				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 				session.setAttribute("memDto", memDto);
-				return "redirect:/test1";
+				return "forward:/selectgroup/index";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 				return "redirect:/";
@@ -172,7 +172,7 @@ public class MemberLoginController {
 	@RequestMapping("/member/updatePhone")
 	public String updatePhone(String memPhone, String memEmail) {
 		memberLoginService.updatePhone(memEmail, memPhone);
-		return "/test";
+		return "forward:/selectgroup/index";
 	}
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러

@@ -10,7 +10,7 @@
 			<div class="input_box">
 				<input type="text" placeholder="그룹 이름 입력">
 			</div>
-
+			
 			<div class="coverSelect mt20">
 				<div class="mainCover">
 					<div class="wrapper">

@@ -5,7 +5,7 @@
   
 <mapper namespace="Mappers.groupMapper">
 	
-	<!-- 그룹 생성 -->
+	<!-- 그룹 최초생성 -->
 	<insert id="insertGroup" parameterType="com.coduck.pond.group.vo.GroupVo">
 		INSERT
 		 INTO POND_GROUP 
@@ -21,14 +21,14 @@
 		 ) 
 		 VALUES 
 		 (
-		 	#{groupNum}, 
+		 	#{groupName}, 
 		 	sysdate, 
-		 	#{maxMemNum}, 
+		 	50, 
 		 	#{memEmail}, 
 		 	#{inviteCode}, 
 		 	#{inviteCodeStatus}, 
 		 	#{groupImage}, 
-		 	#{groupDescription}
+		 	'그룹 소개를 작성해주세요.'
 		 )
 	</insert>
 	
@@ -46,6 +46,7 @@
 	<select id="selectGroup" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="int">
 		select * from pond_group where group_num = #{value}
 	</select>
+	
 	<!-- 그룹 삭제 -->
 	<delete id="deleteGroup" parameterType="int">
 		delete from pond_group where group_num = #{value}

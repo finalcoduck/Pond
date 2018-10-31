@@ -3,6 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <style type="text/css">
 		*, a{color:#333;}
+		.group-list li.group-make span{
+			background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_plus.png);
+		}
 	</style>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group.css">
 
@@ -11,7 +14,7 @@
 			<h2	class="sub_title">내	그룹 <span class="num">0</span></h2>
 			<ul	class="group-list mt20">
 				<li class="group-make">
-					<a href="groupInsert.html">
+					<a href="${pageContext.request.contextPath }/selectgroup/insert-group">
 						<span>그룹 만들기</span>
 					</a>
 				</li>

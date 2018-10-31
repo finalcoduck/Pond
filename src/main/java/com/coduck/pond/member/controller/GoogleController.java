@@ -82,7 +82,7 @@ public class GoogleController {
         	Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 			MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 			session.setAttribute("memDto", memDto);
-        	return "/test";
+        	return "forward:/selectgroup/index";
         }
 	}
 }

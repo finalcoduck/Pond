@@ -19,16 +19,12 @@ public class SelectGroupController {
 	@Autowired
 	GroupService groupService;
 	
-	@RequestMapping(value = "/selectgroup/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/selectgroup/index", method = {RequestMethod.GET,RequestMethod.POST})
 	public String selectGroupMain(MemDto memDto, Model model) { 
 		System.out.println(memDto.getMemVo().getMemEmail());
 		
-		
 		List<GroupVo> groupList =  groupService.selectGroupList(memDto.getMemVo().getMemEmail());
-		
 		model.addAttribute("groupList", groupList);
-		
-		
 		
 		return "/selectgroup/index";
 	}
