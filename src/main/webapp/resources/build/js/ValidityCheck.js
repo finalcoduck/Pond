@@ -2,8 +2,8 @@
  * 
  */
 
-// 파일 확장자 유효성 체크
-	/* $('@@@@@').on('change',function(event){
+/*// 파일 확장자 유효성 체크
+	 $('@@@@@').on('change',function(event){
 		const image = event.target.files;
 		console.log(image[0].type);
 		$.each(image, function(i,elt){
@@ -13,9 +13,9 @@
 				return;
 			} 
 		});
-	}); */
+	}); 
 	
-	/* function validImageType(image){
+	 function validImageType(image){
 		const result = (['image/png','image/jpeg','image/jpg'].indexOf(image) > -1);
 		return result;
-	} */
+	}*/ 

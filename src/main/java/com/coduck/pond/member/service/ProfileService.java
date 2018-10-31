@@ -51,5 +51,25 @@ public class ProfileService {
 		map.put("email", email);
 		return profileDao.updatePhone(map);
 	}
+	
+	/*
+	 *  회원 비밀번호 수정하기
+	 */
+	public int updatePwd(String email, String pwd) {
+		Map<String, String> map = new HashMap<>();
+		map.put("pwd", pwd);
+		map.put("email", email);
+		return profileDao.updatePwd(map);
+	}
+	
+	/*
+	 *  회원 프로필 사전 업데이트
+	 */
+	public void updatePic(String email, String filename) {
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("filename", filename);
+		profileDao.updatePic(map);
+	}
 }
 

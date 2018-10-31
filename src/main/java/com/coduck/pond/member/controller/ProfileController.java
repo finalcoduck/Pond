@@ -56,9 +56,26 @@ public class ProfileController {
 	 */
 	@RequestMapping("/member/update-pwd/proc")
 	@ResponseBody
-	public Map<String, String> updatePwd(String phone, String email) {
+	public Map<String, String> updatePwd(String newPwd, String email) {
+		String memPwd = passwordEncoder.encode(newPwd);
+		profileService.updatePwd(email, memPwd);
 		Map<String, String> map = new HashMap<>();
-		profileService.updatePhone(phone, email);
+		return map;
+	}
+	
+	/*
+	 *  Ajax를 통한 현재 비밀번호 확인
+	 */
+	@RequestMapping("/member/confirm-pwd/proc")
+	@ResponseBody
+	public Map<String, String> confrimPwd(String nowPwd, String email, String nowEncPwd) {
+		String memPwd = passwordEncoder.encode(nowPwd);
+		Map<String, String> map = new HashMap<>();
+		if(passwordEncoder.matches(nowPwd, nowEncPwd)) {
+			map.put("pwdConfirmMsg", "true");
+		}else {
+			map.put("pwdConfirmMsg", "false");
+		}
 		return map;
 	}
 }
