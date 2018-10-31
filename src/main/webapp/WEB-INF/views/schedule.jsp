@@ -89,13 +89,22 @@ $(function() {
                    title: "${vo.scheduleTitle}",
                    start: "${vo.scheduleStartDate}",
                    end: "${vo.scheduleEndDate}",
-               	   backgroundColor: colorList[${status.index}],
-               	   textColor: "black"
+               	   backgroundColor: colorList[${status.index%5}],
+               	   textColor: "black",
+               	   num: "${vo.scheduleNum}"
                }, 
              </c:forEach>  
             ],
          eventClick:function(event){
-        	 
+        	 if(confirm('수정하시겠습니까?')){
+        		 var num = event.num;
+        		 var start = event.start;
+        		 console.log(typeof(start));
+        		 debugger;
+        		 var end = event.end;
+        		 
+        		 updateSchedule(num, start, end);
+        	 }
          },
          eventMouseover:function(calEvent,jsEvent){
 			$(this).css('background-color','black').css('cursor','pointer').css('color','white');

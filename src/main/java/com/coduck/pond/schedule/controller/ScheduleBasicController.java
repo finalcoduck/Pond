@@ -30,8 +30,7 @@ public class ScheduleBasicController {
 	
 	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
-		return "r"
-				+ "edirect:/schedule/info";
+		return "redirect:/schedule/info";
 	}*/
 	
 	/*
@@ -61,15 +60,6 @@ public class ScheduleBasicController {
 	@RequestMapping(value = "/schedule/addCal", method = RequestMethod.POST)
 	public String addCal(ScheduleVo vo, RedirectAttributes ra) {
 		try {
-			Date dd = vo.getScheduleEndDate();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			System.out.println("date:"+dd);
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(dd);
-			cal.add(Calendar.DATE, 1);
-			dd = sdf.parse(sdf.format(cal.getTime()));
-			java.sql.Date date = new java.sql.Date(dd.getTime());
-			vo.setScheduleEndDate(date);
 			ra.addAttribute("groupNum", vo.getGroupNum());
 			scheduleService.addSchedule(vo);
 		}catch (Exception e) {
