@@ -9,11 +9,8 @@ import com.coduck.pond.core.argumentResolver.HeaderInfo;
 
 @Controller
 public class GroupController {
-	
-	
 	@RequestMapping(value = "/group/group-main", method = RequestMethod.GET)
 	public String groupMain() { 
 		return "/group/group-main";
 	}
-
 }

@@ -75,6 +75,7 @@ h2.sub_title span.num{color:#007bff;}
 .profile .myProfile .profileArea li{padding:10px 0;}
 .profile .myProfile .profileArea li:first-child{padding:0 0 10px 0;}
 .profile .myProfile .profileArea div.profileInfo .txt{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; width:100px;}
+.profile .myProfile .profileArea div.profileInfo .txt.group_name{width:500px; line-height:25px;}
 .profile .myProfile .profileArea div.profileInfo .mail{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; margin-left:30px;}
 .profile .myProfile .profileArea div.profileInfo input{display:inline-block; vertical-align:middle; margin-left:30px; border:0; border-bottom:1px solid #d7d7d7; height:40px; width:250px; outline:0;}
 
