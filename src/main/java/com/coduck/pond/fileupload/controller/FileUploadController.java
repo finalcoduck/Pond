@@ -20,12 +20,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.coduck.pond.core.utils.file.FileUtils;
 import com.coduck.pond.fileupload.service.FileUploadService;
 import com.coduck.pond.fileupload.vo.FileUploadVo;
+import com.coduck.pond.member.service.ProfileService;
+import com.coduck.pond.member.vo.MemDto;
 
 @Controller
 public class FileUploadController {
 	@Autowired
 	private FileUploadService fileUploadService;
-
+	@Autowired
+	private ProfileService profileService;
 	
 	/*
 	 *  이동 컨트롤러
@@ -78,4 +81,33 @@ public class FileUploadController {
 		return "fileupload";
 	}
 	
+	
+	/*
+	 * 프로필 사진 단일 업로드 처리
+	 */
+	@RequestMapping(value="/fileupload/insert-profile-pic", method=RequestMethod.POST)
+	public String file(MultipartFile file, HttpSession session, String email) {
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/mem-photo");
+		System.out.println("uploadPath:"+uploadPath);
+		
+		String orgFileName = file.getOriginalFilename(); //전송된 파일명
+		String saveFileName = UUID.randomUUID()+"_"+ orgFileName; //저장할 파일명
+		
+		try {
+			InputStream is = file.getInputStream();
+			FileOutputStream fos = new FileOutputStream(uploadPath + "//" + saveFileName);
+			FileCopyUtils.copy(is, fos); //spring에 있는 복사 기능
+			is.close();
+			fos.close();
+			System.out.println("파일업로드 ~ 성공");
+			
+			profileService.updatePic(email, saveFileName);
+			MemDto memDto = (MemDto)session.getAttribute("memDto");
+			memDto.getMemVo().setMemProfilePic(saveFileName);
+			session.setAttribute("memDto", memDto);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/member/profile";
+	}
 }

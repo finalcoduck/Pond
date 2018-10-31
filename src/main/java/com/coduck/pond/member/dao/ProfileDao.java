@@ -27,4 +27,13 @@ public class ProfileDao {
 	public int updatePhone(Map<String, String> map) {
 		return session.update(NAMESPACE+"updatePhone", map);
 	}
+	
+	
+	public int updatePwd(Map<String, String> map) {
+		return session.update(NAMESPACE+"updatePwd", map);
+	}
+	
+	public void updatePic(Map<String, String> map) {
+		session.update(NAMESPACE+"updatePic", map);
+	}
 }

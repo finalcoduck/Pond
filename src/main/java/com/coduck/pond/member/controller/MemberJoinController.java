@@ -35,9 +35,7 @@ public class MemberJoinController {
 	public String emailConfirm(String key, String email, Model model) {
 		try {
 			int n = memberJoinService.insertMember(key, email);
-			model.addAttribute("joinMsg","success");
-			model.addAttribute("memEamil",email);
-			return "redirect:/";
+			return "/main/email-confirm-ok";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "redirect:/";
