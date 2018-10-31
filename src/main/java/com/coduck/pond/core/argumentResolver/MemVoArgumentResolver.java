@@ -28,9 +28,9 @@ public class MemVoArgumentResolver implements HandlerMethodArgumentResolver {
 		// TODO Auto-generated method stub
 		
 		//webRequest 객체의  세션스코프에서  키가 "memVo"인걸 꺼내옴
-		MemDto memVo =  (MemDto)webRequest.getAttribute(CommonConstant.USER_SESSION_KEY,webRequest.SCOPE_SESSION);
+		MemDto memDto =  (MemDto)webRequest.getAttribute(CommonConstant.USER_SESSION_KEY,webRequest.SCOPE_SESSION);
 		
-		return memVo;
+		return memDto;
 	}
 
 }

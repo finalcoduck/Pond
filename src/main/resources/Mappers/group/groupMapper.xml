@@ -6,7 +6,7 @@
 <mapper namespace="Mappers.groupMapper">
 	
 	<!-- 그룹 생성 -->
-	<insert id="insertGroup" parameterType="com.coduck.pond.group.vo.groupVo">
+	<insert id="insertGroup" parameterType="com.coduck.pond.group.vo.GroupVo">
 		INSERT
 		 INTO POND_GROUP 
 		 (
@@ -33,7 +33,7 @@
 	</insert>
 	
 	<!-- 가입한 그룹 리스트 가져오기 -->
-	<select id="selectGroupList" resultType="com.coduck.pond.group.vo.groupVo" parameterType="string">
+	<select id="selectGroupList" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="string">
 		select 
 			* 
 		from
@@ -43,7 +43,7 @@
 	</select>
 	
 	<!-- 그룹 정보 가져오기-->
-	<select id="selectGroup" resultType="com.coduck.pond.group.vo.groupVo" parameterType="int">
+	<select id="selectGroup" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="int">
 		select * from pond_group where group_num = #{value}
 	</select>
 	<!-- 그룹 삭제 -->
