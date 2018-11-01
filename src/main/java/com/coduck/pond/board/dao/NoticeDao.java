@@ -10,6 +10,8 @@ public class NoticeDao {
 	@Autowired
 	private SqlSession session;
 	
+	
+	
 	public void insertNotice(GroupNoticeVo groupNoticeVo) {
 		session.insert(NAMESPACE+"insertNotice",groupNoticeVo);
 	}
