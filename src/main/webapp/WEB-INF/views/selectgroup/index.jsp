@@ -23,7 +23,7 @@
 				<li class="group">
 					<a href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 						<span class="wrapper">
-							<img src="${pageContext.request.contextPath}/resources/build/image/img1.jpg" alt="" />
+							<img src="${pageContext.request.contextPath}/resources/upload/group-photo/${groupVo.groupImage}" alt="" />
 						</span>
 						<span class="info">
 							<span class="group_name">
