@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupVo;
@@ -56,7 +57,7 @@ public class SelectGroupController {
 		//세션 업데이트
 		Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memDto.getMemVo().getMemEmail());
 		MemDto newMemDto = GetMemDtoUtility.getMemDto(memDto.getMemVo(), memGroupMap);
-		session.setAttribute("memDto", newMemDto);
+		session.setAttribute(CommonConstant.USER_SESSION_KEY, newMemDto);
 		return map;
 	} 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.core.utils.file.FileUtils;
 import com.coduck.pond.fileupload.service.FileUploadService;
@@ -108,9 +109,9 @@ public class FileUploadController {
 			System.out.println("파일업로드 ~ 성공");
 			
 			profileService.updatePic(email, saveFileName);
-			MemDto memDto = (MemDto)session.getAttribute("memDto");
+			MemDto memDto = (MemDto)session.getAttribute(CommonConstant.USER_SESSION_KEY);
 			memDto.getMemVo().setMemProfilePic(saveFileName);
-			session.setAttribute("memDto", memDto);
+			session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -140,7 +141,7 @@ public class FileUploadController {
 			//세션 업데이트
 			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memDto.getMemVo().getMemEmail());
 			MemDto newMemDto = GetMemDtoUtility.getMemDto(memDto.getMemVo(), memGroupMap);
-			session.setAttribute("memDto", newMemDto);
+			session.setAttribute(CommonConstant.USER_SESSION_KEY, newMemDto);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
