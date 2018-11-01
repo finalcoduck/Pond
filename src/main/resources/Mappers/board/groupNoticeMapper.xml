@@ -6,7 +6,6 @@
 <mapper namespace="Mappers.groupNoticeMapper">
 	
 	<!-- 공지 생성 -->
-	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
 		
 	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
 		INSERT INTO 
