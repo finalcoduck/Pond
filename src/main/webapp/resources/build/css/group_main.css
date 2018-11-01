@@ -1,0 +1,11 @@
+.homework_con{font-size:0;}
+.homework_con p{display:inline-block; vertical-align:top; width:65%; font-size:15px;}
+.homework_con div{display:inline-block; vertical-align:top; width:30%; font-size:15px; margin-left:5%;}
+.homework_con div ul{font-size:0;}
+.homework_con div ul li{display:inline-block; vertical-align:middle; width:50%;}
+.homework_con div ul li:before{content:''; display:inline-block; vertical-align:middle; width:1px; height:60px; background-color:#ccc; margin-right:20px;}
+.homework_con div ul li a{display:inline-block; vertical-align:middle; font-size:15px;}
+.homework_con div ul li a:hover span.num, .homework_con div ul li a:hover span.txt{color:#007bff;}
+.homework_con div ul li a span{display:block;}
+.homework_con div ul li a span.num{font-size:30px; color:#000; line-height:1;}
+.homework_con div ul li a span.txt{font-size:14px; color:#666; line-height:1; margin-top:10px;}

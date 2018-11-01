@@ -51,6 +51,8 @@
                     </div>
                 </div>
                 <!--           left side            -->
+                
+                
                 <!--           center            -->
                 <div class="col-12 col-md-8">
                     <!--- \\\\\\\Post-->

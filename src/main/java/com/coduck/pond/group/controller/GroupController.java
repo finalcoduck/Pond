@@ -9,7 +9,6 @@ import com.coduck.pond.member.vo.MemDto;
 
 @Controller
 public class GroupController {
-	
 	@Autowired
 	private GroupService groupService;
 	
@@ -29,5 +28,4 @@ public class GroupController {
 		System.out.println(groupNum);
 		return "/group/group-main";
 	}
-
 }
