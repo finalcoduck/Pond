@@ -3,7 +3,7 @@ package com.coduck.pond.group.vo;
 import java.sql.Date;
 
 public class GroupVo {
-	private String groupNum;
+	private int groupNum;
 	private String groupName;
 	private Date openDate;
 	private int maxMemNum;
@@ -17,11 +17,11 @@ public class GroupVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getGroupNum() {
+	public int getGroupNum() {
 		return groupNum;
 	}
 
-	public void setGroupNum(String groupNum) {
+	public void setGroupNum(int groupNum) {
 		this.groupNum = groupNum;
 	}
 
@@ -89,7 +89,7 @@ public class GroupVo {
 		this.groupDescription = groupDescription;
 	}
 
-	public GroupVo(String groupNum, String groupName, Date openDate, int maxMemNum, String memEmail, String inviteCode,
+	public GroupVo(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail, String inviteCode,
 			char inviteCodeStatus, String groupImage, String groupDescription) {
 		super();
 		this.groupNum = groupNum;
