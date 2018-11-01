@@ -8,19 +8,34 @@
 	<!-- 공지 생성 -->
 	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
 		
+	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
+		INSERT INTO 
+			GROUP_NOTICE 
+			(
+				GROUP_NUM, 
+				NTC_WRITER,
+				NTC_CONTENT,
+				NTC_REGDATE,
+				SUBJECT,
+				BOARD_TYPE
+			) 
+			VALUES 
+			(
+				#{groupNum},
+				#{ntcWriter},
+				#{ntcContent},
+				sysdate,
+				#{subject},
+				#{boardType}
+			);
 	</insert>
 	
-	<!-- 공지 리스트 가져오기 -->
-	<select id="selectNoticeList" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="string">
-		
-	
-	</select>
-	
-	
-	<!-- 공지 가져오기-->
-	<select id="selectGroup" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="int">
-	</select>
-	<!-- 그룹 삭제 -->
-	<delete id="deleteGroup" parameterType="int">
+	<!-- 공지 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM
+			GROUP_NOTICE
+		WHERE
+			NTC_NUM = #{value}
 	</delete>
+	
 </mapper> 
