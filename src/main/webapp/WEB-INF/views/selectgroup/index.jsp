@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <style type="text/css">
 		*, a{color:#333;}
 		.group-list li.group-make span{
@@ -11,7 +12,7 @@
 
 <section class="content group-wrap">
 		<div class="inner">
-			<h2	class="sub_title">내	그룹 <span class="num">0</span></h2>
+			<h2	class="sub_title">내	그룹 <span class="num">${fn:length(groupList) }</span></h2>
 			<ul	class="group-list mt20">
 				<li class="group-make">
 					<a href="${pageContext.request.contextPath }/selectgroup/insert-group">

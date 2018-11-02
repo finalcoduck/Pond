@@ -39,7 +39,6 @@ public class SelectGroupController {
 		return "/selectgroup/index";
 	}
 	
-	
 	@RequestMapping(value = "/selectgroup/insert-group", method = RequestMethod.GET)
 	public String insertGroup(MemDto memDto) {
 		System.out.println(memDto.getKeySet().size()+"@@@@");

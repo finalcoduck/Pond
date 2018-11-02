@@ -15,11 +15,7 @@ public class GroupController {
 	@RequestMapping(value = "/group/group-main", method = RequestMethod.GET)
 	public String groupMain(int groupNum, MemDto memDto) {
 		//넘겨 주어야할 정보 과제글, 공지글 , 주제 
-		System.out.println(groupNum);
-		System.out.println(memDto);
 		//로그인 한 아이디가 해당 그룹에 유효한지 체크
-		System.out.println(memDto.getKeySet().isEmpty()+"@@");
-		System.out.println(memDto.getMemGroupMap().containsKey(groupNum));
 		if(!memDto.getMemGroupMap().containsKey(groupNum)) {
 			return "forward:/selectgroup/index";
 		}		

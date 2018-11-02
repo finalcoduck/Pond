@@ -36,7 +36,6 @@ public class ProfileController {
 		Map<Integer, GroupVo> groupMap = new HashMap<>();
 		groupMap = profileService.getGroupInfo(keySet);
 		model.addAttribute("groupMap", groupMap);
-		System.out.println(memDto.getMemVo().getMemEmail()+"@@@@@@@@@@@@@");
 		model.addAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 		return "/member/profile";
 	}
