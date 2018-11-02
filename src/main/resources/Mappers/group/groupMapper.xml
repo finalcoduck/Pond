@@ -60,4 +60,13 @@
 	<select id="getGroupNum" parameterType="string" resultType="int">
 	 	select group_num from pond_group where invite_code = #{value}
 	</select>
+	
+	<!-- 해당회원 그룹별 회원 숫자 가져오기 -->
+	<select id="getGroupMemNum" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMemNumDto">
+		select * from
+		 pond_group G,
+		  (select group_num, count(*) group_mem_num, status from group_mem group by group_num, status) A
+		   where G.group_num = A.group_num
+			and mem_email = #{value} 
+	</select>
 </mapper> 

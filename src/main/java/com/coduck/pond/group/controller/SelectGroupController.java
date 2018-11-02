@@ -3,11 +3,9 @@ package com.coduck.pond.group.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.ProfileService;
 import com.coduck.pond.member.vo.MemDto;
@@ -33,8 +32,9 @@ public class SelectGroupController {
 	@RequestMapping(value = "/selectgroup/index", method = {RequestMethod.GET,RequestMethod.POST})
 	public String selectGroupMain(MemDto memDto, Model model, HttpSession session) {
 		
-		List<GroupVo> groupList =  groupService.selectGroupList(memDto.getMemVo().getMemEmail());
-		model.addAttribute("groupList", groupList);
+		/*List<GroupVo> groupList =  groupService.selectGroupList(memDto.getMemVo().getMemEmail());*/
+		List<GroupMemNumDto> groupMemNumList = groupService.getGroupMemNum(memDto.getMemVo().getMemEmail());
+		model.addAttribute("groupList", groupMemNumList);
 		
 		return "/selectgroup/index";
 	}

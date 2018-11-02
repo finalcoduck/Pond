@@ -2,7 +2,7 @@ package com.coduck.pond.group.service;
 
 import java.util.List;
 
-import com.coduck.pond.group.vo.GroupMemVo;
+import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupVo;
 
 public interface GroupService {
@@ -26,4 +26,6 @@ public interface GroupService {
 	//그룹 삭제
 	public void deleteGroup (int groupNum);
 	
+	//모든 그룹 멤버 숫자 가져오기
+	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
 }

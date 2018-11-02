@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.coduck.pond.core.utils.RandomCodeUtility;
 import com.coduck.pond.group.dao.GroupDao;
+import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupVo;
 
@@ -70,6 +71,11 @@ public class GroupServiceImpl implements GroupService{
 	public int insertGroupMem(String inviteCode) {
 		int groupNum = groupDao.getGroupNum(inviteCode);
 		return groupNum;
+	}
+
+	@Override
+	public List<GroupMemNumDto> getGroupMemNum(String memEmail) {
+		return groupDao.getGroupMemNum(memEmail);
 	}
 
 }

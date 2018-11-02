@@ -23,14 +23,16 @@
 				<li class="group">
 					<a href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 						<span class="wrapper">
-							<img src="${pageContext.request.contextPath}/resources/upload/group-photo/${groupVo.groupImage}" alt="" />
+							<img src="${pageContext.request.contextPath}/resources/upload/group-photo/${groupVo.groupImage}" alt="" style="width: 100%; height: 100%;"/>
 						</span>
 						<span class="info">
 							<span class="group_name">
-								${groupVo.groupName}
+								${groupVo.groupName} 
+								<c:if test="${groupVo.status == 'M'.charAt(0)}"><span style="color:red;">매니저</span></c:if>
+								<c:if test="${groupVo.status == 'S'.charAt(0)}"><span style="color:blue;">학생</span></c:if>
 							</span>
 							<span class="num">
-								멤버 27
+								멤버 ${groupVo.groupMemNum }명
 							</span>
 						</span>
 					</a>
