@@ -6,7 +6,7 @@
 <mapper namespace="Mappers.BoardMapper">
 	
 	<!-- 그룹의 모든 게시글 불러오기 -->
-	<select id="selectBoard" parameterType="com.coduck.pond.board.vo.BoardDto">
+	<select id="selectBoard" parameterType="com.coduck.pond.board.vo.BoardSrchDto">
 		
 	</select>
 	

@@ -5,8 +5,17 @@
   
 <mapper namespace="Mappers.groupNoticeMapper">
 	
+	<!-- 리스트  -->
+	<select id="selectNoticeList" 
+	parameterType="com.coduck.pond.board.vo.BoardSrchDto"
+	resultType="com.coduck.pond.board.vo.HwBoardVo">
+	SELECT
+		*
+	FROM
+		GROUP_NOTICE
+	</select>
+	
 	<!-- 공지 생성 -->
-		
 	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
 		INSERT INTO 
 			GROUP_NOTICE 
