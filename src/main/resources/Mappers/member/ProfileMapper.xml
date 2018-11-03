@@ -15,4 +15,12 @@
  	<update id="updatePhone" parameterType="map">
  		update mem set mem_phone = #{phone} where mem_email = #{email}
  	</update>
+ 	<!-- 비밀번호 수정 -->
+ 	<update id="updatePwd" parameterType="map">
+ 		update mem set mem_pwd = #{pwd} where mem_email = #{email}
+ 	</update>
+ 	<!-- 회원 프로필 사진 변경 -->
+ 	<update id="updatePic" parameterType="map">
+ 		update mem set mem_profile_pic = #{filename} where mem_email = #{email}
+ 	</update>
  </mapper>

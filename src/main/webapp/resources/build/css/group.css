@@ -19,7 +19,7 @@ h2.sub_title span.num{color:#007bff;}
 .group-list li:hover{transform:translateY(-2px); transition:all .1s ease-in-out; box-shadow:0 5px 9px 1px rgba(0,0,0,.08);}
 .group-list li a{display:block;height:210px;}
 .group-list li.group-make a{padding:64.5px 0;}
-.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center; background-image:url(../../imgs/ico_plus.png); background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
+.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center;  background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
 
 .group-list li.group a span.wrapper{display:block; position:relative; padding-top:75%; overflow:hidden;}
 .group-list li.group a span.wrapper img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; display:block;}
@@ -75,6 +75,7 @@ h2.sub_title span.num{color:#007bff;}
 .profile .myProfile .profileArea li{padding:10px 0;}
 .profile .myProfile .profileArea li:first-child{padding:0 0 10px 0;}
 .profile .myProfile .profileArea div.profileInfo .txt{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; width:100px;}
+.profile .myProfile .profileArea div.profileInfo .txt.group_name{width:500px; line-height:25px;}
 .profile .myProfile .profileArea div.profileInfo .mail{font-size:14px; display:inline-block; vertical-align:middle; line-height:40px; margin-left:30px;}
 .profile .myProfile .profileArea div.profileInfo input{display:inline-block; vertical-align:middle; margin-left:30px; border:0; border-bottom:1px solid #d7d7d7; height:40px; width:250px; outline:0;}
 
@@ -85,7 +86,7 @@ h2.sub_title span.num{color:#007bff;}
 .modal-body .profileImg{position:relative; display:block; width:120px; height:120px; margin:0 auto;}
 .modal-body .profileImg span{display:block; width:120px; height:120px; border-radius:50%; overflow:hidden;}
 .modal-body .profileImg span img{display:block; width:100%;}
-.modal-body .profileImg label{position:absolute; right:0; bottom:0; width:40px; height:40px; border-radius:50%; background-color:#b3b3b3; border:1px solid #fff; background-image:url(../../imgs/ico_camera_w.png); background-repeat:no-repeat; background-position:center center; font-size:0; background-size:60% 60%;}
+.modal-body .profileImg label{position:absolute; right:0; bottom:0; width:40px; height:40px; border-radius:50%; background-color:#b3b3b3; border:1px solid #fff; background-repeat:no-repeat; background-position:center center; font-size:0; background-size:60% 60%;}
 .modal-body .profileImg input{display:none;}
 .modal-body .profileInput{display:block; width:100%; height:40px; border:1px solid #dcdcdc; padding-left:10px; box-sizing:border-box; font-size:14px; color:#333; margin-top:30px;}
 

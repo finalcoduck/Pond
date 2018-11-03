@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.ProfileService;
 import com.coduck.pond.member.vo.MemDto;
@@ -35,8 +36,7 @@ public class ProfileController {
 		Map<Integer, GroupVo> groupMap = new HashMap<>();
 		groupMap = profileService.getGroupInfo(keySet);
 		model.addAttribute("groupMap", groupMap);
-		System.out.println(memDto.getMemVo().getMemEmail()+"@@@@@@@@@@@@@");
-		model.addAttribute("memDto", memDto);
+		model.addAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 		return "/member/profile";
 	}
 	
@@ -56,9 +56,26 @@ public class ProfileController {
 	 */
 	@RequestMapping("/member/update-pwd/proc")
 	@ResponseBody
-	public Map<String, String> updatePwd(String phone, String email) {
+	public Map<String, String> updatePwd(String newPwd, String email) {
+		String memPwd = passwordEncoder.encode(newPwd);
+		profileService.updatePwd(email, memPwd);
 		Map<String, String> map = new HashMap<>();
-		profileService.updatePhone(phone, email);
+		return map;
+	}
+	
+	/*
+	 *  Ajax를 통한 현재 비밀번호 확인
+	 */
+	@RequestMapping("/member/confirm-pwd/proc")
+	@ResponseBody
+	public Map<String, String> confrimPwd(String nowPwd, String email, String nowEncPwd) {
+		String memPwd = passwordEncoder.encode(nowPwd);
+		Map<String, String> map = new HashMap<>();
+		if(passwordEncoder.matches(nowPwd, nowEncPwd)) {
+			map.put("pwdConfirmMsg", "true");
+		}else {
+			map.put("pwdConfirmMsg", "false");
+		}
 		return map;
 	}
 }

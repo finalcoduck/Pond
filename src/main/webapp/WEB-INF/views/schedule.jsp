@@ -24,6 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 <script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -46,14 +47,33 @@ String.prototype.replaceAll = function (org, dest) {
 	return this.split(org).join(dest);
 }
 
-var colorList = ['blue','black','red','green','pink'];
+var colorList = ['#FE2EF7','#FF0040','#9F81F7','#58FA58','#FF8000'];
 $(function() {
 	  getInfo_Month(18, 10);
 	  // page is now ready, initialize the calendar...
 	  $('#calendar').fullCalendar({
+		  displayEventEnd: false,
+		  showNonCurrentDates: false,
+		  fixedWeekCount: false,
+		  themeSystem:'bootstrap4',
+		  bootstrapFontAwesome :
+		  {
+			  close: 'fa-times',
+			  prev: 'fa-hand-point-left',
+			  next: 'fa-hand-point-right',
+			  prevYear: 'fa-angle-double-left',
+			  nextYear: 'fa-angle-double-right'
+		  },
+		  header:
+		  {
+		  left : 'prevYear prev',
+		  center: 'title',
+		  right: 'today next nextYear'
+		  },
 		  dayClick: function(event) {
 		        console.log(event.target);
 		    },
+		    
 		    customButtons:{
 		    	myCustomButton:{
 		    		text:'일정입력',
@@ -69,14 +89,29 @@ $(function() {
                    title: "${vo.scheduleTitle}",
                    start: "${vo.scheduleStartDate}",
                    end: "${vo.scheduleEndDate}",
-               	   backgroundColor: colorList[${status.index}],
-               	   textColor: "white"
+               	   backgroundColor: colorList[${status.index%5}],
+               	   textColor: "black",
+               	   num: "${vo.scheduleNum}"
                }, 
              </c:forEach>  
             ],
          eventClick:function(event){
-        	 
-         }   
+        	 if(confirm('수정하시겠습니까?')){
+        		 var num = event.num;
+        		 var start = event.start;
+        		 console.log(typeof(start));
+        		 debugger;
+        		 var end = event.end;
+        		 
+        		 updateSchedule(num, start, end);
+        	 }
+         },
+         eventMouseover:function(calEvent,jsEvent){
+			$(this).css('background-color','black').css('cursor','pointer').css('color','white');
+         },
+         eventMouseout:function(calEvent,jsEvent){
+ 			$(this).css('background-color',calEvent.backgroundColor).css('color','black');	
+          }
 	  });
 		// 이전,다음 버튼을 누를 때 실행되는 메소드
 		$('button.fc-prev-button, .fc-next-button').click(function() {

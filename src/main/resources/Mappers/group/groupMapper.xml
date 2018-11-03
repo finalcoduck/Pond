@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Mappers.groupMapper">
+	
+	<!-- 그룹 최초생성 -->
+	<insert id="insertGroup" parameterType="com.coduck.pond.group.vo.GroupVo">
+		INSERT
+		 INTO POND_GROUP 
+		 (
+		 	GROUP_NAME, 
+		 	OPEN_DATE, 
+		 	MAX_MEM_NUM, 
+		 	MEM_EMAIL, 
+		 	INVITE_CODE, 
+		 	INVITE_CODE_STATUS, 
+		 	GROUP_IMAGE, 
+		 	GROUP_DESCRIPTION
+		 ) 
+		 VALUES 
+		 (
+		 	#{groupName}, 
+		 	sysdate, 
+		 	50, 
+		 	#{memEmail}, 
+		 	#{inviteCode}, 
+		 	#{inviteCodeStatus}, 
+		 	#{groupImage}, 
+		 	'그룹 소개를 작성해주세요.'
+		 )
+	</insert>
+	
+	<!-- 그룹 생성시 group_mem 테이블에 인서트 -->
+	<insert id="insertGroupMem" parameterType="com.coduck.pond.group.vo.GroupMemVo">
+		insert into group_mem values(group_mem_seq.nextval,#{groupNum},#{memEmail},#{status})
+	</insert>
+	
+	<!-- 가입한 그룹 리스트 가져오기 -->
+	<select id="selectGroupList" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="string">
+		select 
+			* 
+		from
+			pond_group
+		where
+			MEM_EMAIL = #{value} 
+	</select>
+	
+	<!-- 그룹 정보 가져오기-->
+	<select id="selectGroup" resultType="com.coduck.pond.group.vo.GroupVo" parameterType="int">
+		select * from pond_group where group_num = #{value}
+	</select>
+	
+	<!-- 그룹 삭제 -->
+	<delete id="deleteGroup" parameterType="int">
+		delete from pond_group where group_num = #{value}
+	</delete>
+	
+	<select id="getGroupNum" parameterType="string" resultType="int">
+	 	select group_num from pond_group where invite_code = #{value}
+	</select>
+	
+	<!-- 해당회원 그룹별 회원 숫자 가져오기 -->
+	<select id="getGroupMemNum" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMemNumDto">
+		select * from
+		 pond_group G,
+		  (select group_num, count(*) group_mem_num, status from group_mem group by group_num, status) A
+		   where G.group_num = A.group_num
+			and mem_email = #{value} 
+	</select>
+</mapper> 

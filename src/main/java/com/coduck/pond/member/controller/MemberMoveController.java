@@ -52,7 +52,7 @@ public class MemberMoveController {
 	
 	@RequestMapping("/test1")
 	public String testPage() {
-		return "/test";
+		return "/selectgroup/index";
 	}
 	
 	@RequestMapping("/emailConfirm")

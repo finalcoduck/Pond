@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Mappers.groupNoticeMapper">
+	
+	<!-- 리스트  -->
+	<select id="selectNoticeList" 
+	parameterType="com.coduck.pond.board.vo.BoardSrchDto"
+	resultType="com.coduck.pond.board.vo.HwBoardVo">
+	SELECT
+		*
+	FROM
+		GROUP_NOTICE
+	</select>
+	
+	<!-- 공지 생성 -->
+	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
+		INSERT INTO 
+			GROUP_NOTICE 
+			(
+				GROUP_NUM, 
+				NTC_WRITER,
+				NTC_CONTENT,
+				NTC_REGDATE,
+				SUBJECT,
+				BOARD_TYPE
+			) 
+			VALUES 
+			(
+				#{groupNum},
+				#{ntcWriter},
+				#{ntcContent},
+				sysdate,
+				#{subject},
+				#{boardType}
+			);
+	</insert>
+	
+	<!-- 공지 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM
+			GROUP_NOTICE
+		WHERE
+			NTC_NUM = #{value}
+	</delete>
+	
+</mapper> 
