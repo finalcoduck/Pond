@@ -12,6 +12,15 @@ public class CommonConstant {
 	/** User Session Key **/
 	public static final String USER_SESSION_KEY = "memDto";
 	
+	
+	/** Max Board Count **/
+	public static final int MAX_BOARD_COUNT = 5;
+	
+	
+	/** TRUE & FALSE **/
+	public static final String TRUE = "T";
+	public static final String FALSE = "F";
+	
 	/** Zero & One */
 	public static final String STR_ZERO = "0";
 	public static final String STR_ONE = "1";
