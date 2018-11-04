@@ -24,6 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 <script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/resources/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </head>
 <body>
@@ -49,7 +50,15 @@ String.prototype.replaceAll = function (org, dest) {
 
 var colorList = ['#FE2EF7','#FF0040','#9F81F7','#58FA58','#FF8000'];
 $(function() {
-	  getInfo_Month(18, 10);
+	  var calYear = new Date().getFullYear();
+	  var calMonth = new Date().getMonth()+1;
+	  
+	  calYear -= 2000;
+	  if(calMonth<10){
+		  calMonth = "0"+calMonth;
+	  }
+	  console.log(calMonth);
+	  getInfo_Month(calYear, calMonth);
 	  // page is now ready, initialize the calendar...
 	  $('#calendar').fullCalendar({
 		  displayEventEnd: false,
@@ -70,10 +79,23 @@ $(function() {
 		  center: 'title',
 		  right: 'today next nextYear'
 		  },
-		  dayClick: function(event) {
+		  lang : "ko",
+		  editable : true,
+		  eventLimit : true,
+	      googleCalendarApiKey : "AIzaSyBBmL-30gox_ec9v4QY-TTKY2Dsif7NxBg"
+		  ,eventSources : [
+	             // 대한민국의 공휴일
+	             {
+	                   googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com"
+	                 , className : "koHolidays"
+	                 , color : "#FFF"
+	                 , textColor : "#FF0000"
+	                 , editable : false
+	                 ,
+	             } ]
+	        ,dayClick: function(event) {
 		        console.log(event.target);
 		    },
-		    
 		    customButtons:{
 		    	myCustomButton:{
 		    		text:'일정입력',
@@ -81,8 +103,8 @@ $(function() {
 		    			onSelectEvent(event);
 		    		}
 		    	}
-		    },
-	    // put your options and callbacks here
+		    }
+	     ,
 	     events: [
 	    	 <c:forEach var="vo" items="${list}" varStatus="status">
                {
@@ -94,7 +116,7 @@ $(function() {
                	   num: "${vo.scheduleNum}"
                }, 
              </c:forEach>  
-            ],
+            ] ,
          eventClick:function(event){
         	 if(confirm('수정하시겠습니까?')){
         		 var num = event.num;
@@ -114,7 +136,7 @@ $(function() {
           }
 	  });
 		// 이전,다음 버튼을 누를 때 실행되는 메소드
-		$('button.fc-prev-button, .fc-next-button').click(function() {
+		$('button.fc-prev-button, .fc-next-button, .fc-today-button').click(function() {
 			var dd = $('#calendar').fullCalendar("getDate");
 			var date = new Date(dd);
 			var month = date.getMonth() + 1;
@@ -140,6 +162,8 @@ $(function() {
 				var html = "";
 				$.each(data.result_list, function(i, vo) {
 					html += $('#template-list-item').html().replace("{title}", vo.scheduleTitle)
+					
+					
 														   .replace("{content}", vo.scheduleContent)
 														   .replaceAll("{start}", vo.scheduleStartDate)
 														   .replaceAll("{end}", vo.scheduleEndDate)
@@ -147,6 +171,7 @@ $(function() {
 				});
 				$('#testRow').append(html);
 			}
+			
 		});
 	}
 	

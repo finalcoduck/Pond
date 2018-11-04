@@ -28,7 +28,7 @@ public class ScheduleBasicController {
 	@Autowired
 	private ScheduleServiceImpl scheduleService;
 	
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
 		return "redirect:/schedule/info";
 	}*/
