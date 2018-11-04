@@ -86,9 +86,9 @@
 								class="btn btn-outline-secondary dropdown-toggle"
 								data-toggle="dropdown">주제</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Link 1</a> 
-								<a class="dropdown-item" href="#">Link 2</a>
-								<a class="dropdown-item" href="#">Link 3</a>
+								<c:forEach var="subject" items='${subjectList}' varStatus="status">
+									<a class="dropdown-item" href="#">${subject.subjectTitle}</a>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -290,7 +290,6 @@
 	                    $("#HWBtn").popover('hide');
 	                    $("#noticeBtn").popover('hide');
 	                }
-	                
 	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
 	        });
         	
