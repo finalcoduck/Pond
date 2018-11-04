@@ -44,13 +44,13 @@ public class BoardServiceImpl implements BoardService{
 		// 다음으로 불러올 페이지가 있는 경우
 		if(boardList.size()>CommonConstant.MAX_BOARD_COUNT*Nxt1KeyVal) {
 			
-			boardList = boardList.subList(5*(Nxt1KeyVal-1),5*Nxt1KeyVal);
+			boardList = boardList.subList(CommonConstant.MAX_BOARD_COUNT*(Nxt1KeyVal-1),CommonConstant.MAX_BOARD_COUNT*Nxt1KeyVal);
 			boardSrchDto.setNxt1KeyVal(Nxt1KeyVal+1);			
 			boardSrchDto.setNxtPageFl(CommonConstant.TRUE);
 			
 		}else { 
 			// 다음으로 불러올 페이지가 없는 경우
-			boardList = boardList.subList(5*(Nxt1KeyVal-1),boardList.size());
+			boardList = boardList.subList(CommonConstant.MAX_BOARD_COUNT*(Nxt1KeyVal-1),boardList.size());
 			boardSrchDto.setNxtPageFl(CommonConstant.FALSE);
 		}
 		

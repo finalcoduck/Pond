@@ -40,9 +40,9 @@
 						</a>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href="">공지</a></li>
-						<c:forEach var="subject" items='${groupList}' varStatus="status">
-							<li class="list-group-item"><a href=""></a></li>
+						<li class="list-group-item"><a class="subject-title" href="">공지</a></li>
+						<c:forEach var="subject" items='${subjectList}' varStatus="status">
+							<li class="list-group-item"><a class="subject-title" href="">${subject.subjectTitle}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -52,9 +52,6 @@
 
 			<!--           center            -->
 			<div id="center" class="col-12 col-md-8">
-			<!-- BoradSrchDto -->
-			
-			<!-- BoradSrchDto -->
 				<!-- Post /////-->
 				<!-- Post /////-->
 			</div>
@@ -89,9 +86,9 @@
 								class="btn btn-outline-secondary dropdown-toggle"
 								data-toggle="dropdown">주제</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Link 1</a> <a
-									class="dropdown-item" href="#">Link 2</a> <a
-									class="dropdown-item" href="#">Link 3</a>
+								<a class="dropdown-item" href="#">Link 1</a> 
+								<a class="dropdown-item" href="#">Link 2</a>
+								<a class="dropdown-item" href="#">Link 3</a>
 							</div>
 						</div>
 					</div>
@@ -121,21 +118,21 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="">
-					<div class="form-group">
-						<input name="about" type="hidden">
-						<div id="subject-editor-container"></div>
-					</div>
-				</form>
-			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer justify-content-right">
-				<a href="" class="text-muted" data-dismiss="modal">취소</a>
-				<a href="" class="text-muted" data-dismiss="modal">추가</a>
-			</div>
+			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
+				<!-- Modal body -->
+				<div class="modal-body">
+						<div class="form-group">
+						<input name="groupNum" type="hidden" value="${groupNum}">
+							<input name="subjectTitle" type="text">
+						</div>
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-right">
+					<a href="" class="text-muted" data-dismiss="modal">취소</a>
+					<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+				</div>
+			</form>
 
 		</div>
 	</div>
@@ -326,9 +323,6 @@
                 placeholder: '공지를 입력하세요',
             });
             
-            var SubjectQuill = new Quill('#subject-editor-container', {
-                placeholder: '주제',
-            });
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
 
@@ -352,7 +346,7 @@
                 	searchForm();
                 }
             });
-
+            
         });
         function searchForm(){
 			
@@ -397,5 +391,6 @@
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
-		}	    
+		}
+		
     </script>

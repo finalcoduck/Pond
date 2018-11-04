@@ -43,7 +43,7 @@
 		DELETE FROM
 			GROUP_NOTICE
 		WHERE
-			NTC_NUM = #{value}
+			BOARD_NUM = #{value}
 	</delete>
 	
 </mapper> 
