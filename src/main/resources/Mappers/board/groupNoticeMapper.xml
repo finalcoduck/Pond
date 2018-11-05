@@ -21,19 +21,19 @@
 			GROUP_NOTICE 
 			(
 				GROUP_NUM, 
-				NTC_WRITER,
-				NTC_CONTENT,
-				NTC_REGDATE,
-				SUBJECT,
+				BOARD_WRITER,
+				BOARD_CONTENT,
+				BOARD_REGDATE,
+				SUBJECT_TITLE,
 				BOARD_TYPE
 			) 
 			VALUES 
 			(
 				#{groupNum},
-				#{ntcWriter},
-				#{ntcContent},
+				#{boardWriter},
+				#{boardContent},
 				sysdate,
-				#{subject},
+				#{subjectTitle},
 				#{boardType}
 			);
 	</insert>

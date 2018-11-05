@@ -3,7 +3,9 @@ package com.coduck.pond.board.service;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.coduck.pond.board.dao.HwBoardDao;
 import com.coduck.pond.board.dao.NoticeDao;
 import com.coduck.pond.board.vo.BoardSrchDto;
+import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.core.constant.CommonConstant;
+import com.coduck.pond.core.constant.ErrorCodeConstant;
 
 
 @Service
@@ -55,6 +59,17 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		return boardList;
+	}
+
+	@Override
+	public HashMap<String, Object> insertNoticeBoard(GroupNoticeVo groupNoticeVo) {
+		
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
+		
+		noticeDao.insertNotice(groupNoticeVo);
+				
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		return resultMap;
 	}
 
 }
