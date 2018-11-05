@@ -38,10 +38,10 @@
 							<i class="fas fa-plus"></i>
 						</a>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a class="subject-title" href="">공지</a></li>
+					<ul id="subjectList" class="list-group list-group-flush">
+						<li class="list-group-item cursor-pointer">공지</li>
 						<c:forEach var="subject" items='${subjectList}' varStatus="status">
-							<li class="list-group-item"><a class="subject-title" href="">${subject.subjectTitle}</a></li>
+							<li class="list-group-item cursor-pointer">${subject.subjectTitle}</li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -76,6 +76,7 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 			<form id="noticeForm" action="">
+				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
 						<input name="boardContent" type="hidden">
@@ -89,7 +90,7 @@
 						  <select class="custom-select" name="subjectTitle" id="inputGroupSelect01">
 						    <option selected>공지</option>
 						    <c:forEach var="subject" items='${subjectList}' varStatus="status">
-							    <option value="${subject.subjectNum}">${subject.subjectTitle}</option>
+							    <option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
 						    </c:forEach>
 						  </select>
 						</div>
@@ -124,7 +125,7 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 						<div class="form-group">
-						<input name="groupNum" type="hidden" value="${groupNum}">
+						<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 							<input name="subjectTitle" type="text">
 						</div>
 				</div>
@@ -133,6 +134,36 @@
 				<div class="modal-footer justify-content-right">
 					<a href="" class="text-muted" data-dismiss="modal">취소</a>
 					<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="delNoticeModal">
+	<div class="modal-dialog modal-sm modal-dialog-centered">
+		<div class="modal-content border-0">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">공지를 삭제 하시겠습니까?</h4>
+				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+			</div>
+
+			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
+				<!-- Modal body -->
+				<div class="modal-body">
+						<div class="form-group">
+						<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+							<input name="subjectTitle" type="text">
+						</div>
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-right">
+					<a href="" class="text-muted" data-dismiss="modal">취소</a>
+					<button type="submit" class="text-muted btn btn-out-secondary" >삭제</button>
 				</div>
 			</form>
 
@@ -186,16 +217,17 @@
 					</button>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="gedf-drop1">
-						<a class="dropdown-item" href="#">맨 위로 이동</a> <a
-							class="dropdown-item" href="#">수정</a> <a class="dropdown-item"
-							href="#">삭제</a> <a class="dropdown-item" href="#">링크복사</a>
+						 <a	class="dropdown-item" href="#">수정</a> 
+						 <a class="dropdown-item" href="#">삭제</a>
+						 <a class="dropdown-item" href="#">링크복사</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="card-body">
-		<p class="card-text">{{boardContent}}</p>
+		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
+		<p class="card-text">{{{boardContent}}}</p>
 	</div>
 	<div class="card-footer align_r">
 		<a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
@@ -268,13 +300,12 @@
 <script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
 
 
-<script>
-	    
+<script>    
         const SLIDE_EXCUTION_TIME = 178;
         const NOTICE = 'N'
         const HW_BOARD = 'H'
         
-        var boardSrchDto= {srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
+        var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
         var NoticeQuill = new Quill('#notice-editor-container', {
             placeholder: '공지를 입력하세요',
@@ -309,7 +340,7 @@
 
             
             $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show')       
+                $("#noticeModal").modal('show');       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
             
@@ -330,6 +361,7 @@
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
             
+            //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
             $(window).scroll(function(){
                 var scrolltop = $(window).scrollTop(); 
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
@@ -337,6 +369,9 @@
                 	searchBoard();
                 }
             });
+            
+            //주제 클릭 이벤트
+            $("#subjectList").on("click","li",searchSubject);
             
         });
         //게시물을 받아옴 
@@ -358,24 +393,49 @@
 					console.log("게시물이 없습니다.")
 				}else{
 					console.log(data.boardSrchDto);
+					//마지막 페이지 여부 받아오기 
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
+					
+					//키값이 1인 경우 div#center 초기화
+					if(boardSrchDto.nxt1KeyVal === 1){
+						$("#center").html("");	
+					}
+
 					boardSrchDto.nxt1KeyVal += 1;
+					
+					// 카드 추가
 					data.boardList.forEach(function(item){
+						item.boardContent = quillGetHTML(item.boardContent);
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
 							$("#center").append(makeHWCard(item));	
 						}
 					})
+					//페이지 상단으로 이동
+		        	  
 				}
 		   	});
 		}
+        function searchSubject(){
+        	
+        	//검색 주제 추가후
+        	boardSrchDto.srchWord = this.innerHTML;
+        	boardSrchDto.nxt1KeyVal = 1;
+        	
+        	//게시물 조회 실행
+        	searchBoard();
+        	
+        	//화면 상단으로 이동
+        	$('html, body').animate({scrollTop: 0 }, 'slow');
+        }
         function insertNoticeBoard(){
         	
         	// Populate hidden form on submit
             var about = document.querySelector('input[name=boardContent]');
             about.value = JSON.stringify(NoticeQuill.getContents());
-        	var dataStr = JSON.stringify($('#noticeForm').serializeObject());
+            var noticeData = $('#noticeForm').serializeObject()
+        	var dataStr = JSON.stringify(noticeData);
         	$.ajax({
 		   		url : "${pageContext.request.contextPath}/board/insert/notice/proc"
 				, method : "post"
@@ -385,21 +445,33 @@
 		   		, contentType : "application/json; charset=UTF-8"
 			})
 			.done(function(data){
-				
+				console.log(data.errC);
+				if(data.errC ==="0000"){
+					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
+					$("#noticeModal").modal('hide');
+					searchBoard();
+				}
 			});
         }
+        //공지 카드 만들기
 		function makeNoticeCard(data){
 			var source = $("#notice-card").html();
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
 		}
-		
+		//과제 카드 만들기
 		function makeHWCard(data){
 			var source = $("#hw-card").html();
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
 		}
-		
+		//deltaObject를 HTML코드로 변경
+		function quillGetHTML(inputDelta) {
+			var delta = JSON.parse(inputDelta);
+		    var tempCont = document.createElement("div");
+		    (new Quill(tempCont)).setContents(delta.ops);
+		    return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+		}
     </script>

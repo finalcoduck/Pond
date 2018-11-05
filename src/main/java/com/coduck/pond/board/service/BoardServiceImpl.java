@@ -32,8 +32,10 @@ public class BoardServiceImpl implements BoardService{
 	public List<HwBoardVo> selectBoardList(BoardSrchDto boardSrchDto) {
 		
 		//과제게시물과 공지 게시물을 불러와 리스트 하나에 합침
-		List<HwBoardVo> boardList = hwBoardDao.selectHwBoardList(boardSrchDto); 
-		boardList.addAll(noticeDao.selectNoticeList(boardSrchDto));
+		List<HwBoardVo> boardList = hwBoardDao.selectHwBoardList(boardSrchDto);
+		List<HwBoardVo> noticeList = noticeDao.selectNoticeList(boardSrchDto);
+		
+		boardList.addAll(noticeList);
 		
 		// 게시물 번호 순으로 정렬
 		Collections.sort(boardList,new Comparator<HwBoardVo>(){

@@ -28,6 +28,8 @@ public class BoardController {
 	public @ResponseBody HashMap<String,Object> searchBoard (@RequestBody BoardSrchDto boardSrchDto) {
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		
+		
+		
 		map.put("boardList",boardService.selectBoardList(boardSrchDto));
 		
 		map.put("boardSrchDto",boardSrchDto);
@@ -41,10 +43,10 @@ public class BoardController {
 		
 		//글작성 권환 확인
 		
-		
 		//세션에서 작성자 추가
 		groupNoticeVo.setBoardWriter(memDto.getMemVo().getMemEmail());
 		
+		System.out.println(groupNoticeVo);
 		HashMap<String,Object> resultMap = boardService.insertNoticeBoard(groupNoticeVo);
 		
 		return resultMap;
