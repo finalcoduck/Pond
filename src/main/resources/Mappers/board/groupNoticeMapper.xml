@@ -13,6 +13,11 @@
 		*
 	FROM
 		GROUP_NOTICE
+	WHERE
+		GROUP_NUM = #{groupNum}
+		<if test="srchWord != ''">
+			AND SUBJECT_TITLE = #{srchWord}
+		</if>
 	</select>
 	
 	<!-- 공지 생성 -->
@@ -35,7 +40,7 @@
 				sysdate,
 				#{subjectTitle},
 				#{boardType}
-			);
+			)
 	</insert>
 	
 	<!-- 공지 삭제 -->
