@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.service.ProfileService;
@@ -76,13 +77,13 @@ public class GoogleController {
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
 	        Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 			MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
-			session.setAttribute("memDto", memDto);
+			session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 	        return "/social-login-information";
         }else {
         	Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 			MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
-			session.setAttribute("memDto", memDto);
-        	return "/test";
+			session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
+        	return "forward:/selectgroup/index";
         }
 	}
 }

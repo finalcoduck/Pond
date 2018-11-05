@@ -19,7 +19,7 @@ h2.sub_title span.num{color:#007bff;}
 .group-list li:hover{transform:translateY(-2px); transition:all .1s ease-in-out; box-shadow:0 5px 9px 1px rgba(0,0,0,.08);}
 .group-list li a{display:block;height:210px;}
 .group-list li.group-make a{padding:64.5px 0;}
-.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center; background-image:url(../../imgs/ico_plus.png); background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
+.group-list li.group-make span{display:block; font-size:14px; color:#333; text-align:center;  background-repeat:no-repeat; background-position:center top; padding-top:60px; background-size:50px 50px;}
 
 .group-list li.group a span.wrapper{display:block; position:relative; padding-top:75%; overflow:hidden;}
 .group-list li.group a span.wrapper img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; display:block;}

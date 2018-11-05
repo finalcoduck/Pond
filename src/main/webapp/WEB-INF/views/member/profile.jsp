@@ -152,7 +152,7 @@
 								<c:forEach items="${memDto.keySet }" var="groupNum">
 									<li>
 										<div class="profileInfo"><!-- 그룹이미지 나중에 처리 -->
-											<img src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="" />
+											<img src="${pageContext.request.contextPath }/resources/upload/group-photo/${groupMap[groupNum].groupImage }" alt="" style="width: 50px; height: 50px;"/>
 											<span class="txt group_name">${groupMap[groupNum].groupName }</span>
 										</div>
 									</li>

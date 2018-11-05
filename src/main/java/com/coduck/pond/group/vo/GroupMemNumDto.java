@@ -2,7 +2,7 @@ package com.coduck.pond.group.vo;
 
 import java.sql.Date;
 
-public class GroupVo {
+public class GroupMemNumDto {
 	private int groupNum;
 	private String groupName;
 	private Date openDate;
@@ -12,9 +12,28 @@ public class GroupVo {
 	private char inviteCodeStatus;
 	private String groupImage;
 	private String groupDescription;
+	private int groupMemNum;
+	private char status;
 	
-	public GroupVo() {
+	public GroupMemNumDto() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public GroupMemNumDto(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail,
+			String inviteCode, char inviteCodeStatus, String groupImage, String groupDescription, int groupMemNum,
+			char status) {
+		super();
+		this.groupNum = groupNum;
+		this.groupName = groupName;
+		this.openDate = openDate;
+		this.maxMemNum = maxMemNum;
+		this.memEmail = memEmail;
+		this.inviteCode = inviteCode;
+		this.inviteCodeStatus = inviteCodeStatus;
+		this.groupImage = groupImage;
+		this.groupDescription = groupDescription;
+		this.groupMemNum = groupMemNum;
+		this.status = status;
 	}
 
 	public int getGroupNum() {
@@ -89,24 +108,29 @@ public class GroupVo {
 		this.groupDescription = groupDescription;
 	}
 
-	public GroupVo(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail, String inviteCode,
-			char inviteCodeStatus, String groupImage, String groupDescription) {
-		super();
-		this.groupNum = groupNum;
-		this.groupName = groupName;
-		this.openDate = openDate;
-		this.maxMemNum = maxMemNum;
-		this.memEmail = memEmail;
-		this.inviteCode = inviteCode;
-		this.inviteCodeStatus = inviteCodeStatus;
-		this.groupImage = groupImage;
-		this.groupDescription = groupDescription;
+	public int getGroupMemNum() {
+		return groupMemNum;
+	}
+
+	public void setGroupMemNum(int groupMemNum) {
+		this.groupMemNum = groupMemNum;
+	}
+
+	public char getStatus() {
+		return status;
+	}
+
+	public void setStatus(char status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupVo [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate + ", maxMemNum="
-				+ maxMemNum + ", memEmail=" + memEmail + ", inviteCode=" + inviteCode + ", inviteCodeStatus="
-				+ inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription=" + groupDescription + "]";
+		return "GroupMemNumDto [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate
+				+ ", maxMemNum=" + maxMemNum + ", memEmail=" + memEmail + ", inviteCode=" + inviteCode
+				+ ", inviteCodeStatus=" + inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription="
+				+ groupDescription + ", groupMemNum=" + groupMemNum + ", status=" + status + "]";
 	}
+	
+	
 }

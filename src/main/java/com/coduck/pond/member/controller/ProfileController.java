@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.ProfileService;
 import com.coduck.pond.member.vo.MemDto;
@@ -35,8 +36,7 @@ public class ProfileController {
 		Map<Integer, GroupVo> groupMap = new HashMap<>();
 		groupMap = profileService.getGroupInfo(keySet);
 		model.addAttribute("groupMap", groupMap);
-		System.out.println(memDto.getMemVo().getMemEmail()+"@@@@@@@@@@@@@");
-		model.addAttribute("memDto", memDto);
+		model.addAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 		return "/member/profile";
 	}
 	

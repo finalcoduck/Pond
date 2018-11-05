@@ -8,7 +8,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:property-placeholder location="/*.properties"/>	
+	<context:property-placeholder location="/*.properties"/>
+	
 	<!-- dataSource설정 -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -46,7 +47,6 @@
       <property name="port" value="587" />
       <property name="username" value="${sender.username}" />
       <property name="password" value="${sender.password}" />
-      
       <property name="javaMailProperties">
          <props>
                <prop key="mail.transport.protocol">smtp</prop>
