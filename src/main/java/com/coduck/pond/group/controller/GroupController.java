@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.coduck.pond.board.service.SubjectService;
 import com.coduck.pond.board.vo.SubjectVo;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -33,9 +34,11 @@ public class GroupController {
 		
 		//넘겨 주어야할 정보 과제글, 공지글 , 주제 
 		List<SubjectVo> subjecList = subjectService.selectSubjectList(groupNum);
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		
 		
 		model.addAttribute("subjectList", subjecList);
-		model.addAttribute("groupNum", groupNum);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "/group/group-main";
 	}
