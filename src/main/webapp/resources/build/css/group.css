@@ -147,6 +147,20 @@ h2.sub_title span.num{color:#007bff;}
 .modal-body .group_select li a.profileInfo span.txt{font-size: 14px; display: inline-block; vertical-align: middle; margin-left:5px;}
 .modal-body .group_select li a.profileInfo li:first-child{border-top:0;}
 
+#view{overflow:hidden; height:100%;}
+#view .left{float:left; width:30%; height:100%;}
+#view .left p.title{font-size:18px; line-height:55px; padding:0 20px; background-color:#eaeaea;}
+#view .left .student_list{padding-bottom:20px;}
+#view .left .student_list ul li{font-size:0; padding:0 20px; border-top:1px solid #ccc; border-bottom:1px solid #ccc;}
+#view .left .student_list ul li > span{display:inline-block; vertical-align:middle; padding:15px 0;}
+#view .left .student_list ul li > span.profile{width:70%; border-top:0; border-right:1px solid #ccc; box-sizing:border-box;}
+#view .left .student_list ul li > span.profile img{display:inline-block; vertical-align:middle;}
+#view .left .student_list ul li > span.profile .name{display:inline-block; vertical-align:middle; font-size:14px; margin-left:10px;}
+
+#view .left .student_list ul li > span.score{width:30%;}
+
+#view .right{float:right; width:70%; height:100%; padding:20px; box-sizing:border-box; border-left:1px solid #ccc;}
+
 
 /*tablet*/
 @media only screen and (min-width:769px) and (max-width:1023px){
