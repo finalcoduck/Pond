@@ -40,7 +40,7 @@
 </body>
 <script type="text/javascript">
 $('#addCal').click(function() {
-	location.href="${pageContext.request.contextPath}/schedule/addCal";
+	location.href="${pageContext.request.contextPath}/schedule/add-cal?groupNum=${groupNum}";
 });
 
 //replaceAll 메소드 만들기
@@ -157,7 +157,7 @@ $(function() {
 			url : "<c:url value='/schedule/getInfo'/>",
 			dataType : 'json',
 			type : 'post',
-			data : {'year':year, 'month':month, 'groupNum':30},
+			data : {'year':year, 'month':month, 'groupNum':${groupNum} },
 			success: function(data) {
 				var html = "";
 				$.each(data.result_list, function(i, vo) {

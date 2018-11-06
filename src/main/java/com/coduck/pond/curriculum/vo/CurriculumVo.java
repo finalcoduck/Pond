@@ -1,10 +1,10 @@
 package com.coduck.pond.curriculum.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class CurriculumVo {
 	private int crcNum;
-	private String crcWriter;
+	private String crcTeacher;
 	private int groupNum;
 	private Date crcStartDate;
 	private Date crcEndDate;
@@ -15,11 +15,11 @@ public class CurriculumVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CurriculumVo(int crcNum, String crcWriter, int groupNum, Date crcStartDate, Date crcEndDate, String crcTitle,
+	public CurriculumVo(int crcNum, String crcTeacher, int groupNum, Date crcStartDate, Date crcEndDate, String crcTitle,
 			String crcContent) {
 		super();
 		this.crcNum = crcNum;
-		this.crcWriter = crcWriter;
+		this.crcTeacher = crcTeacher;
 		this.groupNum = groupNum;
 		this.crcStartDate = crcStartDate;
 		this.crcEndDate = crcEndDate;
@@ -35,12 +35,12 @@ public class CurriculumVo {
 		this.crcNum = crcNum;
 	}
 
-	public String getCrcWriter() {
-		return crcWriter;
+	public String getcrcTeacher() {
+		return crcTeacher;
 	}
 
-	public void setCrcWriter(String crcWriter) {
-		this.crcWriter = crcWriter;
+	public void setcrcTeacher(String crcTeacher) {
+		this.crcTeacher = crcTeacher;
 	}
 
 	public int getGroupNum() {
@@ -85,7 +85,7 @@ public class CurriculumVo {
 
 	@Override
 	public String toString() {
-		return "CurriculumVo [crcNum=" + crcNum + ", crcWriter=" + crcWriter + ", groupNum=" + groupNum
+		return "CurriculumVo [crcNum=" + crcNum + ", crcTeacher=" + crcTeacher + ", groupNum=" + groupNum
 				+ ", crcStartDate=" + crcStartDate + ", crcEndDate=" + crcEndDate + ", crcTitle=" + crcTitle
 				+ ", crcContent=" + crcContent + "]";
 	}

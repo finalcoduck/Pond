@@ -19,12 +19,12 @@ public class ScheduleUpdateController {
 		model.addAttribute("vo", scheduleVo);
 		model.addAttribute("start", start);
 		model.addAttribute("end", end);
-		return "scheduleUpdate";
+		return "/group/scheduleUpdate";
 	}
 	
 	@RequestMapping(value="/schedule/updatepage", method=RequestMethod.POST)
 	public String goUpdatePage(Model model, ScheduleVo vo) {
 		int n = scheduleService.updateSchedule(vo);
-		return "redirect:/schedule/info";
+		return "forward:/schedule/info";
 	}
 }
