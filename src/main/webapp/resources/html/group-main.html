@@ -249,6 +249,31 @@
     </div>
     <!-- The Modal -->
 
+    <!-- The Modal -->
+    <div class="modal" id="HWModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title text-white">과제</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer justify-content-between">
+                    <a href="" class="text-muted" data-dismiss="modal">과제 만들기</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+
     <!-- floating Button-->
     <div id="floatingBtnDiv"class="material-button-anim">
         <ul class="list-inline" id="options">
@@ -307,20 +332,27 @@
                 $("#noticeModal").modal('show')       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
+
+            $("#HWBtn").on("click", function () {
+                $("#HWModal").modal('show')       
+                $("#HWBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
             
-            $('#noticeModal').on('show.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('show.bs.modal', function (e) {
                 $("#floatingBtn").trigger("click");
             });
 
-            $('#noticeModal').on('shown.bs.modal', function (e) {
+
+            $('#noticeModal, #HWModal').on('shown.bs.modal', function (e) {
                 if($("body").css("padding-right")!=="0px"){
                     $("#floatingBtnDiv").addClass("add-right");
                 }
                 
             });
-            $('#noticeModal').on('hidden.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
             });
+
 
             var quill = new Quill('#editor-container', {
 
