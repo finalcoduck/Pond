@@ -13,4 +13,7 @@ public interface BoardService {
 	
 	public HashMap<String,Object> insertNoticeBoard(GroupNoticeVo groupNoticeVo);
 	
+	public HashMap<String,Object> deleteNoticeBoard(int boardNum);
+	
+	public HashMap<String,Object> deleteHWBoard(int boardNum);
 }

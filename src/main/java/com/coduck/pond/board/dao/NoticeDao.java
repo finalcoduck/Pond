@@ -25,8 +25,8 @@ public class NoticeDao {
 		session.insert(NAMESPACE+"insertNotice",groupNoticeVo);
 	}
 	
-	public void deleteNotice(int ntcNum) {
-		session.delete(NAMESPACE+"deleteNotice",ntcNum);
+	public void deleteNotice(int boardNum) {
+		session.delete(NAMESPACE+"deleteNotice",boardNum);
 	}
 	
 }

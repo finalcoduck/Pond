@@ -24,8 +24,8 @@ public class HwBoardDao {
 		session.insert(NAMESPACE+"insertHwBoard",hwBoardVo);
 	}
 	
-	public void deleteHwBoard(int ntcNum) {
-		session.delete(NAMESPACE+"deleteHwBoard",ntcNum);
+	public void deleteHwBoard(int boardNum) {
+		session.delete(NAMESPACE+"deleteHwBoard",boardNum);
 	}
 	
 }
