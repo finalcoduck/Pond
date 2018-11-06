@@ -15,8 +15,7 @@
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
 				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50"
-						alt="Card image">
+					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
 					<div class="card-body">
 						<h4 class="card-title">중앙HTA 1803기</h4>
 						<p class="card-text">멤버 28</p>
@@ -25,10 +24,9 @@
 				</div>
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href=""><i
-								class="far fa-folder-open"></i> 수업 자료실</a></li>
-						<li class="list-group-item"><a href=""><i
-								class="far fa-calendar-alt"></i> 일정</a> <!--선생님일 때 만 보여야함--></li>
+						<li class="list-group-item"><a href=""><i class="far fa-folder-open"></i> 수업 자료실</a></li>
+						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 일정</a></li>
+						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
@@ -40,9 +38,9 @@
 						</a>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href="">공지</a></li>
-						<c:forEach var="subject" items='${groupList}' varStatus="status">
-							<li class="list-group-item"><a href=""></a></li>
+						<li class="list-group-item"><a class="subject-title" href="">공지</a></li>
+						<c:forEach var="subject" items='${subjectList}' varStatus="status">
+							<li class="list-group-item"><a class="subject-title" href="">${subject.subjectTitle}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -52,9 +50,6 @@
 
 			<!--           center            -->
 			<div id="center" class="col-12 col-md-8">
-			<!-- BoradSrchDto -->
-			
-			<!-- BoradSrchDto -->
 				<!-- Post /////-->
 				<!-- Post /////-->
 			</div>
@@ -76,37 +71,40 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
+			
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form action="">
+			<form id="noticeForm" action="">
+				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
-						<input name="about" type="hidden">
+						<input name="boardContent" type="hidden">
 						<div id="notice-editor-container"></div>
 					</div>
-					<div class="form-group">
-						<div class="dropdown">
-							<button type="button"
-								class="btn btn-outline-secondary dropdown-toggle"
-								data-toggle="dropdown">주제</button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Link 1</a> <a
-									class="dropdown-item" href="#">Link 2</a> <a
-									class="dropdown-item" href="#">Link 3</a>
-							</div>
+					<div class="form-group col-5 col-md-4">
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="inputGroupSelect01">주제</label>
+						  </div>
+						  <select class="custom-select" name="subjectTitle" id="inputGroupSelect01">
+						    <option selected>공지</option>
+						    <c:forEach var="subject" items='${subjectList}' varStatus="status">
+							    <option value="${subject.subjectNum}">${subject.subjectTitle}</option>
+						    </c:forEach>
+						  </select>
 						</div>
 					</div>
-				</form>
+					</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
 				<div id="iconBox">
-					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href=""><i
-						class="fas fa-link"></i></a>
+					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href="">
+					<i class="fas fa-link"></i></a>
 				</div>
-				<a href="" class="text-muted" data-dismiss="modal">제출</a>
+				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
 			</div>
-
+			
 		</div>
 	</div>
 </div>
@@ -121,21 +119,21 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="">
-					<div class="form-group">
-						<input name="about" type="hidden">
-						<div id="subject-editor-container"></div>
-					</div>
-				</form>
-			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer justify-content-right">
-				<a href="" class="text-muted" data-dismiss="modal">취소</a>
-				<a href="" class="text-muted" data-dismiss="modal">추가</a>
-			</div>
+			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
+				<!-- Modal body -->
+				<div class="modal-body">
+						<div class="form-group">
+						<input name="groupNum" type="hidden" value="${groupNum}">
+							<input name="subjectTitle" type="text">
+						</div>
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-right">
+					<a href="" class="text-muted" data-dismiss="modal">취소</a>
+					<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+				</div>
+			</form>
 
 		</div>
 	</div>
@@ -277,11 +275,18 @@
         
         var boardSrchDto= {srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
+        var NoticeQuill = new Quill('#notice-editor-container', {
+            placeholder: '공지를 입력하세요',
+        });
         
         $(document).ready(function () {
             
         	// 첫페이지 조회
-	    	searchForm();
+	    	searchBoard();
+        	
+        	//공지 글 추가 버튼
+        	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	
         	
 	    	 //floating Button
 	        $("#floatingBtn").on("click", function () {
@@ -293,7 +298,6 @@
 	                    $("#HWBtn").popover('hide');
 	                    $("#noticeBtn").popover('hide');
 	                }
-	                
 	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
 	        });
         	
@@ -322,39 +326,20 @@
                 $("#floatingBtnDiv").removeClass("add-right")
             });
 
-            var NoticeQuill = new Quill('#notice-editor-container', {
-                placeholder: '공지를 입력하세요',
-            });
-            
-            var SubjectQuill = new Quill('#subject-editor-container', {
-                placeholder: '주제',
-            });
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
-
-            var form = document.querySelector('form');
-            form.onsubmit = function () {
-                // Populate hidden form on submit
-                var about = document.querySelector('input[name=about]');
-                about.value = JSON.stringify(quill.getContents());
-
-                console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-                // No back end to actually submit to!
-                alert('Open the console to see the submit data!')
-                return false;
-            };
             
             $(window).scroll(function(){
                 var scrolltop = $(window).scrollTop(); 
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
                 		boardSrchDto.nxtPageFl === "T"){
-                	searchForm();
+                	searchBoard();
                 }
             });
-
+            
         });
-        function searchForm(){
+        //게시물을 받아옴 
+        function searchBoard(){
 			
         	var dataStr = JSON.stringify(boardSrchDto)
         	
@@ -375,16 +360,33 @@
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
 					boardSrchDto.nxt1KeyVal += 1;
 					data.boardList.forEach(function(item){
-						if(item.boardType === 'N'){
+						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
-						}else if(item.boardType === 'H'){
+						}else if(item.boardType === HW_BOARD){
 							$("#center").append(makeHWCard(item));	
 						}
 					})
 				}
 		   	});
 		}
-        
+        function insertNoticeBoard(){
+        	
+        	// Populate hidden form on submit
+            var about = document.querySelector('input[name=boardContent]');
+            about.value = JSON.stringify(NoticeQuill.getContents());
+        	var dataStr = JSON.stringify($('#noticeForm').serializeObject());
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/board/insert/notice/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				
+			});
+        }
 		function makeNoticeCard(data){
 			var source = $("#notice-card").html();
 	    	var template = Handlebars.compile(source);
@@ -397,5 +399,6 @@
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
-		}	    
+		}
+		
     </script>
