@@ -15,6 +15,8 @@ import com.coduck.pond.board.service.BoardService;
 import com.coduck.pond.board.vo.BoardSrchDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
+import com.coduck.pond.core.constant.CommonConstant;
+import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -37,7 +39,7 @@ public class BoardController {
 		return map;
 	}
 	
-	//그룹 게시글 추가
+	//그룹 공지 게시글 추가
 	@RequestMapping(value = "/board/insert/notice/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String,Object> insertNoticeBoard (@RequestBody GroupNoticeVo groupNoticeVo,MemDto memDto) {
 		
@@ -51,4 +53,23 @@ public class BoardController {
 		
 		return resultMap;
 	}
+	
+		//그룹 게시물 삭제
+		@RequestMapping(value = "/board/delete/proc", method = RequestMethod.POST)
+		public @ResponseBody HashMap<String,Object> deleteBoard (@RequestBody GroupNoticeVo groupNoticeVo,MemDto memDto) {
+			
+			HashMap<String,Object> resultMap = new HashMap<String, Object>();
+			
+			//글삭제 권환 확인
+			
+			//보드 타입 확인
+			if(groupNoticeVo.getBoardType()==CommonConstant.NOTICE) {
+				return boardService.deleteNoticeBoard(groupNoticeVo.getBoardNum());
+			}else if(groupNoticeVo.getBoardType()==CommonConstant.HOMEWORK) {
+				return boardService.deleteHWBoard(groupNoticeVo.getBoardNum());
+			}
+			resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.FAILURE);
+			
+			return resultMap;
+		}
 }
