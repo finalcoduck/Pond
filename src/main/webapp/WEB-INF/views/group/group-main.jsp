@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
 
 <!-- content -->
@@ -141,32 +139,33 @@
 	</div>
 </div>
 
-<div class="modal" id="delNoticeModal">
-	<div class="modal-dialog modal-sm modal-dialog-centered">
+<div class="modal" id="delBoardModal">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content border-0">
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">공지를 삭제 하시겠습니까?</h4>
+				<h5 class="modal-title">게시물을 삭제 하시겠습니까?</h5>
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
 				<!-- Modal body -->
 				<div class="modal-body">
-						<div class="form-group">
-						<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
-							<input name="subjectTitle" type="text">
-						</div>
+					<div class="form-group">
+						<p>댓글도 삭제됩니다.</p> 
+						<form id="delModalProp">
+							<input name="boardNum" type="hidden">
+							<input name="boardType" type="hidden">
+							<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+						</form>
+					</div>
 				</div>
 	
 				<!-- Modal footer -->
 				<div class="modal-footer justify-content-right">
 					<a href="" class="text-muted" data-dismiss="modal">취소</a>
-					<button type="submit" class="text-muted btn btn-out-secondary" >삭제</button>
+					<button id="delBoardBtn" type="button" class="text-muted btn btn-out-secondary" >삭제</button>
 				</div>
-			</form>
-
 		</div>
 	</div>
 </div>
@@ -205,21 +204,23 @@
 						src="https://picsum.photos/50/50" alt="">
 				</div>
 				<div class="ml-2">
+					<form id="boardProp">
+						<input name="boardNum" type="hidden" value="{{boardNum}}">
+						<input name="boardType" type="hidden" value="{{boardType}}">
+					</form>
 					<div class="h5 m-0">{{boardWriter}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
 			</div>
 			<div>
 				<div class="dropdown">
-					<button class="btn btn-link" type="button" id="gedf-drop1"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fas fa-ellipsis-v"></i>
-					</button>
+						<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="gedf-drop1">
-						 <a	class="dropdown-item" href="#">수정</a> 
-						 <a class="dropdown-item" href="#">삭제</a>
-						 <a class="dropdown-item" href="#">링크복사</a>
+						 <a	class="dropdown-item cursor-pointer">수정</a> 
+						 <a class="dropdown-item cursor-pointer" onclick="showDelBoardModal();">삭제</a>
+						 <a class="dropdown-item cursor-pointer">링크복사</a>
 					</div>
 				</div>
 			</div>
@@ -352,7 +353,6 @@
                 if($("body").css("padding-right")!=="0px"){
                     $("#floatingBtnDiv").addClass("add-right");
                 }
-                
             });
             $('#noticeModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
@@ -373,6 +373,8 @@
             //주제 클릭 이벤트
             $("#subjectList").on("click","li",searchSubject);
             
+            //게시물 삭제 이벤트
+            $("#delBoardBtn").on("click",sendDelBoard);
         });
         //게시물을 받아옴 
         function searchBoard(){
@@ -429,6 +431,51 @@
         	//화면 상단으로 이동
         	$('html, body').animate({scrollTop: 0 }, 'slow');
         }
+        function showDelBoardModal(e){
+        	//해당 게시물의 번호와 타입을 얻어옴
+        	
+        	console.log("!");
+        	
+        	var boardProp = $("#boardProp").serializeObject();
+        	
+        	
+        	//모달에 해당 게시물의 번호와 타입을 저장 해둠
+        	$("#delModalProp input[name=boardNum]").val(boardProp.boardNum);
+        	$("#delModalProp input[name=boardType]").val(boardProp.boardType);
+        	$("#delBoardModal").modal('show');
+        }
+        
+        function sendDelBoard(){
+        	//모달에 저장된 삭제할 게시물 정보 불러옴
+        	var delBoardProp = $("#delModalProp").serializeObject();
+        	var dataStr = JSON.stringify(delBoardProp);
+        	
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/board/delete/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				if(data.errC === "0000"){
+					
+					$("#delBoardModal").modal('hide');
+					
+					//키값 초기화후 다시 글 목록 불러오기
+					boardSrchDto.nxt1KeyVal = 1;
+		        	
+		        	//게시물 조회 실행
+		        	searchBoard();
+		        	
+		        	//화면 상단으로 이동
+		        	$('html, body').animate({scrollTop: 0 }, 'slow');
+				}
+			});
+        }
+        
+        
         function insertNoticeBoard(){
         	
         	// Populate hidden form on submit
