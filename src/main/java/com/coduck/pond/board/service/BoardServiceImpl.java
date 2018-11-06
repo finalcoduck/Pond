@@ -37,6 +37,8 @@ public class BoardServiceImpl implements BoardService{
 		
 		boardList.addAll(noticeList);
 		
+		
+		
 		// 게시물 번호 순으로 정렬
 		Collections.sort(boardList,new Comparator<HwBoardVo>(){
 			@Override
@@ -73,5 +75,25 @@ public class BoardServiceImpl implements BoardService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
+
+	@Override
+	public HashMap<String, Object> deleteNoticeBoard(int boardNum) {
+		
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
+		noticeDao.deleteNotice(boardNum);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		
+		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> deleteHWBoard(int boardNum) {
+		HashMap<String,Object> resultMap = new HashMap<String,Object>();
+		hwBoardDao.deleteHwBoard(boardNum);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		return resultMap;
+	}
+	
+	
 
 }
