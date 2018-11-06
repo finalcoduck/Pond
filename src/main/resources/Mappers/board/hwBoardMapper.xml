@@ -12,17 +12,22 @@
 	SELECT
 		*
 	FROM
-		HW_BOARD		
+		HW_BOARD
+	WHERE
+		GROUP_NUM = #{groupNum}		
+		<if test="srchWord != null">
+			AND SUBJECT_TITLE = #{srchWord}
+		</if>
 	</select>
 	
-	<!-- 공지 생성 -->
+	<!-- 과제 생성 -->
 	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.HwBoardVo">
 		
 	</insert>
 	
 	
 	
-	<!-- 공지 삭제 -->
+	<!-- 과제 삭제 -->
 	<delete id="deleteNotice" parameterType="int">
 		
 	</delete>
