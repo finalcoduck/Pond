@@ -7,6 +7,11 @@ package com.coduck.pond.core.constant;
  */
 
 public class ErrorCodeConstant {
+	
+	
+	/** 정상적으로 처리된 경우 */
+	public static final String ERR_C_KEY = "errC";
+	
 	/** 정상적으로 처리된 경우 */
 	public static final String SUCCESS = "0000";
 	
