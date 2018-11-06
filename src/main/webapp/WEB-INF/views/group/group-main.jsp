@@ -69,8 +69,6 @@
 				<h4 class="modal-title text-white">공지</h4>
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
-
-			
 			<!-- Modal body -->
 			<div class="modal-body">
 			<form id="noticeForm" action="">
@@ -104,7 +102,6 @@
 				</div>
 				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
 			</div>
-			
 		</div>
 	</div>
 </div>
@@ -204,10 +201,7 @@
 						src="https://picsum.photos/50/50" alt="">
 				</div>
 				<div class="ml-2">
-					<form id="boardProp">
-						<input name="boardNum" type="hidden" value="{{boardNum}}">
-						<input name="boardType" type="hidden" value="{{boardType}}">
-					</form>
+					
 					<div class="h5 m-0">{{boardWriter}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
@@ -218,9 +212,12 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="gedf-drop1">
-						 <a	class="dropdown-item cursor-pointer">수정</a> 
-						 <a class="dropdown-item cursor-pointer" onclick="showDelBoardModal();">삭제</a>
-						 <a class="dropdown-item cursor-pointer">링크복사</a>
+						<a class="dropdown-item cursor-pointer">수정</a>
+						<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
+						<form id="boardProp{{boardNum}}">
+							<input name="boardNum" type="hidden" value="{{boardNum}}">
+							<input name="boardType" type="hidden" value="{{boardType}}">
+						</form>
 					</div>
 				</div>
 			</div>
@@ -260,8 +257,11 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                         <a class="dropdown-item" href="#">맨 위로 이동</a>
                         <a class="dropdown-item" href="#">수정</a>
-                        <a class="dropdown-item" href="#">삭제</a>
-                        <a class="dropdown-item" href="#">링크복사</a>
+                        <a class="dropdown-item delModalBtn pointer">삭제</a>
+						<form id="boardProp{{boardNum}}">
+							<input name="boardNum" type="hidden" value="{{boardNum}}">
+							<input name="boardType" type="hidden" value="{{boardType}}">
+						</form>
                     </div>
                 </div>
             </div>
@@ -414,8 +414,8 @@
 							$("#center").append(makeHWCard(item));	
 						}
 					})
-					//페이지 상단으로 이동
-		        	  
+					
+		        	$(".delModalBtn").on("click",showDelBoardModal)  
 				}
 		   	});
 		}
@@ -433,11 +433,10 @@
         }
         function showDelBoardModal(e){
         	//해당 게시물의 번호와 타입을 얻어옴
+        	var evt = e || window.event;
         	
-        	console.log("!");
-        	
-        	var boardProp = $("#boardProp").serializeObject();
-        	
+        	var evtTargetId = e.target.nextSibling.nextSibling.id;
+        	var boardProp = $("#"+evtTargetId).serializeObject();
         	
         	//모달에 해당 게시물의 번호와 타입을 저장 해둠
         	$("#delModalProp input[name=boardNum]").val(boardProp.boardNum);
@@ -496,7 +495,8 @@
 				if(data.errC ==="0000"){
 					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
 					$("#noticeModal").modal('hide');
-					searchBoard();
+					//searchBoard();
+					window.location.reload()
 				}
 			});
         }
