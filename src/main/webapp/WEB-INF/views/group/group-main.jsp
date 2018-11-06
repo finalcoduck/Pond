@@ -24,10 +24,9 @@
 				</div>
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href=""><i
-								class="far fa-folder-open"></i> 수업 자료실</a></li>
-						<li class="list-group-item"><a href=""><i
-								class="far fa-calendar-alt"></i> 일정</a> <!--선생님일 때 만 보여야함--></li>
+						<li class="list-group-item"><a href=""><i class="far fa-folder-open"></i> 수업 자료실</a></li>
+						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 일정</a></li>
+						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
