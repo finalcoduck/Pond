@@ -10,50 +10,49 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="card-body homework">
-		<h5 class="card-title">내 과제</h5>
-		<div class="homework_con">
-			<span class="status before">할당됨</span>
-			<input name="about" type="hidden">
-			<div id="editor-container">
-			</div>
-			<div class="file_wrap">
-				<div class="file_list">
-					<div class="wrapper">
-						<div class="thumbnail">
-							<img src="../build/image/img1.jpg" alt="">
+	<section id="view_student" class="mt30">
+		<div class="card">
+			<div class="card-body homework">
+				<div class="homework_con">
+					<div class="file_wrap">
+						<div class="file_list">
+							<div class="wrapper">
+								<div class="thumbnail">
+									<img src="../build/image/img1.jpg" alt="">
+								</div>
+							</div>
+							<div class="file_name">
+								<p>img3.jpg</p>
+								<span>이미지</span>
+							</div>
+							<button type="button">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+						<div class="file_list">
+							<div class="wrapper">
+								<div class="thumbnail">
+									
+								</div>
+							</div>
+							<div class="file_name">
+								<p>text.txt</p>
+								<span>텍스트</span>
+							</div>
+							<button type="button">
+								<i class="fas fa-times"></i>
+							</button>
 						</div>
 					</div>
-					<div class="file_name">
-						<p>img3.jpg</p>
-						<span>이미지</span>
+					<div class="btn_wrap">
+						<input type="submit" value="제출" class="btn btn-info">
+						<input type="file" id="homework_file">
+						<label for="homework_file" class="btn btn-danger">파일첨부</label>
 					</div>
-					<button type="button">
-						<i class="fas fa-times"></i>
-					</button>
 				</div>
-				<div class="file_list">
-					<div class="wrapper">
-						<div class="thumbnail">
-							
-						</div>
-					</div>
-					<div class="file_name">
-						<p>text.txt</p>
-						<span>텍스트</span>
-					</div>
-					<button type="button">
-						<i class="fas fa-times"></i>
-					</button>
-				</div>
-			</div>
-			<div class="btn_wrap">
-				<input type="submit" value="제출" class="btn btn-info">
-				<input type="file" id="homework_file">
-				<label for="homework_file" class="btn btn-danger">파일첨부</label>
 			</div>
 		</div>
-	</div>
+	</section>
 </body>
 
 	<script src="../vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
