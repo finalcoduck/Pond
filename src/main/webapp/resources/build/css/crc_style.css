@@ -1,0 +1,212 @@
+h1, body, h2, ul, dl, dd{
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	list-style-type: none;	
+}
+
+body{
+	/* background-color: #0a222b; */
+	text-align: center;
+}
+
+.wrapper{
+	padding: 0 20px;
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.cover {
+	/* background-image: url(../build/image/images/cover.png); */
+	color: aliceblue;
+	padding-top: 20%;
+	padding-bottom: 10%;
+	text-align: center;
+	background-size: cover;
+	background-position: bottom;
+	transition: padding .5s;
+}
+
+.cover-title {
+	font-size: 20vw;
+	font-family: 'Yellowtail', cursive;
+	font-weight: normal;
+	line-height: 1;
+	font-style: italic;
+	transition: font-size .5s;
+	color: black;
+}
+
+.cover-title span {
+	font-style: normal;
+	font-family: monospace; font-size : 0.3em;
+	display: block;
+	font-size: 0.3em;
+	text-indent: 3em;
+}
+
+.card{
+	background-color: rgba(0,0,0,0.9);
+	color: #999;
+	padding: 0 20px 15% 20px;
+	border-radius: 30px;
+}
+
+.card-icon{
+	width: 70px;
+	height: auto;
+	vertical-align: top;
+	margin: -35px 30px 30px;
+}
+
+.card-title{
+	font-size:5vw;
+	color: dodgerblue;
+	font-family: 'impact';
+	line-height: 1;
+	margin: 20px;
+}
+
+.timeline-item{
+	margin-top: 70px;
+}
+
+.card-definition{
+	margin: 20px;
+}
+
+.card-definition dt{
+	font-size: 25px;
+	color: #ddd;
+	margin-bottom: 20px;
+}
+
+.card-definition dt span{
+	color: dodgerblue;
+	display: block;
+	font-size: 0.5em;
+}
+
+.card-definition dd{
+		
+}
+
+.timeline{
+	position: relative;
+	padding-bottom: 100px;
+}
+
+.timeline:after{
+	content: ' ';
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	left: 50%;
+	margin-top: 5px;
+	top: 2vw;
+	bottom: 0;	
+	width: 6px;
+	border-radius: 5px;
+	margin-left: -3px;
+	z-index: -1;
+}
+
+.card-title:after{
+	content: ' ';
+	position: absolute;
+	right: -60px;
+	top: 50%;
+	background-color: white;
+	border:  6px solid dodgerblue;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	transform: translate(50%,-50%);
+	background-color: #0a222b;
+	z-index: 10;
+}
+
+@media ( min-width: 720px ){
+	.timeline-item{
+		width: 50%;
+		padding: 10px 20px;
+		box-sizing: border-box;
+		text-align: right;
+	}
+	
+	.card-title{
+		font-size: 2vw;
+		display: inline-block;
+		position: relative;
+	}
+	
+	.cover{
+		padding-top: 10%;
+		padding-bottom: 5%;
+	}
+	
+	.cover-title{
+		font-size: 15vw;
+	}
+	
+	.timeline-item:nth-child(even){
+		margin-left: auto;
+		margin-top: -150px;
+		margin-bottom: -200px;
+		text-align: left;
+	}
+	
+	.card{
+		position: relative;
+	}
+	
+	.card-icon{
+		position: absolute;
+		left:0;
+		top:0;
+	}
+	
+	.timeline-item:nth-child(even) .card-icon{
+		left: auto;
+		right: 0;
+	}
+	
+	.timeline-item:nth-child(even) .card-title:after{
+		left: -60px;
+		transform: translate(-50%, -50%);
+	}
+	
+	.timeline:after{
+		background-color: dodgerblue;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

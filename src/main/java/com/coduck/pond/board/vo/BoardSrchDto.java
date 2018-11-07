@@ -2,6 +2,9 @@ package com.coduck.pond.board.vo;
 
 public class BoardSrchDto {
 	
+	/** 그룹번호 **/
+	private int groupNum;
+	
 	/** 검색어 */
 	private String srchWord;
 	
@@ -13,6 +16,16 @@ public class BoardSrchDto {
 	
 	/** 다음페이지존재여부 */
 	private String nxtPageFl;
+
+	
+	
+	public int getGroupNum() {
+		return groupNum;
+	}
+
+	public void setGroupNum(int groupNum) {
+		this.groupNum = groupNum;
+	}
 
 	public String getSrchWord() {
 		return srchWord;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Mappers.CurriculumMapper">
+  <!-- select -->
+  	<select id="getAllCurriculum" parameterType="int" resultType="com.coduck.pond.curriculum.vo.CurriculumVo">
+  		select * from curriculum where group_num = #{value} order by crc_Start_Date asc
+  	</select>
+  	<select id="getOneCurriculum" parameterType="int" resultType="com.coduck.pond.curriculum.vo.CurriculumVo">
+  		select * from curriculum where crc_num = #{crcNum}
+  	</select>
+  	
+  <!-- update -->
+  	<update id="updateCurriculum" parameterType="com.coduck.pond.curriculum.vo.CurriculumVo">
+		update curriculum set crc_teacher = #{crcTeacher}, crc_start_date = #{crcStartDate}, crc_end_date = #{crcEndDate},
+		crc_title = #{crcTitle}, crc_content = #{crcContent} where crc_num = #{crcNum}  	
+  	</update>
+  	
+  <!-- delete -->
+  	<delete id="deleteCurriculum" parameterType="int">
+  		delete from curriculum where crc_num = #{value}
+  	</delete>		
+  	
+  <!-- insert -->	
+  	<insert id="insertCurriculum" parameterType="com.coduck.pond.curriculum.vo.CurriculumVo">
+  		insert into curriculum values(crc_num_seq.nextval, #{crcTeacher}, #{groupNum}, #{crcStartDate}, #{crcEndDate},
+  		#{crcTitle}, #{crcContent})
+  	</insert>
+  </mapper>

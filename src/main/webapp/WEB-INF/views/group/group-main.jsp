@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
 
 <!-- content -->
@@ -15,8 +13,7 @@
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
 				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50"
-						alt="Card image">
+					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
 					<div class="card-body">
 						<h4 class="card-title">중앙HTA 1803기</h4>
 						<p class="card-text">멤버 28</p>
@@ -25,24 +22,49 @@
 				</div>
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href=""><i
-								class="far fa-folder-open"></i> 수업 자료실</a></li>
-						<li class="list-group-item"><a href=""><i
-								class="far fa-calendar-alt"></i> 일정</a> <!--선생님일 때 만 보여야함--></li>
+						<li class="list-group-item"><a href=""><i class="far fa-folder-open"></i> 수업 자료실</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
-					<div
-						class="card-header d-flex justify-content-between align-items-center">
+					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-						<a href="" data-toggle="modal" data-target="#subjectModal"> 
-							<i class="fas fa-plus"></i>
+						<a data-toggle="modal" data-target="#subjectModal"> 
+							<i class="fas fa-plus cursor-pointer"></i>
 						</a>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href="">공지</a></li>
-						<c:forEach var="subject" items='${groupList}' varStatus="status">
-							<li class="list-group-item"><a href=""></a></li>
+					<ul id="subjectList" class="list-group list-group-flush">
+						<li class="d-flex list-group-item justify-content-between align-items-center">
+							<a class="cursor-pointer">공지</a>
+							
+							<div class="d-none">
+								<div class="dropdown">
+										<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+									<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="gedf-drop1">
+										<a class="dropdown-item cursor-pointer">수정</a>
+										<a class="dropdown-item cursor-pointer">삭제</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<c:forEach var="subject" items='${subjectList}' varStatus="status">
+							<li class="d-flex list-group-item justify-content-between align-items-center">
+								<a class="cursor-pointer">${subject.subjectTitle}</a>
+								<div class="d-none">
+									<div class="dropdown">
+											<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+										<div class="dropdown-menu dropdown-menu-right"
+											aria-labelledby="gedf-drop1">
+											<a class="dropdown-item cursor-pointer">수정</a>
+											<a class="dropdown-item cursor-pointer">삭제</a>
+										</div>
+									</div>
+								</div>
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -52,9 +74,6 @@
 
 			<!--           center            -->
 			<div id="center" class="col-12 col-md-8">
-			<!-- BoradSrchDto -->
-			
-			<!-- BoradSrchDto -->
 				<!-- Post /////-->
 				<!-- Post /////-->
 			</div>
@@ -75,38 +94,39 @@
 				<h4 class="modal-title text-white">공지</h4>
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
-
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form action="">
+			<form id="noticeForm" action="">
+				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
-						<input name="about" type="hidden">
+						<input name="boardContent" type="hidden">
 						<div id="notice-editor-container"></div>
 					</div>
-					<div class="form-group">
-						<div class="dropdown">
-							<button type="button"
-								class="btn btn-outline-secondary dropdown-toggle"
-								data-toggle="dropdown">주제</button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Link 1</a> <a
-									class="dropdown-item" href="#">Link 2</a> <a
-									class="dropdown-item" href="#">Link 3</a>
-							</div>
+					<div class="form-group col-5 col-md-4">
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <label class="input-group-text" for="inputGroupSelect01">주제</label>
+						  </div>
+						  <select class="custom-select" name="subjectTitle" id="inputGroupSelect01">
+						    <option selected>공지</option>
+						    <c:forEach var="subject" items='${subjectList}' varStatus="status">
+							    <option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
+						    </c:forEach>
+						  </select>
 						</div>
 					</div>
-				</form>
+					</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
 				<div id="iconBox">
-					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href=""><i
-						class="fas fa-link"></i></a>
+					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href="">
+					<i class="fas fa-link"></i></a>
 				</div>
-				<a href="" class="text-muted" data-dismiss="modal">제출</a>
+				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -121,22 +141,53 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="">
+			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
+				<!-- Modal body -->
+				<div class="modal-body">
+						<div class="form-group">
+						<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+							<input name="subjectTitle" type="text">
+						</div>
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-right">
+					<a href="" class="text-muted" data-dismiss="modal">취소</a>
+					<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="delBoardModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content border-0">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h5 class="modal-title">게시물을 삭제 하시겠습니까?</h5>
+				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+			</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
 					<div class="form-group">
-						<input name="about" type="hidden">
-						<div id="subject-editor-container"></div>
+						<p>댓글도 삭제됩니다.</p> 
+						<form id="delModalProp">
+							<input name="boardNum" type="hidden">
+							<input name="boardType" type="hidden">
+							<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+						</form>
 					</div>
-				</form>
-			</div>
-
-			<!-- Modal footer -->
-			<div class="modal-footer justify-content-right">
-				<a href="" class="text-muted" data-dismiss="modal">취소</a>
-				<a href="" class="text-muted" data-dismiss="modal">추가</a>
-			</div>
-
+				</div>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-right">
+					<a href="" class="text-muted" data-dismiss="modal">취소</a>
+					<button id="delBoardBtn" type="button" class="text-muted btn btn-out-secondary" >삭제</button>
+				</div>
 		</div>
 	</div>
 </div>
@@ -181,22 +232,24 @@
 			</div>
 			<div>
 				<div class="dropdown">
-					<button class="btn btn-link" type="button" id="gedf-drop1"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fas fa-ellipsis-v"></i>
-					</button>
+						<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="gedf-drop1">
-						<a class="dropdown-item" href="#">맨 위로 이동</a> <a
-							class="dropdown-item" href="#">수정</a> <a class="dropdown-item"
-							href="#">삭제</a> <a class="dropdown-item" href="#">링크복사</a>
+						<a class="dropdown-item cursor-pointer">수정</a>
+						<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
+						<form id="boardProp{{boardNum}}">
+							<input name="boardNum" type="hidden" value="{{boardNum}}">
+							<input name="boardType" type="hidden" value="{{boardType}}">
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="card-body">
-		<p class="card-text">{{boardContent}}</p>
+		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
+		<p class="card-text">{{{boardContent}}}</p>
 	</div>
 	<div class="card-footer align_r">
 		<a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
@@ -228,8 +281,11 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                         <a class="dropdown-item" href="#">맨 위로 이동</a>
                         <a class="dropdown-item" href="#">수정</a>
-                        <a class="dropdown-item" href="#">삭제</a>
-                        <a class="dropdown-item" href="#">링크복사</a>
+                        <a class="dropdown-item delModalBtn pointer">삭제</a>
+						<form id="boardProp{{boardNum}}">
+							<input name="boardNum" type="hidden" value="{{boardNum}}">
+							<input name="boardType" type="hidden" value="{{boardType}}">
+						</form>
                     </div>
                 </div>
             </div>
@@ -269,19 +325,25 @@
 <script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
 
 
-<script>
-	    
+<script>    
         const SLIDE_EXCUTION_TIME = 178;
         const NOTICE = 'N'
         const HW_BOARD = 'H'
         
-        var boardSrchDto= {srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
+        var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
+        var NoticeQuill = new Quill('#notice-editor-container', {
+            placeholder: '공지를 입력하세요',
+        });
         
         $(document).ready(function () {
             
         	// 첫페이지 조회
-	    	searchForm();
+	    	searchBoard();
+        	
+        	//공지 글 추가 버튼
+        	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	
         	
 	    	 //floating Button
 	        $("#floatingBtn").on("click", function () {
@@ -293,7 +355,6 @@
 	                    $("#HWBtn").popover('hide');
 	                    $("#noticeBtn").popover('hide');
 	                }
-	                
 	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
 	        });
         	
@@ -304,7 +365,7 @@
 
             
             $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show')       
+                $("#noticeModal").modal('show');       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
             
@@ -316,45 +377,42 @@
                 if($("body").css("padding-right")!=="0px"){
                     $("#floatingBtnDiv").addClass("add-right");
                 }
-                
             });
             $('#noticeModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
             });
 
-            var NoticeQuill = new Quill('#notice-editor-container', {
-                placeholder: '공지를 입력하세요',
-            });
-            
-            var SubjectQuill = new Quill('#subject-editor-container', {
-                placeholder: '주제',
-            });
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
-
-            var form = document.querySelector('form');
-            form.onsubmit = function () {
-                // Populate hidden form on submit
-                var about = document.querySelector('input[name=about]');
-                about.value = JSON.stringify(quill.getContents());
-
-                console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-                // No back end to actually submit to!
-                alert('Open the console to see the submit data!')
-                return false;
-            };
             
+            //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
             $(window).scroll(function(){
                 var scrolltop = $(window).scrollTop(); 
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
                 		boardSrchDto.nxtPageFl === "T"){
-                	searchForm();
+                	searchBoard();
                 }
             });
-
+            
+            //주제 클릭 이벤트
+            $("#subjectList").on("click","li > a",searchSubject);
+            
+            
+            $("#subjectList").on("mouseenter","li",(evt) =>{
+            	var iconBar = evt.target.querySelector("div");
+            	iconBar.className = "";            	
+            });
+            
+            $("#subjectList").on("mouseleave","li",(evt) =>{
+            	var iconBar = evt.target.querySelector("div");
+            	iconBar.className = "d-none";
+            });
+            
+            //게시물 삭제 이벤트
+            $("#delBoardBtn").on("click",sendDelBoard);
         });
-        function searchForm(){
+        //게시물을 받아옴 
+        function searchBoard(){
 			
         	var dataStr = JSON.stringify(boardSrchDto)
         	
@@ -372,30 +430,131 @@
 					console.log("게시물이 없습니다.")
 				}else{
 					console.log(data.boardSrchDto);
+					//마지막 페이지 여부 받아오기 
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
+					
+					//키값이 1인 경우 div#center 초기화
+					if(boardSrchDto.nxt1KeyVal === 1){
+						$("#center").html("");	
+					}
+
 					boardSrchDto.nxt1KeyVal += 1;
+					
+					// 카드 추가
 					data.boardList.forEach(function(item){
-						if(item.boardType === 'N'){
+						item.boardContent = quillGetHTML(item.boardContent);
+						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
-						}else if(item.boardType === 'H'){
+						}else if(item.boardType === HW_BOARD){
 							$("#center").append(makeHWCard(item));	
 						}
 					})
+					
+		        	$(".delModalBtn").on("click",showDelBoardModal)  
 				}
 		   	});
 		}
+        function searchSubject(){
+        	console.log("search!");
+        	//검색 주제 추가후
+        	boardSrchDto.srchWord = this.innerHTML;
+        	boardSrchDto.nxt1KeyVal = 1;
+        	
+        	//게시물 조회 실행
+        	searchBoard();
+        	
+        	//화면 상단으로 이동
+        	$('html, body').animate({scrollTop: 0 }, 'slow');
+        }
+        function showDelBoardModal(e){
+        	//해당 게시물의 번호와 타입을 얻어옴
+        	var evt = e || window.event;
+        	
+        	var evtTargetId = e.target.nextSibling.nextSibling.id;
+        	var boardProp = $("#"+evtTargetId).serializeObject();
+        	
+        	//모달에 해당 게시물의 번호와 타입을 저장 해둠
+        	$("#delModalProp input[name=boardNum]").val(boardProp.boardNum);
+        	$("#delModalProp input[name=boardType]").val(boardProp.boardType);
+        	$("#delBoardModal").modal('show');
+        }
         
+        function sendDelBoard(){
+        	//모달에 저장된 삭제할 게시물 정보 불러옴
+        	var delBoardProp = $("#delModalProp").serializeObject();
+        	var dataStr = JSON.stringify(delBoardProp);
+        	
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/board/delete/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				if(data.errC === "0000"){
+					
+					$("#delBoardModal").modal('hide');
+					
+					//키값 초기화후 다시 글 목록 불러오기
+					boardSrchDto.nxt1KeyVal = 1;
+		        	
+		        	//게시물 조회 실행
+		        	searchBoard();
+		        	
+		        	//화면 상단으로 이동
+		        	$('html, body').animate({scrollTop: 0 }, 'slow');
+				}
+			});
+        }
+        
+        
+        function insertNoticeBoard(){
+        	
+        	
+            var about = document.querySelector('input[name=boardContent]');
+            about.value = JSON.stringify(NoticeQuill.getContents());
+            var noticeData = $('#noticeForm').serializeObject()
+        	var dataStr = JSON.stringify(noticeData);
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/board/insert/notice/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				console.log(data.errC);
+				if(data.errC ==="0000"){
+					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
+					$("#noticeModal").modal('hide');
+					//searchBoard();
+					//새로고침
+					window.location.reload()
+				}
+			});
+        }
+        //공지 카드 만들기
 		function makeNoticeCard(data){
 			var source = $("#notice-card").html();
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
 		}
-		
+		//과제 카드 만들기
 		function makeHWCard(data){
 			var source = $("#hw-card").html();
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;
-		}	    
+		}
+		//deltaObject를 HTML코드로 변경
+		function quillGetHTML(inputDelta) {
+			var delta = JSON.parse(inputDelta);
+		    var tempCont = document.createElement("div");
+		    (new Quill(tempCont)).setContents(delta.ops);
+		    return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+		}
     </script>

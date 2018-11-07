@@ -9,6 +9,18 @@ package com.coduck.pond.core.constant;
 
 public class CommonConstant {
 	
+	/** Group Status**/
+	public static final char MANAGER = 'M';
+	public static final char STUDENT = 'S';
+	
+	/** Member Status**/
+	public static final char ACTIVATE_MEM = 'A';
+	public static final char DELETE_MEM = 'D';
+	
+	/** Board Type**/
+	public static final char NOTICE = 'N';
+	public static final char HOMEWORK = 'H';
+	
 	/** User Session Key **/
 	public static final String USER_SESSION_KEY = "memDto";
 	

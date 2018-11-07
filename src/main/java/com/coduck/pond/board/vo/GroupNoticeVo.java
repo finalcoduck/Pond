@@ -6,32 +6,32 @@ import java.util.Date;
 public class GroupNoticeVo {
 
  // 공지 글 번호 글번호
- private Integer ntcNum;
+ private Integer boardNum;
 
  // 그룹 번호 그룹번호
  private Integer groupNum;
 
  // 작성자 작성자
- private String ntcWriter;
+ private String boardWriter;
 
  // 글내용 글내용
- private String ntcContent;
+ private String boardContent;
 
  // 등록일 
- private Date ntcRegdate;
+ private Date boardRegdate;
 
  // 주제 
- private String subject;
+ private String subjectTitle;
 
  // BOARD TYPE 보드 타입
- private String boardType;
+ private char boardType;
 
- public Integer getNtcNum() {
-     return ntcNum;
+ public Integer getBoardNum() {
+     return boardNum;
  }
 
- public void setNtcNum(Integer ntcNum) {
-     this.ntcNum = ntcNum;
+ public void setBoardNum(Integer boardNum) {
+     this.boardNum = boardNum;
  }
 
  public Integer getGroupNum() {
@@ -42,63 +42,63 @@ public class GroupNoticeVo {
      this.groupNum = groupNum;
  }
 
- public String getNtcWriter() {
-     return ntcWriter;
+ public String getBoardWriter() {
+     return boardWriter;
  }
 
- public void setNtcWriter(String ntcWriter) {
-     this.ntcWriter = ntcWriter;
+ public void setBoardWriter(String boardWriter) {
+     this.boardWriter = boardWriter;
  }
 
- public String getNtcContent() {
-     return ntcContent;
+ public String getBoardContent() {
+     return boardContent;
  }
 
- public void setNtcContent(String ntcContent) {
-     this.ntcContent = ntcContent;
+ public void setBoardContent(String boardContent) {
+     this.boardContent = boardContent;
  }
 
- public Date getNtcRegdate() {
-     return ntcRegdate;
+ public Date getBoardRegdate() {
+     return boardRegdate;
  }
 
- public void setNtcRegdate(Date ntcRegdate) {
-     this.ntcRegdate = ntcRegdate;
+ public void setBoardRegdate(Date boardRegdate) {
+     this.boardRegdate = boardRegdate;
  }
 
- public String getSubject() {
-     return subject;
+ public String getSubjectTitle() {
+     return subjectTitle;
  }
 
- public void setSubject(String subject) {
-     this.subject = subject;
+ public void setSubjectTitle(String subjectTitle) {
+     this.subjectTitle = subjectTitle;
  }
 
- public String getBoardType() {
+ public char getBoardType() {
      return boardType;
  }
 
- public void setBoardType(String boardType) {
+ public void setBoardType(char boardType) {
      this.boardType = boardType;
  }
 
  // GroupNotice 모델 복사
  public void CopyData(GroupNoticeVo param)
  {
-     this.ntcNum = param.getNtcNum();
+     this.boardNum = param.getBoardNum();
      this.groupNum = param.getGroupNum();
-     this.ntcWriter = param.getNtcWriter();
-     this.ntcContent = param.getNtcContent();
-     this.ntcRegdate = param.getNtcRegdate();
-     this.subject = param.getSubject();
+     this.boardWriter = param.getBoardWriter();
+     this.boardContent = param.getBoardContent();
+     this.boardRegdate = param.getBoardRegdate();
+     this.subjectTitle = param.getSubjectTitle();
      this.boardType = param.getBoardType();
  }
 
 @Override
 public String toString() {
-	return "GroupNotice [ntcNum=" + ntcNum + ", groupNum=" + groupNum + ", ntcWriter=" + ntcWriter + ", ntcContent="
-			+ ntcContent + ", subject=" + subject + ", boardType=" + boardType + "]";
+	return "GroupNoticeVo [boardNum=" + boardNum + ", groupNum=" + groupNum + ", boardWriter=" + boardWriter
+			+ ", boardContent=" + boardContent + ", boardRegdate=" + boardRegdate + ", subjectTitle=" + subjectTitle
+			+ ", boardType=" + boardType + "]";
 }
- 
  
 }

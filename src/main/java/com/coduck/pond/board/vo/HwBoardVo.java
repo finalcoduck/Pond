@@ -33,7 +33,7 @@ public class HwBoardVo {
  private String subjectTitle;
 
  // BOARD TYPE 보드 타입
- private String boardType;
+ private char boardType;
 
  public Integer getBoardNum() {
      return boardNum;
@@ -107,11 +107,11 @@ public class HwBoardVo {
      this.subjectTitle = subjectTitle;
  }
 
- public String getBoardType() {
+ public char getBoardType() {
      return boardType;
  }
 
- public void setBoardType(String boardType) {
+ public void setBoardType(char boardType) {
      this.boardType = boardType;
  }
 
