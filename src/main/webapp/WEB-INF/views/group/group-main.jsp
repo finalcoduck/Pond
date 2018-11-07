@@ -23,22 +23,48 @@
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href=""><i class="far fa-folder-open"></i> 수업 자료실</a></li>
-						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 일정</a></li>
-						<li class="list-group-item"><a href=""><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
-					<div
-						class="card-header d-flex justify-content-between align-items-center">
+					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-						<a href="" data-toggle="modal" data-target="#subjectModal"> 
-							<i class="fas fa-plus"></i>
+						<a data-toggle="modal" data-target="#subjectModal"> 
+							<i class="fas fa-plus cursor-pointer"></i>
 						</a>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
-						<li class="list-group-item cursor-pointer">공지</li>
+						<li class="d-flex list-group-item justify-content-between align-items-center">
+							<a class="cursor-pointer">공지</a>
+							
+							<div class="d-none">
+								<div class="dropdown">
+										<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+									<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="gedf-drop1">
+										<a class="dropdown-item cursor-pointer">수정</a>
+										<a class="dropdown-item cursor-pointer">삭제</a>
+									</div>
+								</div>
+							</div>
+						</li>
 						<c:forEach var="subject" items='${subjectList}' varStatus="status">
-							<li class="list-group-item cursor-pointer">${subject.subjectTitle}</li>
+							<li class="d-flex list-group-item justify-content-between align-items-center">
+								<a class="cursor-pointer">${subject.subjectTitle}</a>
+								<div class="d-none">
+									<div class="dropdown">
+											<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+										<div class="dropdown-menu dropdown-menu-right"
+											aria-labelledby="gedf-drop1">
+											<a class="dropdown-item cursor-pointer">수정</a>
+											<a class="dropdown-item cursor-pointer">삭제</a>
+										</div>
+									</div>
+								</div>
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -200,7 +226,6 @@
 						src="https://picsum.photos/50/50" alt="">
 				</div>
 				<div class="ml-2">
-					
 					<div class="h5 m-0">{{boardWriter}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
@@ -370,7 +395,18 @@
             });
             
             //주제 클릭 이벤트
-            $("#subjectList").on("click","li",searchSubject);
+            $("#subjectList").on("click","li > a",searchSubject);
+            
+            
+            $("#subjectList").on("mouseenter","li",(evt) =>{
+            	var iconBar = evt.target.querySelector("div");
+            	iconBar.className = "";            	
+            });
+            
+            $("#subjectList").on("mouseleave","li",(evt) =>{
+            	var iconBar = evt.target.querySelector("div");
+            	iconBar.className = "d-none";
+            });
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
@@ -419,7 +455,7 @@
 		   	});
 		}
         function searchSubject(){
-        	
+        	console.log("search!");
         	//검색 주제 추가후
         	boardSrchDto.srchWord = this.innerHTML;
         	boardSrchDto.nxt1KeyVal = 1;
@@ -476,7 +512,7 @@
         
         function insertNoticeBoard(){
         	
-        	// Populate hidden form on submit
+        	
             var about = document.querySelector('input[name=boardContent]');
             about.value = JSON.stringify(NoticeQuill.getContents());
             var noticeData = $('#noticeForm').serializeObject()
@@ -495,6 +531,7 @@
 					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
 					$("#noticeModal").modal('hide');
 					//searchBoard();
+					//새로고침
 					window.location.reload()
 				}
 			});
