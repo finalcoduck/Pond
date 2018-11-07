@@ -30,40 +30,24 @@
 				<div class="card mb-3">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-						<a data-toggle="modal" data-target="#subjectModal"> 
-							<i class="fas fa-plus cursor-pointer"></i>
-						</a>
+	
+						<div class="dropdown">
+							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+							<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="gedf-drop1">
+								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
+								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+							</div>
+						</div>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
-						<li class="d-flex list-group-item justify-content-between align-items-center">
-							<a class="cursor-pointer">공지</a>
-							
-							<div class="d-none">
-								<div class="dropdown">
-										<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-										<a class="dropdown-item cursor-pointer">수정</a>
-										<a class="dropdown-item cursor-pointer">삭제</a>
-									</div>
-								</div>
-							</div>
+						<li class="cursor-pointer list-group-item">
+							<a>공지</a>
 						</li>
 						<c:forEach var="subject" items='${subjectList}' varStatus="status">
-							<li class="d-flex list-group-item justify-content-between align-items-center">
-								<a class="cursor-pointer">${subject.subjectTitle}</a>
-								<div class="d-none">
-									<div class="dropdown">
-											<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-										<div class="dropdown-menu dropdown-menu-right"
-											aria-labelledby="gedf-drop1">
-											<a class="dropdown-item cursor-pointer">수정</a>
-											<a class="dropdown-item cursor-pointer">삭제</a>
-										</div>
-									</div>
-								</div>
+							<li class="cursor-pointer list-group-item">
+								<a>${subject.subjectTitle}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -161,6 +145,7 @@
 	</div>
 </div>
 
+<!--!!!!!!!!!!!!! 게시물 삭제 모달!!!!!!! -->
 <div class="modal" id="delBoardModal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content border-0">
@@ -191,6 +176,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- The Modal -->
 
 <!-- floating Button-->
@@ -395,18 +381,15 @@
             });
             
             //주제 클릭 이벤트
-            $("#subjectList").on("click","li > a",searchSubject);
+            $("#subjectList").on("click","li",searchSubject);
             
+           
             
-            $("#subjectList").on("mouseenter","li",(evt) =>{
-            	var iconBar = evt.target.querySelector("div");
-            	iconBar.className = "";            	
-            });
+            //주제 삭제 모달 팝업 이벤트
+            $("#setSubjectModalBtn").on("click",function(){
+            	$("#setSubjectModal").modal("show");
+            })
             
-            $("#subjectList").on("mouseleave","li",(evt) =>{
-            	var iconBar = evt.target.querySelector("div");
-            	iconBar.className = "d-none";
-            });
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
@@ -455,9 +438,10 @@
 		   	});
 		}
         function searchSubject(){
-        	console.log("search!");
-        	//검색 주제 추가후
-        	boardSrchDto.srchWord = this.innerHTML;
+        	
+        	//boardSrchDto에 검색 주제 추가후
+        	console.log(this)
+        	boardSrchDto.srchWord = this.querySelector("a").innerHTML;
         	boardSrchDto.nxt1KeyVal = 1;
         	
         	//게시물 조회 실행
@@ -512,7 +496,6 @@
         
         function insertNoticeBoard(){
         	
-        	
             var about = document.querySelector('input[name=boardContent]');
             about.value = JSON.stringify(NoticeQuill.getContents());
             var noticeData = $('#noticeForm').serializeObject()
@@ -526,7 +509,7 @@
 		   		, contentType : "application/json; charset=UTF-8"
 			})
 			.done(function(data){
-				console.log(data.errC);
+				
 				if(data.errC ==="0000"){
 					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
 					$("#noticeModal").modal('hide');
