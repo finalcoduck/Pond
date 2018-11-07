@@ -28,7 +28,7 @@ public class ScheduleBasicController {
 	@Autowired
 	private ScheduleServiceImpl scheduleService;
 	
-	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
 		return "redirect:/schedule/info";
 	}*/
@@ -36,28 +36,29 @@ public class ScheduleBasicController {
 	/*
 	 * 	최초에 데이터 받아오기
 	 */
-	@RequestMapping(value = "/schedule/info", method = RequestMethod.GET)
-	public String getDateInfo(Model model, @RequestParam(value="groupNum", defaultValue="30") int groupNum) {
+	@RequestMapping(value = "/schedule/info", method = {RequestMethod.GET, RequestMethod.POST})
+	public String getDateInfo(Model model, @RequestParam(value="groupNum") int groupNum) {
 		List<ScheduleVo> list = scheduleService.getDateInfo(groupNum);
 		for (ScheduleVo vo : list) {
 			Date date = vo.getScheduleEndDate();
 			java.sql.Date dd = plus1day(date);
 			vo.setScheduleEndDate(dd);
 		}
+		model.addAttribute("groupNum", groupNum);
 		model.addAttribute("list", list);
-		
-		return "schedule";
+		return "/group/schedule";
 	}
 	
-	@RequestMapping(value = "/schedule/addCal", method = RequestMethod.GET)
-	public String goAddCal() {
-		return "addCal";
+	@RequestMapping(value = "/schedule/add-cal", method = RequestMethod.GET)
+	public String goAddCal(int groupNum, Model model) {
+		model.addAttribute("groupNum", groupNum);
+		return "/group/add-cal";
 	}
 	
 	/*
 	 *  그룹 일정 등록
 	 */
-	@RequestMapping(value = "/schedule/addCal", method = RequestMethod.POST)
+	@RequestMapping(value = "/schedule/add-cal", method = RequestMethod.POST)
 	public String addCal(ScheduleVo vo, RedirectAttributes ra) {
 		try {
 			ra.addAttribute("groupNum", vo.getGroupNum());
@@ -73,8 +74,8 @@ public class ScheduleBasicController {
 	 *  해당 년도 / 월별로 데이터 뽑아오기
 	 */
 	@RequestMapping(value = "/schedule/getInfo", method = RequestMethod.POST)
-	@ResponseBody // @@@@@@@@@@@@@@@@@ 추후에 groupNum 처리해주어야함
-	public Map<String, Object> getInfo(String year, String month, @RequestParam(value="groupNum", defaultValue="30") String groupNum) {
+	@ResponseBody // 추후에 groupNum 처리해주어야함
+	public Map<String, Object> getInfo(String year, String month, @RequestParam(value="groupNum") String groupNum) {
 		List<ScheduleVo> list = scheduleService.getSchedule_month(year, month, groupNum);
 		Map<String, Object> json = new HashMap<>();
 		List<Map<String, Object>> jsonList = new ArrayList<>();

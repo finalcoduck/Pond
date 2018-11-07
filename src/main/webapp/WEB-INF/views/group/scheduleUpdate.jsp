@@ -11,8 +11,9 @@
 	<form action="${pageContext.request.contextPath }/schedule/updatepage" method="post">
 	스케줄 이름 : <input type="text" value="${vo.scheduleTitle }" name="scheduleTitle"/><br>	
 	스케줄 내용 : <input type="text" value="${vo.scheduleContent }" name="scheduleContent"/><br>
-	시작 날짜: <input type="date" value="${start }" name="scheduleStartDate"/><br>
-	종료 날짜: <input type="date" value="${end }" name="scheduleEndDate"/><br>
+	시작 날짜: <input type="date" value="${vo.scheduleStartDate }" name="scheduleStartDate"/><br>
+	종료 날짜: <input type="date" value="${vo.scheduleEndDate }" name="scheduleEndDate"/><br>
+	<input type="hidden" value="${vo.groupNum }" name="groupNum" />
 	<input type="hidden" value="${vo.scheduleNum }" name="scheduleNum" />
 	<input type="submit" value="수정" />
 	</form>
