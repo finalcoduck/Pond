@@ -1,48 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1,	user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap-4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../build/css/general.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-        crossorigin="anonymous">
-
-    <title>POND</title>
-    <style>
-
-    </style>
-</head>
-
-<body>
-
-    <header>
-        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary mb-3">
-            <h1>
-                <a class=" text-white" href="#">
-                    <b>POND</b>
-                </a>
-            </h1>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="">스트림</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="">사용자</a>
-                </li>
-            </ul>
-            <div class="mr-2">
-                <a href="">
-                    <img class="rounded-circle header-profile-img" src="https://picsum.photos/50/50" alt="">
-                </a>
-            </div>
-        </nav>
-    </header>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
     <!-- content -->
 
@@ -166,20 +123,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-12 control-label" for="textinput">이메일 주소</label>
-                        <div class="col-12 mb-2">
-                            <input id="tcinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+                        <div class="col-12 mb-2 inputDiv">
+                            <input id="tcinput" name="textinput" type="text" placeholder="" class="form-control input-md"
+                            onkeypress="if(event.keyCode==13){addMail('tc'); return false;}">
                         </div>
-                        <span class="badge badge-pill badge-secondary">kang10019@naver.com <i class="fas fa-times"></i></span>
-                        <span class="badge badge-pill badge-secondary">kang10019@naver.com <i class="fas fa-times"></i></span>
-                        <span class="badge badge-pill badge-secondary">kang10019@naver.com <i class="fas fa-times"></i></span>
-                        <span class="badge badge-pill badge-secondary">kang10019@naver.com <i class="fas fa-times"></i></span>
                     </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <a href="" data-dismiss="modal">취소</a>
-                    <a href="" data-dismiss="modal text-muted">초대하기</a>
+                    <a href="#" class="invite-btn">초대하기</a>
                 </div>
 
             </div>
@@ -198,9 +152,9 @@
                     <div class="modal-body">
                         <div class="form-group st-group">
                             <label class="col-12 control-label" for="textinput">이메일 주소</label>
-                            <div class="col-12 mb-2" id="inputDiv">
+                            <div class="col-12 mb-2 inputDiv">
                                 <input id="stinput" name="textinput" type="text" placeholder="" class="form-control input-md"
-                                onkeypress="if(event.keyCode==13){addMail(); return false;}">
+                                onkeypress="if(event.keyCode==13){addMail('st'); return false;}">
                             </div>
                         </div>
                     </div>
@@ -208,37 +162,49 @@
                     <!-- Modal footer -->
                     <!-- data-dismiss="modal text-muted" -->
                     <div class="modal-footer">
-                        <a href="" data-dismiss="modal">취소</a>
-                        <a href="#" id="invite-btn">초대하기</a>
+                        <a href="#" data-dismiss="modal">취소</a>
+                        <a href="#" class="invite-btn">초대하기</a>
                     </div>
     
                 </div>
             </div>
         </div>
     <!-- The Modal -->
-    <script src="../vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="../vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-    <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
-    
     <script>
     	var mailArr = [];
-        function addMail() {
-    		var stInputText = $('#stinput').val();
-    		$('#inputDiv').after($('<span class="badge badge-pill badge-secondary stMail">'+stInputText+' <i class="fas fa-times ic"></i></span>'));
-    		mailArr.push(stInputText);
-			$('#stinput').val('');    		
+    	var inviteCode = '';
+    	
+    	// 메일 추가 입력
+        function addMail(distinct) {
+        	var inputText = '';
+        	if(distinct == 'st'){
+    			inputText = $('#stinput').val();
+    			inviteCode = '${groupVo.inviteCode}';
+        	}else if(distinct == 'tc'){
+        		inputText = $('#tcinput').val();
+        		inviteCode = '${groupVo.inviteCode}' + "@";
+        	}
+    		$('.inputDiv').after($('<span class="badge badge-pill badge-secondary mailsText">'+inputText+' <i class="fas fa-times ic"></i></span>'));
+    		mailArr.push(inputText);
+			$('#stinput,#tcinput').val('');    		
 		}
-        // 학생 초대
-        $('#invite-btn').on('click',function(){
+        
+        // 초대 버튼 클릭시
+        $('.invite-btn').on('click',function(){
         	var mailStr = mailArr.join();
         	$.ajax({
-        		url : "";
+        		url : "${pageContext.request.contextPath}/group/invite/proc",
+        		data : {'mails':mailStr, 'groupNum':'${groupVo.groupNum}', 'groupName':'${groupVo.groupName}', 'inviteCode':'${groupVo.inviteCode}'},
+        		dataType : 'json',
+        		success : function(data){
+        			if(data.msg == 'success'){
+        				$('#inviteStudentModal').modal('hide');
+        				alert('메일 전송 완료');
+        				mailArr = [];
+        	        	$('.mailsText').remove();
+        			}
+        		}
         	});
-        	
-        	mailArr = [];
-        	$('.stMail').remove();
         });
         
         // 학생 초대 x버튼 클릭시 이벤트
@@ -252,6 +218,3 @@
         });
     </script>
 
-</body>
-
-</html>

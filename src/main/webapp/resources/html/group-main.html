@@ -13,8 +13,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../build/css/floating_btn.css">
     <link rel="stylesheet" type="text/css" href="../build/css/group_main.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/group.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/datedropper.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/my-style.css">
     <link rel="stylesheet" type="text/css" href="../vendor/quill/quill.snow.css">
     <title>POND</title>
+	<style type="text/css">
+		div.datedropper .picker .pick-btns .pick-btn.pick-btn-sz:after{content:'';}
+		div.datedropper .picker .pick-btns .pick-btn.pick-btn-sz{width:25px; height:25px; background-image:url(../build/image/arrow01.png); background-repeat:no-repeat; background-position:center center; background-size:100% 100%; opacity:0.8;}
+		div.datedropper.picker-lg .picker .pick-btns .pick-btn.pick-btn-sz{background-image:url(../build/image/arrow02.png);}
+		.pick-submit:after, .pick-btn-lng{display:none;}
+		.pick-submit{background-image:url(../build/image/ico_check.png); background-repeat:no-repeat; background-position:center center; background-size:25px 25px;}
+	</style>
 </head>
 
 <body>
@@ -249,6 +259,79 @@
     </div>
     <!-- The Modal -->
 
+	<!-- The Modal -->
+	<div class="modal" id="HWModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content border-0">
+
+				<!-- Modal Header -->
+				<div class="modal-header bg-primary">
+					<h4 class="modal-title text-white">과제</h4>
+					<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="chk_area">
+						<div class="dropdown">
+							<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+								전체학생
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="allChk">
+									<label for="allChk"></label>
+									<span class="txt">전체 학생</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_1">
+									<label for="student_1"></label>
+									<span class="txt">배재정</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_2">
+									<label for="student_2"></label>
+									<span class="txt">배재정</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<input name="homework-caption" type="hidden">
+						<div id="homework-caption">
+						</div>
+						<input name="homework-content" type="hidden">
+						<div id="homework-content">
+						</div>
+					</div>
+					<ul class="score_area">
+						<li>
+							<span class="txt">점수</span>
+							<input type="text" value="100">
+						</li>
+						<li>
+							<span class="txt">마감일</span>
+							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+						</li>
+						<li>
+							<span class="txt">주제</span>
+							<select>
+								<option>주제</option>
+							</select>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-between">
+					<a href="" class="text-muted" data-dismiss="modal">과제 만들기</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- The Modal -->
+
     <!-- floating Button-->
     <div id="floatingBtnDiv"class="material-button-anim">
         <ul class="list-inline" id="options">
@@ -277,6 +360,7 @@
     <script src="../vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
     <script src="../vendor/quill/quill.min.js"></script>
+    <script src="../build/js/datedropper.js"></script>
 
     <script>
         const slideExcutionTime = 178;
@@ -307,25 +391,38 @@
                 $("#noticeModal").modal('show')       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
+
+            $("#HWBtn").on("click", function () {
+                $("#HWModal").modal('show')       
+                $("#HWBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
             
-            $('#noticeModal').on('show.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('show.bs.modal', function (e) {
                 $("#floatingBtn").trigger("click");
             });
 
-            $('#noticeModal').on('shown.bs.modal', function (e) {
+
+            $('#noticeModal, #HWModal').on('shown.bs.modal', function (e) {
                 if($("body").css("padding-right")!=="0px"){
                     $("#floatingBtnDiv").addClass("add-right");
                 }
                 
             });
-            $('#noticeModal').on('hidden.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
             });
 
+
             var quill = new Quill('#editor-container', {
-
                 placeholder: '공지를 입력하세요',
+            });
 
+            var quill1 = new Quill('#homework-caption', {
+                placeholder: '제목',
+            });
+			
+            var quill2 = new Quill('#homework-content', {
+                placeholder: '내용(선택사항)',
             });
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
@@ -344,7 +441,16 @@
             };
 
         });
+
+		$(function() { 
+			$("ul.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) { 
+				e.stopPropagation(); 
+			}); 
+		}); 
     </script>
+	<script>
+		$('.datepicker').dateDropper();
+	</script>
 
 </body>
 

@@ -110,3 +110,23 @@ select{background-color:#FFF;}
 .max-vh90{max-height:90vh !important}
 
 .cursor-pointer{cursor:pointer}
+
+
+/* 에디터 효과 */
+.ql-editor{border-bottom:2px solid #f1f1f1;}
+.ql-editor:after {
+	 position:absolute;
+	 bottom:0;
+	 left:0;
+	 display:block;
+	 content:"";
+	 width:100%;
+	 height:2px;
+	 background-color:#007bff;
+	 transform:scale3d(0,1,1);
+	 transform-origin:center center;
+	 transition:transform .3s;
+}
+.ql-editor:focus:after {
+	 transform:scale3d(1,1,1);
+}

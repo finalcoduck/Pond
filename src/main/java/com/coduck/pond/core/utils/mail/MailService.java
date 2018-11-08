@@ -37,4 +37,16 @@ public class MailService {
 		sendMail.setTo(email);
 		sendMail.send();
 	}
+	
+	public void drawSendInviteCode(JavaMailSender mailSender,String inviteCode, String email, String groupName) throws MessagingException, UnsupportedEncodingException {
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject("[Pond 그룹 초대코드]");
+		sendMail.setText(new StringBuffer().append("<h1>'Pond'"+groupName+"에서 초대 코드가 도착했습니다.</h1>")
+		.append("<h2 style='color: red;'>초대코드</h2>")
+		.append("<span style='color: blue;'>"+inviteCode+"</span>")
+		.toString());
+		sendMail.setFrom("soulstrk1234@gmail.com", "운영진");
+		sendMail.setTo(email);
+		sendMail.send();
+	}
 }

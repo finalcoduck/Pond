@@ -12,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.coduck.pond.member.vo.MemVo;
-
 @Controller
 public class MemberMoveController {
 	@Autowired
