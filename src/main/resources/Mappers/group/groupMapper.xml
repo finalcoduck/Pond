@@ -71,4 +71,9 @@
 		   where G.group_num = A.group_num
 			and mem_email = #{value} 
 	</select>
+	
+	<!-- 초대코드 입력시 중복 확인용 -->
+	<select id="dupliInviteCode" parameterType="map" resultType="com.coduck.pond.group.vo.GroupMemVo">
+		select * from group_mem where group_num = #{groupNum} and mem_email = #{memEmail}
+	</select>
 </mapper> 

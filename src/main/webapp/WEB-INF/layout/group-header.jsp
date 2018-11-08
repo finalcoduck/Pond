@@ -13,7 +13,7 @@
                     <a class="nav-link text-white" href="">스트림</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="">사용자</a>
+                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}">사용자</a>
                 </li>
             </ul>
             <div class="mr-2">

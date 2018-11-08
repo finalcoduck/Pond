@@ -1,6 +1,8 @@
 package com.coduck.pond.group.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +82,15 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail) {
 		return groupDao.getGroupMemNum(memEmail);
+	}
+
+	@Override
+	public GroupMemVo dupliInviteCode(String memEmail, String groupNum) {
+		Map<String, String> map = new HashMap<>();
+		map.put("memEmail", memEmail);
+		map.put("groupNum", groupNum);
+		
+		return groupDao.dupliInviteCode(map);
 	}
 
 }

@@ -13,8 +13,12 @@ public class InviteDao {
 	@Autowired
 	private SqlSession session;
 	
-	public GroupVo findGroupNum(String inviteCode) {
-		return session.selectOne(NAMESPACE+"findGroupNum", inviteCode);
+	public GroupVo findGroupNumS(String inviteCode) {
+		return session.selectOne(NAMESPACE+"findGroupNumS", inviteCode);
+	}
+	
+	public GroupVo findGroupNumM(String inviteCode) {
+		return session.selectOne(NAMESPACE+"findGroupNumM", inviteCode);
 	}
 	
 	public void insertGroupMem(GroupMemVo vo) {
