@@ -14,7 +14,8 @@
 		 	OPEN_DATE, 
 		 	MAX_MEM_NUM, 
 		 	MEM_EMAIL, 
-		 	INVITE_CODE, 
+		 	INVITE_CODE_S,
+		 	INVITE_CODE_M, 
 		 	INVITE_CODE_STATUS, 
 		 	GROUP_IMAGE, 
 		 	GROUP_DESCRIPTION
@@ -25,7 +26,8 @@
 		 	sysdate, 
 		 	50, 
 		 	#{memEmail}, 
-		 	#{inviteCode}, 
+		 	#{inviteCodeS},
+		 	#{inviteCodeM}, 
 		 	#{inviteCodeStatus}, 
 		 	#{groupImage}, 
 		 	'그룹 소개를 작성해주세요.'
@@ -57,8 +59,8 @@
 		delete from pond_group where group_num = #{value}
 	</delete>
 	
-	<select id="getGroupNum" parameterType="string" resultType="int">
-	 	select group_num from pond_group where invite_code = #{value}
+	<select id="getGroupNum" parameterType="map" resultType="int">
+	 	select * from pond_group where invite_code_m = #{inviteCodeM} or invite_code_s = #{inviteCodeS}
 	</select>
 	
 	<!-- 해당회원 그룹별 회원 숫자 가져오기 -->

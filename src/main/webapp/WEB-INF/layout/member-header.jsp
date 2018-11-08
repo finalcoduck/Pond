@@ -18,7 +18,8 @@
 						<c:otherwise>
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/img1.jpg" alt="">
+							<%-- <img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt=""> --%>	
 						</c:otherwise>			
 					</c:choose>
 				</button>

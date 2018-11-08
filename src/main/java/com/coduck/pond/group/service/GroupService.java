@@ -15,7 +15,7 @@ public interface GroupService {
 	public void insertGorupDefault (GroupVo groupVo);
 	
 	//group_mem테이블에 저장
-	public int insertGroupMem(String inviteCode);
+	int insertGroupMem(String inviteCodeS, String inviteCodeM);
 	
 	// 회원이 가입한 그룹 목록
 	public List<GroupVo> selectGroupList (String memEmail);
@@ -28,4 +28,6 @@ public interface GroupService {
 	
 	//모든 그룹 멤버 숫자 가져오기
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
+
+	
 }

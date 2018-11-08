@@ -179,10 +179,10 @@
         	var inputText = '';
         	if(distinct == 'st'){
     			inputText = $('#stinput').val();
-    			inviteCode = '${groupVo.inviteCode}';
+    			inviteCode = '${groupVo.inviteCodeS}';
         	}else if(distinct == 'tc'){
         		inputText = $('#tcinput').val();
-        		inviteCode = '${groupVo.inviteCode}' + "@";
+        		inviteCode = '${groupVo.inviteCodeM}';
         	}
     		$('.inputDiv').after($('<span class="badge badge-pill badge-secondary mailsText">'+inputText+' <i class="fas fa-times ic"></i></span>'));
     		mailArr.push(inputText);
@@ -194,7 +194,7 @@
         	var mailStr = mailArr.join();
         	$.ajax({
         		url : "${pageContext.request.contextPath}/group/invite/proc",
-        		data : {'mails':mailStr, 'groupNum':'${groupVo.groupNum}', 'groupName':'${groupVo.groupName}', 'inviteCode':'${groupVo.inviteCode}'},
+        		data : {'mails':mailStr, 'groupNum':'${groupVo.groupNum}', 'groupName':'${groupVo.groupName}', 'inviteCode':inviteCode},
         		dataType : 'json',
         		success : function(data){
         			if(data.msg == 'success'){

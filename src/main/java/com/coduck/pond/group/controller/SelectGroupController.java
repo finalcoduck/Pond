@@ -41,7 +41,6 @@ public class SelectGroupController {
 	
 	@RequestMapping(value = "/selectgroup/insert-group", method = RequestMethod.GET)
 	public String insertGroup(MemDto memDto) {
-		System.out.println(memDto.getKeySet().size()+"@@@@");
 		return "/selectgroup/insert-group";
 	}
 	
@@ -49,7 +48,7 @@ public class SelectGroupController {
 	@RequestMapping(value = "/selectgroup/make-group-proc", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> makeGroup(String groupName, String imgUrl, String memEmail, MemDto memDto, HttpSession session) {
-		GroupVo groupVo = new GroupVo(0, groupName, null, 0, memEmail, null, '0', imgUrl, null);
+		GroupVo groupVo = new GroupVo(0, groupName, null, 0, memEmail, null,null, '0', imgUrl, null);
 		groupService.insertGorupDefault(groupVo);
 		Map<String, String> map = new HashMap<>();
 		map.put("msg", "success");

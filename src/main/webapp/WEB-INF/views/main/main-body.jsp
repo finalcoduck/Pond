@@ -20,6 +20,7 @@
 <section id="" class="bg-primary">
 <c:if test="${!empty loginFail }"><script type="text/javascript">alert('${loginFail}');</script></c:if>
 <c:if test="${!empty dpMsg }"><script type="text/javascript">alert('${dpMsg}');</script></c:if>
+<c:if test="${!empty changeMsg }"><script type="text/javascript">alert('새로운 비밀번호로 변경되었습니다.');</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">

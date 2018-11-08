@@ -22,12 +22,14 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	@Transactional
 	public void insertGorup(GroupVo groupVo) {
-		String inviteCode = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
-		groupVo.setInviteCode(inviteCode);
+		String inviteCodeS = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
+		String inviteCodeM = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
+		groupVo.setInviteCodeS(inviteCodeS);
+		groupVo.setInviteCodeM(inviteCodeM);
 		groupVo.setInviteCodeStatus('O');
 		groupDao.insertGroup(groupVo);
 		
-		int groupNum = insertGroupMem(inviteCode);
+		int groupNum = insertGroupMem(inviteCodeS, inviteCodeM);
 		
 		GroupMemVo groupMemVo = new GroupMemVo(0, groupNum, groupVo.getMemEmail(), 'M');
 		groupDao.insertGroupMem(groupMemVo);
@@ -51,8 +53,10 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	@Transactional
 	public void insertGorupDefault(GroupVo groupVo) {
-		String inviteCode = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
-		groupVo.setInviteCode(inviteCode);
+		String inviteCodeS = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
+		String inviteCodeM = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
+		groupVo.setInviteCodeS(inviteCodeS);
+		groupVo.setInviteCodeM(inviteCodeM);
 		groupVo.setInviteCodeStatus('O');
 		
 		String imgUrl = groupVo.getGroupImage();
@@ -61,15 +65,15 @@ public class GroupServiceImpl implements GroupService{
 		groupVo.setGroupImage(groupImage);
 		groupDao.insertGroup(groupVo);
 		
-		int groupNum = insertGroupMem(inviteCode);
+		int groupNum = insertGroupMem(inviteCodeS, inviteCodeM);
 		
 		GroupMemVo groupMemVo = new GroupMemVo(0, groupNum, groupVo.getMemEmail(), 'M');
 		groupDao.insertGroupMem(groupMemVo);
 	}
 
 	@Override
-	public int insertGroupMem(String inviteCode) {
-		int groupNum = groupDao.getGroupNum(inviteCode);
+	public int insertGroupMem(String inviteCodeS, String inviteCodeM) { //여까지
+		int groupNum = groupDao.getGroupNum(inviteCodeS, inviteCodeM);
 		return groupNum;
 	}
 
