@@ -241,70 +241,10 @@
 		<a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
 	</div>
 </div>
-
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
 
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
-                    <img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
-                </div>
-                <div class="ml-2">
-                    <div class="h5 m-0"  onclick="console.log($('body').hasScrollBar())">{{boardWriter}}</div>
-                    <div class="h7 text-muted">{{boardRegDate}}</div>
-                </div>
-            </div>
-            <div>
-                <div class="dropdown">
-                    <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                        <a class="dropdown-item" href="#">맨 위로 이동</a>
-                        <a class="dropdown-item" href="#">수정</a>
-                        <a class="dropdown-item delModalBtn pointer">삭제</a>
-						<form id="boardProp{{boardNum}}">
-							<input name="boardNum" type="hidden" value="{{boardNum}}">
-							<input name="boardType" type="hidden" value="{{boardType}}">
-						</form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-body homework">
-        <h5 class="card-title">{{boardTitle}}</h5>
-		<div class="homework_con">
-			<p class="card-text">
-				{{boardContent}}
-			</p>
-			<div class="person">
-				<ul>
-					<li>
-						<a href="#">
-							<span class="num">0</span>
-							<span class="txt">제출함</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="num">0</span>
-							<span class="txt">할당 완료</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-    </div>
-    <div class="card-footer align_r">
-        <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
-    </div>
-</div>
 </script>
 <!-- Card Template -->
 
@@ -313,8 +253,7 @@
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
-        const NOTICE = 'N'
-        const HW_BOARD = 'H'
+
         
         var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
@@ -450,6 +389,8 @@
         	//화면 상단으로 이동
         	$('html, body').animate({scrollTop: 0 }, 'slow');
         }
+        
+        //
         function showDelBoardModal(e){
         	//해당 게시물의 번호와 타입을 얻어옴
         	var evt = e || window.event;
@@ -463,6 +404,7 @@
         	$("#delBoardModal").modal('show');
         }
         
+        // 공지 삭제  Ajax Request
         function sendDelBoard(){
         	//모달에 저장된 삭제할 게시물 정보 불러옴
         	var delBoardProp = $("#delModalProp").serializeObject();
@@ -493,7 +435,7 @@
 			});
         }
         
-        
+        //공지 생성 Ajax Request
         function insertNoticeBoard(){
         	
             var about = document.querySelector('input[name=boardContent]');
@@ -533,11 +475,5 @@
 	    	var html = template(data);
 	    	return html;
 		}
-		//deltaObject를 HTML코드로 변경
-		function quillGetHTML(inputDelta) {
-			var delta = JSON.parse(inputDelta);
-		    var tempCont = document.createElement("div");
-		    (new Quill(tempCont)).setContents(delta.ops);
-		    return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
-		}
+		
     </script>
