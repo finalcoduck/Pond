@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 	<header>
         <nav class="navbar d-flex justify-content-between navbar-expand bg-primary mb-3">
             <h1>
@@ -17,7 +18,16 @@
             </ul>
             <div class="mr-2">
                 <a href="">
-                    <img class="rounded-circle header-profile-img" src="https://picsum.photos/50/50" alt="">
+					<c:choose>
+						<c:when test="${memDto.memVo.memProfilePic == null}">
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="">	
+						</c:when>
+						<c:otherwise>
+						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
+							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
+						</c:otherwise>			
+					</c:choose>
                 </a>
             </div>
         </nav>
