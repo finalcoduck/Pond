@@ -10,6 +10,10 @@ public class AttendedVo {
 	private Date attendedOut;
 	private String attendedType;
 	
+	public AttendedVo() {
+		
+	}
+	
 	public int getAttendedNum() {
 		return attendedNum;
 	}
