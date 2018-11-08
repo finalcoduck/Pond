@@ -11,17 +11,17 @@ public class FileListVo {
 	private String orgFileName;
 	private String saveFileName;
 	private long fileSize;
-	private String writer;
-	private String title;
-	private Date regdate;
+	private String boardWriter;
+	private String subjectTitle;
+	private Date boardRegdate;
 	private String fileType;
 	
 	public FileListVo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FileListVo(int fileNum, int groupNum, int refBoardNum, String orgFileName, String saveFileName, long fileSize,
-			String writer, String title, Date regdate, String fileType) {
+	public FileListVo(int fileNum, int groupNum, int refBoardNum, String orgFileName, String saveFileName,
+			long fileSize, String boardWriter, String subjectTitle, Date boardRegdate, String fileType) {
 		super();
 		this.fileNum = fileNum;
 		this.groupNum = groupNum;
@@ -29,9 +29,9 @@ public class FileListVo {
 		this.orgFileName = orgFileName;
 		this.saveFileName = saveFileName;
 		this.fileSize = fileSize;
-		this.writer = writer;
-		this.title = title;
-		this.regdate = regdate;
+		this.boardWriter = boardWriter;
+		this.subjectTitle = subjectTitle;
+		this.boardRegdate = boardRegdate;
 		this.fileType = fileType;
 	}
 
@@ -39,7 +39,8 @@ public class FileListVo {
 	public String toString() {
 		return "FileListVo [fileNum=" + fileNum + ", groupNum=" + groupNum + ", refBoardNum=" + refBoardNum
 				+ ", orgFileName=" + orgFileName + ", saveFileName=" + saveFileName + ", fileSize=" + fileSize
-				+ ", writer=" + writer + ", title=" + title + ", regdate=" + regdate + "fileType:"+fileType+"]";
+				+ ", boardWriter=" + boardWriter + ", subjectTitle=" + subjectTitle + ", boardRegdate=" + boardRegdate
+				+ ", fileType=" + fileType + "]";
 	}
 
 	public int getFileNum() {
@@ -48,14 +49,6 @@ public class FileListVo {
 
 	public void setFileNum(int fileNum) {
 		this.fileNum = fileNum;
-	}
-	
-	public String getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
 	}
 
 	public int getGroupNum() {
@@ -98,28 +91,36 @@ public class FileListVo {
 		this.fileSize = fileSize;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getBoardWriter() {
+		return boardWriter;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBoardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getSubjectTitle() {
+		return subjectTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSubjectTitle(String subjectTitle) {
+		this.subjectTitle = subjectTitle;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public Date getBoardRegdate() {
+		return boardRegdate;
 	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setBoardRegdate(Date boardRegdate) {
+		this.boardRegdate = boardRegdate;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 	
 	

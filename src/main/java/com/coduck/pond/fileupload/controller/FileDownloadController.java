@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FileDownloadController {
 	//파일 다운로드
-	@RequestMapping("/fileupload/download")
+	@RequestMapping("/group/filedownload")
 	public String downloadFile(String saveFileName, String orgFileName,HttpSession session, Model model) throws Exception {
 		String filePath = session.getServletContext().getRealPath("resources/upload/") + saveFileName;
 		System.out.println("filePath:"+filePath);
