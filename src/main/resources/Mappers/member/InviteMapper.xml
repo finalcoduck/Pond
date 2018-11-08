@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="Mappers.InviteMapper">
+  	<select id="findGroupNum" parameterType="string" resultType="com.coduck.pond.group.vo.GroupVo">
+  		select * from pond_group where invite_code = #{value}
+  	</select>
+  	
+  	<insert id="insertGroupMem" parameterType="com.coduck.pond.group.vo.GroupMemVo">
+  		insert into group_mem values(pond_group_seq.nextval,#{groupNum},#{memEmail},#{status})
+  	</insert>
+  </mapper>

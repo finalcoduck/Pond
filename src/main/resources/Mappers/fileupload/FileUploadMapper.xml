@@ -9,7 +9,7 @@
 	</insert>
 	<!-- 그룹별 파알 정보 가져오기 -->
 	<select id="getFilesByGroup" resultType="com.coduck.pond.fileupload.vo.FileListVo" parameterType="int">
-		select * from upload_file u, testboard1 t where u.ref_board_num = t.num and
+		select * from upload_file u, group_notice t where u.ref_board_num = t.board_num and
 		  u.group_num = t.group_num and u.group_num = #{value}
 	</select>
 	<!-- 파일번호로 파일 정보 가져오기 -->
