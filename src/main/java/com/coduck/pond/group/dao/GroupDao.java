@@ -1,7 +1,9 @@
 package com.coduck.pond.group.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,11 @@ public class GroupDao {
 		session.insert(NAMESPACE+"insertGroupMem", groupMemVo);
 	}
 	
-	public int getGroupNum(String inviteCode) {
-		return session.selectOne(NAMESPACE+"getGroupNum", inviteCode);
+	public int getGroupNum(String inviteCodeS, String inviteCodeM) {
+		Map<String, String> map = new HashMap<>();
+		map.put("inviteCodeS", inviteCodeS);
+		map.put("inviteCodeM", inviteCodeM);
+		return session.selectOne(NAMESPACE+"getGroupNum", map);
 	}
 	
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail){

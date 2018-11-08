@@ -10,13 +10,16 @@ public class MailService {
 
 	public void drawSendMail(JavaMailSender mailSender,String authKey, String email) throws MessagingException, UnsupportedEncodingException {
 		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[메일인증]");
-		sendMail.setText(new StringBuffer().append("<h1>인증해주세여</h1>")
-		.append("<a href='http://localhost:8090/pond/join/emailConfirm?key=")
+		sendMail.setSubject("POND Community [메일인증]");
+		sendMail.setText(new StringBuffer().append("<h1 style=\"font-weight: bold; font-size: 50px; color: #2E64FE;\">Pond</h1>")
+		.append("<h2>인증을 완료 해주세요.</h2>")
+		.append("<button style=\"width: 100px; background-color: #2E64FE; border: none; color: #fff; padding: 15px 0; text-align: center;\r\n" + 
+				"	text-decoration: none; display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;\">")
+		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/pond/join/emailConfirm?key=")
 		.append(authKey)
 		.append("&email=")
 		.append(email)
-		.append("' target='_blank'>인증하기</a>")
+		.append("' target='_blank'>인증하기</a></button>")
 		.toString());
 		sendMail.setFrom("soulstrk1234@gmail.com", "운영진");
 		sendMail.setTo(email);
@@ -26,12 +29,15 @@ public class MailService {
 	public void drawSendMailToPwd(JavaMailSender mailSender,String authKey, String email) throws MessagingException, UnsupportedEncodingException {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[메일인증]");
-		sendMail.setText(new StringBuffer().append("<h1>인증해주세여</h1>")
-		.append("<a href='http://localhost:8090/pond/member/login/emailConfirmNewPwd?key=")
+		sendMail.setText(new StringBuffer().append("<h1 style=\"font-weight: bold; font-size: 50px; color: #2E64FE;\">Pond</h1>")
+		.append("<h2>인증을 완료 해주세요.</h2>")
+		.append("<button style=\"width: 100px; background-color: #2E64FE; border: none; color: #fff; padding: 15px 0; text-align: center;\r\n" + 
+				"	text-decoration: none; display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;\">")
+		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/pond/member/login/emailConfirmNewPwd?key=")
 		.append(authKey)
 		.append("&email=")
 		.append(email)
-		.append("' target='_blank'>인증하기</a>")
+		.append("' target='_blank'>인증하기</a></button>")
 		.toString());
 		sendMail.setFrom("soulstrk1234@gmail.com", "운영진");
 		sendMail.setTo(email);

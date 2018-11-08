@@ -12,11 +12,13 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coduck.pond.core.constant.CommonConstant;
@@ -196,7 +198,7 @@ public class MemberLoginController {
 		int n = memberLoginService.authConfirm(key, email);
 		if(n>0) {
 			model.addAttribute("email",email);
-			return "/setNewPwd";
+			return "/main/set-new-pwd";
 		}else {
 			System.out.println("새로운 비밀번호 설정 오류");
 			return "redirect:/";
@@ -204,15 +206,17 @@ public class MemberLoginController {
 	}
 	
 	//새로운 비밀번호 받아 암호화 처리후 업데이트
-	@RequestMapping(value="/member/login/changePwd", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login/changePwd", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseStatus(value=HttpStatus.OK)
 	public String changePwd(String newPwd, String email, Model model) {
 		 String encPwd = passwordEncoder.encode(newPwd);
 		 try {
 			 memberLoginService.changeNewPwd(email, encPwd);
-			 return "redirect:/";
+			 model.addAttribute("changeMsg","success");
+			 return "forward:/";
 		 }catch (Exception e) {
 			 System.out.println(e.getMessage());
-			 return "redirect:/";
+			 return "forward:/";
 		 }
 		 
 	}

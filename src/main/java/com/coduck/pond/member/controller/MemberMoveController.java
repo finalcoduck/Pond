@@ -26,7 +26,7 @@ public class MemberMoveController {
 	 *  mainPage에서 구글 소셜로그인 버튼에 URL등록을 위해 
 	 */
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
 	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
 		
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -60,7 +60,7 @@ public class MemberMoveController {
 	
 	@RequestMapping("/login/sendMail")
 	public String setNewPwd() {
-		return "/set-new-pwd";
+		return "/main/find-password";
 	}
 	
 	/*@RequestMapping("/member/main/loginForm")

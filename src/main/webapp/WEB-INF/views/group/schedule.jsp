@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html>
-<head>
 <style type="text/css">
 #calendar {
   max-width: 800px;
@@ -16,18 +13,10 @@
 	color:blue;
 }
 </style>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 <script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/resources/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-</head>
-<body>
 <div class="container">
 	<div class="row">
 		<div id='calendar'></div>
@@ -37,7 +26,6 @@
 		
 	</div>	
 </div>
-</body>
 <script type="text/javascript">
 $('#addCal').click(function() {
 	location.href="${pageContext.request.contextPath}/schedule/add-cal?groupNum=${groupNum}";
@@ -83,16 +71,6 @@ $(function() {
 		  editable : true,
 		  eventLimit : true,
 	      googleCalendarApiKey : "AIzaSyBBmL-30gox_ec9v4QY-TTKY2Dsif7NxBg"
-		  ,eventSources : [
-	             // 대한민국의 공휴일
-	             {
-	                   googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com"
-	                 , className : "koHolidays"
-	                 , color : "#FFF"
-	                 , textColor : "#FF0000"
-	                 , editable : false
-	                 ,
-	             } ]
 	        ,dayClick: function(event) {
 		        console.log(event.target);
 		    },

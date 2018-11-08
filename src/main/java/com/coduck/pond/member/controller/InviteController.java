@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coduck.pond.core.utils.mail.MailService;
+import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.InviteSerivce;
@@ -22,11 +23,15 @@ public class InviteController {
 	private InviteSerivce inviteSerivce;
 	@Autowired
 	private JavaMailSender mailSender;
-	
-/*	@RequestMapping("/")
-	public String wefwf() {
+	@Autowired
+	private GroupService groupSerivce;
+	//그룹번호 그룹 초대 코드 두개 
+	@RequestMapping("/group/member")
+	public String goGroupMember(int groupNum, Model model) {
+		GroupVo groupVo = groupSerivce.selectGroup(groupNum);
+		model.addAttribute("groupVo", groupVo);
 		return "/group/group-member";
-	}*/
+	}
 	
 	/*
 	 *  초대코드 메일 보내기 컨트롤러

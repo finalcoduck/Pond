@@ -8,7 +8,8 @@ public class GroupMemNumDto {
 	private Date openDate;
 	private int maxMemNum;
 	private String memEmail;
-	private String inviteCode;
+	private String inviteCodeS;
+	private String inviteCodeM;
 	private char inviteCodeStatus;
 	private String groupImage;
 	private String groupDescription;
@@ -20,20 +21,30 @@ public class GroupMemNumDto {
 	}
 
 	public GroupMemNumDto(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail,
-			String inviteCode, char inviteCodeStatus, String groupImage, String groupDescription, int groupMemNum,
-			char status) {
+			String inviteCodeS, String inviteCodeM, char inviteCodeStatus, String groupImage, String groupDescription,
+			int groupMemNum, char status) {
 		super();
 		this.groupNum = groupNum;
 		this.groupName = groupName;
 		this.openDate = openDate;
 		this.maxMemNum = maxMemNum;
 		this.memEmail = memEmail;
-		this.inviteCode = inviteCode;
+		this.inviteCodeS = inviteCodeS;
+		this.inviteCodeM = inviteCodeM;
 		this.inviteCodeStatus = inviteCodeStatus;
 		this.groupImage = groupImage;
 		this.groupDescription = groupDescription;
 		this.groupMemNum = groupMemNum;
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupMemNumDto [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate
+				+ ", maxMemNum=" + maxMemNum + ", memEmail=" + memEmail + ", inviteCodeS=" + inviteCodeS
+				+ ", inviteCodeM=" + inviteCodeM + ", inviteCodeStatus=" + inviteCodeStatus + ", groupImage="
+				+ groupImage + ", groupDescription=" + groupDescription + ", groupMemNum=" + groupMemNum + ", status="
+				+ status + "]";
 	}
 
 	public int getGroupNum() {
@@ -76,12 +87,20 @@ public class GroupMemNumDto {
 		this.memEmail = memEmail;
 	}
 
-	public String getInviteCode() {
-		return inviteCode;
+	public String getInviteCodeS() {
+		return inviteCodeS;
 	}
 
-	public void setInviteCode(String inviteCode) {
-		this.inviteCode = inviteCode;
+	public void setInviteCodeS(String inviteCodeS) {
+		this.inviteCodeS = inviteCodeS;
+	}
+
+	public String getInviteCodeM() {
+		return inviteCodeM;
+	}
+
+	public void setInviteCodeM(String inviteCodeM) {
+		this.inviteCodeM = inviteCodeM;
 	}
 
 	public char getInviteCodeStatus() {
@@ -124,13 +143,5 @@ public class GroupMemNumDto {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "GroupMemNumDto [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate
-				+ ", maxMemNum=" + maxMemNum + ", memEmail=" + memEmail + ", inviteCode=" + inviteCode
-				+ ", inviteCodeStatus=" + inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription="
-				+ groupDescription + ", groupMemNum=" + groupMemNum + ", status=" + status + "]";
-	}
-	
 	
 }
