@@ -32,8 +32,7 @@ public class SubjectServiceImpl implements SubjectService{
 
 	@Override
 	public void deleteSubject(int subjectNum) {
-	
-		
+		subjectDao.deleteSubject(subjectNum);
 	}
 
 }

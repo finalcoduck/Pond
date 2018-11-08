@@ -213,6 +213,22 @@ h2.sub_title span.num{color:#007bff;}
 #view_student .my_score .total{position:absolute; top:50%; margin-top:5px; color:#fff; width:100%; text-align:center;}
 #view_student .my_score .bar{position:absolute; top:50%; left:50%; width:50px; height:1px; margin-top:-0.5px; margin-left:-25px; background-color:#fff;}
 
+.chk_area .dropdown-menu{max-height:250px; overflow:auto;}
+.chk_area .dropdown-item{position:relative; padding:.75rem 1.5rem;}
+.chk_area .dropdown-item label{position:absolute; top:0; right:0; left:0; bottom:0;}
+
+.score_area{font-size:0;}
+.score_area li{display:inline-block; vertical-align:middle; margin-left:40px;}
+.score_area li:first-child{margin-left:0;}
+.score_area li > *{display:inline-block; vertical-align:middle;}
+.score_area li span.txt{font-size:13px; color:#666; margin-right:10px}
+.score_area li input[type=text]{position:relative; width:100px; padding-left:5px box-sizing:border-box; border:0; border-bottom:1px solid #ccc; outline:0;}
+.score_area li input[type=text]:focus{
+	border-bottom:1px solid #007bff
+}
+
+#HWModal .modal-dialog{margin:-100px auto;}
+
 
 /*tablet*/
 @media only screen and (min-width:769px) and (max-width:1023px){

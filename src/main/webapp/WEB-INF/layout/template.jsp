@@ -20,6 +20,9 @@
 <script src="${pageContext.request.contextPath}/resources/vendor/jQuery.serializeObject/js/jquery.serializeObject.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap-4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
+<script src="${pageContext.request.contextPath}/resources/build/js/commonConstant.js"></script>
+<script src="${pageContext.request.contextPath}/resources/build/js/commonFunction.js"></script>
+
 <title>POND</title>
 </head>
 <body>

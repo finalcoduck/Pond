@@ -42,4 +42,16 @@ public class GroupController {
 		
 		return "/group/group-main";
 	}
+	
+	@RequestMapping(value="/group/setting-subject")
+	public String settingGroupSubject(int groupNum, MemDto memDto, Model model) {
+		
+		List<SubjectVo> subjectList = subjectService.selectSubjectList(groupNum);
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		
+		model.addAttribute("subjectList",subjectList);
+		model.addAttribute("groupVo", groupVo);
+		return "/group/setting-subject";
+	}	
+	
 }
