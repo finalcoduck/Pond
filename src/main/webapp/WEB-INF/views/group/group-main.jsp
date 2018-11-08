@@ -245,7 +245,7 @@
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
-
+	
 </script>
 <!-- Card Template -->
 
