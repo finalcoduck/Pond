@@ -1,8 +1,10 @@
 package com.coduck.pond.group.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.coduck.pond.group.vo.GroupMemNumDto;
+import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupVo;
 
 public interface GroupService {
@@ -29,5 +31,6 @@ public interface GroupService {
 	//모든 그룹 멤버 숫자 가져오기
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
 
-	
+	//초대코드 중복확인
+	GroupMemVo dupliInviteCode(String memEmail, String groupNum);
 }

@@ -60,24 +60,24 @@ public class InviteController {
 	 *  초대코드 입력 컨트롤러
 	 */
 	
-	@RequestMapping("/asd")
-	@ResponseBody //inviteCode 학생 / 선생 처리 해주어야함
+	@RequestMapping("/group/invite/input")
 	public String invitedMem(Model model, MemDto memDto, String inviteCode) {
 		inviteCode = inviteCode.trim();
-		char status = inviteCode.charAt(inviteCode.length()-1);
-		if(status == '@') {
-			status = 'M';
-		}else {
-			status = 'S';
+		Map<String, Object> map = inviteSerivce.findGroupNum(inviteCode);
+		GroupVo groupVo = (GroupVo)map.get("groupVo");
+		GroupMemVo groupMemVo = groupSerivce.dupliInviteCode(memDto.getMemVo().getMemEmail(), String.valueOf(groupVo.getGroupNum()));
+		if(groupMemVo != null) {
+			model.addAttribute("msg","이미 가입한 회원 입니다.");
+			return "forward:/selectgroup/index"; 
 		}
-		GroupVo groupVo = inviteSerivce.findGroupNum(inviteCode);
-		GroupMemVo groupMemVo = new GroupMemVo(0, groupVo.getGroupNum(), memDto.getMemVo().getMemEmail(), status);
+		
+		groupMemVo = new GroupMemVo(0, groupVo.getGroupNum(), memDto.getMemVo().getMemEmail(), (Character)map.get("status"));
 		try {
 			inviteSerivce.insertGroupMem(groupMemVo);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return null;
+		return "forward:/selectgroup/index";
 	}
 }

@@ -8,6 +8,9 @@
 				<a href="#">
 					<b class="text-white">POND</b>
 				</a>
+				<a href="${pageContext.request.contextPath }/group/invite/input?inviteCode=testest">
+					<b class="text-white">임시초대코드입력</b>
+				</a>
 			</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

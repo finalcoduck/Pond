@@ -3,8 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="Mappers.InviteMapper">
-  	<select id="findGroupNum" parameterType="string" resultType="com.coduck.pond.group.vo.GroupVo">
-  		select * from pond_group where invite_code = #{value}
+  <!-- 학생 초대 코드 -->
+  	<select id="findGroupNumS" parameterType="string" resultType="com.coduck.pond.group.vo.GroupVo">
+  		select * from pond_group where invite_code_s = #{value}
+  	</select>
+  <!-- 선생 초대 코드 -->
+  	<select id="findGroupNumM" parameterType="string" resultType="com.coduck.pond.group.vo.GroupVo">
+  		select * from pond_group where invite_code_m = #{value}
   	</select>
   	
   	<insert id="insertGroupMem" parameterType="com.coduck.pond.group.vo.GroupMemVo">

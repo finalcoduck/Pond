@@ -31,7 +31,7 @@ public class SelectGroupController {
 	
 	@RequestMapping(value = "/selectgroup/index", method = {RequestMethod.GET,RequestMethod.POST})
 	public String selectGroupMain(MemDto memDto, Model model, HttpSession session) {
-		
+		System.out.println("여기들오나?");
 		/*List<GroupVo> groupList =  groupService.selectGroupList(memDto.getMemVo().getMemEmail());*/
 		List<GroupMemNumDto> groupMemNumList = groupService.getGroupMemNum(memDto.getMemVo().getMemEmail());
 		model.addAttribute("groupList", groupMemNumList);
