@@ -2,9 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/build/css/group.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">	
 
 <!-- content -->
 <section id="main">
@@ -13,7 +20,8 @@
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
 				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
+					<img class="card-img-top" src="https://picsum.photos/50/50"
+						alt="Card image">
 					<div class="card-body">
 						<h4 class="card-title">중앙HTA 1803기</h4>
 						<p class="card-text">멤버 28</p>
@@ -22,33 +30,42 @@
 				</div>
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 출결</a></li>
+						<li class="list-group-item"><a
+							href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i
+								class="far fa-folder-open"></i> 수업 자료실</a></li>
+						<li class="list-group-item"><a
+							href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i
+								class="far fa-calendar-alt"></i> 일정</a></li>
+						<li class="list-group-item"><a
+							href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i
+								class="far fa-calendar-alt"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a
+							href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i
+								class="far fa-calendar-alt"></i> 출결</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
-					<div class="card-header d-flex justify-content-between align-items-center">
+					<div
+						class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-	
+
 						<div class="dropdown">
 							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"></i>
 							<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
-								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+								aria-labelledby="gedf-drop1">
+								<a class="dropdown-item cursor-pointer" data-toggle="modal"
+									data-target="#subjectModal">추가</a> <a
+									href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}"
+									class="dropdown-item">편집</a>
 							</div>
 						</div>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
-						<li class="cursor-pointer list-group-item">
-							<a>공지</a>
-						</li>
+						<li class="cursor-pointer list-group-item"><a>공지</a></li>
 						<c:forEach var="subject" items='${subjectList}' varStatus="status">
-							<li class="cursor-pointer list-group-item">
-								<a>${subject.subjectTitle}</a>
+							<li class="cursor-pointer list-group-item"><a>${subject.subjectTitle}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -63,7 +80,7 @@
 				<!-- Post /////-->
 			</div>
 			<!--           center            -->
-			
+
 		</div>
 	</div>
 </section>
@@ -81,36 +98,40 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-			<form id="noticeForm" action="">
-				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
-				<input name="boardType" type="hidden" value="N">
+				<form id="noticeForm" action="">
+					<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+					<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
 						<input name="boardContent" type="hidden">
 						<div id="notice-editor-container"></div>
 					</div>
 					<div class="form-group col-5 col-md-4">
 						<div class="input-group mb-3">
-						  <div class="input-group-prepend">
-						    <label class="input-group-text" for="inputGroupSelect01">주제</label>
-						  </div>
-						  <select class="custom-select" name="subjectTitle" id="inputGroupSelect01">
-						    <option selected>공지</option>
-						    <c:forEach var="subject" items='${subjectList}' varStatus="status">
-							    <option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
-						    </c:forEach>
-						  </select>
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="inputGroupSelect01">주제</label>
+							</div>
+							<select class="custom-select" name="subjectTitle"
+								id="inputGroupSelect01">
+								<option selected>공지</option>
+								<c:forEach var="subject" items='${subjectList}'
+									varStatus="status">
+									<option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
-					</form>
+				</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
 				<div id="iconBox">
 					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href="">
-					<i class="fas fa-link"></i></a>
+						<i class="fas fa-link"></i>
+					</a>
 				</div>
-				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
+				<button id="noticeSubmitBtn" type="button"
+					class="btn btn-out-secondary">제출</button>
 			</div>
 		</div>
 	</div>
@@ -126,25 +147,102 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
+			<form
+				action="${pageContext.request.contextPath}/board/insert/subject"
+				method="post">
 				<!-- Modal body -->
 				<div class="modal-body">
-						<div class="form-group">
+					<div class="form-group">
 						<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
-							<input name="subjectTitle" type="text">
-						</div>
+						<input name="subjectTitle" type="text">
+					</div>
 				</div>
-	
+
 				<!-- Modal footer -->
 				<div class="modal-footer justify-content-right">
 					<a href="" class="text-muted" data-dismiss="modal">취소</a>
-					<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+					<button type="submit" class="text-muted btn btn-out-secondary">추가</button>
 				</div>
 			</form>
 
 		</div>
 	</div>
 </div>
+
+
+<!-- The Modal -->
+<div class="modal" id="homeworkModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content border-0">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-primary">
+				<h4 class="modal-title text-white">과제</h4>
+				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="chk_area">
+					<div class="dropdown">
+						<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+							전체학생
+						</button>
+						<ul class="dropdown-menu">
+							<li class="dropdown-item" data-keepOpenOnClick>
+								<input type="checkbox" id="allChk">
+								<label for="allChk"></label>
+								<span class="txt">전체 학생</span>
+							</li>
+							<li class="dropdown-item" data-keepOpenOnClick>
+								<input type="checkbox" id="student_1">
+								<label for="student_1"></label>
+								<span class="txt">배재정</span>
+							</li>
+							<li class="dropdown-item" data-keepOpenOnClick>
+								<input type="checkbox" id="student_2">
+								<label for="student_2"></label>
+								<span class="txt">배재정</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="form-group">
+					<input name="homework-caption" type="hidden">
+					<div id="homework-caption">
+					</div>
+					<input name="homework-content" type="hidden">
+					<div id="homework-content">
+					</div>
+				</div>
+				<ul class="score_area">
+					<li>
+						<span class="txt">점수</span>
+						<input type="text" value="100">
+					</li>
+					<li>
+						<span class="txt">마감일</span>
+						<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+					</li>
+					<li>
+						<span class="txt">주제</span>
+						<select>
+							<option>주제</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer justify-content-between">
+				<a href="" class="text-muted" data-dismiss="modal">과제 만들기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- The Modal -->
+
 
 <!--!!!!!!!!!!!!! 게시물 삭제 모달!!!!!!! -->
 <div class="modal" id="delBoardModal">
@@ -157,23 +255,24 @@
 				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 			</div>
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div class="form-group">
-						<p>댓글도 삭제됩니다.</p> 
-						<form id="delModalProp">
-							<input name="boardNum" type="hidden">
-							<input name="boardType" type="hidden">
-							<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
-						</form>
-					</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<p>댓글도 삭제됩니다.</p>
+					<form id="delModalProp">
+						<input name="boardNum" type="hidden"> <input
+							name="boardType" type="hidden"> <input name="groupNum"
+							type="hidden" value="${groupVo.groupNum}">
+					</form>
 				</div>
-	
-				<!-- Modal footer -->
-				<div class="modal-footer justify-content-right">
-					<a href="" class="text-muted" data-dismiss="modal">취소</a>
-					<button id="delBoardBtn" type="button" class="text-muted btn btn-out-secondary" >삭제</button>
-				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer justify-content-right">
+				<a href="" class="text-muted" data-dismiss="modal">취소</a>
+				<button id="delBoardBtn" type="button"
+					class="text-muted btn btn-out-secondary">삭제</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -184,7 +283,7 @@
 <div id="floatingBtnDiv" class="material-button-anim">
 	<ul class="list-inline" id="options">
 		<li class="option">
-			<button id="HWBtn" class="material-button option1" type="button"
+			<button id="homeworkBtn" class="material-button option1" type="button"
 				data-container="body" data-placement="left" data-content="과제">
 				<i class="fas fa-clipboard-check"></i>
 			</button>
@@ -245,236 +344,318 @@
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
-	
+                   <div class="card mb-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0"  onclick="console.log($('body').hasScrollBar())">강덕영</div>
+                                        <div class="h7 text-muted">10월 12일</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                            <a class="dropdown-item" href="#">맨 위로 이동</a>
+                                            <a class="dropdown-item" href="#">수정</a>
+                                            <a class="dropdown-item" href="#">삭제</a>
+                                            <a class="dropdown-item" href="#">링크복사</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body homework">
+                            <h5 class="card-title">과제 카드</h5>
+							<div class="homework_con">
+								<p class="card-text">
+									<a href="#">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
+										eos
+										ipsa praesentium esse magnam nemo dolor
+										sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+									</a>
+								</p>
+								<div class="person">
+									<ul>
+										<li>
+											<a href="#">
+												<span class="num">0</span>
+												<span class="txt">제출함</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="num">0</span>
+												<span class="txt">할당 완료</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+                        </div>
+                        <div class="card-footer align_r">
+                            <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
+                        </div>
+                    </div>
 </script>
 <!-- Card Template -->
 
-<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+	
+<!-- datepicker 플러그인 -->
+<script
+	src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
 
+<script>
+	const SLIDE_EXCUTION_TIME = 178;
 
-<script>    
-        const SLIDE_EXCUTION_TIME = 178;
+	var boardSrchDto = {
+		groupNum : "${groupVo.groupNum}",
+		srchWord : "",
+		nxt1KeyVal : 1,
+		pagePercnt : "5",
+		nxtPageFl : ""
+	};
 
-        
-        var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
-        
-        var NoticeQuill = new Quill('#notice-editor-container', {
-            placeholder: '공지를 입력하세요',
-        });
-        
-        $(document).ready(function () {
-            
-        	// 첫페이지 조회
-	    	searchBoard();
-        	
-        	//공지 글 추가 버튼
-        	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
-        	
-        	
-	    	 //floating Button
-	        $("#floatingBtn").on("click", function () {
-	            setTimeout(function () {
-	                if($("#floatingBtn").hasClass("open")){
-	                    $("#HWBtn").popover('show');
-	                    $("#noticeBtn").popover('show');
-	                }else{
-	                    $("#HWBtn").popover('hide');
-	                    $("#noticeBtn").popover('hide');
-	                }
-	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
-	        });
-        	
-            $('.material-button-toggle').on("click", function () {
-                $(this).toggleClass('open');
-                $('.option').toggleClass('scale-on');
-            });
+	var NoticeQuill = new Quill('#notice-editor-container', {
+		placeholder : '공지를 입력하세요',
+	});
 
-            
-            $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show');       
-                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });
-            
-            $('#noticeModal').on('show.bs.modal', function (e) {
-                $("#floatingBtn").trigger("click");
-            });
+	$(document).ready(
+			function() {
 
-            $('#noticeModal').on('shown.bs.modal', function (e) {
-                if($("body").css("padding-right")!=="0px"){
-                    $("#floatingBtnDiv").addClass("add-right");
-                }
-            });
-            $('#noticeModal').on('hidden.bs.modal', function (e) {
-                $("#floatingBtnDiv").removeClass("add-right")
-            });
+				// 첫페이지 조회
+				searchBoard();
 
+				//공지 글 추가 버튼
+				$("#noticeSubmitBtn").on("click", insertNoticeBoard)
 
-            $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
-            
-            //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
-            $(window).scroll(function(){
-                var scrolltop = $(window).scrollTop(); 
-                if( scrolltop >= $(document).height()-$(window).height()-2 &&
-                		boardSrchDto.nxtPageFl === "T"){
-                	searchBoard();
-                }
-            });
-            
-            //주제 클릭 이벤트
-            $("#subjectList").on("click","li",searchSubject);
-            
-           
-            
-            //주제 삭제 모달 팝업 이벤트
-            $("#setSubjectModalBtn").on("click",function(){
-            	$("#setSubjectModal").modal("show");
-            })
-            
-            
-            //게시물 삭제 이벤트
-            $("#delBoardBtn").on("click",sendDelBoard);
-        });
-        //게시물을 받아옴 
-        function searchBoard(){
-			
-        	var dataStr = JSON.stringify(boardSrchDto)
-        	
-        	$.ajax({
-		   		url : "${pageContext.request.contextPath}/board/search/proc"
-				, method : "post"
-		   		, dataType : 'json'
-		   		, data : dataStr
-		   		, processData : true
-		   		, contentType : "application/json; charset=UTF-8"
-			})
-			.done(function(data){
-				console.log(data);
-				if(data.boardList === null){
-					console.log("게시물이 없습니다.")
-				}else{
-					console.log(data.boardSrchDto);
-					//마지막 페이지 여부 받아오기 
-					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
-					
-					//키값이 1인 경우 div#center 초기화
-					if(boardSrchDto.nxt1KeyVal === 1){
-						$("#center").html("");	
-					}
-
-					boardSrchDto.nxt1KeyVal += 1;
-					
-					// 카드 추가
-					data.boardList.forEach(function(item){
-						item.boardContent = quillGetHTML(item.boardContent);
-						if(item.boardType === NOTICE){
-							$("#center").append(makeNoticeCard(item));	
-						}else if(item.boardType === HW_BOARD){
-							$("#center").append(makeHWCard(item));	
+				//floating Button
+				$("#floatingBtn").on("click", function() {
+					setTimeout(function() {
+						if ($("#floatingBtn").hasClass("open")) {
+							$("#homeworkBtn").popover('show');
+							$("#noticeBtn").popover('show');
+						} else {
+							$("#homeworkBtn").popover('hide');
+							$("#noticeBtn").popover('hide');
 						}
-					})
-					
-		        	$(".delModalBtn").on("click",showDelBoardModal)  
-				}
-		   	});
-		}
-        function searchSubject(){
-        	
-        	//boardSrchDto에 검색 주제 추가후
-        	console.log(this)
-        	boardSrchDto.srchWord = this.querySelector("a").innerHTML;
-        	boardSrchDto.nxt1KeyVal = 1;
-        	
-        	//게시물 조회 실행
-        	searchBoard();
-        	
-        	//화면 상단으로 이동
-        	$('html, body').animate({scrollTop: 0 }, 'slow');
-        }
-        
-        //
-        function showDelBoardModal(e){
-        	//해당 게시물의 번호와 타입을 얻어옴
-        	var evt = e || window.event;
-        	
-        	var evtTargetId = e.target.nextSibling.nextSibling.id;
-        	var boardProp = $("#"+evtTargetId).serializeObject();
-        	
-        	//모달에 해당 게시물의 번호와 타입을 저장 해둠
-        	$("#delModalProp input[name=boardNum]").val(boardProp.boardNum);
-        	$("#delModalProp input[name=boardType]").val(boardProp.boardType);
-        	$("#delBoardModal").modal('show');
-        }
-        
-        // 공지 삭제  Ajax Request
-        function sendDelBoard(){
-        	//모달에 저장된 삭제할 게시물 정보 불러옴
-        	var delBoardProp = $("#delModalProp").serializeObject();
-        	var dataStr = JSON.stringify(delBoardProp);
-        	
-        	$.ajax({
-		   		url : "${pageContext.request.contextPath}/board/delete/proc"
-				, method : "post"
-		   		, dataType : 'json'
-		   		, data : dataStr
-		   		, processData : true
-		   		, contentType : "application/json; charset=UTF-8"
-			})
-			.done(function(data){
-				if(data.errC === "0000"){
-					
-					$("#delBoardModal").modal('hide');
-					
-					//키값 초기화후 다시 글 목록 불러오기
-					boardSrchDto.nxt1KeyVal = 1;
-		        	
-		        	//게시물 조회 실행
-		        	searchBoard();
-		        	
-		        	//화면 상단으로 이동
-		        	$('html, body').animate({scrollTop: 0 }, 'slow');
-				}
-			});
-        }
-        
-        //공지 생성 Ajax Request
-        function insertNoticeBoard(){
-        	
-            var about = document.querySelector('input[name=boardContent]');
-            about.value = JSON.stringify(NoticeQuill.getContents());
-            var noticeData = $('#noticeForm').serializeObject()
-        	var dataStr = JSON.stringify(noticeData);
-        	$.ajax({
-		   		url : "${pageContext.request.contextPath}/board/insert/notice/proc"
-				, method : "post"
-		   		, dataType : 'json'
-		   		, data : dataStr
-		   		, processData : true
-		   		, contentType : "application/json; charset=UTF-8"
-			})
-			.done(function(data){
+					}, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
+				});
+
+				$('.material-button-toggle').on("click", function() {
+					$(this).toggleClass('open');
+					$('.option').toggleClass('scale-on');
+				});
+
+	            $("#homeworkBtn").on("click", function () {
+	                $("#homeworkModal").modal('show')       
+	                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+	            });				
 				
-				if(data.errC ==="0000"){
-					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
-					$("#noticeModal").modal('hide');
-					//searchBoard();
-					//새로고침
-					window.location.reload()
-				}
+				$("#noticeBtn").on("click", function() {
+					$("#noticeModal").modal('show');
+					$("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+				});
+
+				$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
+					$("#floatingBtn").trigger("click");
+				});
+
+				$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
+					if ($("body").css("padding-right") !== "0px") {
+						$("#floatingBtnDiv").addClass("add-right");
+					}
+				});
+				$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
+					$("#floatingBtnDiv").removeClass("add-right")
+				});
+
+				$(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
+
+				//스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
+				$(window).scroll(
+						function() {
+							var scrolltop = $(window).scrollTop();
+							if (scrolltop >= $(document).height()
+									- $(window).height() - 2
+									&& boardSrchDto.nxtPageFl === "T") {
+								searchBoard();
+							}
+						});
+
+				//주제 클릭 이벤트
+				$("#subjectList").on("click", "li", searchSubject);
+
+				//주제 삭제 모달 팝업 이벤트
+				$("#setSubjectModalBtn").on("click", function() {
+					$("#setSubjectModal").modal("show");
+				})
+
+				//게시물 삭제 이벤트
+				$("#delBoardBtn").on("click", sendDelBoard);
+				
+				//datepicker 플러그인 적용
+				$('.datepicker').dateDropper();
 			});
-        }
-        //공지 카드 만들기
-		function makeNoticeCard(data){
-			var source = $("#notice-card").html();
-	    	var template = Handlebars.compile(source);
-	    	var html = template(data);
-	    	return html;
-		}
-		//과제 카드 만들기
-		function makeHWCard(data){
-			var source = $("#hw-card").html();
-	    	var template = Handlebars.compile(source);
-	    	var html = template(data);
-	    	return html;
-		}
-		
-    </script>
+			$(function(){
+				//모달 드롭다운 클릭시 닫지 않음
+				$("ul.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) { 
+					e.stopPropagation(); 
+				});
+			})
+	//게시물을 받아옴 
+	function searchBoard() {
+
+		var dataStr = JSON.stringify(boardSrchDto)
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/board/search/proc",
+			method : "post",
+			dataType : 'json',
+			data : dataStr,
+			processData : true,
+			contentType : "application/json; charset=UTF-8"
+		}).done(function(data) {
+			console.log(data);
+			if (data.boardList === null) {
+				console.log("게시물이 없습니다.")
+			} else {
+				console.log(data.boardSrchDto);
+				//마지막 페이지 여부 받아오기 
+				boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
+
+				//키값이 1인 경우 div#center 초기화
+				if (boardSrchDto.nxt1KeyVal === 1) {
+					$("#center").html("");
+				}
+
+				boardSrchDto.nxt1KeyVal += 1;
+
+				// 카드 추가
+				data.boardList.forEach(function(item) {
+					item.boardContent = quillGetHTML(item.boardContent);
+					if (item.boardType === NOTICE) {
+						$("#center").append(makeNoticeCard(item));
+					} else if (item.boardType === HW_BOARD) {
+						$("#center").append(makeHWCard(item));
+					}
+				})
+
+				$(".delModalBtn").on("click", showDelBoardModal)
+			}
+		});
+	}
+	function searchSubject() {
+
+		//boardSrchDto에 검색 주제 추가후
+		console.log(this)
+		boardSrchDto.srchWord = this.querySelector("a").innerHTML;
+		boardSrchDto.nxt1KeyVal = 1;
+
+		//게시물 조회 실행
+		searchBoard();
+
+		//화면 상단으로 이동
+		$('html, body').animate({
+			scrollTop : 0
+		}, 'slow');
+	}
+
+	//
+	function showDelBoardModal(e) {
+		//해당 게시물의 번호와 타입을 얻어옴
+		var evt = e || window.event;
+
+		var evtTargetId = e.target.nextSibling.nextSibling.id;
+		var boardProp = $("#" + evtTargetId).serializeObject();
+
+		//모달에 해당 게시물의 번호와 타입을 저장 해둠
+		$("#delModalProp input[name=boardNum]").val(boardProp.boardNum);
+		$("#delModalProp input[name=boardType]").val(boardProp.boardType);
+		$("#delBoardModal").modal('show');
+	}
+
+	// 공지 삭제  Ajax Request
+	function sendDelBoard() {
+		//모달에 저장된 삭제할 게시물 정보 불러옴
+		var delBoardProp = $("#delModalProp").serializeObject();
+		var dataStr = JSON.stringify(delBoardProp);
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/board/delete/proc",
+			method : "post",
+			dataType : 'json',
+			data : dataStr,
+			processData : true,
+			contentType : "application/json; charset=UTF-8"
+		}).done(function(data) {
+			if (data.errC === "0000") {
+
+				$("#delBoardModal").modal('hide');
+
+				//키값 초기화후 다시 글 목록 불러오기
+				boardSrchDto.nxt1KeyVal = 1;
+
+				//게시물 조회 실행
+				searchBoard();
+
+				//화면 상단으로 이동
+				$('html, body').animate({
+					scrollTop : 0
+				}, 'slow');
+			}
+		});
+	}
+
+	//공지 생성 Ajax Request
+	function insertNoticeBoard() {
+
+		var about = document.querySelector('input[name=boardContent]');
+		about.value = JSON.stringify(NoticeQuill.getContents());
+		var noticeData = $('#noticeForm').serializeObject()
+		var dataStr = JSON.stringify(noticeData);
+		$
+				.ajax(
+						{
+							url : "${pageContext.request.contextPath}/board/insert/notice/proc",
+							method : "post",
+							dataType : 'json',
+							data : dataStr,
+							processData : true,
+							contentType : "application/json; charset=UTF-8"
+						}).done(function(data) {
+
+					if (data.errC === "0000") {
+						boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
+						$("#noticeModal").modal('hide');
+						//searchBoard();
+						//새로고침
+						window.location.reload()
+					}
+				});
+	}
+	//공지 카드 만들기
+	function makeNoticeCard(data) {
+		var source = $("#notice-card").html();
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		return html;
+	}
+	//과제 카드 만들기
+	function makeHWCard(data) {
+		var source = $("#hw-card").html();
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		return html;
+	}
+</script>
