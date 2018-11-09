@@ -44,6 +44,11 @@
 	
 	<!-- ///////////////////////// group /////////////////////////// -->
 	
+	<definition name="/group/attended" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/attended-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/attended.jsp" />
+	</definition>
+	
 	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
 	</definition>

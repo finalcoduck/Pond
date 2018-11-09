@@ -48,4 +48,6 @@
 		    SYSDATE, 
 		    #{attendedType});
    </update>
+   
+   
 </mapper>  
