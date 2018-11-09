@@ -75,6 +75,15 @@ public class BoardServiceImpl implements BoardService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
+	
+	@Override
+	public HashMap<String, Object> insertHomeworkBoard(HwBoardVo hwBoardVo){
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		hwBoardDao.insertHwBoard(hwBoardVo);
+		
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		return resultMap;
+	}
 
 	@Override
 	public HashMap<String, Object> deleteNoticeBoard(int boardNum) {

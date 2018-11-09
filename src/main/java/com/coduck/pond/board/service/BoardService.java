@@ -16,4 +16,6 @@ public interface BoardService {
 	public HashMap<String,Object> deleteNoticeBoard(int boardNum);
 	
 	public HashMap<String,Object> deleteHWBoard(int boardNum);
+	
+	public HashMap<String, Object> insertHomeworkBoard(HwBoardVo hwBoardVo);
 }

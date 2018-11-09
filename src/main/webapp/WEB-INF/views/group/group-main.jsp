@@ -11,7 +11,9 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/build/css/group.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">	
+	href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
 
 <!-- content -->
 <section id="main">
@@ -172,7 +174,7 @@
 
 <!-- The Modal -->
 <div class="modal" id="homeworkModal">
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog" style="max-width:700px">
 		<div class="modal-content border-0">
 
 			<!-- Modal Header -->
@@ -209,10 +211,10 @@
 				</div>
 				<div class="form-group">
 					<input name="homework-caption" type="hidden">
-					<div id="homework-caption">
+					<div id="homework-caption-container">
 					</div>
 					<input name="homework-content" type="hidden">
-					<div id="homework-content">
+					<div id="homework-content-container">
 					</div>
 				</div>
 				<ul class="score_area">
@@ -226,8 +228,13 @@
 					</li>
 					<li>
 						<span class="txt">주제</span>
-						<select>
-							<option>주제</option>
+						<select class="custom-select" name="subjectTitle"
+							id="inputGroupSelect01" style="width:auto;">
+							<option selected>공지</option>
+							<c:forEach var="subject" items='${subjectList}'
+								varStatus="status">
+								<option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
+							</c:forEach>
 						</select>
 					</li>
 				</ul>
@@ -428,6 +435,14 @@
 
 	var NoticeQuill = new Quill('#notice-editor-container', {
 		placeholder : '공지를 입력하세요',
+	});
+	
+	var HomeworkCaptionQuill = new Quill('#homework-caption-container', {
+		placeholder : '제목을 입력하세요',
+	});
+	
+	var HomeworkContentQuill = new Quill('#homework-content-container', {
+		placeholder : '내용을 입력하세요(선택사항)',
 	});
 
 	$(document).ready(
