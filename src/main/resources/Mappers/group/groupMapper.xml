@@ -10,6 +10,7 @@
 		INSERT
 		 INTO POND_GROUP 
 		 (
+		 	GROUP_NUM,
 		 	GROUP_NAME, 
 		 	OPEN_DATE, 
 		 	MAX_MEM_NUM, 
@@ -22,6 +23,7 @@
 		 ) 
 		 VALUES 
 		 (
+		 	POND_GROUP_SEQ.nextval,
 		 	#{groupName}, 
 		 	sysdate, 
 		 	50, 
@@ -76,4 +78,15 @@
 	<select id="dupliInviteCode" parameterType="map" resultType="com.coduck.pond.group.vo.GroupMemVo">
 		select * from group_mem where group_num = #{groupNum} and mem_email = #{memEmail}
 	</select>
+	
+	<!-- 해당 그룹의 매니저 멤버리스트 가져오기 -->
+	<select id="getGroupMemListM" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMem_smDto">
+	 	select * from group_mem g, mem m where g.mem_email = m.mem_email and g.group_num = #{value} and g.status = 'M'
+	</select>
+	
+	<!-- 해당 그룹의 학생 멤버리스트 가져오기 -->
+	<select id="getGroupMemListS" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMem_smDto">
+	 	select * from group_mem g, mem m where g.mem_email = m.mem_email and g.group_num = #{value} and g.status = 'S'
+	</select>
+	
 </mapper> 

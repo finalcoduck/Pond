@@ -12,6 +12,7 @@ import com.coduck.pond.core.utils.RandomCodeUtility;
 import com.coduck.pond.group.dao.GroupDao;
 import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
+import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
 
 
@@ -31,7 +32,7 @@ public class GroupServiceImpl implements GroupService{
 		groupVo.setInviteCodeStatus('O');
 		groupDao.insertGroup(groupVo);
 		
-		int groupNum = insertGroupMem(inviteCodeS, inviteCodeM);
+		int groupNum = getGroupMem(inviteCodeS, inviteCodeM);
 		
 		GroupMemVo groupMemVo = new GroupMemVo(0, groupNum, groupVo.getMemEmail(), 'M');
 		groupDao.insertGroupMem(groupMemVo);
@@ -53,7 +54,6 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	@Transactional
 	public void insertGorupDefault(GroupVo groupVo) {
 		String inviteCodeS = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
 		String inviteCodeM = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
@@ -67,14 +67,14 @@ public class GroupServiceImpl implements GroupService{
 		groupVo.setGroupImage(groupImage);
 		groupDao.insertGroup(groupVo);
 		
-		int groupNum = insertGroupMem(inviteCodeS, inviteCodeM);
+		int groupNum = getGroupMem(inviteCodeS, inviteCodeM);
 		
 		GroupMemVo groupMemVo = new GroupMemVo(0, groupNum, groupVo.getMemEmail(), 'M');
 		groupDao.insertGroupMem(groupMemVo);
 	}
 
 	@Override
-	public int insertGroupMem(String inviteCodeS, String inviteCodeM) { //여까지
+	public int getGroupMem(String inviteCodeS, String inviteCodeM) { //여까지
 		int groupNum = groupDao.getGroupNum(inviteCodeS, inviteCodeM);
 		return groupNum;
 	}
@@ -91,6 +91,11 @@ public class GroupServiceImpl implements GroupService{
 		map.put("groupNum", groupNum);
 		
 		return groupDao.dupliInviteCode(map);
+	}
+
+	@Override
+	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum) {
+		 return groupDao.getGroupMemList(groupNum);
 	}
 
 }

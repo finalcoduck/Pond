@@ -2,6 +2,7 @@
 package com.coduck.pond.group.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.coduck.pond.board.service.SubjectService;
 import com.coduck.pond.board.vo.SubjectVo;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
@@ -23,6 +25,16 @@ public class GroupController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	
+	@RequestMapping("/group/member")
+	public String goGroupMember(int groupNum, Model model) {
+		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		model.addAttribute("mList", map.get("mList")); // 매니저 등급 회원들
+		model.addAttribute("sList", map.get("sList")); // 학생 등급 회원들
+		model.addAttribute("groupVo", groupVo); // 그룹 정보
+		return "/group/group-member";
+	}
 	
 	@RequestMapping(value = "/group/group-main", method = {RequestMethod.GET,RequestMethod.POST})
 	public String groupMain(int groupNum, MemDto memDto, Model model) {
@@ -52,6 +64,7 @@ public class GroupController {
 		model.addAttribute("subjectList",subjectList);
 		model.addAttribute("groupVo", groupVo);
 		return "/group/setting-subject";
-	}	
+	}
+	
 	
 }

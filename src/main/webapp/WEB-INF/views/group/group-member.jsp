@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
     <!-- content -->
 
@@ -13,39 +14,42 @@
                             <a id="inviteTeacherBtn" href="" data-toggle="modal" data-target="#inviteTeacherModal"><i class="fas fa-user-plus"><!--선생님초대아이콘--></i></a>
                         </div>
                         <ul class="list-group list-group-flush">
+                        	<c:forEach items="${mList }" var="vo">
                             <li class="list-group-item d-flex justify-content-between">
                                 <div class="d-flex">
-                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
-                                    <h6>강덕영</h6>
+                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
+                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
+                                    <c:choose>
+                                    	<c:when test="${groupVo.memEmail eq vo.memEmail }">
+	                                    	<h6>
+		                                    	<span style="color:red;">${vo.memName }</span> &nbsp; &nbsp; &nbsp;
+												${vo.memEmail }                                    	
+		                                    </h6>
+                                    	</c:when>
+                                    	<c:otherwise>
+	                                    	<h6>
+		                                    	<span>${vo.memName }</span> &nbsp; &nbsp; &nbsp;
+												${vo.memEmail }                                    	
+		                                    </h6>
+                                    	</c:otherwise>
+                                    </c:choose>
                                 </div>
-                                <div class="dropdown dropleft">
-                                    <a href="" class="" data-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">이메일</a>
-                                        <a class="dropdown-item" href="#">삭제</a>
-                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
-                                    </div>
-                                </div>
+                                <c:if test="${groupVo.memEmail eq vo.memEmail }">
+                                <c:set var="boss" value="is"/>
+                                   	<c:if test="${groupVo.memEmail ne vo.memEmail }">
+	                                <div class="dropdown dropleft">
+	                                    <a href="" class="" data-toggle="dropdown">
+	                                        <i class="fas fa-ellipsis-v"></i>
+	                                    </a>
+	                                    <div class="dropdown-menu">
+	                                        <a class="dropdown-item" href="#">삭제</a>
+	                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
+	                                    </div>
+	                                </div>                               
+                                    </c:if>
+                                </c:if>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div class="d-flex">
-                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
-                                    <h6>이재용</h6>
-                                </div>
-                                <div class="dropdown dropleft">
-                                    <a href="" class="" data-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">이메일</a>
-                                        <a class="dropdown-item" href="#">삭제</a>
-                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
-
-                                    </div>
-                                </div>
-                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <div class="card mb-3">
@@ -54,53 +58,44 @@
                             <a href="" id="inviteStudentBtn" data-toggle="modal" data-target="#inviteStudentModal"><i class="fas fa-user-plus"></i></a>
                         </div>
                         <ul class="list-group list-group-flush">
+<!--                             <li class="list-group-item d-flex justify-content-between">
+	                                <div class="d-flex align-items-center">
+	                                    <input type="checkbox" class="mr-1" value="">
+	                                    <h6>전체</h6>
+	                                </div>
+	                                <div class="dropdown dropleft">
+	                                    <a href="" class="" data-toggle="dropdown">
+	                                        <i class="fas fa-ellipsis-v"></i>
+	                                    </a>
+	                                    <div class="dropdown-menu">
+	                                        <a class="dropdown-item" href="#">차단</a>
+	                                        <a class="dropdown-item" href="#">삭제</a>
+	                                    </div>
+	                                </div>
+	                            </li> -->
+							<c:forEach items="${sList }" var="vo">
                             <li class="list-group-item d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <input type="checkbox" class="mr-1" value="">
-                                    <h6>전체</h6>
+                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
+                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
+                                    	<h6>
+	                                    	<span>${vo.memName }&nbsp;&nbsp;&nbsp;</span>
+											${vo.memEmail }                                    	
+	                                    </h6>
                                 </div>
+                                <c:if test="${!empty boss}">
                                 <div class="dropdown dropleft">
                                     <a href="" class="" data-toggle="dropdown">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">차단</a>
-                                        <a class="dropdown-item" href="#">삭제</a>
+                                        <a class="dropdown-item" href="${pageContext.request.contextPath }/group/member-kick?groupNum=${groupVo.groupNum}&memEmail=${vo.memEmail}">삭제</a>
                                     </div>
                                 </div>
+                                </c:if>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <input type="checkbox" class="mr-1" value="">
-                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
-                                    <h6>강덕영</h6>
-                                </div>
-                                <div class="dropdown dropleft">
-                                    <a href="" class="" data-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">이메일</a>
-                                        <a class="dropdown-item" href="#">삭제</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <input type="checkbox" class="mr-1" value="">
-                                    <img class="rounded-circle sm-profile-img" src="https://picsum.photos/50/50" alt="">
-                                    <h6>이재용</h6>
-                                </div>
-                                <div class="dropdown dropleft">
-                                    <a href="" class="" data-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">이메일</a>
-                                        <a class="dropdown-item" href="#">삭제</a>
-                                    </div>
-                                </div>
-                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>

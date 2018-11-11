@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mappers.MemberManageMapper">
+	<!-- 그룹에서 내보낸 회원 디비 삭제 -->
+	<delete id="kickMemFromGroup" parameterType="map">
+		delete from group_mem where group_num = #{groupNum} and mem_Email = #{memEmail}
+	</delete>
+	
+	<!-- 그룹에서 회원 내보낸 기록 저장 -->
+	<insert id="kickHistoryInsert" parameterType="com.coduck.pond.member.vo.KickHistory">
+		insert into kickout_history values(kick_seq.nextval,#{groupNum},#{memEmail},sysdate)
+	</insert>
+	
+	<!-- 초대코드 입력시 내보냈던 회원 확인 -->
+	<select id="checkKickedMem" parameterType="map" resultType="com.coduck.pond.member.vo.KickHistory">
+		select * from kickout_history where group_Num = #{groupNum} and memEmail = #{memEmail}
+	</select>
+	
+	<!-- 해당 그룹 내보낸 회원 이력 -->
+	<select id="getKickHistory" parameterType="int" resultType="com.coduck.pond.member.vo.KickHistory">
+		select * from kickout_history where group_Num = #{groupNum}
+	</select>	
+</mapper>
