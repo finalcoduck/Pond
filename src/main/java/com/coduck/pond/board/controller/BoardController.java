@@ -24,6 +24,16 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+
+	@RequestMapping(value = "/board/insert/homework/proc", method = RequestMethod.POST)
+	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody HwBoardVo hwBoardVo, MemDto memDto){
+		hwBoardVo.setBoardWriter(memDto.getMemVo().getMemEmail());
+		
+		HashMap<String,Object> resultMap = boardService.insertHomeworkBoard(hwBoardVo);
+		
+		return resultMap;
+	}
+	
 	
 	//그룹 게시글 조회
 	@RequestMapping(value = "/board/search/proc", method = RequestMethod.POST)

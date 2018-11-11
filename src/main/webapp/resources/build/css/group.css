@@ -227,7 +227,11 @@ h2.sub_title span.num{color:#007bff;}
 	border-bottom:1px solid #007bff
 }
 
-#HWModal .modal-dialog{margin:-100px auto;}
+div.datedropper .picker .pick-btns .pick-btn.pick-btn-sz:after{content:'' !important;}
+div.datedropper .picker .pick-btns .pick-btn.pick-btn-sz{width:25px; height:25px; background-image:url(../image/arrow01.png); background-repeat:no-repeat; background-position:center center; background-size:100% 100%; opacity:0.8;}
+div.datedropper.picker-lg .picker .pick-btns .pick-btn.pick-btn-sz{background-image:url(../image/arrow02.png);}
+.pick-submit:after, .pick-btn-lng{display:none;}
+.pick-submit{background-image:url(../image/ico_check.png); background-repeat:no-repeat; background-position:center center; background-size:25px 25px;}
 
 
 /*tablet*/
