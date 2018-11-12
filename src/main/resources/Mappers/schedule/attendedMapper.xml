@@ -5,8 +5,7 @@
 <mapper namespace="Mappers.attendedMapper">
    
    <!-- 금일의 등원 정보 선택 -->
-   <select id="selectTodayAttended" parameterType="com.coduck.pond.member.vo.MemVo"
-   resultType="com.coduck.pond.schedule.vo.AttendedVo">
+   <select id="selectTodayAttended" parameterType="com.coduck.pond.member.vo.MemAttendedDto" resultType="com.coduck.pond.schedule.vo.AttendedVo">
 		SELECT
 			*
 		FROM
@@ -14,7 +13,7 @@
 		WHERE
 			GROUP_NUM = #{groupNum} 
 			AND MEM_EMAIL = #{memEmail}
-			AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD');
+			AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
    </select>
    
    <!-- 하원시간 업데이트 -->
@@ -30,7 +29,7 @@
 		    #{groupNum}, 
 		    sysdate, 
 		    null, 
-		    'F');
+		    'F')
    </insert>
    
    <!-- 하원 시간 업데이트 -->
@@ -46,8 +45,6 @@
 		    #{groupNum}, 
 		    #{attendedIn}, 
 		    SYSDATE, 
-		    #{attendedType});
+		    #{attendedType})
    </update>
-   
-   
 </mapper>  

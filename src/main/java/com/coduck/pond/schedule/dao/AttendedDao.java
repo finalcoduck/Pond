@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.coduck.pond.member.vo.MemAttendedDto;
 import com.coduck.pond.member.vo.MemVo;
 import com.coduck.pond.schedule.vo.AttendedVo;
 
@@ -15,8 +16,8 @@ public class AttendedDao {
 	private SqlSession session;
 	private static final String NAMESPACE = "Mappers.attendedMapper.";
 	
-	public AttendedVo selectTodayAttended (MemVo memVo) {
-		return session.selectOne(NAMESPACE+"selectTodayAttended", memVo);
+	public AttendedVo selectTodayAttended (AttendedVo attendedVo) {
+		return session.selectOne(NAMESPACE+"selectTodayAttended", attendedVo);
 	}
 	
 	public void insertInAttended (AttendedVo attendedVo) {
