@@ -38,35 +38,15 @@ $(document).ready(function(){
 			displayEventEnd: false,
 			showNonCurrentDates: false,
 			themeSystem:'bootstrap4',
-			contentHeight: 'auto'
+			contentHeight: 'auto',
+			viewRender: function(view, element) {
+				srchAttended(new Date(view.start._i));
+			}
 		});
-		var events = [{
-			  title: 'Event Title3',
-		      start: '2018-11-17T13:13:55.008',
-		      end: '2018-11-19T13:13:55.008',
-		      backgroundColor: '#dc3545',
-		      borderColor: '#dc3545',
-		      textColor: '#fff'},
-		      {
-			      title: 'Event Title1',
-			      start: '2018-03-17T13:13:55.008',
-			      end: '2018-03-19T13:13:55.008',
-			      backgroundColor: '#dc3545',
-			      borderColor: '#dc3545',
-			      textColor: '#fff'
-			    },
-			    {
-			      title: 'Event Title2',
-			      start: '2018-03-17T13:13:55-0400',
-			      end: '2018-03-19T13:13:55-0400',
-			      backgroundColor: '#007bff',
-			      borderColor: '#007bff',
-			      textColor: '#fff'
-			    }
-		      ];
-		$('#calendar').fullCalendar('addEventSource',events);
+		$('#calendar').fullCalendar('option', 'timezone', 'Asia/Seoul');
 		$('#attendanceBtn').on('click',attendedIn);
 
+		
 });
 function isAttended(){
 	
@@ -94,7 +74,49 @@ function isAttended(){
 function attended(){
 	
 }
-
+function srchAttended(date){
+	
+	var data = {groupNum : '${groupVo.groupNum}',srchDate: date};
+	var dataStr = JSON.stringify(data); 
+	
+	$.ajax({
+   		url : "${pageContext.request.contextPath}/group/srch/attended/proc"
+		, method : "post"
+   		, dataType : 'json'
+   		, data : dataStr
+   		, processData : true
+   		, contentType : "application/json; charset=UTF-8"
+	})
+	.done(function(data){
+		var eventsList = [];
+		data.attendedVoList.forEach(function(item){
+			
+			
+			//AWS RDS 에서 sysdate로 저장하면 UTC로 저장되어짐 seoul 타임존 +9:00 해주어야함
+			eventsList.push({
+				  title: '등원',
+			      start: moment(item.attendedIn).add(9,'hours'),
+			      end: moment(item.attendedIn).add(9,'hours'),
+			      backgroundColor: '#007bff',
+			      borderColor: '#007bff',
+			      textColor: '#fff'})
+			
+			if(item.attendedOut !== null){
+				eventsList.push({
+					  title: '하원',
+				      start: moment(item.attendedOut).add(9,'hours'),
+				      end: moment(item.attendedOut).add(9,'hours'),
+				      backgroundColor: '#dc3545',
+				      borderColor: '#dc3545',
+				      textColor: '#fff'})	
+			}
+			  
+		})
+		$('#calendar').fullCalendar('addEventSource',eventsList);
+		console.log(eventsList);
+	});
+	
+}
 function attendedIn(){
 	
 	var data = {groupNum : '${groupVo.groupNum}'};

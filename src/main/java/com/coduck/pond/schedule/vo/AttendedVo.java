@@ -6,8 +6,8 @@ public class AttendedVo {
 	private int attendedNum;
 	private String memEmail;
 	private int groupNum;
-	private Date attendedIn;
-	private Date attendedOut;
+	private String attendedIn;
+	private String attendedOut;
 	private String attendedType;
 	
 	public AttendedVo() {
@@ -32,16 +32,16 @@ public class AttendedVo {
 	public void setGroupNum(int groupNum) {
 		this.groupNum = groupNum;
 	}
-	public Date getAttendedIn() {
+	public String getAttendedIn() {
 		return attendedIn;
 	}
-	public void setAttendedIn(Date attendedIn) {
+	public void setAttendedIn(String attendedIn) {
 		this.attendedIn = attendedIn;
 	}
-	public Date getAttendedOut() {
+	public String getAttendedOut() {
 		return attendedOut;
 	}
-	public void setAttendedOut(Date attendedOut) {
+	public void setAttendedOut(String attendedOut) {
 		this.attendedOut = attendedOut;
 	}
 	public String getAttendedType() {

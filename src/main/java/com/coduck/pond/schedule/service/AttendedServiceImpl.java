@@ -1,6 +1,7 @@
 package com.coduck.pond.schedule.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.member.vo.MemAttendedDto;
 import com.coduck.pond.schedule.dao.AttendedDao;
 import com.coduck.pond.schedule.vo.AttendedVo;
+import com.coduck.pond.schedule.vo.SrchAttendedDto;
 
 @Service
 public class AttendedServiceImpl implements AttendedService{
@@ -46,5 +48,13 @@ public class AttendedServiceImpl implements AttendedService{
 		
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.FAILURE);
 		return resultMap;
+	}
+
+	@Override
+	public List<AttendedVo> selectMonthAttended(SrchAttendedDto srchAttendedDto) {
+		
+		List<AttendedVo>  AttendedVoList = attendedDao.selectMonthAttended(srchAttendedDto);
+		
+		return AttendedVoList;
 	}
 }
