@@ -9,3 +9,12 @@
 .homework_con div ul li a span{display:block;}
 .homework_con div ul li a span.num{font-size:30px; color:#000; line-height:1;}
 .homework_con div ul li a span.txt{font-size:14px; color:#666; line-height:1; margin-top:10px;}
+
+.comment-div button{
+	float: right;
+}
+
+#profile-img{
+	width: 30px; height: 30px;
+}
+

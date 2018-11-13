@@ -137,6 +137,48 @@
                         <div class="card-footer align_r">
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
                         </div>
+                        <div class="comment-list">
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+                        </div>                                                
+                        <div class="card-footer d-flex">
+							<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
+							          	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
+							          	<input type="hidden" name="cmntComment"/>
+							          	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
+								</form>
+							<div class="col-9" id="editor-test-{{boardNum}}"></div>
+							<button class="comment-btn col-1" id="cmnt-{{boardNum}}">작성</button> 
+						</div>
                     </div>
                     <!-- Post /////-->
                     <div class="card mb-3">
@@ -198,6 +240,11 @@
                         </div>
                         <div class="card-footer align_r">
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
+                        </div>
+	                    <div class="card-footer comment-div">
+	                    	<img id="profile-img" class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+	                    	<div id="editor-test"></div>
+                            <button>작성</button>
                         </div>
                     </div>
                     <!-- Post /////-->
@@ -421,7 +468,11 @@
             var quill2 = new Quill('#homework-content', {
                 placeholder: '내용(선택사항)',
             });
-
+			
+            var testQuill = new Quill('#editor-test', {
+            	placeholder: '댓글을 입력하세요',
+            });
+            
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
 
             var form = document.querySelector('form');
