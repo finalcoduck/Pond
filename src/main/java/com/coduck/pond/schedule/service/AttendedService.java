@@ -14,4 +14,6 @@ public interface AttendedService {
 	
 	public HashMap<String, Object> attendedIn(AttendedVo attendedVo);
 	
+	public HashMap<String, Object> attendedOut(AttendedVo attendedVo);
+	
 }

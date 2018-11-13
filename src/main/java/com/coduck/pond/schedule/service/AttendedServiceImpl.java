@@ -57,4 +57,12 @@ public class AttendedServiceImpl implements AttendedService{
 		
 		return AttendedVoList;
 	}
+
+	@Override
+	public HashMap<String, Object> attendedOut(AttendedVo attendedVo) {
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		attendedDao.updateOutAttended(attendedVo);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		return resultMap;
+	}
 }

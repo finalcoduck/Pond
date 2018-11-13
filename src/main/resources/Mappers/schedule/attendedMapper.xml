@@ -50,17 +50,18 @@
    
    <!-- 하원 시간 업데이트 -->
    <update id="updateOutAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
-	   INSERT INTO ATTENDED
-		    (MEM_EMAIL, 
-		    GROUP_NUM, 
-		    ATTENDED_IN, 
-		    ATTENDED_OUT, 
-		    ATTENDED_TYPE)
-		VALUES
-		    (#{memEmail}, 
-		    #{groupNum}, 
-		    #{attendedIn}, 
-		    SYSDATE, 
-		    #{attendedType})
+	    UPDATE ATTENDED SET
+	   		ATTENDED_OUT=SYSDATE
+	   	WHERE
+	   		ATTENDED_NUM = (
+	   			SELECT
+	   				ATTENDED_NUM
+	   			FROM
+	   				ATTENDED
+	   			WHERE
+	   				GROUP_NUM = #{groupNum}
+	   				AND MEM_EMAIL = #{memEmail}
+	   				AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	   		)
    </update>
 </mapper>  

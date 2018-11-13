@@ -32,6 +32,7 @@ public class AttendedController {
 	@Autowired
 	private GroupService groupService;
 	
+	//출석 페이지 리턴
 	@RequestMapping(value="/group/attended")
 	public String attendedPage(int groupNum, Model model) {
 		
@@ -54,6 +55,7 @@ public class AttendedController {
 		return resultMap;
 	}
 	
+	//금일 출석 여부 리턴
 	@RequestMapping(value="/group/is/attended/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> isAttended(@RequestBody AttendedVo attendedVo, MemDto memDto) {
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
@@ -67,12 +69,23 @@ public class AttendedController {
 		return resultMap;
 	}
 	
+	// 등원
 	@RequestMapping(value="/group/attended/in/proc",method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> attended(@RequestBody AttendedVo attendedVo,MemDto memDto){
+	public @ResponseBody Map<String,Object> attendedIn(@RequestBody AttendedVo attendedVo,MemDto memDto){
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
 		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
 		resultMap = attendedService.attendedIn(attendedVo);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/group/attended/out/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> attendedOut(@RequestBody AttendedVo attendedVo,MemDto memDto){
+		
+		
+		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
+		HashMap<String,Object> resultMap = attendedService.attendedOut(attendedVo);
 		
 		return resultMap;
 	}
