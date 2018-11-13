@@ -6,6 +6,9 @@ $(function() {
 	checkPassword(); // 비밀번호 유효성 체크
 	checkName(); // 이름 유효성 체크
 	dupliCheck(); // 비밀번호 중복체크
+	
+	//회원가입 버튼을 눌렀을시 최종체크
+	$('#sbm-btn').on('click',finalCheck());
 });
 
 
@@ -15,14 +18,13 @@ var regxPwd = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/; //영어,�
 
 function dupliCheck() {
 	$('#password2').keyup(function () {
-		console.log('test');
 		var pwd = $('#password').val();
 		var pwd2 = $('#password2').val();
 		if(pwd === pwd2){
-			console.log('일치합니다!');
+			$('label[for=pwd-check]').find('span').html('&nbsp;&nbsp; 일치합니다.').css('color','blue');
 			return true;
 		}else{
-			console.log('불일치합니다!');
+			$('label[for=pwd-check]').find('span').html('&nbsp;&nbsp; 일치하지 않습니다.').css('color','red');
 			return false;
 		}
 	});
@@ -47,10 +49,10 @@ function checkPassword() {
 		var password = $('#password').val();
 		var bool = regxPwd.test(password);
 		if(bool){
-			console.log(true);
+			$('label[for=pwd]').find('span').html('&nbsp;&nbsp; 사용할 수 있습니다.').css('color','blue');
 			return true;
 		}else{
-			console.log(false);
+			$('label[for=pwd]').find('span').html('');
 			return false;
 		}
 	});
@@ -73,6 +75,7 @@ function checkName(){
 
 
 function finalCheck(){
+	console.log('asd');
 	var pwd = $('#password').val();
 	var pwd2 = $('#password2').val();
 	var password = $('#password').val();

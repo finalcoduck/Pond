@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.coduck.pond.core.utils.DateUtility;
 import com.coduck.pond.schedule.service.ScheduleServiceImpl;
 import com.coduck.pond.schedule.vo.ScheduleVo;
 
@@ -27,6 +28,7 @@ import com.coduck.pond.schedule.vo.ScheduleVo;
 public class ScheduleBasicController {
 	@Autowired
 	private ScheduleServiceImpl scheduleService;
+	DateUtility du = new DateUtility();
 	
 /*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletResponse response) {
@@ -41,7 +43,7 @@ public class ScheduleBasicController {
 		List<ScheduleVo> list = scheduleService.getDateInfo(groupNum);
 		for (ScheduleVo vo : list) {
 			Date date = vo.getScheduleEndDate();
-			java.sql.Date dd = plus1day(date);
+			java.sql.Date dd = du.plus1day(date);
 			vo.setScheduleEndDate(dd);
 		}
 		model.addAttribute("groupNum", groupNum);
@@ -99,17 +101,5 @@ public class ScheduleBasicController {
 		}
 		json.put("result_list", jsonList);
 		return json;
-	}
-	
-	/*
-	 *  해당 날짜 date 형식으로 +1일
-	 */
-	public java.sql.Date plus1day(Date day) {
-		Calendar c = Calendar.getInstance();
-		c.setTime(day);
-		c.add(Calendar.DATE, 1);
-		day = c.getTime();
-		java.sql.Date date = new java.sql.Date(day.getTime());
-		return date;
 	}
 }

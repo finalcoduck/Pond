@@ -15,6 +15,8 @@ import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.InviteSerivce;
+import com.coduck.pond.member.service.MemberManageService;
+import com.coduck.pond.member.vo.KickHistory;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -24,14 +26,9 @@ public class InviteController {
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
-	private GroupService groupSerivce;
-	//그룹번호 그룹 초대 코드 두개 
-	@RequestMapping("/group/member")
-	public String goGroupMember(int groupNum, Model model) {
-		GroupVo groupVo = groupSerivce.selectGroup(groupNum);
-		model.addAttribute("groupVo", groupVo);
-		return "/group/group-member";
-	}
+	private GroupService groupService;
+	@Autowired
+	private MemberManageService managerSerivce;
 	
 	/*
 	 *  초대코드 메일 보내기 컨트롤러
@@ -52,20 +49,25 @@ public class InviteController {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
 		return map;
 	}
 	
 	/*
 	 *  초대코드 입력 컨트롤러
 	 */
-	
 	@RequestMapping("/group/invite/input")
 	public String invitedMem(Model model, MemDto memDto, String inviteCode) {
 		inviteCode = inviteCode.trim();
 		Map<String, Object> map = inviteSerivce.findGroupNum(inviteCode);
 		GroupVo groupVo = (GroupVo)map.get("groupVo");
-		GroupMemVo groupMemVo = groupSerivce.dupliInviteCode(memDto.getMemVo().getMemEmail(), String.valueOf(groupVo.getGroupNum()));
+		//강퇴당한 회원 여부 체크
+		KickHistory kh = managerSerivce.checkKickedMem(groupVo.getGroupNum(), memDto.getMemVo().getMemEmail());
+		if(kh != null) {
+			model.addAttribute("msg", "이미 차단된 회원이라 가입이 불가합니다.");
+			return "forward:/selectgroup/index";
+		}
+		
+		GroupMemVo groupMemVo = groupService.dupliInviteCode(memDto.getMemVo().getMemEmail(), String.valueOf(groupVo.getGroupNum()));
 		if(groupMemVo != null) {
 			model.addAttribute("msg","이미 가입한 회원 입니다.");
 			return "forward:/selectgroup/index"; 

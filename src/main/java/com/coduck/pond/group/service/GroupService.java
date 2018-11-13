@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
+import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
 
 public interface GroupService {
@@ -17,7 +18,7 @@ public interface GroupService {
 	public void insertGorupDefault (GroupVo groupVo);
 	
 	//group_mem테이블에 저장
-	int insertGroupMem(String inviteCodeS, String inviteCodeM);
+	int getGroupMem(String inviteCodeS, String inviteCodeM);
 	
 	// 회원이 가입한 그룹 목록
 	public List<GroupVo> selectGroupList (String memEmail);
@@ -33,4 +34,7 @@ public interface GroupService {
 
 	//초대코드 중복확인
 	GroupMemVo dupliInviteCode(String memEmail, String groupNum);
+	
+	//해당그룹의 모든 회원 가져오기
+	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum);
 }
