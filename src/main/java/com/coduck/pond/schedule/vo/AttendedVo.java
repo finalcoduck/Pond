@@ -1,7 +1,5 @@
 package com.coduck.pond.schedule.vo;
 
-import java.sql.Date;
-
 public class AttendedVo {
 	private int attendedNum;
 	private String memEmail;

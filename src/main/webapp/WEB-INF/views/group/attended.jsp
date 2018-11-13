@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
-
+<script src="${pageContext.request.contextPath }/resources/vendor/instascan/js/instascan.min.js" type="text/javascript"></script>
 
 
 <section id="main">
@@ -18,18 +18,52 @@
 				<button id="attendanceBtn" class="btn btn-primary btn-block">출석</button>
 			</div>		
 		</div>
-		
 	</div>
+	
+    
 </section>
+<div class="modal" id="attendedModal">
+	<div class="modal-dialog modal-sm modal-dialog-centered">
+		<div class="modal-content border-0">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">QR코드 캡쳐</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			
+			<!-- Modal body -->
+			<div class="modal-body align_c">
+				<video id="preview" class="max-vw85"></video>		
+			</div>
+	
+			<!-- Modal footer -->
+			<div class="modal-footer justify-content-right">
+				<a href="" class="text-muted" data-dismiss="modal">취소</a>
+				<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/gcal.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/locale/ko.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+      
+</script>
 
 <script>
 
 $(document).ready(function(){
+	
+	
+	    
 		
+		$('#attendanceBtn').on('click',attended);
+	
 		//출석 여부 조회
 		isAttended();
 
@@ -40,14 +74,34 @@ $(document).ready(function(){
 			themeSystem:'bootstrap4',
 			contentHeight: 'auto',
 			viewRender: function(view, element) {
+				// 달력이 그려질때마다 해당 월의 첫번째 1일을 SrchDate로 넘겨줌
 				srchAttended(new Date(view.start._i));
+			},
+			eventClick: function(calEvent, jsEvent, view){
+				//console.log(calEvent);
 			}
 		});
-		$('#calendar').fullCalendar('option', 'timezone', 'Asia/Seoul');
-		$('#attendanceBtn').on('click',attendedIn);
-
-		
+			
 });
+
+function attended(){
+	$("#attendedModal").modal("show");
+	let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    scanner.addListener('scan', function (content) {
+      console.log(content);
+    });
+	Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+        	console.log(cameras)
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+}
+
 function isAttended(){
 	
 	var data = {groupNum : '${groupVo.groupNum}'};
@@ -65,15 +119,13 @@ function isAttended(){
 		result = data.isAttended;
 		if(result){//등원 후 일때
 			$('#attendanceBtn').html('하원');
+			$('#attendanceBtn').on('click',attendedOut);
 		}else{// 등원 전 일때
 			
 		}
 	});
 }
 
-function attended(){
-	
-}
 function srchAttended(date){
 	
 	var data = {groupNum : '${groupVo.groupNum}',srchDate: date};
@@ -90,8 +142,6 @@ function srchAttended(date){
 	.done(function(data){
 		var eventsList = [];
 		data.attendedVoList.forEach(function(item){
-			
-			
 			//AWS RDS 에서 sysdate로 저장하면 UTC로 저장되어짐 seoul 타임존 +9:00 해주어야함
 			eventsList.push({
 				  title: '등원',
@@ -112,8 +162,9 @@ function srchAttended(date){
 			}
 			  
 		})
+		$('#calendar').fullCalendar('removeEvents');
 		$('#calendar').fullCalendar('addEventSource',eventsList);
-		console.log(eventsList);
+		
 	});
 	
 }
@@ -131,7 +182,28 @@ function attendedIn(){
    		, contentType : "application/json; charset=UTF-8"
 	})
 	.done(function(data){
-		console.log(data);
+		if(data.errC==="0000"){
+			location.reload();
+		}
+	});
+}
+function attendedOut(){
+	
+	var data = {groupNum : '${groupVo.groupNum}'};
+	var dataStr = JSON.stringify(data); 
+	
+	$.ajax({
+   		url : "${pageContext.request.contextPath}/group/attended/out/proc"
+		, method : "post"
+   		, dataType : 'json'
+   		, data : dataStr
+   		, processData : true
+   		, contentType : "application/json; charset=UTF-8"
+	})
+	.done(function(data){
+		if(data.errC==="0000"){
+			location.reload();
+		}
 	});
 }
 </script>
