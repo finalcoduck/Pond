@@ -185,64 +185,69 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="chk_area">
-					<div class="dropdown">
-						<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-							전체학생
-						</button>
-						<ul class="dropdown-menu">
-							<li class="dropdown-item" data-keepOpenOnClick>
-								<input type="checkbox" id="allChk">
-								<label for="allChk"></label>
-								<span class="txt">전체 학생</span>
-							</li>
-							<li class="dropdown-item" data-keepOpenOnClick>
-								<input type="checkbox" id="student_1">
-								<label for="student_1"></label>
-								<span class="txt">배재정</span>
-							</li>
-							<li class="dropdown-item" data-keepOpenOnClick>
-								<input type="checkbox" id="student_2">
-								<label for="student_2"></label>
-								<span class="txt">배재정</span>
-							</li>
-						</ul>
+				<form id="homeworkForm" action="">
+					<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+					<input name="boardType" type="hidden" value="H">
+					<div class="chk_area">
+						<div class="dropdown">
+							<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+								전체학생
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="allChk">
+									<label for="allChk"></label>
+									<span class="txt">전체 학생</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_1">
+									<label for="student_1"></label>
+									<span class="txt">배재정</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_2">
+									<label for="student_2"></label>
+									<span class="txt">배재정</span>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<input name="homework-caption" type="hidden">
-					<div id="homework-caption-container">
+					<div class="form-group">
+						<input name="boardTitle" type="hidden" id="homeworkTitle">
+						<div id="homeworkTitleContainer">
+						</div>
+						
+						<input name="boardContent" type="hidden" id="homeworkContent">
+						<div id="homeworkContentContainer">
+						</div>
 					</div>
-					<input name="homework-content" type="hidden">
-					<div id="homework-content-container">
-					</div>
-				</div>
-				<ul class="score_area">
-					<li>
-						<span class="txt">점수</span>
-						<input type="text" value="100">
-					</li>
-					<li>
-						<span class="txt">마감일</span>
-						<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
-					</li>
-					<li>
-						<span class="txt">주제</span>
-						<select class="custom-select" name="subjectTitle"
-							id="inputGroupSelect01" style="width:auto;">
-							<option selected>공지</option>
-							<c:forEach var="subject" items='${subjectList}'
-								varStatus="status">
-								<option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
-							</c:forEach>
-						</select>
-					</li>
-				</ul>
+					<ul class="score_area">
+						<li>
+							<span class="txt">점수</span>
+							<input type="text" value="100">
+						</li>
+						<li>
+							<span class="txt">마감일</span>
+							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+						</li>
+						<li>
+							<span class="txt">주제</span>
+							<select class="custom-select" name="subjectTitle"
+								id="inputGroupSelect01" style="width:auto;">
+								<option selected>공지</option>
+								<c:forEach var="subject" items='${subjectList}'
+									varStatus="status">
+									<option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
+								</c:forEach>
+							</select>
+						</li>
+					</ul>
+				</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
-				<a href="" class="text-muted" data-dismiss="modal">과제 만들기</a>
+				<button type="button" id="homeworkSubmitBtn" class="btn btn-out-secondary">제출</button>
 			</div>
 
 		</div>
@@ -359,8 +364,10 @@
                                         <img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0"  onclick="console.log($('body').hasScrollBar())">강덕영</div>
-                                        <div class="h7 text-muted">10월 12일</div>
+                                        <div class="h5 m-0">{{boardWriter}}</div>
+                                        <div class="h7 text-muted">
+											{{boardRegdate}}
+										</div>
                                     </div>
                                 </div>
                                 <div>
@@ -370,26 +377,26 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <a class="dropdown-item" href="#">맨 위로 이동</a>
-                                            <a class="dropdown-item" href="#">수정</a>
-                                            <a class="dropdown-item" href="#">삭제</a>
-                                            <a class="dropdown-item" href="#">링크복사</a>
+											<a class="dropdown-item cursor-pointer">수정</a>
+											<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
+											<form id="boardProp{{boardNum}}">
+												<input name="boardNum" type="hidden" value="{{boardNum}}">
+												<input name="boardType" type="hidden" value="{{boardType}}">
+											</form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body homework">
-                            <h5 class="card-title">과제 카드</h5>
+                            <h5 class="card-title">{{{boardTitle}}}</h5>
+							<h5><span class="badge badge-secondary">{{{subjectTitle}}}</span></h5>
 							<div class="homework_con">
-								<p class="card-text">
+								<div class="con_area">
 									<a href="#">
-										Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-										eos
-										ipsa praesentium esse magnam nemo dolor
-										sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+										{{{boardContent}}}
 									</a>
-								</p>
+								</div>
 								<div class="person">
 									<ul>
 										<li>
@@ -437,11 +444,11 @@
 		placeholder : '공지를 입력하세요',
 	});
 	
-	var HomeworkCaptionQuill = new Quill('#homework-caption-container', {
+	var HomeworkTitleQuill = new Quill('#homeworkTitleContainer', {
 		placeholder : '제목을 입력하세요',
 	});
 	
-	var HomeworkContentQuill = new Quill('#homework-content-container', {
+	var HomeworkContentQuill = new Quill('#homeworkContentContainer', {
 		placeholder : '내용을 입력하세요(선택사항)',
 	});
 
@@ -453,6 +460,9 @@
 
 				//공지 글 추가 버튼
 				$("#noticeSubmitBtn").on("click", insertNoticeBoard)
+				
+				//과제 글 추가 버튼
+				$("#homeworkSubmitBtn").on("click", insertHomeworkBoard)				
 
 				//floating Button
 				$("#floatingBtn").on("click", function() {
@@ -559,9 +569,11 @@
 				// 카드 추가
 				data.boardList.forEach(function(item) {
 					item.boardContent = quillGetHTML(item.boardContent);
+					item.boardRegdate = new Date(item.boardRegdate);
 					if (item.boardType === NOTICE) {
 						$("#center").append(makeNoticeCard(item));
 					} else if (item.boardType === HW_BOARD) {
+						item.boardTitle = quillGetHTML(item.boardTitle);
 						$("#center").append(makeHWCard(item));
 					}
 				})
@@ -659,6 +671,35 @@
 					}
 				});
 	}
+	
+	
+	function insertHomeworkBoard(){
+		var hwTitle = document.querySelector('#homeworkTitle');
+		hwTitle.value = JSON.stringify(HomeworkTitleQuill.getContents());
+
+		var hwContent = document.querySelector('#homeworkContent');
+		hwContent.value = JSON.stringify(HomeworkContentQuill.getContents());
+		
+		var homeworakData = $('#homeworkForm').serializeObject();
+		var dataStr = JSON.stringify(homeworakData);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/board/insert/homework/proc",
+			method : "post",
+			dataType : 'json',
+			data : dataStr,
+			processData : true,
+			contentType : "application/json; charset=UTF-8"
+		}).done(function(data){
+			if(data.errC === "0000"){
+				boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
+				$("#homeworkModal").modal('hide');
+				//새로고침
+				window.location.reload()
+			}
+		});
+	}
+	
+	
 	//공지 카드 만들기
 	function makeNoticeCard(data) {
 		var source = $("#notice-card").html();
