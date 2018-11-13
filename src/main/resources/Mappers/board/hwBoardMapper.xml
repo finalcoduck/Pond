@@ -15,14 +15,34 @@
 		HW_BOARD
 	WHERE
 		GROUP_NUM = #{groupNum}		
-		<if test="srchWord != null">
+		<if test="srchWord != ''">
 			AND SUBJECT_TITLE = #{srchWord}
 		</if>
 	</select>
 	
 	<!-- 과제 생성 -->
-	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.HwBoardVo">
-		
+	<insert id="insertHwBoard" parameterType="com.coduck.pond.board.vo.HwBoardVo">
+		INSERT INTO
+			HW_BOARD
+			(
+				GROUP_NUM,
+				BOARD_WRITER,
+				BOARD_TITLE,
+				BOARD_CONTENT,
+				BOARD_REGDATE,
+				SUBJECT_TITLE,
+				BOARD_TYPE
+			)
+			VALUES
+			(
+				#{groupNum},
+				#{boardWriter},
+				#{boardTitle},
+				#{boardContent},
+				sysdate,
+				#{subjectTitle},
+				#{boardType}
+			)
 	</insert>
 	
 	
