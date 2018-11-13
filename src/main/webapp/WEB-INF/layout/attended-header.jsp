@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<header>
 	    <nav class="navbar bg-primary text-white text-uppercase justify-content-between vh5 mb-3">
 	        <h1>
-	            <a class=" text-white" href="#">
+	            <a class="text-white" href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 	                <i class="fas fa-arrow-left"></i>
 	            </a>
 	        </h1>
