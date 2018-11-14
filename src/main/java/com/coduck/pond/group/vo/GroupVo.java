@@ -13,6 +13,8 @@ public class GroupVo {
 	private char inviteCodeStatus;
 	private String groupImage;
 	private String groupDescription;
+	private String attendedQRCode;
+	
 	
 	public GroupVo() {
 		// TODO Auto-generated constructor stub
@@ -119,6 +121,14 @@ public class GroupVo {
 
 	public void setGroupDescription(String groupDescription) {
 		this.groupDescription = groupDescription;
+	}
+
+	public String getAttendedQRCode() {
+		return attendedQRCode;
+	}
+
+	public void setAttendedQRCode(String attendedQRCode) {
+		this.attendedQRCode = attendedQRCode;
 	}
 	
 	
