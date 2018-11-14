@@ -14,7 +14,17 @@ public class GroupVo {
 	private String groupImage;
 	private String groupDescription;
 	private String attendedQRCode;
-	
+    // 전화번호 
+    private String groupPhoneNum;
+
+    // 학원주소 
+    private String groupAddr;
+
+    // 경도 
+    private Double latitude;
+
+    // 위도 
+    private Double longitude;
 	
 	public GroupVo() {
 		// TODO Auto-generated constructor stub
@@ -35,12 +45,15 @@ public class GroupVo {
 		this.groupDescription = groupDescription;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "GroupVo [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate + ", maxMemNum="
 				+ maxMemNum + ", memEmail=" + memEmail + ", inviteCodeS=" + inviteCodeS + ", inviteCodeM=" + inviteCodeM
 				+ ", inviteCodeStatus=" + inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription="
-				+ groupDescription + "]";
+				+ groupDescription + ", attendedQRCode=" + attendedQRCode + ", groupPhoneNum=" + groupPhoneNum
+				+ ", groupAddr=" + groupAddr + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 
 	public int getGroupNum() {
@@ -130,6 +143,36 @@ public class GroupVo {
 	public void setAttendedQRCode(String attendedQRCode) {
 		this.attendedQRCode = attendedQRCode;
 	}
-	
+    public String getGroupPhoneNum() {
+        return groupPhoneNum;
+    }
+
+    public void setGroupPhoneNum(String groupPhoneNum) {
+        this.groupPhoneNum = groupPhoneNum;
+    }
+
+    public String getGroupAddr() {
+        return groupAddr;
+    }
+
+    public void setGroupAddr(String groupAddr) {
+        this.groupAddr = groupAddr;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 	
 }
