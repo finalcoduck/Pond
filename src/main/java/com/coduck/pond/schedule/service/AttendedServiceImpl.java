@@ -26,11 +26,15 @@ public class AttendedServiceImpl implements AttendedService{
 		AttendedVo attendedResultVo = attendedDao.selectTodayAttended(attendedVo);
 		
 		//금일 출석한 내용이 없으면 False 있으면 True
+		//금일 출석한 내용이 있어도 attendedOut이 null 인 경우 false attendedOut null이 아닌 경우 True 리턴!
 		
-		if(attendedResultVo == null) {
+		if(attendedResultVo != null) {
+			if(attendedResultVo.getAttendedOut() == null) {
+				return true;
+			}
 			return false;
 		}else {
-			return true;
+			return false;
 		}
 	
 	}
@@ -38,15 +42,8 @@ public class AttendedServiceImpl implements AttendedService{
 	@Override
 	public HashMap<String, Object> attendedIn(AttendedVo attendedVo) {
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
-		AttendedVo attendedResultVo = attendedDao.selectTodayAttended(attendedVo);
-		
-		if(attendedResultVo == null) {
-			attendedDao.insertInAttended(attendedVo);
-			resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
-			return resultMap;
-		}
-		
-		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.FAILURE);
+		attendedDao.insertInAttended(attendedVo);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
 

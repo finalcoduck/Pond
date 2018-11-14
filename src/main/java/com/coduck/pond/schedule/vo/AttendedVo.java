@@ -7,6 +7,7 @@ public class AttendedVo {
 	private String attendedIn;
 	private String attendedOut;
 	private String attendedType;
+	private String attendedQRCode;
 	
 	public AttendedVo() {
 		
@@ -49,6 +50,14 @@ public class AttendedVo {
 		this.attendedType = attendedType;
 	}
 	
+	public String getAttendedQRCode() {
+		return attendedQRCode;
+	}
+
+	public void setAttendedQRCode(String attendedQRCode) {
+		this.attendedQRCode = attendedQRCode;
+	}
+
 	@Override
 	public String toString() {
 		return "AppendedVo [attendedNum=" + attendedNum + ", memEmail=" + memEmail + ", groupNum=" + groupNum

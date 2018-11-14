@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupVo;
+import com.coduck.pond.schedule.vo.AttendedVo;
 
 public interface GroupService {
 	
@@ -29,5 +30,8 @@ public interface GroupService {
 	//모든 그룹 멤버 숫자 가져오기
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
 
+	//QRcode 조회 
+	public boolean isQRcodeCorrect(AttendedVo attendedVo);
+	
 	
 }

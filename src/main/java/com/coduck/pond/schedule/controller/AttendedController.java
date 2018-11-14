@@ -74,6 +74,13 @@ public class AttendedController {
 	public @ResponseBody Map<String,Object> attendedIn(@RequestBody AttendedVo attendedVo,MemDto memDto){
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
 		
+		//그룹 출석 QR코드와 일치 하지 않으면 Failure code return
+		if(!groupService.isQRcodeCorrect(attendedVo)) {
+			resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.FAILURE);
+			return resultMap;
+		}
+		
+		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
 		resultMap = attendedService.attendedIn(attendedVo);
 		
@@ -82,10 +89,16 @@ public class AttendedController {
 	
 	@RequestMapping(value="/group/attended/out/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> attendedOut(@RequestBody AttendedVo attendedVo,MemDto memDto){
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
 		
+		//그룹 출석 QR코드와 일치 하지 않으면 Failure code return
+		if(!groupService.isQRcodeCorrect(attendedVo)) {
+			resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.FAILURE);
+			return resultMap;
+		}
 		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
-		HashMap<String,Object> resultMap = attendedService.attendedOut(attendedVo);
+		resultMap = attendedService.attendedOut(attendedVo);
 		
 		return resultMap;
 	}

@@ -19,11 +19,11 @@
 			</div>		
 		</div>
 	</div>
-	
-    
 </section>
+
+<!-- QR camera Modal -->
 <div class="modal" id="attendedModal">
-	<div class="modal-dialog modal-sm modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content border-0">
 
 			<!-- Modal Header -->
@@ -46,24 +46,41 @@
 		</div>
 	</div>
 </div>
+<!-- QR camera Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/gcal.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/locale/ko.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-      
-</script>
 
 <script>
 
+let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+var attendedStatus = false;
+//getLocation();
+
+scanner.addListener('scan', function (content) {
+	
+	console.log(content);
+	console.log(attendedStatus);
+	if(attendedStatus){
+		attendedOut(content);
+	}else{
+		attendedIn(content);
+	}
+	
+	scanner.stop();
+});
+
 $(document).ready(function(){
-	
-	
-	    
 		
 		$('#attendanceBtn').on('click',attended);
-	
+		
+		
+		//모달이 사라질 경우 카메라 꺼짐
+		$('#attendedModal').on('hidden.bs.modal', function (e) {
+			scanner.stop();	
+		})
+		
 		//출석 여부 조회
 		isAttended();
 
@@ -84,23 +101,42 @@ $(document).ready(function(){
 			
 });
 
+function getLocation() {
+	  if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	      alert(position.coords.latitude + ' ' + position.coords.longitude);
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	  }
+}
+	
+
 function attended(){
 	$("#attendedModal").modal("show");
-	let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-    scanner.addListener('scan', function (content) {
-      console.log(content);
-    });
-	Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-        	console.log(cameras)
-          scanner.start(cameras[0]);
-        } else {
-          console.error('No cameras found.');
-        }
-      }).catch(function (e) {
-        console.error(e);
-      });
+	startCamera();
 }
+
+function startCamera(){
+	Instascan.Camera.getCameras().then(function (cameras) {
+	    if (cameras.length > 1) { // 2 이상인 경우 후면 카메라 먼저 실행
+	    	scanner.start(cameras[1]);
+	    } else if(cameras.length > 0){ // 0 이상인 경우 
+	    	scanner.start(cameras[0]);
+	    }	else {
+	      console.error('No cameras found.');
+	    }
+	  }).catch(function (e) {
+	    console.error(e);
+	  });	
+}
+
 
 function isAttended(){
 	
@@ -118,10 +154,11 @@ function isAttended(){
 	.done(function(data){
 		result = data.isAttended;
 		if(result){//등원 후 일때
+			attendedStatus = true;
 			$('#attendanceBtn').html('하원');
-			$('#attendanceBtn').on('click',attendedOut);
 		}else{// 등원 전 일때
-			
+			attendedStatus = false;
+			$('#attendanceBtn').html('등원');
 		}
 	});
 }
@@ -168,9 +205,9 @@ function srchAttended(date){
 	});
 	
 }
-function attendedIn(){
+function attendedIn(qrCode){
 	
-	var data = {groupNum : '${groupVo.groupNum}'};
+	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : 'ABCD'};
 	var dataStr = JSON.stringify(data); 
 	
 	$.ajax({
@@ -182,14 +219,17 @@ function attendedIn(){
    		, contentType : "application/json; charset=UTF-8"
 	})
 	.done(function(data){
+		console.log(data);
 		if(data.errC==="0000"){
 			location.reload();
+		}else if(data.errC === "E001"){
+			//QR코드 불일치로 인한 실패
 		}
 	});
 }
-function attendedOut(){
+function attendedOut(qrCode){
 	
-	var data = {groupNum : '${groupVo.groupNum}'};
+	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : 'ABCD'};
 	var dataStr = JSON.stringify(data); 
 	
 	$.ajax({
@@ -201,8 +241,11 @@ function attendedOut(){
    		, contentType : "application/json; charset=UTF-8"
 	})
 	.done(function(data){
+		console.log(data);
 		if(data.errC==="0000"){
 			location.reload();
+		}else if(data.errC === "E001"){
+			//QR코드 불일치로 인한 실패
 		}
 	});
 }

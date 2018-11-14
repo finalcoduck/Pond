@@ -11,7 +11,10 @@
 		FROM
 			ATTENDED
 		WHERE
-			GROUP_NUM = #{groupNum} 
+			ATTENDED_NUM = (SELECT MAX(ATTENDED_NUM) FROM ATTENDED WHERE GROUP_NUM = #{groupNum} 
+				AND MEM_EMAIL = #{memEmail}
+				AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD') )
+			AND GROUP_NUM = #{groupNum} 
 			AND MEM_EMAIL = #{memEmail}
 			AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
    </select>
@@ -55,7 +58,7 @@
 	   	WHERE
 	   		ATTENDED_NUM = (
 	   			SELECT
-	   				ATTENDED_NUM
+	   				MAX(ATTENDED_NUM)
 	   			FROM
 	   				ATTENDED
 	   			WHERE
