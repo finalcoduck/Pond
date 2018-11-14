@@ -4,7 +4,7 @@
 	<header>
         <nav class="navbar d-flex justify-content-between navbar-expand bg-primary mb-3">
             <h1>
-                <a class=" text-white" href="#">
+                <a class=" text-white" href="${pageContext.request.contextPath }/">
                     <b>POND</b>
                 </a>
             </h1>

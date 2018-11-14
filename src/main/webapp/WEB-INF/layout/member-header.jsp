@@ -5,7 +5,7 @@
 	<div class="inner">
 		<nav class="navbar vh10">
 			<h1>
-				<a href="#">
+				<a href="${pageContext.request.contextPath }/">
 					<b class="text-white">POND</b>
 				</a>
 				<a href="${pageContext.request.contextPath }/group/invite/input?inviteCode=testest">

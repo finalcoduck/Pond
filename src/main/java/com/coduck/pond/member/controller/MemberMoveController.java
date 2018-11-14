@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.member.vo.MemDto;
+
 @Controller
 public class MemberMoveController {
 	@Autowired
@@ -27,8 +29,10 @@ public class MemberMoveController {
 	 */
 	
 	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
-	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
-		
+	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail, MemDto memDto) {
+		if(memDto != null) {
+			return "forward:/selectgroup/index";
+		}
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, googleOauth2Parameters);
 		System.out.println("/googleLogin, url" + url);
@@ -46,11 +50,6 @@ public class MemberMoveController {
 	@RequestMapping("/join")
 	public String joinPage() {
 		return "/join-member";
-	}
-	
-	@RequestMapping("/test1")
-	public String testPage() {
-		return "/selectgroup/index";
 	}
 	
 	@RequestMapping("/emailConfirm")

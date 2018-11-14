@@ -321,7 +321,12 @@
 		
 		//파일 업로드후 멤버 프로필 사진 변경
 		$('#change-img-btn').on('click',function(){
-			$('form[name=filefrm]').submit();
+			var imgVal = $('#imgUpdate').val();
+			if(imgVal == ''){
+				$('#myModal').modal('hide');
+			}else{
+				$('form[name=filefrm]').submit();
+			}
 		});
 		
 		
