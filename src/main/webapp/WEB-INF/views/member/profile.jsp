@@ -61,14 +61,7 @@
 									<li>
 										<div class="profileInfo">
 											<span class="txt">이메일</span>
-											<c:choose>
-												<c:when test="${memDto.memVo.memPwd ne 'google'}">
 												<span class="mail">${memDto.memVo.memEmail }</span>
-												</c:when>
-												<c:otherwise>
-												<span class="mail" style="color:blue;">Google 계정 연동중</span>
-												</c:otherwise>
-											</c:choose>
 										</div>
 									</li>
 									<li>

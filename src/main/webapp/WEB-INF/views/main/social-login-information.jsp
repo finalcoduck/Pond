@@ -17,7 +17,7 @@
                         <input type="hidden" name="memEmail" value='${sessionScope.memVo.memEmail }'>
                         <button type="submit" class="mt-5 btn btn-block btn-outline-primary">확인</button>
                     </form>
-                    <a href="${pageContext.request.contextPath }/test1">넘어가기</a>
+                    <a href="${pageContext.request.contextPath }memDto.getMemVo().getMemEmail()/selectgroup/index">넘어가기</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,9 @@
 package com.coduck.pond.group.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
+import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
 
 
@@ -39,11 +42,28 @@ public class GroupDao {
 		session.insert(NAMESPACE+"insertGroupMem", groupMemVo);
 	}
 	
-	public int getGroupNum(String inviteCode) {
-		return session.selectOne(NAMESPACE+"getGroupNum", inviteCode);
+	public int getGroupNum(String inviteCodeS, String inviteCodeM) {
+		Map<String, String> map = new HashMap<>();
+		map.put("inviteCodeS", inviteCodeS);
+		map.put("inviteCodeM", inviteCodeM);
+		return session.selectOne(NAMESPACE+"getGroupNum", map);
 	}
 	
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail){
 		return session.selectList(NAMESPACE+"getGroupMemNum", memEmail);
 	}
+	
+	public GroupMemVo dupliInviteCode(Map<String, String> map) {
+		return session.selectOne(NAMESPACE+"dupliInviteCode", map);
+	}
+	
+	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum){
+		List<GroupMem_smDto> mList = session.selectList(NAMESPACE+"getGroupMemListM", groupNum);
+		List<GroupMem_smDto> sList = session.selectList(NAMESPACE+"getGroupMemListS", groupNum);
+		Map<String, List<GroupMem_smDto>> map = new HashMap<>();
+		map.put("mList", mList);
+		map.put("sList", sList);
+		return map;
+	}
+	
 }

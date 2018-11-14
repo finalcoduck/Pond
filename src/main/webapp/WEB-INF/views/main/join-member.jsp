@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/build/js/joinValidityCheck.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/build/js/joinValidityCheck.js?ver=1"></script>
  
    <section id="">
         <div class="container">
@@ -13,26 +13,25 @@
                         <div class="form-group">
                             <label for="email">이메일 주소 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/></label>
                             <input type="email" class="form-control" id="email" name="preEmail">
-                            <span id=""></span>
                         
-                            <label for="pwd">비밀번호 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/></label>
+                            <label for="pwd">비밀번호 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
                             <input type="password" class="form-control" id="password" name="prePassword">
                             <span id=""></span>
                             
                         
-                            <label for="pwd-check">비밀번호 확인 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/></label>
+                            <label for="pwd-check">비밀번호 확인 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
                             <input type="password" class="form-control" id="password2">
                             <span id=""></span>
-                            <label for="name">이름 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/></label>
+                            <label for="name">이름 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
                             <input type="text" class="form-control" id="name" name="preName">
                             <span id=""></span>
                         </div>
                         <div class="form-group">
-                            <label for="phone">휴대폰 번호 </label>
-                            <input type="text" class="form-control" id="phone" name="prePhone">
+                            <label for="phone">휴대폰 번호(선택) <span></span></label>
+                            <input type="text" class="form-control" id="phone" name="prePhone" placeholder="-없이 입력해주세요.">
                             <span id=""></span>
                         </div>
-                        <button type="submit" class="mt-5 btn btn-block btn-outline-primary">Submit</button>
+                        <button type="button" class="mt-5 btn btn-block btn-outline-primary" id="sbm-btn">Submit</button>
                     </form>
                 </div>
             </div>

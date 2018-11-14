@@ -1,9 +1,13 @@
 package com.coduck.pond.group.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.coduck.pond.group.vo.GroupMemNumDto;
+import com.coduck.pond.group.vo.GroupMemVo;
+import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
+import com.coduck.pond.schedule.vo.AttendedVo;
 
 public interface GroupService {
 	
@@ -15,7 +19,7 @@ public interface GroupService {
 	public void insertGorupDefault (GroupVo groupVo);
 	
 	//group_mem테이블에 저장
-	public int insertGroupMem(String inviteCode);
+	int getGroupMem(String inviteCodeS, String inviteCodeM);
 	
 	// 회원이 가입한 그룹 목록
 	public List<GroupVo> selectGroupList (String memEmail);
@@ -28,4 +32,13 @@ public interface GroupService {
 	
 	//모든 그룹 멤버 숫자 가져오기
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
+
+	//초대코드 중복확인
+	GroupMemVo dupliInviteCode(String memEmail, String groupNum);
+	
+	//해당그룹의 모든 회원 가져오기
+	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum);
+	
+	//QRcode 조회 
+	public boolean isQRcodeCorrect(AttendedVo attendedVo);
 }

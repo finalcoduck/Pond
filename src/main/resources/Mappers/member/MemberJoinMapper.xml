@@ -35,6 +35,6 @@
 	</delete>
 	<!-- 구글 이메일 아이디 값으로 가져오기 -->
 	<select id="getGoogleMem" parameterType="string" resultType="com.coduck.pond.member.vo.MemVo">
-		select * from mem where mem_email = #{value}
+		select * from mem where mem_id = #{value}
 	</select>
 </mapper>

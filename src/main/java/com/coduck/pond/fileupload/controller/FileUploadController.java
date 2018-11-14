@@ -46,7 +46,7 @@ public class FileUploadController {
 	}*/
 	
 	/*
-	 * 단인 파일 업로드 처리
+	 * 단일 파일 업로드 처리
 	 */
 	@RequestMapping(value="/fileupload/insertfile", method=RequestMethod.POST)
 	public String fileInsert(int groupNum,int refBoardNum,MultipartFile file, HttpSession session) {

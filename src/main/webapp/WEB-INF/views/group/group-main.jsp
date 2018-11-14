@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
 
 <!-- content -->
 <section id="main">
@@ -22,48 +22,33 @@
 				</div>
 				<div class="card mb-3">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><a href=""><i class="far fa-folder-open"></i> 수업 자료실</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 출결</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-						<a data-toggle="modal" data-target="#subjectModal"> 
-							<i class="fas fa-plus cursor-pointer"></i>
-						</a>
+	
+						<div class="dropdown">
+							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+							<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="gedf-drop1">
+								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
+								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+							</div>
+						</div>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
-						<li class="d-flex list-group-item justify-content-between align-items-center">
-							<a class="cursor-pointer">공지</a>
-							
-							<div class="d-none">
-								<div class="dropdown">
-										<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-										<a class="dropdown-item cursor-pointer">수정</a>
-										<a class="dropdown-item cursor-pointer">삭제</a>
-									</div>
-								</div>
-							</div>
+						<li class="cursor-pointer list-group-item">
+							<a>공지</a>
 						</li>
 						<c:forEach var="subject" items='${subjectList}' varStatus="status">
-							<li class="d-flex list-group-item justify-content-between align-items-center">
-								<a class="cursor-pointer">${subject.subjectTitle}</a>
-								<div class="d-none">
-									<div class="dropdown">
-											<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-										<div class="dropdown-menu dropdown-menu-right"
-											aria-labelledby="gedf-drop1">
-											<a class="dropdown-item cursor-pointer">수정</a>
-											<a class="dropdown-item cursor-pointer">삭제</a>
-										</div>
-									</div>
-								</div>
+							<li class="cursor-pointer list-group-item">
+								<a>${subject.subjectTitle}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -161,6 +146,7 @@
 	</div>
 </div>
 
+<!--!!!!!!!!!!!!! 게시물 삭제 모달!!!!!!! -->
 <div class="modal" id="delBoardModal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content border-0">
@@ -191,6 +177,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- The Modal -->
 
 <!-- floating Button-->
@@ -252,73 +239,53 @@
 		<p class="card-text">{{{boardContent}}}</p>
 	</div>
 	<div class="card-footer align_r">
-		<a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
+		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+	</div>
+	<div class="comment-list" id="comment-{{boardNum}}">
+
+	</div>
+	<div class="card-footer d-flex" >
+		<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+		<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
+           	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
+           	<input type="hidden" name="cmntContent"/>
+           	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
+		</form>
+		<div class="col-9" id="editor-test-{{boardNum}}"></div>
+		<button class="comment-btn col-1" id="cmnt-{{boardNum}}">작성</button> 
 	</div>
 </div>
+</script>
 
+<!-- comment Template -->
+<script id="comment-card" type="text/x-handlebars-template">
+				<div class="card-footer d-flex">
+						<img id="profile-img" class="col-2 rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="">
+							<div class="col-9">
+						<span>{{memName}}</span>&nbsp;&nbsp;&nbsp; 
+						<span>{{{cmntContent}}}</span>&nbsp;&nbsp;&nbsp;
+						</div>
+						<button class="col-1" id="delete-{{cmntNum}}" value="delete">삭제</button>
+						<input type="hidden" value="{{refBoardNum}}"/>
+	            </div>
+</script>
+<!-- no delete commet Template -->
+<script id="comment-card-no" type="text/x-handlebars-template">
+				<div class="card-footer d-flex">
+						<img id="profile-img" class="col-2 rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="">
+							<div class="col-9">
+						<span>{{memName}}</span>&nbsp;&nbsp;&nbsp; 
+						<span>{{{cmntContent}}}</span>&nbsp;&nbsp;&nbsp;
+						</div>
+						<input type="hidden" value="{{refBoardNum}}"/>
+	            </div>
+</script>
+ 
+<script type="text/javascript">
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
 
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
-                    <img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
-                </div>
-                <div class="ml-2">
-                    <div class="h5 m-0"  onclick="console.log($('body').hasScrollBar())">{{boardWriter}}</div>
-                    <div class="h7 text-muted">{{boardRegDate}}</div>
-                </div>
-            </div>
-            <div>
-                <div class="dropdown">
-                    <button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                        <a class="dropdown-item" href="#">맨 위로 이동</a>
-                        <a class="dropdown-item" href="#">수정</a>
-                        <a class="dropdown-item delModalBtn pointer">삭제</a>
-						<form id="boardProp{{boardNum}}">
-							<input name="boardNum" type="hidden" value="{{boardNum}}">
-							<input name="boardType" type="hidden" value="{{boardType}}">
-						</form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-body homework">
-        <h5 class="card-title">{{boardTitle}}</h5>
-		<div class="homework_con">
-			<p class="card-text">
-				{{boardContent}}
-			</p>
-			<div class="person">
-				<ul>
-					<li>
-						<a href="#">
-							<span class="num">0</span>
-							<span class="txt">제출함</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<span class="num">0</span>
-							<span class="txt">할당 완료</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-    </div>
-    <div class="card-footer align_r">
-        <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
-    </div>
-</div>
 </script>
 <!-- Card Template -->
 
@@ -327,14 +294,15 @@
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
-        const NOTICE = 'N'
-        const HW_BOARD = 'H'
+
         
         var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
         var NoticeQuill = new Quill('#notice-editor-container', {
             placeholder: '공지를 입력하세요',
         });
+        
+        var quillArr = [];
         
         $(document).ready(function () {
             
@@ -344,6 +312,60 @@
         	//공지 글 추가 버튼
         	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
         	
+        	//댓글 펼치기 버튼
+        	$(document).on('click','.cmt-btn', function(event){
+        		var boardNum = $(this).prop('id');
+        		boardNum = boardNum.trim();
+        		
+        		var tmp = $(this).prop('value'); // 클릭 식별을 위한 코드
+        		if(tmp == 'true'){
+        			$('#comment-'+boardNum+'').empty();
+        			$(this).prop('value','false');
+        			return;
+        		}
+        		$(this).prop('value','true');
+        		
+				getCommentAJAX(boardNum);        		
+        	});
+        	
+        	//댓글 삭제 버튼
+        	$(document).on('click','button[value=delete]',function(event){
+        		var refBoardNum = $(this).next().val();
+        		console.log(refBoardNum+"@@");
+        		var idValue = $(this).prop('id');
+        		var sptArr = idValue.split('-');
+        		var cmntNum = sptArr[1].trim();
+        		
+        		deleteComment(cmntNum, refBoardNum);
+        	});
+        	
+        	//댓글 작성 버튼
+        	$(document).on('click','.comment-btn',function(event){
+        		var indexBoardNum = $(this).prop('id'); // cmnt-{{boardNum}}
+        		var boardNum = indexBoardNum.split('-')[1]; //해당 카드섹션 boardNum
+        		var commentQuill = quillArr[boardNum];
+        		
+        		var content = commentQuill.getContents();
+        		var quillContent = JSON.stringify(content);
+        		var cmntInput = $('#cmntForm-'+boardNum+'').children('input[name=cmntContent]').val(quillContent);
+        		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
+        		var commentDataStr = JSON.stringify(commentData);
+        		var editorDiv = $('#editor-test-'+boardNum+'');
+        		//editor-test-{{boardNum}}
+        		$.ajax({
+        			url : "${pageContext.request.contextPath}/board/insert/comment/proc",
+        			data : commentDataStr,
+        			dataType : "json",
+        			type : "post",
+        			contentType : "application/json; charset=UTF-8",
+        			success : function(data){
+        				editorDiv.text('');
+			            var commentQuill = new Quill('#editor-test-'+boardNum,{
+			            	placeholder: '댓글을 입력하세요',
+			            });					
+        			}
+        		});
+        	});
         	
 	    	 //floating Button
 	        $("#floatingBtn").on("click", function () {
@@ -359,6 +381,7 @@
 	        });
         	
             $('.material-button-toggle').on("click", function () {
+            	
                 $(this).toggleClass('open');
                 $('.option').toggleClass('scale-on');
             });
@@ -395,22 +418,51 @@
             });
             
             //주제 클릭 이벤트
-            $("#subjectList").on("click","li > a",searchSubject);
+            $("#subjectList").on("click","li",searchSubject);
             
+           
+            //주제 삭제 모달 팝업 이벤트
+            $("#setSubjectModalBtn").on("click",function(){
+            	$("#setSubjectModal").modal("show");
+            })
             
-            $("#subjectList").on("mouseenter","li",(evt) =>{
-            	var iconBar = evt.target.querySelector("div");
-            	iconBar.className = "";            	
-            });
-            
-            $("#subjectList").on("mouseleave","li",(evt) =>{
-            	var iconBar = evt.target.querySelector("div");
-            	iconBar.className = "d-none";
-            });
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
         });
+        
+        //댓글 삭제
+		function deleteComment(cmntNum, refBoardNum){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/board/comment/delete/proc",
+				data : {'cmntNum':cmntNum},
+				success : function(data){
+					if(data.msg == 'success'){
+						$('#comment-'+refBoardNum+'').empty();
+						getCommentAJAX(refBoardNum);	
+					}
+				}
+			})
+		}        
+        
+        //댓글을 받아와 해당 글에 뿌려줌
+    	function getCommentAJAX(boardNum){
+    		$.ajax({
+    			url : "${pageContext.request.contextPath}/board/get-comment/proc",
+    			dataType : "json",
+    			data : {refBoardNum:boardNum},
+    			success : function(data){
+    				$.each(data.list, function(i, elt) {
+    					console.log("memEmail:"+data.memEmail);
+    					data.list[i].cmntContent = quillGetHTML(data.list[i].cmntContent);
+    					var bn = data.list[i].refBoardNum;
+    					$('#comment-'+bn+'').append(makeCommentCard(data.list[i],data.memEmail));
+    					//makeCommentCard
+    				})
+    			}
+    		});
+    	}
+        
         //게시물을 받아옴 
         function searchBoard(){
 			
@@ -448,6 +500,13 @@
 						}else if(item.boardType === HW_BOARD){
 							$("#center").append(makeHWCard(item));	
 						}
+						
+			            var commentQuill = new Quill('#editor-test-'+item.boardNum,{
+			            	placeholder: '댓글을 입력하세요',
+			            });
+			            var indexBoardNum = item.boardNum;
+			            console.log(indexBoardNum);
+			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
 		        	$(".delModalBtn").on("click",showDelBoardModal)  
@@ -455,9 +514,10 @@
 		   	});
 		}
         function searchSubject(){
-        	console.log("search!");
-        	//검색 주제 추가후
-        	boardSrchDto.srchWord = this.innerHTML;
+        	
+        	//boardSrchDto에 검색 주제 추가후
+        	console.log(this)
+        	boardSrchDto.srchWord = this.querySelector("a").innerHTML;
         	boardSrchDto.nxt1KeyVal = 1;
         	
         	//게시물 조회 실행
@@ -466,6 +526,8 @@
         	//화면 상단으로 이동
         	$('html, body').animate({scrollTop: 0 }, 'slow');
         }
+        
+        //
         function showDelBoardModal(e){
         	//해당 게시물의 번호와 타입을 얻어옴
         	var evt = e || window.event;
@@ -479,6 +541,7 @@
         	$("#delBoardModal").modal('show');
         }
         
+        // 공지 삭제  Ajax Request
         function sendDelBoard(){
         	//모달에 저장된 삭제할 게시물 정보 불러옴
         	var delBoardProp = $("#delModalProp").serializeObject();
@@ -509,9 +572,8 @@
 			});
         }
         
-        
+        //공지 생성 Ajax Request
         function insertNoticeBoard(){
-        	
         	
             var about = document.querySelector('input[name=boardContent]');
             about.value = JSON.stringify(NoticeQuill.getContents());
@@ -526,7 +588,7 @@
 		   		, contentType : "application/json; charset=UTF-8"
 			})
 			.done(function(data){
-				console.log(data.errC);
+				
 				if(data.errC ==="0000"){
 					boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
 					$("#noticeModal").modal('hide');
@@ -550,11 +612,19 @@
 	    	var html = template(data);
 	    	return html;
 		}
-		//deltaObject를 HTML코드로 변경
-		function quillGetHTML(inputDelta) {
-			var delta = JSON.parse(inputDelta);
-		    var tempCont = document.createElement("div");
-		    (new Quill(tempCont)).setContents(delta.ops);
-		    return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
-		}
+		//댓글 섹션 만들기
+		function makeCommentCard(data, memEmail){
+			if(data.cmntWriter == memEmail){
+				var source = $("#comment-card").html();
+		    	var template = Handlebars.compile(source);
+		    	var html = template(data);
+		    	return html;				
+			}else{
+				var source = $("#comment-card-no").html();
+		    	var template = Handlebars.compile(source);
+		    	var html = template(data);
+		    	return html;				
+			}
+		}		
+		
     </script>

@@ -8,13 +8,39 @@ public class GroupVo {
 	private Date openDate;
 	private int maxMemNum;
 	private String memEmail;
-	private String inviteCode;
+	private String inviteCodeS;
+	private String inviteCodeM;
 	private char inviteCodeStatus;
 	private String groupImage;
 	private String groupDescription;
+	private String attendedQRCode;
+	
 	
 	public GroupVo() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public GroupVo(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail, String inviteCodeS,
+			String inviteCodeM, char inviteCodeStatus, String groupImage, String groupDescription) {
+		super();
+		this.groupNum = groupNum;
+		this.groupName = groupName;
+		this.openDate = openDate;
+		this.maxMemNum = maxMemNum;
+		this.memEmail = memEmail;
+		this.inviteCodeS = inviteCodeS;
+		this.inviteCodeM = inviteCodeM;
+		this.inviteCodeStatus = inviteCodeStatus;
+		this.groupImage = groupImage;
+		this.groupDescription = groupDescription;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupVo [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate + ", maxMemNum="
+				+ maxMemNum + ", memEmail=" + memEmail + ", inviteCodeS=" + inviteCodeS + ", inviteCodeM=" + inviteCodeM
+				+ ", inviteCodeStatus=" + inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription="
+				+ groupDescription + "]";
 	}
 
 	public int getGroupNum() {
@@ -57,12 +83,20 @@ public class GroupVo {
 		this.memEmail = memEmail;
 	}
 
-	public String getInviteCode() {
-		return inviteCode;
+	public String getInviteCodeS() {
+		return inviteCodeS;
 	}
 
-	public void setInviteCode(String inviteCode) {
-		this.inviteCode = inviteCode;
+	public void setInviteCodeS(String inviteCodeS) {
+		this.inviteCodeS = inviteCodeS;
+	}
+
+	public String getInviteCodeM() {
+		return inviteCodeM;
+	}
+
+	public void setInviteCodeM(String inviteCodeM) {
+		this.inviteCodeM = inviteCodeM;
 	}
 
 	public char getInviteCodeStatus() {
@@ -89,24 +123,13 @@ public class GroupVo {
 		this.groupDescription = groupDescription;
 	}
 
-	public GroupVo(int groupNum, String groupName, Date openDate, int maxMemNum, String memEmail, String inviteCode,
-			char inviteCodeStatus, String groupImage, String groupDescription) {
-		super();
-		this.groupNum = groupNum;
-		this.groupName = groupName;
-		this.openDate = openDate;
-		this.maxMemNum = maxMemNum;
-		this.memEmail = memEmail;
-		this.inviteCode = inviteCode;
-		this.inviteCodeStatus = inviteCodeStatus;
-		this.groupImage = groupImage;
-		this.groupDescription = groupDescription;
+	public String getAttendedQRCode() {
+		return attendedQRCode;
 	}
 
-	@Override
-	public String toString() {
-		return "GroupVo [groupNum=" + groupNum + ", groupName=" + groupName + ", openDate=" + openDate + ", maxMemNum="
-				+ maxMemNum + ", memEmail=" + memEmail + ", inviteCode=" + inviteCode + ", inviteCodeStatus="
-				+ inviteCodeStatus + ", groupImage=" + groupImage + ", groupDescription=" + groupDescription + "]";
+	public void setAttendedQRCode(String attendedQRCode) {
+		this.attendedQRCode = attendedQRCode;
 	}
+	
+	
 }

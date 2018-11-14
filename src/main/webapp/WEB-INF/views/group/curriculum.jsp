@@ -9,7 +9,6 @@
        <div class="cover">
        	<h1 class="cover-title">
        		Curriculum
-       		
        	</h1>
        </div>
        

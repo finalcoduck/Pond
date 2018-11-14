@@ -10,22 +10,26 @@
 		INSERT
 		 INTO POND_GROUP 
 		 (
+		 	GROUP_NUM,
 		 	GROUP_NAME, 
 		 	OPEN_DATE, 
 		 	MAX_MEM_NUM, 
 		 	MEM_EMAIL, 
-		 	INVITE_CODE, 
+		 	INVITE_CODE_S,
+		 	INVITE_CODE_M, 
 		 	INVITE_CODE_STATUS, 
 		 	GROUP_IMAGE, 
 		 	GROUP_DESCRIPTION
 		 ) 
 		 VALUES 
 		 (
+		 	POND_GROUP_SEQ.nextval,
 		 	#{groupName}, 
 		 	sysdate, 
 		 	50, 
 		 	#{memEmail}, 
-		 	#{inviteCode}, 
+		 	#{inviteCodeS},
+		 	#{inviteCodeM}, 
 		 	#{inviteCodeStatus}, 
 		 	#{groupImage}, 
 		 	'그룹 소개를 작성해주세요.'
@@ -57,16 +61,33 @@
 		delete from pond_group where group_num = #{value}
 	</delete>
 	
-	<select id="getGroupNum" parameterType="string" resultType="int">
-	 	select group_num from pond_group where invite_code = #{value}
+	<select id="getGroupNum" parameterType="map" resultType="int">
+	 	select * from pond_group where invite_code_m = #{inviteCodeM} or invite_code_s = #{inviteCodeS}
 	</select>
 	
 	<!-- 해당회원 그룹별 회원 숫자 가져오기 -->
 	<select id="getGroupMemNum" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMemNumDto">
 		select * from
 		 pond_group G,
-		  (select group_num, count(*) group_mem_num, status from group_mem group by group_num, status) A
-		   where G.group_num = A.group_num
-			and mem_email = #{value} 
+		  (select group_num, count(*) group_mem_num from group_mem group by group_num) A,
+           (select group_num, status, mem_email from group_mem) C
+		   where G.group_num = A.group_num and A.group_num = C.group_num
+			and C.mem_email = #{value}
 	</select>
+	
+	<!-- 초대코드 입력시 중복 확인용 -->
+	<select id="dupliInviteCode" parameterType="map" resultType="com.coduck.pond.group.vo.GroupMemVo">
+		select * from group_mem where group_num = #{groupNum} and mem_email = #{memEmail}
+	</select>
+	
+	<!-- 해당 그룹의 매니저 멤버리스트 가져오기 -->
+	<select id="getGroupMemListM" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMem_smDto">
+	 	select * from group_mem g, mem m where g.mem_email = m.mem_email and g.group_num = #{value} and g.status = 'M'
+	</select>
+	
+	<!-- 해당 그룹의 학생 멤버리스트 가져오기 -->
+	<select id="getGroupMemListS" parameterType="string" resultType="com.coduck.pond.group.vo.GroupMem_smDto">
+	 	select * from group_mem g, mem m where g.mem_email = m.mem_email and g.group_num = #{value} and g.status = 'S'
+	</select>
+	
 </mapper> 

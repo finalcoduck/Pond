@@ -29,6 +29,6 @@
 	</select>
 	<!-- 구글 로그인 정보 인서트 -->
 	<insert id="googleToInsertMember" parameterType="map">
-		insert into mem values(#{id},'google',#{name},'0','V','google@google.com',sysdate,#{profilePic})
+		insert into mem values(#{memEmail},'google',#{name},'0','V',#{id},sysdate,#{profilePic})
 	</insert>
 </mapper>  

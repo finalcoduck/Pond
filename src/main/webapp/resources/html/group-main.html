@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../build/css/floating_btn.css">
     <link rel="stylesheet" type="text/css" href="../build/css/group_main.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/group.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/datedropper.css">
+    <link rel="stylesheet" type="text/css" href="../build/css/my-style.css">
     <link rel="stylesheet" type="text/css" href="../vendor/quill/quill.snow.css">
     <title>POND</title>
+	<style type="text/css">
+	</style>
 </head>
 
 <body>
@@ -132,6 +137,48 @@
                         <div class="card-footer align_r">
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
                         </div>
+                        <div class="comment-list">
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+	                        <div class="card-footer d-flex">
+	                        	<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<div class="col-8">
+	                        	<span>이름</span>&nbsp;&nbsp;&nbsp; 
+	     						<span>댓글내용</span>&nbsp;&nbsp;&nbsp;
+	     						<span>11-04</span>
+	     						</div>
+	     						<a href="" class="col-1">수정</a>
+	     						<a href="" class="col-1">삭제</a>
+	                        </div>
+                        </div>                                                
+                        <div class="card-footer d-flex">
+							<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+								<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
+							          	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
+							          	<input type="hidden" name="cmntComment"/>
+							          	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
+								</form>
+							<div class="col-9" id="editor-test-{{boardNum}}"></div>
+							<button class="comment-btn col-1" id="cmnt-{{boardNum}}">작성</button> 
+						</div>
                     </div>
                     <!-- Post /////-->
                     <div class="card mb-3">
@@ -166,10 +213,12 @@
                             <h5 class="card-title">과제 카드</h5>
 							<div class="homework_con">
 								<p class="card-text">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
-									eos
-									ipsa praesentium esse magnam nemo dolor
-									sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+									<a href="#">
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem
+										eos
+										ipsa praesentium esse magnam nemo dolor
+										sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
+									</a>
 								</p>
 								<div class="person">
 									<ul>
@@ -191,6 +240,11 @@
                         </div>
                         <div class="card-footer align_r">
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> 댓글</a>
+                        </div>
+	                    <div class="card-footer comment-div">
+	                    	<img id="profile-img" class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+	                    	<div id="editor-test"></div>
+                            <button>작성</button>
                         </div>
                     </div>
                     <!-- Post /////-->
@@ -249,6 +303,79 @@
     </div>
     <!-- The Modal -->
 
+	<!-- The Modal -->
+	<div class="modal" id="HWModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content border-0">
+
+				<!-- Modal Header -->
+				<div class="modal-header bg-primary">
+					<h4 class="modal-title text-white">과제</h4>
+					<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="chk_area">
+						<div class="dropdown">
+							<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+								전체학생
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="allChk">
+									<label for="allChk"></label>
+									<span class="txt">전체 학생</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_1">
+									<label for="student_1"></label>
+									<span class="txt">배재정</span>
+								</li>
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="student_2">
+									<label for="student_2"></label>
+									<span class="txt">배재정</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<input name="homework-caption" type="hidden">
+						<div id="homework-caption">
+						</div>
+						<input name="homework-content" type="hidden">
+						<div id="homework-content">
+						</div>
+					</div>
+					<ul class="score_area">
+						<li>
+							<span class="txt">점수</span>
+							<input type="text" value="100">
+						</li>
+						<li>
+							<span class="txt">마감일</span>
+							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+						</li>
+						<li>
+							<span class="txt">주제</span>
+							<select>
+								<option>주제</option>
+							</select>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer justify-content-between">
+					<a href="" class="text-muted" data-dismiss="modal">과제 만들기</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- The Modal -->
+
     <!-- floating Button-->
     <div id="floatingBtnDiv"class="material-button-anim">
         <ul class="list-inline" id="options">
@@ -277,6 +404,7 @@
     <script src="../vendor/bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <script src="../vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
     <script src="../vendor/quill/quill.min.js"></script>
+    <script src="../build/js/datedropper.js"></script>
 
     <script>
         const slideExcutionTime = 178;
@@ -307,27 +435,44 @@
                 $("#noticeModal").modal('show')       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
+
+            $("#HWBtn").on("click", function () {
+                $("#HWModal").modal('show')       
+                $("#HWBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
             
-            $('#noticeModal').on('show.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('show.bs.modal', function (e) {
                 $("#floatingBtn").trigger("click");
             });
 
-            $('#noticeModal').on('shown.bs.modal', function (e) {
+
+            $('#noticeModal, #HWModal').on('shown.bs.modal', function (e) {
                 if($("body").css("padding-right")!=="0px"){
                     $("#floatingBtnDiv").addClass("add-right");
                 }
                 
             });
-            $('#noticeModal').on('hidden.bs.modal', function (e) {
+            $('#noticeModal, #HWModal').on('hidden.bs.modal', function (e) {
                 $("#floatingBtnDiv").removeClass("add-right")
             });
 
+
             var quill = new Quill('#editor-container', {
-
                 placeholder: '공지를 입력하세요',
-
             });
 
+            var quill1 = new Quill('#homework-caption', {
+                placeholder: '제목',
+            });
+			
+            var quill2 = new Quill('#homework-content', {
+                placeholder: '내용(선택사항)',
+            });
+			
+            var testQuill = new Quill('#editor-test', {
+            	placeholder: '댓글을 입력하세요',
+            });
+            
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
 
             var form = document.querySelector('form');
@@ -344,7 +489,16 @@
             };
 
         });
+
+		$(function() { 
+			$("ul.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) { 
+				e.stopPropagation(); 
+			}); 
+		}); 
     </script>
+	<script>
+		$('.datepicker').dateDropper();
+	</script>
 
 </body>
 
