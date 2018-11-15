@@ -66,6 +66,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public HwBoardVo detailHomeworkBoard(int boardNum) {
+		return hwBoardDao.detailHomeworkBoard(boardNum);
+	}
+	
+	@Override
 	public HashMap<String, Object> insertNoticeBoard(GroupNoticeVo groupNoticeVo) {
 		
 		HashMap<String,Object> resultMap = new HashMap<String,Object>();
@@ -84,6 +89,7 @@ public class BoardServiceImpl implements BoardService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
+	
 
 	@Override
 	public HashMap<String, Object> deleteNoticeBoard(int boardNum) {

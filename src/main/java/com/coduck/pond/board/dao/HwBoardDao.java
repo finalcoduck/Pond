@@ -28,4 +28,8 @@ public class HwBoardDao {
 		session.delete(NAMESPACE+"deleteHwBoard",boardNum);
 	}
 	
+	public HwBoardVo detailHomeworkBoard(int boardNum) {
+		return session.selectOne(NAMESPACE+"detailHwBoard", boardNum);
+	}
+	
 }

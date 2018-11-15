@@ -5,10 +5,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
 
 <!-- content -->
 <section id="main">
-	<div class="container">
+	<div class="container mt20">
 		<div class="row">
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
@@ -146,6 +148,88 @@
 	</div>
 </div>
 
+
+<!-- The Modal -->
+<div class="modal" id="homeworkModal">
+	<div class="modal-dialog" style="max-width:700px">
+		<div class="modal-content border-0">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-primary">
+				<h4 class="modal-title text-white">과제</h4>
+				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<form id="homeworkForm" action="">
+					<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
+					<input name="boardType" type="hidden" value="H">
+					<div class="chk_area">
+						<div class="dropdown">
+							<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+								전체학생
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item" data-keepOpenOnClick>
+									<input type="checkbox" id="allChk">
+									<label for="allChk"></label>
+									<span class="txt">전체 학생</span>
+								</li>
+								<c:forEach items="${sList }" var="vo" varStatus="status">
+		                            <li class="dropdown-item" data-keepOpenOnClick>
+	                                    <input type="checkbox" id="${status.index }" name="student_list" class="mr-1" value="">
+	                                    <label for="${status.index }"></label>
+                                    	<span class="txt">${vo.memName }</span>
+									</li>
+	                            </c:forEach>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<input name="boardTitle" type="hidden" id="homeworkTitle">
+						<div id="homeworkTitleContainer">
+						</div>
+						
+						<input name="boardContent" type="hidden" id="homeworkContent">
+						<div id="homeworkContentContainer">
+						</div>
+					</div>
+					<ul class="score_area">
+						<li>
+							<span class="txt">점수</span>
+							<input type="text" name="hwMaxScore" placeholder="100">
+						</li>
+						<li>
+							<span class="txt">마감일</span>
+							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+						</li>
+						<li>
+							<span class="txt">주제</span>
+							<select class="custom-select" name="subjectTitle"
+								id="inputGroupSelect01" style="width:auto;">
+								<option selected>공지</option>
+								<c:forEach var="subject" items='${subjectList}'
+									varStatus="status">
+									<option value="${subject.subjectTitle}">${subject.subjectTitle}</option>
+								</c:forEach>
+							</select>
+						</li>
+					</ul>
+				</form>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer justify-content-between">
+				<button type="button" id="homeworkSubmitBtn" class="btn btn-out-secondary">제출</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- The Modal -->
+
+
 <!--!!!!!!!!!!!!! 게시물 삭제 모달!!!!!!! -->
 <div class="modal" id="delBoardModal">
 	<div class="modal-dialog modal-dialog-centered">
@@ -184,7 +268,7 @@
 <div id="floatingBtnDiv" class="material-button-anim">
 	<ul class="list-inline" id="options">
 		<li class="option">
-			<button id="HWBtn" class="material-button option1" type="button"
+			<button id="homeworkBtn" class="material-button option1" type="button"
 				data-container="body" data-placement="left" data-content="과제">
 				<i class="fas fa-clipboard-check"></i>
 			</button>
@@ -244,53 +328,146 @@
 	<div class="comment-list" id="comment-{{boardNum}}">
 
 	</div>
-	<div class="card-footer d-flex" >
-		<img id="profile-img" class="col-2 rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
-		<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
-           	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
-           	<input type="hidden" name="cmntContent"/>
-           	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
-		</form>
-		<div class="col-9" id="editor-test-{{boardNum}}"></div>
-		<button class="comment-btn col-1" id="cmnt-{{boardNum}}">작성</button> 
-	</div>
+		<div class="comment-list" id="comment-{{boardNum}}"></div>
+		<div class="card-footer d-flex" >
+			<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
+      	     	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
+     	      	<input type="hidden" name="cmntContent"/>
+     	      	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
+			</form>
+			<div class="col-10" id="editor-test-{{boardNum}}"></div>
+			<div class="col-2 align_c">
+				<button class="comment-btn" id="cmnt-{{boardNum}}">작성</button>
+			</div> 
+		</div>
 </div>
 </script>
 
 <!-- comment Template -->
 <script id="comment-card" type="text/x-handlebars-template">
-				<div class="card-footer d-flex">
-						<img id="profile-img" class="col-2 rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="">
-							<div class="col-9">
-						<span>{{memName}}</span>&nbsp;&nbsp;&nbsp; 
-						<span>{{{cmntContent}}}</span>&nbsp;&nbsp;&nbsp;
-						</div>
-						<button class="col-1" id="delete-{{cmntNum}}" value="delete">삭제</button>
-						<input type="hidden" value="{{refBoardNum}}"/>
-	            </div>
+	<div class="card-footer d-flex">
+		<div class="col-1 align_c">
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+		</div>
+		<div class="col-8 comment_con">
+			<span class="name">{{memName}}</span>
+			{{{cmntContent}}}
+		</div>
+		<div class="col-3 align_r">
+			<button class="btn btn-danger" id="delete-{{cmntNum}}" value="delete">삭제</button>
+			<input type="hidden" value="{{refBoardNum}}"/>
+		</div>
+	</div>
 </script>
 <!-- no delete commet Template -->
 <script id="comment-card-no" type="text/x-handlebars-template">
-				<div class="card-footer d-flex">
-						<img id="profile-img" class="col-2 rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="">
-							<div class="col-9">
-						<span>{{memName}}</span>&nbsp;&nbsp;&nbsp; 
-						<span>{{{cmntContent}}}</span>&nbsp;&nbsp;&nbsp;
-						</div>
-						<input type="hidden" value="{{refBoardNum}}"/>
-	            </div>
+	<div class="card-footer d-flex">
+		<div class="col-2">
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+		</div>
+		<div class="col-8">
+			<span>{{memName}}</span>
+			{{{cmntContent}}}
+		</div>
+		<input type="hidden" value="{{refBoardNum}}"/>
+	</div>
 </script>
  
 <script type="text/javascript">
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
+	<div class="card mb-3">
+		<div class="card-header">
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="mr-2">
+						<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+					</div>
+					<div class="ml-2">
+						<div class="h5 m-0">
+							{{boardWriter}}
+						</div>
+						<div class="h7 text-muted">
+							{{boardRegdate}}
+						</div>
+					</div>
+				</div>
 
+                <div>
+                	<div class="dropdown">
+                    	<button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        	<i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+							<a class="dropdown-item cursor-pointer">수정</a>
+							<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
+							<form id="boardProp{{boardNum}}">
+								<input name="boardNum" type="hidden" value="{{boardNum}}">
+								<input name="boardType" type="hidden" value="{{boardType}}">
+							</form>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+
+		<div class="card-body homework">
+			<h5 class="card-title">{{{boardTitle}}}</h5>
+			<h5><span class="badge badge-secondary">{{{subjectTitle}}}</span></h5>
+			<div class="homework_con">
+				<div class="con_area">
+					<a href="${pageContext.request.contextPath }/group/view?boardNum={{boardNum}}&groupNum=${groupVo.groupNum}">
+						{{{boardContent}}}
+					</a>
+					<br>
+					<span>
+						최대부여점수 : {{hwMaxScore}}
+					</span>
+				</div>
+				<div class="person">
+					<ul>
+						<li>
+							<a href="#">
+								<span class="num">0</span>
+								<span class="txt">제출함</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="num">0</span>									
+								<span class="txt">할당 완료</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-footer align_r">
+			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+		</div>
+		<div class="comment-list" id="comment-{{boardNum}}"></div>
+		<div class="card-footer d-flex" >
+			<form action="" name="comment-form" id="cmntForm-{{boardNum}}">
+      	     	<input type="hidden" name="refBoardNum" value='{{boardNum}}' />
+     	      	<input type="hidden" name="cmntContent"/>
+     	      	<input type="hidden" name="cmntWriter" value='{{boardWriter}}'/>
+			</form>
+			<div class="col-10" id="editor-test-{{boardNum}}"></div>
+			<div class="col-2 align_c">
+				<button class="comment-btn" id="cmnt-{{boardNum}}">작성</button>
+			</div> 
+		</div>
+	</div>
 </script>
 <!-- Card Template -->
-
 <script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
 
+<!-- datepicker 플러그인 -->
+<script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
@@ -302,6 +479,14 @@
             placeholder: '공지를 입력하세요',
         });
         
+    	var HomeworkTitleQuill = new Quill('#homeworkTitleContainer', {
+    		placeholder : '제목을 입력하세요',
+    	});
+    	
+    	var HomeworkContentQuill = new Quill('#homeworkContentContainer', {
+    		placeholder : '내용을 입력하세요(선택사항)',
+    	});       
+        
         var quillArr = [];
         
         $(document).ready(function () {
@@ -311,6 +496,9 @@
         	
         	//공지 글 추가 버튼
         	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	
+			//과제 글 추가 버튼
+			$("#homeworkSubmitBtn").on("click", insertHomeworkBoard)	        	
         	
         	//댓글 펼치기 버튼
         	$(document).on('click','.cmt-btn', function(event){
@@ -371,10 +559,10 @@
 	        $("#floatingBtn").on("click", function () {
 	            setTimeout(function () {
 	                if($("#floatingBtn").hasClass("open")){
-	                    $("#HWBtn").popover('show');
+	                    $("#homeworkBtn").popover('show');
 	                    $("#noticeBtn").popover('show');
 	                }else{
-	                    $("#HWBtn").popover('hide');
+	                    $("#homeworkBtn").popover('hide');
 	                    $("#noticeBtn").popover('hide');
 	                }
 	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
@@ -386,24 +574,28 @@
                 $('.option').toggleClass('scale-on');
             });
 
+            $("#homeworkBtn").on("click", function () {
+                $("#homeworkModal").modal('show')       
+                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });	            
             
             $("#noticeBtn").on("click", function () {
                 $("#noticeModal").modal('show');       
                 $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
             });
-            
-            $('#noticeModal').on('show.bs.modal', function (e) {
-                $("#floatingBtn").trigger("click");
-            });
 
-            $('#noticeModal').on('shown.bs.modal', function (e) {
-                if($("body").css("padding-right")!=="0px"){
-                    $("#floatingBtnDiv").addClass("add-right");
-                }
-            });
-            $('#noticeModal').on('hidden.bs.modal', function (e) {
-                $("#floatingBtnDiv").removeClass("add-right")
-            });
+			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
+				$("#floatingBtn").trigger("click");
+			});
+
+			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
+				if ($("body").css("padding-right") !== "0px") {
+					$("#floatingBtnDiv").addClass("add-right");
+				}
+			});
+			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
+				$("#floatingBtnDiv").removeClass("add-right")
+			});
 
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
@@ -429,7 +621,34 @@
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
+            
+			//datepicker 플러그인 적용
+			$('.datepicker').dateDropper();
+
+			//과제 할당학생 체크
+			var $allChk = $('#allChk');
+			$allChk.change(function () {
+				var $this = $(this);
+				var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
+				// console.log(checked);
+				$('input[name="student_list"]').prop('checked', checked);
+			});
+			var boxes = $('input[name="student_list"]');
+			boxes.change(function () {
+				var boxLength = boxes.length;
+				// 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
+				var checkedLength = $('input[name="student_list"]:checked').length;
+				var selectAll = (boxLength == checkedLength);
+				$allChk.prop('checked', selectAll);
+			});
         });
+
+		$(function(){
+			//모달 드롭다운 클릭시 닫지 않음
+			$("ul.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(e) { 
+				e.stopPropagation(); 
+			});
+		})        
         
         //댓글 삭제
 		function deleteComment(cmntNum, refBoardNum){
@@ -495,9 +714,11 @@
 					// 카드 추가
 					data.boardList.forEach(function(item){
 						item.boardContent = quillGetHTML(item.boardContent);
+						item.boardRegdate = new Date(item.boardRegdate);
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
+							item.boardTitle = quillGetHTML(item.boardTitle);
 							$("#center").append(makeHWCard(item));	
 						}
 						
@@ -598,6 +819,34 @@
 				}
 			});
         }
+        
+    	function insertHomeworkBoard(){
+    		var hwTitle = document.querySelector('#homeworkTitle');
+    		hwTitle.value = JSON.stringify(HomeworkTitleQuill.getContents());
+
+    		var hwContent = document.querySelector('#homeworkContent');
+    		hwContent.value = JSON.stringify(HomeworkContentQuill.getContents());
+    		
+    		var homeworakData = $('#homeworkForm').serializeObject();
+    		var dataStr = JSON.stringify(homeworakData);
+    		$.ajax({
+    			url : "${pageContext.request.contextPath}/board/insert/homework/proc",
+    			method : "post",
+    			dataType : 'json',
+    			data : dataStr,
+    			processData : true,
+    			contentType : "application/json; charset=UTF-8"
+    		}).done(function(data){
+    			if(data.errC === "0000"){
+    				boardSrchDto.nxt1KeyVal = 1; // 키값 초기화	
+    				$("#homeworkModal").modal('hide');
+    				//새로고침
+    				window.location.reload()
+    			}
+    		});
+    	}        
+        
+        
         //공지 카드 만들기
 		function makeNoticeCard(data){
 			var source = $("#notice-card").html();

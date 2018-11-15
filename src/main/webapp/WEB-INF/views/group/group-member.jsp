@@ -5,7 +5,7 @@
     <!-- content -->
 
     <section>
-        <div class="container">
+        <div class="container fill-vh60">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8">
                     <div class="card mb-3">
@@ -58,7 +58,7 @@
                             <a href="" id="inviteStudentBtn" data-toggle="modal" data-target="#inviteStudentModal"><i class="fas fa-user-plus"></i></a>
                         </div>
                         <ul class="list-group list-group-flush">
-<!--                             <li class="list-group-item d-flex justify-content-between">
+								<!-- <li class="list-group-item d-flex justify-content-between">
 	                                <div class="d-flex align-items-center">
 	                                    <input type="checkbox" class="mr-1" value="">
 	                                    <h6>전체</h6>
@@ -74,27 +74,27 @@
 	                                </div>
 	                            </li> -->
 							<c:forEach items="${sList }" var="vo">
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <input type="checkbox" class="mr-1" value="">
-                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
-                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
+	                            <li class="list-group-item d-flex justify-content-between">
+	                                <div class="d-flex align-items-center">
+	                                    <input type="checkbox" class="mr-1" value="">
+	                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
+	                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
                                     	<h6>
 	                                    	<span>${vo.memName }&nbsp;&nbsp;&nbsp;</span>
 											${vo.memEmail }                                    	
 	                                    </h6>
-                                </div>
-                                <c:if test="${!empty boss}">
-                                <div class="dropdown dropleft">
-                                    <a href="" class="" data-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="${pageContext.request.contextPath }/group/member-kick?groupNum=${groupVo.groupNum}&memEmail=${vo.memEmail}">삭제</a>
-                                    </div>
-                                </div>
-                                </c:if>
-                            </li>
+	                                </div>
+	                                <c:if test="${!empty boss}">
+		                                <div class="dropdown dropleft">
+		                                    <a href="" class="" data-toggle="dropdown">
+		                                        <i class="fas fa-ellipsis-v"></i>
+		                                    </a>
+		                                    <div class="dropdown-menu">
+		                                        <a class="dropdown-item" href="${pageContext.request.contextPath }/group/member-kick?groupNum=${groupVo.groupNum}&memEmail=${vo.memEmail}">삭제</a>
+		                                    </div>
+		                                </div>
+	                                </c:if>
+	                            </li>
                             </c:forEach>
                         </ul>
                     </div>

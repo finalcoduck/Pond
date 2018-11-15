@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
+	//과제 등록
 	@RequestMapping(value = "/board/insert/homework/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody HwBoardVo hwBoardVo, MemDto memDto){
 		hwBoardVo.setBoardWriter(memDto.getMemVo().getMemEmail());
@@ -34,13 +36,24 @@ public class BoardController {
 		return resultMap;
 	}
 	
+	//과제 상세
+	@RequestMapping(value = "/group/view", method = RequestMethod.GET)
+	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {
+		HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
+		model.addAttribute(hwBoardVo);
+	
+		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
+			return "/group/view-teacher";
+		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
+			return "/group/view-student";
+		}
+		return null;
+	}
 	
 	//그룹 게시글 조회
 	@RequestMapping(value = "/board/search/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String,Object> searchBoard (@RequestBody BoardSrchDto boardSrchDto) {
 		HashMap<String, Object> map = new HashMap<String,Object>();
-		
-		
 		
 		map.put("boardList",boardService.selectBoardList(boardSrchDto));
 		

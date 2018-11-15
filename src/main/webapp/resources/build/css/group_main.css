@@ -1,4 +1,4 @@
-.homework_con{font-size:0;}
+.homework_con{font-size:0; margin-top:15px;}
 .homework_con .con_area{display:inline-block; vertical-align:middle; width:65%; font-size:15px;}
 .homework_con .person{display:inline-block; vertical-align:middle; width:30%; font-size:15px; margin-left:5%;}
 .homework_con .person ul{font-size:0;}
@@ -14,6 +14,12 @@
 	float: right;
 }
 
-#profile-img{
+.profile-img{
 	width: 30px; height: 30px;
 }
+
+.comment-btn{border:0; background-color:transparent; line-height:24px; padding:5px 10px; background-color:#ccc; color:#fff; margin-top:5px;}
+.comment_con span{display:block; font-size:16px; color:#333; margin-bottom:5px;}
+.comment_con p{font-size:14px; color:#999; line-height:22px;}
+
+.card-footer .btn{padding:5px 10px; font-size:15px;}

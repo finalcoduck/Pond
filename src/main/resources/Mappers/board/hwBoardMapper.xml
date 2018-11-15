@@ -26,25 +26,32 @@
 			HW_BOARD
 			(
 				GROUP_NUM,
+				BOARD_NUM,
 				BOARD_WRITER,
 				BOARD_TITLE,
 				BOARD_CONTENT,
 				BOARD_REGDATE,
+				HW_MAX_SCORE,
 				SUBJECT_TITLE,
 				BOARD_TYPE
 			)
 			VALUES
 			(
 				#{groupNum},
+				#{boardNum},
 				#{boardWriter},
 				#{boardTitle},
 				#{boardContent},
 				sysdate,
+				#{hwMaxScore},
 				#{subjectTitle},
 				#{boardType}
 			)
 	</insert>
 	
+	<select id="detailHwBoard" parameterType="int" resultType="com.coduck.pond.board.vo.HwBoardVo">
+		select * from hw_board where BOARD_NUM = #{boardNum}
+	</select>
 	
 	
 	<!-- 과제 삭제 -->
