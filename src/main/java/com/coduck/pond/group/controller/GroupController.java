@@ -52,6 +52,9 @@ public class GroupController {
 		model.addAttribute("subjectList", subjecList);
 		model.addAttribute("groupVo", groupVo);
 		
+		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
+		model.addAttribute("sList", map.get("sList")); // 학생 등급 회원들
+		
 		return "/group/group-main";
 	}
 	
