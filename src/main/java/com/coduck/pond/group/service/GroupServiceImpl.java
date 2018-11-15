@@ -14,6 +14,7 @@ import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
+import com.coduck.pond.schedule.vo.AttendedVo;
 
 
 @Service
@@ -96,6 +97,17 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum) {
 		 return groupDao.getGroupMemList(groupNum);
+	}
+	@Override
+	public boolean isQRcodeCorrect(AttendedVo attendedVo) {
+		
+		GroupVo groupVo = groupDao.selectGroup(attendedVo.getGroupNum());
+		if(groupVo.getAttendedQRCode().equals(attendedVo.getAttendedQRCode())) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 
 }

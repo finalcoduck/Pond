@@ -60,7 +60,7 @@ public class MemberMoveController {
 	
 	@RequestMapping("/login/sendMail")
 	public String setNewPwd() {
-		return "/main/find-password";
+		return "/find-password";
 	}
 	
 	/*@RequestMapping("/member/main/loginForm")

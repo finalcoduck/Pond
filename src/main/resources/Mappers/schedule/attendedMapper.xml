@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mappers.attendedMapper">
+   
+   <!-- 금일의 등원 정보 조회 -->
+   <select id="selectTodayAttended" parameterType="com.coduck.pond.member.vo.MemAttendedDto" resultType="com.coduck.pond.schedule.vo.AttendedVo">
+		SELECT
+			*
+		FROM
+			ATTENDED
+		WHERE
+			ATTENDED_NUM = (SELECT MAX(ATTENDED_NUM) FROM ATTENDED WHERE GROUP_NUM = #{groupNum} 
+				AND MEM_EMAIL = #{memEmail}
+				AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD') )
+			AND GROUP_NUM = #{groupNum} 
+			AND MEM_EMAIL = #{memEmail}
+			AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+   </select>
+   
+   <!-- 해당 월의 등원 정보 조회 -->
+   <select id="selectMonthAttended" parameterType="com.coduck.pond.member.vo.MemAttendedDto" resultType="com.coduck.pond.schedule.vo.AttendedVo">
+		SELECT
+			ATTENDED_NUM,
+			GROUP_NUM,
+			TO_CHAR(ATTENDED_IN,'YYYY-MM-DD HH24:MI:SS') as ATTENDED_IN,
+			TO_CHAR(ATTENDED_OUT,'YYYY-MM-DD HH24:MI:SS') as ATTENDED_OUT,
+			ATTENDED_TYPE
+		FROM
+			ATTENDED
+		WHERE
+			GROUP_NUM = #{groupNum} 
+			AND MEM_EMAIL = #{memEmail}
+			AND TO_CHAR(ATTENDED_IN,'YYYYMM') = TO_CHAR(#{srchDate},'YYYYMM')
+   </select>
+   
+   <!-- 하원시간 업데이트 -->
+   <insert id="insertInAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
+	   INSERT INTO ATTENDED
+		    (MEM_EMAIL, 
+		    GROUP_NUM, 
+		    ATTENDED_IN, 
+		    ATTENDED_OUT, 
+		    ATTENDED_TYPE)
+		VALUES
+		    (#{memEmail}, 
+		    #{groupNum}, 
+		    sysdate, 
+		    null, 
+		    'F')
+   </insert>
+   
+   <!-- 하원 시간 업데이트 -->
+   <update id="updateOutAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
+	    UPDATE ATTENDED SET
+	   		ATTENDED_OUT=SYSDATE
+	   	WHERE
+	   		ATTENDED_NUM = (
+	   			SELECT
+	   				MAX(ATTENDED_NUM)
+	   			FROM
+	   				ATTENDED
+	   			WHERE
+	   				GROUP_NUM = #{groupNum}
+	   				AND MEM_EMAIL = #{memEmail}
+	   				AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	   		)
+   </update>
+</mapper>  

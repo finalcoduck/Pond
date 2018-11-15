@@ -198,7 +198,8 @@ public class MemberLoginController {
 		int n = memberLoginService.authConfirm(key, email);
 		if(n>0) {
 			model.addAttribute("email",email);
-			return "/main/set-new-pwd";
+			model.addAttribute("changePwdMsg","비밀번호 변경 성공");
+			return "/set-new-pwd";
 		}else {
 			System.out.println("새로운 비밀번호 설정 오류");
 			return "redirect:/";

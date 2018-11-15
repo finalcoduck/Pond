@@ -73,6 +73,7 @@ public class GoogleController {
 	        map.put("id", profile.getId());
 	        map.put("name", profile.getDisplayName());
 	        map.put("profilePic", profile.getImageUrl());
+	        map.put("memEmail", profile.getAccountEmail());
 	        memberLoginService.googleToInsertMember(map);
 	        memVo = memberLoginService.getGoogleMem(profile.getId());
 	        Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
