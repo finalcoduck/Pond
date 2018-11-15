@@ -41,6 +41,11 @@ public class MemberMoveController {
 		model.addAttribute("loginFail", loginFail);
 		return "/main-body";
 	}
+/*	
+	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
+	public String home() {
+		return "test";
+	}*/
 	
 	/*@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
 	public String go(Model model) { 

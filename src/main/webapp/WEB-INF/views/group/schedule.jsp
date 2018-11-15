@@ -36,7 +36,7 @@ String.prototype.replaceAll = function (org, dest) {
 	return this.split(org).join(dest);
 }
 
-var colorList = ['#FE2EF7','#FF0040','#9F81F7','#58FA58','#FF8000'];
+var colorList = ['#2ECCFA','#D358F7','#01DFA5','#58FA58','#FF8000'];
 $(function() {
 	  var calYear = new Date().getFullYear();
 	  var calMonth = new Date().getMonth()+1;

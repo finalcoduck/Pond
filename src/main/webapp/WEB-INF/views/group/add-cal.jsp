@@ -1,21 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>일정 등록</h1>
+   <section id="">
+        <div class="container">
+            <div class="row mt-5 align-items-center justify-content-center">
+                <div class="col-12 align_c">
+                    <h2>일정 등록</h2>
+                </div>
+                <div class="col-12 col-md-6 mt-5">
+                    <form action="${pageContext.request.contextPath}/schedule/add-cal" method="post">
+                        <div class="form-group">
+                            <label for="scheduleTitle">스케줄 이름</label>
+                            <input type="text" name="scheduleTitle" class="form-control"/><br>
+                        
+                            <label for="scheduleContent">스케줄 내용</label>
+                            <input type="text" name="scheduleContent" class="form-control" />
+                            
+                            <label for="scheduleStartDate">시작 날짜</label>
+                            <input type="date" name="scheduleStartDate" class="form-control"/><br>
+                            
+                            <label for="scheduleEndDate">종료 날짜 </label>
+                            <input type="date" name="scheduleEndDate" class="form-control"/>
+                        </div>
+                        	<input type="hidden" value="${groupNum }" name="groupNum" />
+                        <input type="submit" value="등록" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<form action="${pageContext.request.contextPath}/schedule/add-cal" method="post">
-	일정 제목 : <input type="text" name="scheduleTitle" /><br>
-	일정 내용 : <textarea rows="5" cols="30" name="scheduleContent"></textarea><br>
-	시작 날짜 : <input type="date" name="scheduleStartDate"/><br>
-	끝 날짜 : <input type="date" name="scheduleEndDate" /><br>
-	<input type="hidden" name="groupNum" value="${groupNum }" /><br>
-	<input type="submit" value="등록" />
-</form>
-</body>
-</html>

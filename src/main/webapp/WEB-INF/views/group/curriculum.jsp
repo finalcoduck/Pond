@@ -20,7 +20,8 @@
 	       		<div class="card">
 					<img src="${pageContext.request.contextPath }/resources/build/image/images/1.png" alt="" class="card-icon" />
 					<h2 class="card-title">
-						<div><fmt:formatDate value="${vo.crcStartDate }" pattern="yy/MM/dd"/> ~ <fmt:formatDate value="${vo.crcEndDate }" pattern="MM/dd"/></div>
+						20<fmt:formatDate value="${vo.crcStartDate }" pattern="yy"/>
+						<div style="color:#A9F5F2;"><fmt:formatDate value="${vo.crcStartDate }" pattern="MM/dd"/> ~ <fmt:formatDate value="${vo.crcEndDate }" pattern="MM/dd"/></div>
 					</h2>
 					<dl class="card-definition">
 						<dt>

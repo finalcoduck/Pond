@@ -62,6 +62,7 @@ public class ScheduleBasicController {
 	 */
 	@RequestMapping(value = "/schedule/add-cal", method = RequestMethod.POST)
 	public String addCal(ScheduleVo vo, RedirectAttributes ra) {
+		System.out.println("여기는?");
 		try {
 			ra.addAttribute("groupNum", vo.getGroupNum());
 			scheduleService.addSchedule(vo);
