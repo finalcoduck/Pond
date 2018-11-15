@@ -26,7 +26,6 @@
 			HW_BOARD
 			(
 				GROUP_NUM,
-				BOARD_NUM,
 				BOARD_WRITER,
 				BOARD_TITLE,
 				BOARD_CONTENT,
@@ -38,7 +37,6 @@
 			VALUES
 			(
 				#{groupNum},
-				#{boardNum},
 				#{boardWriter},
 				#{boardTitle},
 				#{boardContent},

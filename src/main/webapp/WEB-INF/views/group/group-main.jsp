@@ -178,7 +178,7 @@
 								</li>
 								<c:forEach items="${sList }" var="vo" varStatus="status">
 		                            <li class="dropdown-item" data-keepOpenOnClick>
-	                                    <input type="checkbox" id="${status.index }" name="student_list" class="mr-1" value="">
+	                                    <input type="checkbox" id="${status.index }" name="student_list" class="mr-1" value="${vo.memEmail }">
 	                                    <label for="${status.index }"></label>
                                     	<span class="txt">${vo.memName }</span>
 									</li>
@@ -829,6 +829,8 @@
     		
     		var homeworakData = $('#homeworkForm').serializeObject();
     		var dataStr = JSON.stringify(homeworakData);
+    		console.log(homeworakData);
+    		/*
     		$.ajax({
     			url : "${pageContext.request.contextPath}/board/insert/homework/proc",
     			method : "post",
@@ -844,6 +846,7 @@
     				window.location.reload()
     			}
     		});
+    		*/
     	}        
         
         
