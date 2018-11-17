@@ -46,5 +46,9 @@ public class CommonConstant {
 	public static final String INSERT = "C";
 	public static final String UPDATE = "U";
 	
+	/** 출석 코드 */
+	public static final char ABSENCE = 'A';
+	public static final char PRESENT = 'P';
+	public static final char LEAVE = 'L';
 	
 }
