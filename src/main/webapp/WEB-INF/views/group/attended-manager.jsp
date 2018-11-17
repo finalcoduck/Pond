@@ -4,9 +4,9 @@
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 
 <section id="main">
-	<h1>선생님</h1>
+	
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mt-3">
 			<div class="col-12 col-md-8">
 			</div>
 			
