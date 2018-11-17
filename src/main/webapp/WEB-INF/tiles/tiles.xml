@@ -53,7 +53,9 @@
 		<put-attribute name="header" value="/WEB-INF/layout/attended-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/group/attended-manager.jsp" />
 	</definition>
-	
+	<definition name="/group/attended/qrgenerator" template="/WEB-INF/layout/bodytemplate.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/group/attended-qrgenerator.jsp" />
+	</definition>
 	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
 	</definition>

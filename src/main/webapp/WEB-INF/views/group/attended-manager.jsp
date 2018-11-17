@@ -14,7 +14,7 @@
 			</div>
 			
 			<div class="col-12 col-md-8 mb-3">
-				<button id="attendanceBtn" class="btn btn-primary btn-block">출석</button>
+				<a id="attendanceBtn" href="${pageContext.request.contextPath }/group/attended/qrgenerator?groupNum=${groupVo.groupNum}" class="btn btn-primary btn-block">출석 모드</a>
 			</div>		
 		</div>
 	</div>

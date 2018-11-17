@@ -43,12 +43,20 @@ public class AttendedController {
 		model.addAttribute("groupVo", groupVo);
 		if(groupStatus==CommonConstant.MANAGER) {
 			return "/group/attended/manager";
-		}else if(groupStatus==CommonConstant.MANAGER) {
-			
+		}else if(groupStatus==CommonConstant.STUDENT) {
 			return "/group/attended/student";
 		}
 		return null;
 	}
+	
+	@RequestMapping(value="/group/attended/qrgenerator")
+	public String attendedGenerator(int groupNum, MemDto memDto) {
+		
+		
+		
+		return "/group/attended/qrgenerator";
+	}
+	
 	
 	
 	//해당 달의 출석 기록 리스트 리턴
