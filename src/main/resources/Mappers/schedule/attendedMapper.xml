@@ -19,7 +19,7 @@
 			AND TO_CHAR(ATTENDED_IN,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
    </select>
    
-   <!-- 해당 월의 등원 정보 조회 -->
+   <!-- 해당 월의 본인 등원 정보 조회 -->
    <select id="selectMonthAttended" parameterType="com.coduck.pond.member.vo.MemAttendedDto" resultType="com.coduck.pond.schedule.vo.AttendedVo">
 		SELECT
 			ATTENDED_NUM,
@@ -30,12 +30,31 @@
 		FROM
 			ATTENDED
 		WHERE
-			GROUP_NUM = #{groupNum} 
-			AND MEM_EMAIL = #{memEmail}
+			GROUP_NUM = #{groupNum}
+			<if test="memEmail != ''"> 
+				AND MEM_EMAIL = #{memEmail}
+			</if>
 			AND TO_CHAR(ATTENDED_IN,'YYYYMM') = TO_CHAR(#{srchDate},'YYYYMM')
    </select>
    
-   <!-- 하원시간 업데이트 -->
+   <!-- 해당 월의 그룹내 모든 회원 등원 정보 조회 -->
+   <select id="selectGroupMonthAttended" parameterType="com.coduck.pond.member.vo.MemAttendedDto" resultType="com.coduck.pond.schedule.vo.MemNameAttendedDto">
+		SELECT
+			AT.ATTENDED_NUM,
+			AT.GROUP_NUM,
+			TO_CHAR(AT.ATTENDED_IN,'YYYY-MM-DD HH24:MI:SS') as ATTENDED_IN,
+			TO_CHAR(AT.ATTENDED_OUT,'YYYY-MM-DD HH24:MI:SS') as ATTENDED_OUT,
+			AT.ATTENDED_TYPE,
+			MEM.MEM_NAME
+		FROM
+			ATTENDED AT, MEM MEM
+		WHERE
+			AT.GROUP_NUM = #{groupNum}
+			AND AT.MEM_EMAIL = MEM.MEM_EMAIL
+			AND TO_CHAR(AT.ATTENDED_IN,'YYYYMM') = TO_CHAR(#{srchDate},'YYYYMM')
+   </select>
+   
+   <!-- 출석 삽입 -->
    <insert id="insertInAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
 	   INSERT INTO ATTENDED
 		    (MEM_EMAIL, 
@@ -48,13 +67,14 @@
 		    #{groupNum}, 
 		    sysdate, 
 		    null, 
-		    'F')
+		    'P')
    </insert>
    
    <!-- 하원 시간 업데이트 -->
    <update id="updateOutAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
 	    UPDATE ATTENDED SET
-	   		ATTENDED_OUT=SYSDATE
+	   		ATTENDED_OUT = SYSDATE
+	   		ATTENDED_TYPE = 'L'
 	   	WHERE
 	   		ATTENDED_NUM = (
 	   			SELECT

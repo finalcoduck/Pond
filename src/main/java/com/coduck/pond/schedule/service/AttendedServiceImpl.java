@@ -11,6 +11,7 @@ import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.member.vo.MemAttendedDto;
 import com.coduck.pond.schedule.dao.AttendedDao;
 import com.coduck.pond.schedule.vo.AttendedVo;
+import com.coduck.pond.schedule.vo.MemNameAttendedDto;
 import com.coduck.pond.schedule.vo.SrchAttendedDto;
 
 @Service
@@ -49,12 +50,16 @@ public class AttendedServiceImpl implements AttendedService{
 
 	@Override
 	public List<AttendedVo> selectMonthAttended(SrchAttendedDto srchAttendedDto) {
-		
-		List<AttendedVo>  AttendedVoList = attendedDao.selectMonthAttended(srchAttendedDto);
-		
-		return AttendedVoList;
+		List<AttendedVo>  attendedVoList = attendedDao.selectMonthAttended(srchAttendedDto);
+		return attendedVoList;
 	}
-
+	
+	@Override
+	public List<MemNameAttendedDto> selectGroupMonthAttended(SrchAttendedDto srchAttendedDto) {
+		List<MemNameAttendedDto>  memNameAttendedDtoList = attendedDao.selectGroupMonthAttended(srchAttendedDto);
+		return memNameAttendedDtoList;
+	}
+	
 	@Override
 	public HashMap<String, Object> attendedOut(AttendedVo attendedVo) {
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
@@ -62,4 +67,6 @@ public class AttendedServiceImpl implements AttendedService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
+
+	
 }
