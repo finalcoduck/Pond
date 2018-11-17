@@ -25,7 +25,7 @@
 
 <title>POND</title>
 </head>
-<body>
+<body class="bg-primary">
 	
 
 	<tiles:insertAttribute name="body" />
