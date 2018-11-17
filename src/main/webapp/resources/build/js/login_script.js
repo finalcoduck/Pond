@@ -2,8 +2,8 @@
 
 const ryan = document.querySelector('#ryan');
 const face = document.querySelectorAll('.ears, .eyes, .muzzle');
-const email = document.querySelector('input[type="email"]');
-const password = document.querySelector('input[type="current-password"]');
+const email = document.querySelector('input[type="text"]');
+const password = document.querySelector('input[type="password"]');
 const fauxInput = document.createElement('div');
 const span = document.createElement('span');
 let timer = null;
@@ -55,10 +55,11 @@ function copyStyles(el) {
 
 function look(event) {
     const el = event.target;
+
     const text = el.value.substr(0, el.selectionStart);
-
+    
     span.innerText = text || '.';
-
+    
     const ryanRect = ryan.getBoundingClientRect();
     const inputRect = el.getBoundingClientRect();
     const caretRect = span.getBoundingClientRect();

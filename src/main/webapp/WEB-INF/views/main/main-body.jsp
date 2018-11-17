@@ -52,12 +52,10 @@
                                     stroke-linejoin="round" />
                             </g>
                         </svg>
-                        <input type="email" placeholder="email@domain.com" name="memEmail">
+                        <input type="text" placeholder="email@domain.com" name="memEmail">
                         <input type="password" placeholder="Password" name="memPwd">
                         <input type="submit" class="btn btn-dark text-white" value="로그인">
-                        <a href="${pageContext.request.contextPath }/login/sendMail">비밀번호를 잊어버렸습니다.</a>
-                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
-                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
+                       
                     </form>
                 </div>
             </div>
