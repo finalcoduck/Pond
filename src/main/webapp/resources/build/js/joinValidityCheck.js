@@ -101,6 +101,7 @@ function checkName(){
 			return false;
 		}
 	});
+	
 }
 
 
