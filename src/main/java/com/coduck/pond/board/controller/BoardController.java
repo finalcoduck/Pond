@@ -1,7 +1,9 @@
 package com.coduck.pond.board.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,15 +11,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.coduck.pond.board.dao.HwSubmitDao;
 import com.coduck.pond.board.service.BoardService;
+import com.coduck.pond.board.service.HwSubmitService;
 import com.coduck.pond.board.vo.BoardSrchDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
+import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
+import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupMem_smDto;
+import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -25,13 +33,42 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	HwSubmitService hwSubmitService;
+	
+	@Autowired
+	private GroupService groupService;
 
 	//과제 등록
 	@RequestMapping(value = "/board/insert/homework/proc", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody HwBoardVo hwBoardVo, MemDto memDto){
-		hwBoardVo.setBoardWriter(memDto.getMemVo().getMemEmail());
+	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody Map<String, Object> map, MemDto memDto){
+	
+		HwBoardVo hwBoardVo = new HwBoardVo();
+		hwBoardVo.setGroupNum(Integer.parseInt((String)map.get("groupNum")));
+		hwBoardVo.setBoardWriter((String)(memDto.getMemVo().getMemEmail()));
+		hwBoardVo.setBoardTitle((String)(map.get("boardTitle")));
+		hwBoardVo.setBoardContent((String)(map.get("boardContent")));
+		hwBoardVo.setBoardRegdate((Date)(map.get("hwRegdate")));
+		hwBoardVo.setHwEndDate((Date)(map.get("hwEndDate")));
+		hwBoardVo.setHwMaxScore(Integer.parseInt((String)(map.get("hwMaxScore"))));
+		hwBoardVo.setSubjectTitle((String)(map.get("subjectTitle")));
+		
+		List<String> student_list = (List<String>)map.get("student_list");
 		
 		HashMap<String,Object> resultMap = boardService.insertHomeworkBoard(hwBoardVo);
+
+		HwSubmitVo hwSubmitVo = new HwSubmitVo();
+		
+		Integer seq_val = boardService.selectBoardSeqVal();
+	
+		for(int i=0; i<student_list.size(); i++) {
+			hwSubmitVo.setHwSubmitGroupNum(seq_val);		
+			hwSubmitVo.setHwSubmitWriter((String)student_list.get(i));
+			hwSubmitVo.setHwTeacherId(memDto.getMemVo().getMemEmail());
+			System.out.println(hwSubmitVo);
+			hwSubmitService.insertSubmitBoard(hwSubmitVo);
+		}
 		
 		return resultMap;
 	}
@@ -40,7 +77,11 @@ public class BoardController {
 	@RequestMapping(value = "/group/view", method = RequestMethod.GET)
 	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {
 		HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
+		
+		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
+		
 		model.addAttribute(hwBoardVo);
+		model.addAttribute("sList", map.get("sList"));
 	
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			return "/group/view-teacher";
@@ -95,4 +136,15 @@ public class BoardController {
 			
 			return resultMap;
 		}
+		
+	//채점점수 업데이트
+	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
+	public String update(HwSubmitVo hwSubmitVo) {
+		try {
+			hwSubmitService.updateHwScore(hwSubmitVo);
+			return "0000";
+		}catch(Exception e) {
+			return "E001";
+		}
+	}
 }

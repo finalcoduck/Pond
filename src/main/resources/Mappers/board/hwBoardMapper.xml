@@ -57,4 +57,8 @@
 		
 	</delete>
 	
+	<select id="selectBoardSeqVal" resultType="int">
+		select last_number from user_sequences where sequence_name = 'GROUP_BOARD_SEQ'
+	</select>
+	
 </mapper> 

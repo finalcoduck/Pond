@@ -198,7 +198,7 @@
 					<ul class="score_area">
 						<li>
 							<span class="txt">점수</span>
-							<input type="text" name="hwMaxScore" placeholder="100">
+							<input type="text" name="hwMaxScore" placeholder="100" maxlength="3">
 						</li>
 						<li>
 							<span class="txt">마감일</span>
@@ -829,8 +829,7 @@
     		
     		var homeworakData = $('#homeworkForm').serializeObject();
     		var dataStr = JSON.stringify(homeworakData);
-    		console.log(homeworakData);
-    		/*
+    		//console.log(homeworakData);
     		$.ajax({
     			url : "${pageContext.request.contextPath}/board/insert/homework/proc",
     			method : "post",
@@ -846,7 +845,6 @@
     				window.location.reload()
     			}
     		});
-    		*/
     	}        
         
         
