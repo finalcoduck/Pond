@@ -20,9 +20,9 @@
 				<div class="coverList">
 					<div class="head">
 						<h3>커버 선택</h3>
-						<div class="navi">
+						<!-- <div class="navi">
 							
-						</div>
+						</div> -->
 					</div>
 					<ul class="cover">
 						<li>
@@ -78,8 +78,11 @@
 					</ul>
 				</div>
 			</div>
-				<span>320x240 jpeg/jpg/png 파일</span><br>
+			<span>권장 사이즈 : 320x240</span><br>
+			<div class="align_c mt20">
+				<button type="button" class="btn" onclick="history.back();">취소</button>
 				<button type="button" class="btn btn-success" id="make-group-btn">생성</button>
+			</div>
 		</div>
 	</section>
 		<script type="text/javascript">

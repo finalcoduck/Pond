@@ -41,4 +41,10 @@ public interface GroupService {
 	
 	//QRcode 조회 
 	public boolean isQRcodeCorrect(AttendedVo attendedVo);
+	
+	//그룹 주소,좌표 넣기
+	public void updateGroupAddr(String x, String y, String addr, String groupNum);
+	
+	//그룹 전화번호 수정
+	public void updateGroupPhone(String phone, String groupNum);
 }

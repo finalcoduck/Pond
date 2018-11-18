@@ -108,7 +108,10 @@ public class BoardServiceImpl implements BoardService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
-	
-	
+
+	@Override
+	public Integer selectBoardSeqVal() {
+		return (Integer)hwBoardDao.selectBoardSeqVal();
+	}
 
 }

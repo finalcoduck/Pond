@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <section id="view">
 	<div class="left">
 		<p class="title">
@@ -8,19 +9,23 @@
 		</p>
 		<div class="student_list">
 			<ul>
-				<li>
-					<span class="profile">
-						<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="" />
-						<span class="name">배재정</span>
-					</span>
-					<span class="score">
-						<span class="input_wrap">
-							<input type="text" id="score">
-							<span> / 100</span>
-							<input type="submit" value="채점" class="btn btn-primary">
+				<c:forEach items="${sList }" var="vo">
+					<li>
+						<span class="profile">
+							<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="" />
+							<span class="name">${vo.memName }</span>
 						</span>
-					</span>
-				</li>
+						<form method="post" action="<c:url value='/board/insert/homework/proc' />">
+							<span class="score">
+								<span class="input_wrap">
+									<input type="text" id="score" value="${hwSubmitVo.hwSubmitScore }">
+									<span> / ${hwBoardVo.hwMaxScore }</span>
+									<input type="submit" value="채점" class="btn btn-primary">
+								</span>
+							</span>
+						</form>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>
@@ -53,30 +58,13 @@
 		</div>
 
 		<ul class="student_list">
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
-			<li>
-				<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt=""> <span class="name">배재정</span>
-				<span class="status">할당됨</span>
-			</li>
+			<c:forEach items="${sList }" var="vo">
+				<li>
+					<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="">
+					<span class="name">${vo.memName }</span>
+					<span class="status">할당됨</span>
+				</li>
+			</c:forEach>
 		</ul>
 	</div>
 </section>

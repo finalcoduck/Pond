@@ -32,4 +32,8 @@ public class HwBoardDao {
 		return session.selectOne(NAMESPACE+"detailHwBoard", boardNum);
 	}
 	
+	public int selectBoardSeqVal() {
+		return session.selectOne(NAMESPACE+"selectBoardSeqVal");
+	}
+	
 }

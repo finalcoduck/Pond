@@ -46,6 +46,12 @@ public class CommonConstant {
 	public static final String INSERT = "C";
 	public static final String UPDATE = "U";
 	
+	/* 과제 제출 상태 */
+	public static final char BEFORE = 'B';
+	public static final char PROPOSE = 'P';
+	public static final char SCORING = 'S';
+	public static final char COMPLEATE = 'C';
+	
 	/** 출석 코드 */
 	public static final char ABSENCE = 'A';
 	public static final char PRESENT = 'P';

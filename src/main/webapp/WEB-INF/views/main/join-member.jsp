@@ -14,17 +14,23 @@
                             <label for="email">이메일 주소 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/></label>
                             <input type="email" class="form-control" id="email" name="preEmail">
                         
-                            <label for="pwd">비밀번호 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
-                            <input type="password" class="form-control" id="password" name="prePassword">
-                            <span id=""></span>
+                        	<div class="mt10">
+	                            <label for="pwd">비밀번호 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
+	                            <input type="password" class="form-control" id="password" name="prePassword">
+	                            <span id=""></span>
+                            </div>
                             
-                        
-                            <label for="pwd-check">비밀번호 확인 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
-                            <input type="password" class="form-control" id="password2">
-                            <span id=""></span>
-                            <label for="name">이름 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
-                            <input type="text" class="form-control" id="name" name="preName">
-                            <span id=""></span>
+                        	<div class="mt10">
+	                            <label for="pwd-check">비밀번호 확인 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
+	                            <input type="password" class="form-control" id="password2">
+	                            <span id=""></span>
+                            </div>
+                            
+                            <div class="mt10">
+	                            <label for="name">이름 <img src="${pageContext.request.contextPath }/resources/build/image/required.jpg" alt="" class="required-img"/><span></span></label>
+	                            <input type="text" class="form-control" id="name" name="preName">
+	                            <span id=""></span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="phone">휴대폰 번호(선택) <span></span></label>

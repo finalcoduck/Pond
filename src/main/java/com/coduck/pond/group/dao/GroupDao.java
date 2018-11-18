@@ -66,4 +66,12 @@ public class GroupDao {
 		return map;
 	}
 	
+	public void updateGroupAddr(Map<String, Object> map) {
+		session.update(NAMESPACE+"updateGroupAddress", map);
+	}
+	
+	public void updateGroupPhone(Map<String, Object> map) {
+		session.update(NAMESPACE+"updateGroupPhone", map);
+	}
+	
 }
