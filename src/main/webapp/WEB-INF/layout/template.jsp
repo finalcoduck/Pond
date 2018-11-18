@@ -22,6 +22,7 @@
 <script src="${pageContext.request.contextPath}/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
 <script src="${pageContext.request.contextPath}/resources/build/js/commonConstant.js"></script>
 <script src="${pageContext.request.contextPath}/resources/build/js/commonFunction.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/sweetalert/dist/sweetalert.min.js"></script>
 
 <title>POND</title>
 </head>
