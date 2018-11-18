@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
 
 <!-- content -->
@@ -467,7 +467,7 @@
 <script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
 
 <!-- datepicker 플러그인 -->
-<script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script> --%>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
@@ -548,9 +548,9 @@
         			contentType : "application/json; charset=UTF-8",
         			success : function(data){
         				editorDiv.text('');
-			            var commentQuill = new Quill('#editor-test-'+boardNum,{
+			             var commentQuill = new Quill('#editor-test-'+boardNum,{
 			            	placeholder: '댓글을 입력하세요',
-			            });					
+			            });	 			
         			}
         		});
         	});
@@ -623,7 +623,7 @@
             $("#delBoardBtn").on("click",sendDelBoard);
             
 			//datepicker 플러그인 적용
-			$('.datepicker').dateDropper();
+			//$('.datepicker').dateDropper();
 
 			//과제 할당학생 체크
 			var $allChk = $('#allChk');
@@ -722,12 +722,12 @@
 							$("#center").append(makeHWCard(item));	
 						}
 						
-			            var commentQuill = new Quill('#editor-test-'+item.boardNum,{
+			           /*  var commentQuill = new Quill('#editor-test-'+item.boardNum,{
 			            	placeholder: '댓글을 입력하세요',
 			            });
 			            var indexBoardNum = item.boardNum;
 			            console.log(indexBoardNum);
-			            quillArr[indexBoardNum]=commentQuill;
+			            quillArr[indexBoardNum]=commentQuill; */
 					})
 					
 		        	$(".delModalBtn").on("click",showDelBoardModal)  
