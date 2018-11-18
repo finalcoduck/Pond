@@ -52,4 +52,9 @@ public class CommonConstant {
 	public static final char SCORING = 'S';
 	public static final char COMPLEATE = 'C';
 	
+	/** 출석 코드 */
+	public static final char ABSENCE = 'A';
+	public static final char PRESENT = 'P';
+	public static final char LEAVE = 'L';
+	
 }

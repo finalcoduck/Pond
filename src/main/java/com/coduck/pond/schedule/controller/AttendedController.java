@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupVo;
@@ -19,6 +20,7 @@ import com.coduck.pond.member.vo.MemAttendedDto;
 import com.coduck.pond.member.vo.MemDto;
 import com.coduck.pond.schedule.service.AttendedService;
 import com.coduck.pond.schedule.vo.AttendedVo;
+import com.coduck.pond.schedule.vo.MemNameAttendedDto;
 import com.coduck.pond.schedule.vo.SrchAttendedDto;
 
 
@@ -34,12 +36,27 @@ public class AttendedController {
 	
 	//출석 페이지 리턴
 	@RequestMapping(value="/group/attended")
-	public String attendedPage(int groupNum, Model model) {
+	public String attendedPage(int groupNum, MemDto memDto, Model model) {
 		
+		char groupStatus = memDto.getMemGroupMap().get(groupNum); 
 		GroupVo groupVo = groupService.selectGroup(groupNum);
 		model.addAttribute("groupVo", groupVo);
-		return "/group/attended";
+		if(groupStatus==CommonConstant.MANAGER) {
+			return "/group/attended/manager";
+		}else if(groupStatus==CommonConstant.STUDENT) {
+			return "/group/attended/student";
+		}
+		return null;
 	}
+	
+	@RequestMapping(value="/group/attended/qrgenerator")
+	public String attendedGenerator(int groupNum, MemDto memDto) {
+		
+		
+		
+		return "/group/attended/qrgenerator";
+	}
+	
 	
 	
 	//해당 달의 출석 기록 리스트 리턴
@@ -47,7 +64,11 @@ public class AttendedController {
 	public @ResponseBody Map<String,Object> srchAttended(@RequestBody SrchAttendedDto srchAttendedDto, MemDto memDto) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		
+		
+		
 		srchAttendedDto.setMemEmail(memDto.getMemVo().getMemEmail());
+		
+		
 		List<AttendedVo> attendedVoList = attendedService.selectMonthAttended(srchAttendedDto);
 		
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
@@ -55,6 +76,15 @@ public class AttendedController {
 		return resultMap;
 	}
 	
+	
+	@RequestMapping(value="/group/srch/group-attended/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> srchGroupAttended(@RequestBody SrchAttendedDto srchAttendedDto, MemDto memDto) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		List<MemNameAttendedDto> memNameAttendedDtoList = attendedService.selectGroupMonthAttended(srchAttendedDto);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
+		resultMap.put("memNameAttendedDtoList", memNameAttendedDtoList);
+		return resultMap;
+	}
 	//금일 출석 여부 리턴
 	@RequestMapping(value="/group/is/attended/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> isAttended(@RequestBody AttendedVo attendedVo, MemDto memDto) {

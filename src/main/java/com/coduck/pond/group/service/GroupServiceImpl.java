@@ -56,10 +56,12 @@ public class GroupServiceImpl implements GroupService{
 
 	@Override
 	public void insertGorupDefault(GroupVo groupVo) {
+		String attendedQRCode = RandomCodeUtility.makeRandomCode(10);
 		String inviteCodeS = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
 		String inviteCodeM = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
 		groupVo.setInviteCodeS(inviteCodeS);
 		groupVo.setInviteCodeM(inviteCodeM);
+		groupVo.setAttendedQRCode(attendedQRCode);
 		groupVo.setInviteCodeStatus('O');
 		
 		String imgUrl = groupVo.getGroupImage();
@@ -108,6 +110,26 @@ public class GroupServiceImpl implements GroupService{
 			return false;
 		}
 		
+	}
+
+	@Override
+	public void updateGroupAddr(String x, String y, String addr, String groupNum) {
+		Map<String, Object> map = new HashMap<>();
+		double longitude = Double.parseDouble(x);
+		double latitude = Double.parseDouble(y);
+		map.put("longitude", longitude);
+		map.put("latitude", latitude);
+		map.put("groupNum", groupNum);
+		map.put("groupAddr", addr);
+		groupDao.updateGroupAddr(map);
+	}
+
+	@Override
+	public void updateGroupPhone(String phone, String groupNum) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("groupPhoneNum", phone);
+		map.put("groupNum", groupNum);
+		groupDao.updateGroupPhone(map);
 	}
 
 }

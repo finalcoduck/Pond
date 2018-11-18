@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.coduck.pond.schedule.vo.AttendedVo;
+import com.coduck.pond.schedule.vo.MemNameAttendedDto;
 import com.coduck.pond.schedule.vo.SrchAttendedDto;
 
 
@@ -23,6 +24,9 @@ public class AttendedDao {
 		return session.selectList(NAMESPACE+"selectMonthAttended", srchAttendedDto);
 	}
 	
+	public List<MemNameAttendedDto> selectGroupMonthAttended(SrchAttendedDto srchAttendedDto) {
+		return session.selectList(NAMESPACE+"selectGroupMonthAttended", srchAttendedDto);
+	}
 	public void insertInAttended (AttendedVo attendedVo) {
 		session.insert(NAMESPACE+"insertInAttended",attendedVo);
 	}
@@ -30,4 +34,5 @@ public class AttendedDao {
 	public void updateOutAttended(AttendedVo attendedVo) {
 		session.update(NAMESPACE+"updateOutAttended", attendedVo);
 	}
+
 }

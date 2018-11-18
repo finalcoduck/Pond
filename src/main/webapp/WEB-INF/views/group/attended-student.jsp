@@ -90,6 +90,7 @@ $(document).ready(function(){
 			showNonCurrentDates: false,
 			themeSystem:'bootstrap4',
 			contentHeight: 'auto',
+			eventLimit : true,
 			viewRender: function(view, element) {
 				// 달력이 그려질때마다 해당 월의 첫번째 1일을 SrchDate로 넘겨줌
 				srchAttended(new Date(view.start._i));
