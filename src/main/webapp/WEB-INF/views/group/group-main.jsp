@@ -19,7 +19,7 @@
 					<div class="card-body">
 						<h4 class="card-title">중앙HTA 1803기</h4>
 						<p class="card-text">멤버 28</p>
-						<a href="#" class="">학원 정보 상세보기</a>
+						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
 				<div class="card mb-3">

@@ -70,5 +70,17 @@ public class GroupController {
 		return "/group/setting-subject";
 	}
 	
+	@RequestMapping(value="/group/detail")
+	public String detailGroupInfo(int groupNum, MemDto memDto, Model model) {
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		model.addAttribute("groupVo",groupVo);
+		return"/group/detail";
+	}
 	
+	@RequestMapping(value="/group/detail/setting")
+	public String detailGroupInfoSetting(int groupNum, MemDto memDto, Model model) {
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		model.addAttribute("groupVo",groupVo);
+		return"/group/detail/setting";
+	}
 }

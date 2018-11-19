@@ -20,7 +20,7 @@
 	<definition name="group.definition" template="/WEB-INF/layout/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/group-header.jsp"/>
 		<put-attribute name="body" />
-		<put-attribute name="footer" value="/WEB-INF/layout/main-footer.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/layout/group-footer.jsp"/>
 	</definition>
 	
 	<!-- groupSelect Definition -->
@@ -55,6 +55,14 @@
 	</definition>
 	<definition name="/group/attended/qrgenerator" template="/WEB-INF/layout/bodytemplate.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/group/attended-qrgenerator.jsp" />
+	</definition>
+	<definition name="/group/detail" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/detail-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/detail.jsp" />
+	</definition>
+	<definition name="/group/detail/setting" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/detailsetting-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/detail-setting.jsp" />
 	</definition>
 	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
