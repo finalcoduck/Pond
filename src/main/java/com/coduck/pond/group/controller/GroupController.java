@@ -27,12 +27,13 @@ public class GroupController {
 	private SubjectService subjectService;
 	
 	@RequestMapping("/group/member")
-	public String goGroupMember(int groupNum, Model model) {
+	public String goGroupMember(int groupNum, Model model, MemDto memDto) {
 		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
 		GroupVo groupVo = groupService.selectGroup(groupNum);
 		model.addAttribute("mList", map.get("mList")); // 매니저 등급 회원들
 		model.addAttribute("sList", map.get("sList")); // 학생 등급 회원들
 		model.addAttribute("groupVo", groupVo); // 그룹 정보
+		model.addAttribute("status", memDto.getMemGroupMap().get(groupNum));
 		return "/group/group-member";
 	}
 	

@@ -20,7 +20,9 @@
 <div class="container">
 	<div class="row">
 		<div id='calendar'></div>
-		<button type="button" id="addCal" class="btn">일정 등록</button>
+		<c:if test="${status == 'M'.charAt(0) }">
+		  <button type="button" id="addCal" class="btn">일정 등록</button>
+		</c:if>
 	</div>
 	<div class="row" id="testRow">
 		
@@ -95,6 +97,7 @@ $(function() {
                }, 
              </c:forEach>  
             ] ,
+            <c:if test="${status == 'M'.charAt(0) }">
          eventClick:function(event){
         	 if(confirm('수정하시겠습니까?')){
         		 var num = event.num;
@@ -106,6 +109,7 @@ $(function() {
         		 updateSchedule(num, start, end);
         	 }
          },
+         </c:if>
          eventMouseover:function(calEvent,jsEvent){
 			$(this).css('background-color','black').css('cursor','pointer').css('color','white');
          },
@@ -185,8 +189,10 @@ $(function() {
 		<span>{title}</span><br> 
 		<span>{content}</span><br>
 		<span>{start} ~ {end}</span>
+		<c:if test="${status == 'M'.charAt(0) }">
 		<button type="button" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
 		<button type="button" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
+		</c:if>
 </div>
 </script>
 </html>

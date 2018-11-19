@@ -28,10 +28,26 @@
 				</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 					<a class="dropdown-item" href="${pageContext.request.contextPath }/member/profile">마이페이지</a>
-					<a class="dropdown-item" href="#">초대코드 입력</a>
+					<a class="dropdown-item cursor-pointer" id="inviteCodeInput">초대코드 입력</a>
 					<a class="dropdown-item" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 				</div>
 			</div>
 		</nav>
 	</div>
 </header>
+<script type="text/javascript">
+	$('#inviteCodeInput').on('click',function(){
+		swal({
+			title : 'test',
+			width : 600,
+			padding: '3em',
+			background: '#fff url(${pageContext.request.contextPath}/resources/build/image/bbo1.gif)',
+		    backdrop: `
+				rgba(0,0,123,0.4)
+			    url("${pageContext.request.contextPath}/resources/build/image/bbo1.gif")
+			    center left
+			    no-repeat
+			  `			
+		})	
+	})
+</script>
