@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
+import com.coduck.pond.core.utils.RandomCodeUtility;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemAttendedDto;
@@ -132,18 +133,17 @@ public class AttendedController {
 		return resultMap;
 	}
 	
+	
 	@RequestMapping(value="/group/attended/generate/qr/proc",method = RequestMethod.POST)
-	public @ResponseBody Map<String,Object> generateQRcode(@RequestBody AttendedVo attendedVo,MemDto memDto){
+	public @ResponseBody Map<String,Object> generateQRcode(@RequestBody GroupVo groupVo,MemDto memDto){
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
 		
-		//그룹 출석 QR코드와 일치 하지 않으면 Failure code return
-		if(!groupService.isQRcodeCorrect(attendedVo)) {
-			resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.FAILURE);
-			return resultMap;
-		}
+		String attendedQRCode = RandomCodeUtility.makeRandomCode(10);
+		groupVo.setAttendedQRCode(attendedQRCode);
+		groupService.updateQRcode(groupVo);
 		
-		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
-		resultMap = attendedService.attendedOut(attendedVo);
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
+		resultMap.put("groupVo", groupVo);
 		
 		return resultMap;
 	}

@@ -74,18 +74,15 @@ $(document).ready(function(){
 });
 var count = 4;
 function clickAttendedBtn(){
-	
-	createQrCode();
-	
-	toggleQRcodeSection();
+	getAttendedQRCode();
 	
 	//0 25 50 75 100
 	QRcodeTimer();
 }
 
-function createQrCode(){
+function createQrCode(attendedQRCode){
 	var qrcode = new QRCode(document.getElementById("qrCode"), {
-	    text: "http://jindo.dev.naver.com/collie",
+	    text: attendedQRCode,
 	    width: 175,
 	    height: 175,
 	    colorDark : "#000000",
@@ -117,17 +114,18 @@ function QRcodeTimer(){
 	QRcodeProgressBar.className="progress-bar progress-bar-striped progress-bar-animated bg-success "+progressWidth;
 	
 	count--;
+	
 	setTimeout("QRcodeTimer()",750);
 }
 
 
 function getAttendedQRCode(){
 	
-	var data = {groupNum : '${groupVo.groupNum}'};
-	var dataStr = JSON.stringify(data); 
+	var data = {groupNum : '${groupVo.groupNum}'},
+	dataStr = JSON.stringify(data); 
 	
 	$.ajax({
-   		url : "${pageContext.request.contextPath}/group/srch/qrcode/proc"
+   		url : "${pageContext.request.contextPath}/group/attended/generate/qr/proc"
 		, method : "post"
    		, dataType : 'json'
    		, data : dataStr
@@ -135,7 +133,11 @@ function getAttendedQRCode(){
    		, contentType : "application/json; charset=UTF-8"
 	})
 	.done(function(data){
-		
+		console.log(data);
+		if(data.errC==="0000"){
+			createQrCode(data.groupVo.attendedQRCode);
+			toggleQRcodeSection();
+		}
 	});
 }
 function printClock() {
