@@ -8,7 +8,7 @@ li{
 }
 
 body{
-	/* background-color: #0a222b; */
+	background-color: #0a222b;
 	text-align: center;
 }
 
@@ -19,7 +19,6 @@ body{
 }
 
 .cover {
-	/* background-image: url(../build/image/images/cover.png); */
 	color: aliceblue;
 	padding-top: 20%;
 	padding-bottom: 10%;

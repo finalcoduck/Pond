@@ -52,9 +52,9 @@
 			background: '#fff',
 		    backdrop: `
 				rgba(0,0,123,0.4)
-			    url("${pageContext.request.contextPath}/resources/build/image/bbo1.gif")
+			    url("${pageContext.request.contextPath}/resources/build/image/loverduck.gif")
 			    center top
-			    no-repeat
+			    repeat
 			  `
 		})
 	})

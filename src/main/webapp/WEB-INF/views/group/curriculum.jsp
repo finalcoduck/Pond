@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/build/css/crc_style.css">
 		<link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
     <body>
-       <div class="cover">
-       	<h1 class="cover-title">
-       		Curriculum
-       	</h1>
+       <div class="cover" style="background-image: url('${pageContext.request.contextPath}/resources/build/image/images/cover.png')">
+	       	<h1 class="cover-title">
+	       		Curriculum
+	       	</h1>
        </div>
+       
        
        <div class="wrapper" style="height:auto; padding-bottom:150px;">
        		<c:if test="${status == 'M'.charAt(0) }">

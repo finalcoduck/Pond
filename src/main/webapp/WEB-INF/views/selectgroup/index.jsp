@@ -10,7 +10,14 @@
 	</style>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group.css">
 
-<c:if test="${!empty msg }"><script type="text/javascript">alert('${msg}')</script></c:if> <!-- 그룹에 이미 가입한 회원 -->
+<c:if test="${!empty msg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '유효하지 않은 코드 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if> <!-- 그룹에 이미 가입한 회원 -->
 <section class="content group-wrap">
 		<div class="inner">
 			<h2	class="sub_title">내	그룹 <span class="num">${fn:length(groupList) }</span></h2>

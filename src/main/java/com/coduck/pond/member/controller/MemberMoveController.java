@@ -1,5 +1,6 @@
 package com.coduck.pond.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.coduck.pond.core.utils.PropertyUtility;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -29,7 +31,7 @@ public class MemberMoveController {
 	 */
 	
 	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
-	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail, MemDto memDto) {
+	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail, MemDto memDto, HttpServletRequest request) {
 		if(memDto != null) {
 			return "forward:/selectgroup/index";
 		}
