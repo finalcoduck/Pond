@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row mt-5 align-items-center justify-content-center">
                 <div class="col-12 align_c">
-                    <h2>커리큘럼 일정 등록</h2>
+                    <h2>커리큘럼 등록</h2>
                 </div>
                 <div class="col-12 col-md-6 mt-5">
                     <form action="${pageContext.request.contextPath }/group/crc-insert" method="post">

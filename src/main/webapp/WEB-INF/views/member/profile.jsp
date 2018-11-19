@@ -14,9 +14,6 @@
 							<li class="list-group-item on">
 								<a href="#">내정보</a>
 							</li>
-							<li class="list-group-item">
-								<a href="#">내가 쓴 글</a>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -113,10 +110,10 @@
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'naver' }">
 												<span class="txt" style="color:green;">네이버</span>
-												<span>연동중 입니다</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/naver_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<span class="txt">네이버</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/naver_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -125,10 +122,10 @@
 										<div class="profileInfo">
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'google' }">
-												<span class="txt" style="color:blue;">구글</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/google_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<span class="txt">구글</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/google_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -189,7 +186,7 @@
 						</form>
 						<label for="imgUpdate" style="background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_camera_w.png);">사진</label>
 					</div>
-					<input type="text" value="배재정" class="profileInput" disabled="disabled" readonly="readonly">
+					<input type="text" value="${memDto.memVo.memName }" class="profileInput" disabled="disabled" readonly="readonly">
 				</div>
 				<!-- Modal footer -->
 				<div class="align_c" style="padding:1rem;">

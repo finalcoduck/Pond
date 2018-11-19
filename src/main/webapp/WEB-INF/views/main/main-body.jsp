@@ -78,4 +78,3 @@
         </div>
     </section>
     <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script> 
-   

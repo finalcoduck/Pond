@@ -12,8 +12,10 @@
        	</h1>
        </div>
        
-       <div class="wrapper">
-       		<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}">일정등록</a>
+       <div class="wrapper" style="height:auto; padding-bottom:150px;">
+       		<c:if test="${status == 'M'.charAt(0) }">
+       		<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}" class="btn btn-dark">일정등록</a>
+       		</c:if>
 	       <ul class="timeline">
 	       <c:forEach items="${list }" var="vo">
 	       	<li class="timeline-item">
@@ -30,8 +32,10 @@
 						</dt>
 						<dd>${vo.crcContent }</dd>
 					<dd>
+					<c:if test="${status == 'M'.charAt(0) }">
 			       		<i class="fas fa-edit crcUpdate" onclick="location.href='${pageContext.request.contextPath}/group/crc-update-page?crcNum=${vo.crcNum }'"></i>
 			       		<i class="fas fa-trash-alt crcDelete" onclick="location.href='${pageContext.request.contextPath}/group/crc-delete?crcNum=${vo.crcNum }&groupNum=${vo.groupNum }'"></i>
+			       	</c:if>	
 		       		</dd>
 					</dl>	       		
 	       		</div>

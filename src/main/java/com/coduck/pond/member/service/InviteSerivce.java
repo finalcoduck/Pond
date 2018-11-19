@@ -21,7 +21,7 @@ public class InviteSerivce {
 		map.put("groupVo", groupVo);
 		map.put("status", 'S');
 		if(groupVo == null) {
-			groupVo = inviteDao.findGroupNumS(inviteCode);
+			groupVo = inviteDao.findGroupNumM(inviteCode);
 			map.put("groupVo", groupVo);
 			map.put("status", 'M');
 		}
