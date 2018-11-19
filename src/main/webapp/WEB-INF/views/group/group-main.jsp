@@ -548,9 +548,9 @@
         			contentType : "application/json; charset=UTF-8",
         			success : function(data){
         				editorDiv.text('');
-			            var commentQuill = new Quill('#editor-test-'+boardNum,{
+			             var commentQuill = new Quill('#editor-test-'+boardNum,{
 			            	placeholder: '댓글을 입력하세요',
-			            });					
+			            });	 			
         			}
         		});
         	});

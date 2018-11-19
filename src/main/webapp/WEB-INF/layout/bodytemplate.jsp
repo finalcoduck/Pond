@@ -16,12 +16,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/general.css">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/sweetalert2/dist/sweetalert2.min.css">       
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery-3.3.1/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/jQuery.serializeObject/js/jquery.serializeObject.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap-4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
 <script src="${pageContext.request.contextPath}/resources/build/js/commonConstant.js"></script>
 <script src="${pageContext.request.contextPath}/resources/build/js/commonFunction.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
 <title>POND</title>
 </head>

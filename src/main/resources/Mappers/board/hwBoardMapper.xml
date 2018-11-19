@@ -43,7 +43,7 @@
 				sysdate,
 				#{hwMaxScore},
 				#{subjectTitle},
-				#{boardType}
+				'H'
 			)
 	</insert>
 	
