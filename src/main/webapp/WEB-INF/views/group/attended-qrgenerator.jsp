@@ -79,7 +79,7 @@ function clickAttendedBtn(){
 	
 	getAttendedQRCode();
 	//0 25 50 75 100
-	QRcodeTimer();
+	setTimeout("QRcodeTimer()",1000);
 }
 
 function createQrCode(attendedQRCode){
@@ -102,7 +102,8 @@ function toggleQRcodeSection(){
 function QRcodeTimer(){
 	var progressCount = 25*count,
 	progressWidth = "w-"+progressCount;
-	QRcodeProgressBar = document.querySelector("#QRcodeProgressBar");
+	QRcodeProgressBar = document.querySelector("#QRcodeProgressBar"),
+	progressBarColor = 'bg-success ';
 	
 	// 여기서 Ajax 요청으로 출석을 했는지 확인하자~ 출석했으면 count -1로 해버려서 종료
 	if(count !== -1){
@@ -115,12 +116,23 @@ function QRcodeTimer(){
 		document.querySelector("#qrCode").innerHTML="";
 		return;
 	}
+	switch(count){
+	case 1:
+		progressBarColor = 'bg-danger '
+		break;
+	case 2:
+		progressBarColor = 'bg-warning '
+		break;
+	default:
+		progressBarColor = 'bg-success '
+		break;
+	}
 	
-	QRcodeProgressBar.className="progress-bar progress-bar-striped progress-bar-animated bg-success "+progressWidth;
+	QRcodeProgressBar.className="progress-bar progress-bar-striped progress-bar-animated "+progressBarColor+progressWidth;
 	
 	count--;
 	
-	setTimeout("QRcodeTimer()",1000);
+	setTimeout("QRcodeTimer()",1200);
 }
 
 
@@ -214,7 +226,4 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  }
 	  return zero + num;
 }
-
-
-
 </script>
