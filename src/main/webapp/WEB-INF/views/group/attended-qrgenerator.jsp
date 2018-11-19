@@ -7,18 +7,18 @@
 	<div class="container bg-primary">
 		<div class="row vh5">
 			<div class="col-12 vh5">
-				<a class="close text-white" data-dismiss="modal">&times;</a>
+				<a class="close text-white" href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}">&times;</a>
 			</div>
 		</div>
 		<div class="row vh10 py-5">
 			<div class="col-12">
-				<div style="font-size:50px;" class="text-center text-white" id="clock">
+				<div style="font-size:50px;" class=".font-weight-bold text-center text-white" id="clock">
 				</div>
 			</div>
 		</div>
 		<div class="row align-items-center vh80">	
 			<div class="col-12 col-md-6 text-center">
-				<svg id="ryan" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+				<svg id="ryan" style="width:40%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 	<path d="M0,150 C0,65 120,65 120,150" fill="#ffcb01" stroke="#000" stroke-width="2" />
                     <circle cx="60" cy="60" r="40" fill="#ffcb01" stroke="#000" stroke-width="2" />
                     <g class="eyes">
@@ -39,51 +39,110 @@
                  </svg>
 			</div>
 			<div class="col-12 col-md-6 text-center">
-				<div id="attendBtnSection">
-					<p class="text-white">안녕하세요</p>
-					<p class="text-white">본인 핸드폰의 출석버튼을 누른 후 화면의 출석 버튼을 눌러주세요</p>
-					<a id="attendedBtn" href="javascript:;" class="code_view actionBtn9">
-						 <span class="txt">출석</span>
-					</a>
+				<div class="card shadow">
+					<div class="card-body">
+						<div id="attendBtnSection">
+							<h3>안녕하세요</h3>
+							<p class="my-5">본인 핸드폰의 출석버튼을 누른 후 화면의 출석 버튼을 눌러주세요</p>
+							<button type="button" id="attendedBtn" class="btn btn-primary">
+						 		출석
+							</button>
+						</div>
+						<div id="qrCodeSection" class="d-none">
+							<div class="progress mb-5">
+							    <div id="QRcodeProgressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success w-100"></div>
+							</div>
+							<div id="qrCode"></div>
+						</div>  
+				    </div> 
+				    
 				</div>
-				<div id="qrCode" class="d-none">
-				</div>	
 			</div>
 		</div>
 	</div>
 </section>
 <script src="${pageContext.request.contextPath }/resources/vendor/qrcodejs/qrcode.min.js" type="text/javascript"></script>
 <script>
-
+<!-- Autoplay is allowed. -->
+var alertSound = new Audio('${pageContext.request.contextPath }/resources/audio/barcode.mp3'); // 오디오 객체 생성
 $(document).ready(function(){
-	
-	$("#attendedBtn").on("click",createQrCode);
+
+	//alertSound.play();
+	$("#attendedBtn").on("click",clickAttendedBtn);
 	
 	//시계 실행
 	printClock();
 	
 });
+var count = 4;
+function clickAttendedBtn(){
+	
+	getAttendedQRCode();
+	//0 25 50 75 100
+	setTimeout("QRcodeTimer()",1000);
+}
 
-function createQrCode(){
+function createQrCode(attendedQRCode){
 	var qrcode = new QRCode(document.getElementById("qrCode"), {
-	    text: "http://jindo.dev.naver.com/collie",
-	    width: 128,
-	    height: 128,
+	    text: attendedQRCode,
+	    width: 175,
+	    height: 175,
 	    colorDark : "#000000",
 	    colorLight : "#ffffff",
 	    correctLevel : QRCode.CorrectLevel.H
 	});
 	document.getElementById("qrCode").querySelector("img").className="d-inline";
-	$("#attendBtnSection").addClass("d-none");
-	$("#qrCode").removeClass("d-none");
 }
+
+function toggleQRcodeSection(){
+	$("#attendBtnSection").toggleClass("d-none");
+	$("#qrCodeSection").toggleClass("d-none");
+}
+
+function QRcodeTimer(){
+	var progressCount = 25*count,
+	progressWidth = "w-"+progressCount;
+	QRcodeProgressBar = document.querySelector("#QRcodeProgressBar"),
+	progressBarColor = 'bg-success ';
+	
+	// 여기서 Ajax 요청으로 출석을 했는지 확인하자~ 출석했으면 count -1로 해버려서 종료
+	if(count !== -1){
+		isUserAttended();
+	}
+	
+	if(count === -1){
+		count=4;
+		toggleQRcodeSection();
+		document.querySelector("#qrCode").innerHTML="";
+		return;
+	}
+	switch(count){
+		case 1:
+			progressBarColor = 'bg-danger '
+			break;
+		case 2:
+			progressBarColor = 'bg-warning '
+			break;
+		default:
+			progressBarColor = 'bg-success '
+			break;
+	}
+	
+	QRcodeProgressBar.className="progress-bar progress-bar-striped progress-bar-animated "+progressBarColor+progressWidth;
+	
+	count--;
+	
+	setTimeout("QRcodeTimer()",1200);
+}
+
+
 function getAttendedQRCode(){
 	
-	var data = {groupNum : '${groupVo.groupNum}'};
-	var dataStr = JSON.stringify(data); 
+	var data = {groupNum : '${groupVo.groupNum}'},
+	dataStr = JSON.stringify(data); 
 	
 	$.ajax({
-   		url : "${pageContext.request.contextPath}/group/srch/qrcode/proc"
+   		url : "${pageContext.request.contextPath}/group/attended/generate/qr/proc"
 		, method : "post"
    		, dataType : 'json'
    		, data : dataStr
@@ -91,7 +150,50 @@ function getAttendedQRCode(){
    		, contentType : "application/json; charset=UTF-8"
 	})
 	.done(function(data){
-		
+		console.log(data);
+		if(data.errC==="0000"){
+			createQrCode(data.attendedQRCode);
+			toggleQRcodeSection();
+		}
+	});
+}
+function isUserAttended(){
+	
+	var data = {groupNum : '${groupVo.groupNum}'},
+	dataStr = JSON.stringify(data); 
+	
+	$.ajax({
+   		url : "${pageContext.request.contextPath}/group/attended/search/qr/proc"
+		, method : "post"
+   		, dataType : 'json'
+   		, data : dataStr
+   		, processData : true
+   		, contentType : "application/json; charset=UTF-8"
+	})
+	.done(function(data){
+		console.log(data);
+		if(data.errC==="0000"){
+			if(data.attendedQRCode === null){
+				count=-1;
+				alertSound.play();
+				//출석 성공 팝업
+				let timerInterval;
+				swal({
+				  title: '반가워요',
+				  html: '출석 되었습니다.',
+				  type: 'success',
+				  timer: 2000,
+				  onClose: () => {
+				    clearInterval(timerInterval)
+				  }
+				}).then((result) => {
+				// Read more about handling dismissals
+					if ( result.dismiss === swal.DismissReason.timer) {
+						
+					}
+				})
+			}
+		}
 	});
 }
 function printClock() {
@@ -124,7 +226,4 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  }
 	  return zero + num;
 }
-
-
-
 </script>

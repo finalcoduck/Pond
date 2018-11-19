@@ -73,7 +73,7 @@
    <!-- 하원 시간 업데이트 -->
    <update id="updateOutAttended" parameterType="com.coduck.pond.schedule.vo.AttendedVo">
 	    UPDATE ATTENDED SET
-	   		ATTENDED_OUT = SYSDATE
+	   		ATTENDED_OUT = SYSDATE,
 	   		ATTENDED_TYPE = 'L'
 	   	WHERE
 	   		ATTENDED_NUM = (

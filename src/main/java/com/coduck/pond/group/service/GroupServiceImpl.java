@@ -132,4 +132,9 @@ public class GroupServiceImpl implements GroupService{
 		groupDao.updateGroupPhone(map);
 	}
 
+	@Override
+	public void updateQRcode(GroupVo groupVo) {
+		groupDao.updateAttendedQRCode(groupVo);
+	}
+
 }
