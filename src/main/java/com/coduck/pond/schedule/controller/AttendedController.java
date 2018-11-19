@@ -112,7 +112,14 @@ public class AttendedController {
 		
 		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
+		
 		resultMap = attendedService.attendedIn(attendedVo);
+		
+		// QR코드 초기화
+		GroupVo groupVo = new GroupVo();
+		groupVo.setGroupNum(attendedVo.getGroupNum());
+		groupVo.setAttendedQRCode("");
+		groupService.updateQRcode(groupVo);
 		
 		return resultMap;
 	}
@@ -130,6 +137,12 @@ public class AttendedController {
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
 		resultMap = attendedService.attendedOut(attendedVo);
 		
+		// QR코드 초기화
+		GroupVo groupVo = new GroupVo();
+		groupVo.setGroupNum(attendedVo.getGroupNum());
+		groupVo.setAttendedQRCode("");
+		groupService.updateQRcode(groupVo);
+		
 		return resultMap;
 	}
 	
@@ -143,7 +156,19 @@ public class AttendedController {
 		groupService.updateQRcode(groupVo);
 		
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
-		resultMap.put("groupVo", groupVo);
+		resultMap.put("attendedQRCode", attendedQRCode);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/group/attended/search/qr/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> searchQRcode(@RequestBody GroupVo groupVo ,MemDto memDto){
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		
+		GroupVo selectedGroupVo = groupService.selectGroup(groupVo.getGroupNum());
+		
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
+		resultMap.put("attendedQRCode", selectedGroupVo.getAttendedQRCode());
 		
 		return resultMap;
 	}

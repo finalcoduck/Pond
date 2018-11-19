@@ -63,9 +63,11 @@
 </section>
 <script src="${pageContext.request.contextPath }/resources/vendor/qrcodejs/qrcode.min.js" type="text/javascript"></script>
 <script>
-
+<!-- Autoplay is allowed. -->
+var alertSound = new Audio('${pageContext.request.contextPath }/resources/audio/barcode.mp3'); // 오디오 객체 생성
 $(document).ready(function(){
-	
+
+	//alertSound.play();
 	$("#attendedBtn").on("click",clickAttendedBtn);
 	
 	//시계 실행
@@ -74,8 +76,8 @@ $(document).ready(function(){
 });
 var count = 4;
 function clickAttendedBtn(){
-	getAttendedQRCode();
 	
+	getAttendedQRCode();
 	//0 25 50 75 100
 	QRcodeTimer();
 }
@@ -103,6 +105,9 @@ function QRcodeTimer(){
 	QRcodeProgressBar = document.querySelector("#QRcodeProgressBar");
 	
 	// 여기서 Ajax 요청으로 출석을 했는지 확인하자~ 출석했으면 count -1로 해버려서 종료
+	if(count !== -1){
+		isUserAttended();
+	}
 	
 	if(count === -1){
 		count=4;
@@ -115,7 +120,7 @@ function QRcodeTimer(){
 	
 	count--;
 	
-	setTimeout("QRcodeTimer()",750);
+	setTimeout("QRcodeTimer()",1000);
 }
 
 
@@ -135,8 +140,47 @@ function getAttendedQRCode(){
 	.done(function(data){
 		console.log(data);
 		if(data.errC==="0000"){
-			createQrCode(data.groupVo.attendedQRCode);
+			createQrCode(data.attendedQRCode);
 			toggleQRcodeSection();
+		}
+	});
+}
+function isUserAttended(){
+	
+	var data = {groupNum : '${groupVo.groupNum}'},
+	dataStr = JSON.stringify(data); 
+	
+	$.ajax({
+   		url : "${pageContext.request.contextPath}/group/attended/search/qr/proc"
+		, method : "post"
+   		, dataType : 'json'
+   		, data : dataStr
+   		, processData : true
+   		, contentType : "application/json; charset=UTF-8"
+	})
+	.done(function(data){
+		console.log(data);
+		if(data.errC==="0000"){
+			if(data.attendedQRCode === null){
+				count=-1;
+				alertSound.play();
+				//출석 성공 팝업
+				let timerInterval;
+				swal({
+				  title: '반가워요',
+				  html: '출석 되었습니다.',
+				  type: 'success',
+				  timer: 2000,
+				  onClose: () => {
+				    clearInterval(timerInterval)
+				  }
+				}).then((result) => {
+				// Read more about handling dismissals
+					if ( result.dismiss === swal.DismissReason.timer) {
+						
+					}
+				})
+			}
 		}
 	});
 }

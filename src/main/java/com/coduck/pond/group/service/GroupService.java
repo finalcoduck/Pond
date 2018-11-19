@@ -39,7 +39,7 @@ public interface GroupService {
 	//해당그룹의 모든 회원 가져오기
 	public Map<String, List<GroupMem_smDto>> getGroupMemList(String groupNum);
 	
-	//QRcode 조회 
+	//QRcode 일치하는지 조회 
 	public boolean isQRcodeCorrect(AttendedVo attendedVo);
 	
 	//그룹 주소,좌표 넣기
