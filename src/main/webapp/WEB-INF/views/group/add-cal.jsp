@@ -13,7 +13,7 @@
                             <input type="text" name="scheduleTitle" class="form-control"/><br>
                         
                             <label for="scheduleContent">스케줄 내용</label>
-                            <input type="text" name="scheduleContent" class="form-control" />
+                            <input type="text" name="scheduleContent" class="form-control" /><br>
                             
                             <label for="scheduleStartDate">시작 날짜</label>
                             <input type="date" name="scheduleStartDate" class="form-control"/><br>
@@ -21,8 +21,10 @@
                             <label for="scheduleEndDate">종료 날짜 </label>
                             <input type="date" name="scheduleEndDate" class="form-control"/>
                         </div>
-                        	<input type="hidden" value="${groupNum }" name="groupNum" />
-                        <input type="submit" value="등록" />
+                        <div class="align_c">
+	                        <input type="hidden" value="${groupNum }" name="groupNum" />
+	                        <input type="submit" class="btn btn-success" value="등록" />
+                        </div>
                     </form>
                 </div>
             </div>

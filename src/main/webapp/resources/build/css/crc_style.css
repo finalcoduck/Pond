@@ -142,12 +142,12 @@ body{
 	}
 	
 	.cover{
-		padding-top: 10%;
-		padding-bottom: 5%;
+		padding-top: 5%;
+		padding-bottom: 2%;
 	}
 	
 	.cover-title{
-		font-size: 15vw;
+		font-size: 10vw;
 	}
 	
 	.timeline-item:nth-child(even){

@@ -12,8 +12,8 @@
        	</h1>
        </div>
        
-       <div class="wrapper">
-       		<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}">일정등록</a>
+       <div class="wrapper" style="height:auto; padding-bottom:150px;">
+			<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}" class="btn btn-dark">일정등록</a>
 	       <ul class="timeline">
 	       <c:forEach items="${list }" var="vo">
 	       	<li class="timeline-item">

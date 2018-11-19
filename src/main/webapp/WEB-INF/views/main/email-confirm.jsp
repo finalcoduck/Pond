@@ -52,7 +52,7 @@ h1.chk_mail{font-size:50px; color:#fff; font-family:'Cabin Condensed'; margin-le
 </style>
 
 <body>
-<div style="margin-top: 200px; margin-left:-310px;">
+<div style="margin-top: 200px; margin-left:-310px; min-height:450px;">
 	<h1 class="chk_mail">Please Check Mail</h1>
 	<svg class="loading" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="-50px" y="0px"
 		 width="1400px" height="120px" viewBox="0 0 574.558 120" enable-background="new 0 0 574.558 120" xml:space="preserve">

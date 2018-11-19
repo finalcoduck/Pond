@@ -17,12 +17,15 @@
 <link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 <script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/resources/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
-<div class="container">
-	<div class="row">
+<div class="container mt20">
+	<div>
 		<div id='calendar'></div>
-		<button type="button" id="addCal" class="btn">일정 등록</button>
+		
+		<div class="align_c mt20">
+			<button type="button" id="addCal" class="btn btn-success">일정 등록</button>
+		</div>
 	</div>
-	<div class="row" id="testRow">
+	<div id="testRow">
 		
 	</div>	
 </div>
@@ -181,12 +184,16 @@ $(function() {
 	};
 </script>
 <script type="text/template" id="template-list-item">
-<div style="border: 1px solid black; width: 100%; height: 30%;" id="calbox">
-		<span>{title}</span><br> 
-		<span>{content}</span><br>
-		<span>{start} ~ {end}</span>
-		<button type="button" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
-		<button type="button" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
+<div class="card_wrap" id="calbox">
+	<div class="cal_card">
+		<span class="cal_tit">{title}</span>
+		<span class="cal_con">{content}</span>
+		<span class="cal_date">{start} ~ {end}</span>
+	</div>
+	<div class="btn_wrap">
+		<button type="button" class="btn" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
+		<button type="button" class="btn btn-info" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
+	</div>
 </div>
 </script>
 </html>

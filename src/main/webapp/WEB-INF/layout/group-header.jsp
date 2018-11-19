@@ -11,10 +11,10 @@
             </h1>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="">스트림</a>
+                    <a class="nav-link text-white" href="" style="font-size:20px;">스트림</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}">사용자</a>
+                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}" style="font-size:20px;">사용자</a>
                 </li>
             </ul>
             <div class="mr-2">
@@ -26,7 +26,7 @@
 						<c:otherwise>
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="" style="width:50px; height:50px;">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/img1.jpg" alt="">
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/img1.jpg" alt="" style="width:50px; height:50px;">
 							<%-- <img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt=""> --%>	
 						</c:otherwise>			
 					</c:choose>

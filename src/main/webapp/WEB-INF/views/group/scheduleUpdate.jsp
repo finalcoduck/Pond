@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row mt-5 align-items-center justify-content-center">
                 <div class="col-12 align_c">
-                    <h2>일정 등록</h2>
+                    <h2>일정 수정</h2>
                 </div>
                 <div class="col-12 col-md-6 mt-5">
                     <form action="${pageContext.request.contextPath }/schedule/updatepage" method="post">
@@ -22,9 +22,11 @@
                             <label for="scheduleEndDate">종료 날짜 </label>
                             <input type="date" value="${vo.scheduleEndDate }" name="scheduleEndDate" class="form-control"/>
                         </div>
-                        	<input type="hidden" value="${vo.groupNum }" name="groupNum" />
-							<input type="hidden" value="${vo.scheduleNum }" name="scheduleNum" />
-                        <input type="submit" value="수정" />
+                       	<input type="hidden" value="${vo.groupNum }" name="groupNum" />
+						<input type="hidden" value="${vo.scheduleNum }" name="scheduleNum" />
+						<div class="align_c mt20">
+                        	<input type="submit" class="btn btn-success" value="수정" />
+                        </div>
                     </form>
                 </div>
             </div>

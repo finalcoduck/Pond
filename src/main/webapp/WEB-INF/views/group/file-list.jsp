@@ -13,13 +13,13 @@
 }
 </style>    
 	<section id="view_student" class="mt30">
-		<h2>파일 모음</h2>
+		<h2>자료실</h2>
 		<div class="card">
 			<div class="card-body homework">
 				<div class="homework_con">
 					<div class="file_wrap">
 						<c:if test="${empty fileList }">
-							<h2>파일이 존재하지 않습니다.</h2>
+							<h2 style="font-size:18px;">파일이 존재하지 않습니다.</h2>
 						</c:if>
 						<c:forEach items="${fileList }" var="vo">
 						<div class="file_list">
