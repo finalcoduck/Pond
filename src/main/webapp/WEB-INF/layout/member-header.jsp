@@ -8,9 +8,6 @@
 				<a href="${pageContext.request.contextPath }/">
 					<b class="text-white">POND</b>
 				</a>
-				<a href="${pageContext.request.contextPath }/group/invite/input?inviteCode=testest">
-					<b class="text-white">임시초대코드입력</b>
-				</a>
 			</h1>
 			<div class="dropdown">
 				<button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,16 +35,27 @@
 <script type="text/javascript">
 	$('#inviteCodeInput').on('click',function(){
 		swal({
-			title : 'test',
-			width : 600,
+			title : '초대코드 입력',
+			input : 'text',
+			inputAttributes: {
+				autocapitalize : 'off'
+			},
+			showCancelButton: true,
+			confirmButtonText: '발송',
+			showLoaderOnConfirm: true,
+			preConfirm:(inviteCode) => {
+				location.href = "${pageContext.request.contextPath}/group/invite/input?inviteCode="+inviteCode;
+			},
+			allowOutsideClick: () => !swql.isLoading(),
+			width : 640,
 			padding: '3em',
-			background: '#fff url(${pageContext.request.contextPath}/resources/build/image/bbo1.gif)',
+			background: '#fff',
 		    backdrop: `
 				rgba(0,0,123,0.4)
 			    url("${pageContext.request.contextPath}/resources/build/image/bbo1.gif")
-			    center left
+			    center top
 			    no-repeat
-			  `			
-		})	
+			  `
+		})
 	})
 </script>
