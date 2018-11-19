@@ -12,9 +12,9 @@
        	</h1>
        </div>
        
-       <div class="wrapper">
+       <div class="wrapper" style="height:auto; padding-bottom:150px;">
        		<c:if test="${status == 'M'.charAt(0) }">
-       		<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}">일정등록</a>
+       		<a href="${pageContext.request.contextPath }/group/addPage?groupNum=${groupNum}" class="btn btn-dark">일정등록</a>
        		</c:if>
 	       <ul class="timeline">
 	       <c:forEach items="${list }" var="vo">
