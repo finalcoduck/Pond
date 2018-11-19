@@ -4,16 +4,13 @@ package com.coduck.pond.group.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
-
 
 
 @Repository
@@ -73,5 +70,7 @@ public class GroupDao {
 	public void updateGroupPhone(Map<String, Object> map) {
 		session.update(NAMESPACE+"updateGroupPhone", map);
 	}
-	
+	public void updateAttendedQRCode(GroupVo groupVo) {
+		session.update(NAMESPACE+"updateAttendedQRCode", groupVo);
+	}
 }

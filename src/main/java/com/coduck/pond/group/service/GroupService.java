@@ -47,4 +47,7 @@ public interface GroupService {
 	
 	//그룹 전화번호 수정
 	public void updateGroupPhone(String phone, String groupNum);
+	
+	//QR코드 업데이트
+	public void updateQRcode(GroupVo groupVo);
 }
