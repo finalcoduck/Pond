@@ -117,15 +117,15 @@ function QRcodeTimer(){
 		return;
 	}
 	switch(count){
-	case 1:
-		progressBarColor = 'bg-danger '
-		break;
-	case 2:
-		progressBarColor = 'bg-warning '
-		break;
-	default:
-		progressBarColor = 'bg-success '
-		break;
+		case 1:
+			progressBarColor = 'bg-danger '
+			break;
+		case 2:
+			progressBarColor = 'bg-warning '
+			break;
+		default:
+			progressBarColor = 'bg-success '
+			break;
 	}
 	
 	QRcodeProgressBar.className="progress-bar progress-bar-striped progress-bar-animated "+progressBarColor+progressWidth;
