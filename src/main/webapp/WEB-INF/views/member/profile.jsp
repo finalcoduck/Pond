@@ -238,18 +238,30 @@
 	<script type="text/javascript">
 		$('#updatePhoneBtn').on('click',function(){
 			var phoneNum = $('#phoneNum').val();
-			if(confirm(phoneNum+"으로 수정하시겠습니까?")){
-				$.ajax({
-					url : "${pageContext.request.contextPath}/member/update-phone/proc",
-					dataType : "json",
-					data : {"phone":phoneNum, "email":'${memDto.memVo.memEmail}'},
-					success: function(data) {
-						alert('수정 완료');
-					}
-				});
-			}else{
-				return;
-			}
+			swal({
+				  title: phoneNum,
+				  text : '수정하시겠습니까?',
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '수정'
+				}).then((result) => {
+				  if (result.value) {
+						$.ajax({
+							url : "${pageContext.request.contextPath}/member/update-phone/proc",
+							dataType : "json",
+							data : {"phone":phoneNum, "email":'${memDto.memVo.memEmail}'},
+							success: function(data) {
+								swal({
+									type : 'success',
+									title : '수정 완료!',
+									timer : 1500
+								})
+							}
+						});
+				  }
+				})
 		});
 		
 		//비밀번호 수정 버튼 클릭시
@@ -275,19 +287,35 @@
 									data : {'newPwd': newPwd, "email":'${memDto.memVo.memEmail}'},
 									success: function(data) {
 										$('#pwdModal').modal('hide');
-										alert('비밀번호 수정완료');
+										swal({
+											type : 'success',
+											title : '비밀번호 수정 완료!',
+											showConfirmButton: true
+										})
 									}
 								}); 
 							}else{
-								alert('비밀번호는 8~20글자 영문,숫자,특수문자를 포함해야 합니다.');
+								swal({
+									type : 'error',
+									title : '비밀번호는 8~20글자 영문,숫자,특수문자를 포함해야 합니다.',
+									showConfirmButton: true,
+								})
 								return;
 							}
 						}else{
-							alert('입력한 비밀번호가 틀립니다');
+							swal({
+								type : 'error',
+								title : '입력한 비밀번호가 틀립니다.',
+								showConfirmButton: true,
+							})
 							return;
 						}
 					}else{
-						alert('현재 비밀번호가 틀립니다.');
+						swal({
+							type : 'error',
+							title : '현재 비밀번호가 틀립니다.',
+							showConfirmButton: true,
+						})
 						return;						
 					}
 				}
@@ -311,7 +339,11 @@
 			if(validImageType(image)){
 				$('.snImg').prop('src',window.URL.createObjectURL(image));
 			}else{
-				alert('png/jpg/jpeg 파일만 등록 가능합니다.');
+				swal({
+					type : 'error',
+					title : 'png/jpg.jpeg 파일만 등록 가능합니다.',
+					showConfirmButton: true,
+				})
 				return;
 			}
 		});

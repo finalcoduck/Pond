@@ -187,16 +187,6 @@ $(function() {
 	};
 </script>
 <script type="text/template" id="template-list-item">
-<<<<<<< HEAD
-<div style="border: 1px solid black; width: 100%; height: 30%;" id="calbox">
-		<span>{title}</span><br> 
-		<span>{content}</span><br>
-		<span>{start} ~ {end}</span>
-		<c:if test="${status == 'M'.charAt(0) }">
-		<button type="button" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
-		<button type="button" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
-		</c:if>
-=======
 <div class="card_wrap" id="calbox">
 	<div class="cal_card">
 		<span class="cal_tit">{title}</span>
@@ -207,7 +197,6 @@ $(function() {
 		<button type="button" class="btn" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
 		<button type="button" class="btn btn-info" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
 	</div>
->>>>>>> branch 'develop' of https://github.com/finalcoduck/Pond.git
 </div>
 </script>
 </html>
