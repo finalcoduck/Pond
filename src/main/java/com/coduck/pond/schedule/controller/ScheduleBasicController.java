@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coduck.pond.core.utils.DateUtility;
+import com.coduck.pond.member.vo.MemDto;
 import com.coduck.pond.schedule.service.ScheduleServiceImpl;
 import com.coduck.pond.schedule.vo.ScheduleVo;
 
@@ -39,8 +40,9 @@ public class ScheduleBasicController {
 	 * 	최초에 데이터 받아오기
 	 */
 	@RequestMapping(value = "/schedule/info", method = {RequestMethod.GET, RequestMethod.POST})
-	public String getDateInfo(Model model, @RequestParam(value="groupNum") int groupNum) {
+	public String getDateInfo(Model model, @RequestParam(value="groupNum") int groupNum, MemDto memDto) {
 		List<ScheduleVo> list = scheduleService.getDateInfo(groupNum);
+		char status = memDto.getMemGroupMap().get(groupNum);
 		for (ScheduleVo vo : list) {
 			Date date = vo.getScheduleEndDate();
 			java.sql.Date dd = du.plus1day(date);
@@ -48,6 +50,7 @@ public class ScheduleBasicController {
 		}
 		model.addAttribute("groupNum", groupNum);
 		model.addAttribute("list", list);
+		model.addAttribute("status", status);
 		return "/group/schedule";
 	}
 	
@@ -62,6 +65,7 @@ public class ScheduleBasicController {
 	 */
 	@RequestMapping(value = "/schedule/add-cal", method = RequestMethod.POST)
 	public String addCal(ScheduleVo vo, RedirectAttributes ra) {
+		System.out.println("여기는?");
 		try {
 			ra.addAttribute("groupNum", vo.getGroupNum());
 			scheduleService.addSchedule(vo);

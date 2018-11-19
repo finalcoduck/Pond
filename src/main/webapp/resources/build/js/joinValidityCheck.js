@@ -101,11 +101,13 @@ function checkName(){
 			return false;
 		}
 	});
+	
 }
 
 
 
 function finalCheck(){
+	console.log('asdasd?');
 	var pwd = $('#password').val();
 	var pwd2 = $('#password2').val();
 	var password = $('#password').val();
@@ -115,8 +117,12 @@ function finalCheck(){
 	var bool1 = regxPhone.test(phone);
 	var bool2 = regxPwd.test(password);
 	var bool3 = regxName.test(name);
+	console.log(pwd,pwd2);
+	console.log(bool1);
+	console.log(bool2);
+	console.log(bool3);
 	
-	if(pwd===pwd2 && bool1 && bool2 && bool3){
+	if(pwd===pwd2 && bool2 && bool3){
 		return true;
 	}else{
 		return false;

@@ -5,28 +5,28 @@
 	<header class="group-header">
         <nav class="navbar d-flex justify-content-between navbar-expand bg-primary">
             <h1>
-                <a class=" text-white" href="#">
+                <a class=" text-white" href="${pageContext.request.contextPath }/">
                     <b>POND</b>
                 </a>
             </h1>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="">스트림</a>
+                    <a class="nav-link text-white" href="" style="font-size:20px;">스트림</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}">사용자</a>
+                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}" style="font-size:20px;">사용자</a>
                 </li>
             </ul>
             <div class="mr-2">
                 <button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<c:choose>
 						<c:when test="${memDto.memVo.memProfilePic == null}">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="">	
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="" style="width:50px; height:50px;">	
 						</c:when>
 						<c:otherwise>
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
-							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/img1.jpg" alt="">
+							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="" style="width:50px; height:50px;">
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/img1.jpg" alt="" style="width:50px; height:50px;">
 							<%-- <img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt=""> --%>	
 						</c:otherwise>			
 					</c:choose>

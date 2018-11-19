@@ -14,9 +14,6 @@
 							<li class="list-group-item on">
 								<a href="#">내정보</a>
 							</li>
-							<li class="list-group-item">
-								<a href="#">내가 쓴 글</a>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -113,10 +110,10 @@
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'naver' }">
 												<span class="txt" style="color:green;">네이버</span>
-												<span>연동중 입니다</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/naver_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<span class="txt">네이버</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/naver_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -125,10 +122,10 @@
 										<div class="profileInfo">
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'google' }">
-												<span class="txt" style="color:blue;">구글</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/google_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<span class="txt">구글</span>
+												<img src="${pageContext.request.contextPath }/resources/build/image/google_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -189,7 +186,7 @@
 						</form>
 						<label for="imgUpdate" style="background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_camera_w.png);">사진</label>
 					</div>
-					<input type="text" value="배재정" class="profileInput" disabled="disabled" readonly="readonly">
+					<input type="text" value="${memDto.memVo.memName }" class="profileInput" disabled="disabled" readonly="readonly">
 				</div>
 				<!-- Modal footer -->
 				<div class="align_c" style="padding:1rem;">
@@ -241,18 +238,30 @@
 	<script type="text/javascript">
 		$('#updatePhoneBtn').on('click',function(){
 			var phoneNum = $('#phoneNum').val();
-			if(confirm(phoneNum+"으로 수정하시겠습니까?")){
-				$.ajax({
-					url : "${pageContext.request.contextPath}/member/update-phone/proc",
-					dataType : "json",
-					data : {"phone":phoneNum, "email":'${memDto.memVo.memEmail}'},
-					success: function(data) {
-						alert('수정 완료');
-					}
-				});
-			}else{
-				return;
-			}
+			swal({
+				  title: phoneNum,
+				  text : '수정하시겠습니까?',
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '수정'
+				}).then((result) => {
+				  if (result.value) {
+						$.ajax({
+							url : "${pageContext.request.contextPath}/member/update-phone/proc",
+							dataType : "json",
+							data : {"phone":phoneNum, "email":'${memDto.memVo.memEmail}'},
+							success: function(data) {
+								swal({
+									type : 'success',
+									title : '수정 완료!',
+									timer : 1500
+								})
+							}
+						});
+				  }
+				})
 		});
 		
 		//비밀번호 수정 버튼 클릭시
@@ -278,19 +287,35 @@
 									data : {'newPwd': newPwd, "email":'${memDto.memVo.memEmail}'},
 									success: function(data) {
 										$('#pwdModal').modal('hide');
-										alert('비밀번호 수정완료');
+										swal({
+											type : 'success',
+											title : '비밀번호 수정 완료!',
+											showConfirmButton: true
+										})
 									}
 								}); 
 							}else{
-								alert('비밀번호는 8~20글자 영문,숫자,특수문자를 포함해야 합니다.');
+								swal({
+									type : 'error',
+									title : '비밀번호는 8~20글자 영문,숫자,특수문자를 포함해야 합니다.',
+									showConfirmButton: true,
+								})
 								return;
 							}
 						}else{
-							alert('입력한 비밀번호가 틀립니다');
+							swal({
+								type : 'error',
+								title : '입력한 비밀번호가 틀립니다.',
+								showConfirmButton: true,
+							})
 							return;
 						}
 					}else{
-						alert('현재 비밀번호가 틀립니다.');
+						swal({
+							type : 'error',
+							title : '현재 비밀번호가 틀립니다.',
+							showConfirmButton: true,
+						})
 						return;						
 					}
 				}
@@ -314,14 +339,23 @@
 			if(validImageType(image)){
 				$('.snImg').prop('src',window.URL.createObjectURL(image));
 			}else{
-				alert('png/jpg/jpeg 파일만 등록 가능합니다.');
+				swal({
+					type : 'error',
+					title : 'png/jpg.jpeg 파일만 등록 가능합니다.',
+					showConfirmButton: true,
+				})
 				return;
 			}
 		});
 		
 		//파일 업로드후 멤버 프로필 사진 변경
 		$('#change-img-btn').on('click',function(){
-			$('form[name=filefrm]').submit();
+			var imgVal = $('#imgUpdate').val();
+			if(imgVal == ''){
+				$('#myModal').modal('hide');
+			}else{
+				$('form[name=filefrm]').submit();
+			}
 		});
 		
 		

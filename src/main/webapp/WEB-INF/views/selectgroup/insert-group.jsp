@@ -3,7 +3,7 @@
     <style type="text/css">
 		*, a{color:#333;}
 	</style>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group.css">
 <section class="content group-wrap">
 		<div class="inner">
 			<h2 class="sub_title">그룹 이름</h2>
@@ -20,9 +20,9 @@
 				<div class="coverList">
 					<div class="head">
 						<h3>커버 선택</h3>
-						<div class="navi">
+						<!-- <div class="navi">
 							
-						</div>
+						</div> -->
 					</div>
 					<ul class="cover">
 						<li>
@@ -78,8 +78,11 @@
 					</ul>
 				</div>
 			</div>
-				<span>320x240 jpeg/jpg/png 파일</span><br>
+			<span>권장 사이즈 : 320x240</span><br>
+			<div class="align_c mt20">
+				<button type="button" class="btn" onclick="history.back();">취소</button>
 				<button type="button" class="btn btn-success" id="make-group-btn">생성</button>
+			</div>
 		</div>
 	</section>
 		<script type="text/javascript">
@@ -97,7 +100,11 @@
 					console.log(image);
 					var imageURL = window.URL.createObjectURL(image);
 					if(!validImageType(image)){
-						alert('첨부가 불가능한 확장자 입니다.');
+						swal({
+							type : 'error',
+							title : '잘못된 확장자 입니다.',
+							showConfirmButton: true
+						});
 						return;
 					}else{
 						$('#mainImage').prop('src',imageURL).css({

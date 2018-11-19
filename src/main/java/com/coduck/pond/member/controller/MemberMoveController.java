@@ -1,5 +1,6 @@
 package com.coduck.pond.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.coduck.pond.core.utils.PropertyUtility;
+import com.coduck.pond.member.vo.MemDto;
 
 @Controller
 public class MemberMoveController {
@@ -27,8 +31,10 @@ public class MemberMoveController {
 	 */
 	
 	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
-	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail) {
-		
+	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail, MemDto memDto, HttpServletRequest request) {
+		if(memDto != null) {
+			return "forward:/selectgroup/index";
+		}
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, googleOauth2Parameters);
 		System.out.println("/googleLogin, url" + url);
@@ -38,6 +44,11 @@ public class MemberMoveController {
 		return "/main-body";
 	}
 	
+/*	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
+	public String home() {
+		return "test";
+	}*/
+	
 	/*@RequestMapping(value = "/member/main/home", method = RequestMethod.GET)
 	public String go(Model model) { 
 		return "home";
@@ -46,11 +57,6 @@ public class MemberMoveController {
 	@RequestMapping("/join")
 	public String joinPage() {
 		return "/join-member";
-	}
-	
-	@RequestMapping("/test1")
-	public String testPage() {
-		return "/selectgroup/index";
 	}
 	
 	@RequestMapping("/emailConfirm")

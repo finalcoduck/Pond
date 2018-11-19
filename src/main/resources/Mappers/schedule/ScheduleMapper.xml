@@ -13,7 +13,7 @@
 	</select>
 	<!-- 년/월로 스케쥴 정보 가져오기 -->
 	<select id="getSchedule_month" parameterType="map" resultType="com.coduck.pond.schedule.vo.ScheduleVo">
-		select * from schedule where to_char(schedule_start_date, 'YYMM') = #{yymm} and group_num = #{groupNum}
+		select * from schedule where to_char(schedule_start_date, 'YYMM') = #{yymm} and group_num = #{groupNum} order by schedule_start_date
 	</select>
 	<!-- 일정번호로 정보 가져오기 -->
 	<select id="getScheduleOne" parameterType="int" resultType="com.coduck.pond.schedule.vo.ScheduleVo">

@@ -37,8 +37,6 @@ public class BoardServiceImpl implements BoardService{
 		
 		boardList.addAll(noticeList);
 		
-		
-		
 		// 게시물 번호 순으로 정렬
 		Collections.sort(boardList,new Comparator<HwBoardVo>(){
 			@Override
@@ -51,14 +49,16 @@ public class BoardServiceImpl implements BoardService{
 		
 		// 다음으로 불러올 페이지가 있는 경우
 		if(boardList.size()>CommonConstant.MAX_BOARD_COUNT*Nxt1KeyVal) {
-			
+	
 			boardList = boardList.subList(CommonConstant.MAX_BOARD_COUNT*(Nxt1KeyVal-1),CommonConstant.MAX_BOARD_COUNT*Nxt1KeyVal);
+	
 			boardSrchDto.setNxt1KeyVal(Nxt1KeyVal+1);			
 			boardSrchDto.setNxtPageFl(CommonConstant.TRUE);
 			
 		}else { 
 			// 다음으로 불러올 페이지가 없는 경우
 			boardList = boardList.subList(CommonConstant.MAX_BOARD_COUNT*(Nxt1KeyVal-1),boardList.size());
+			
 			boardSrchDto.setNxtPageFl(CommonConstant.FALSE);
 		}
 		
@@ -108,7 +108,10 @@ public class BoardServiceImpl implements BoardService{
 		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
 		return resultMap;
 	}
-	
-	
+
+	@Override
+	public Integer selectBoardSeqVal() {
+		return (Integer)hwBoardDao.selectBoardSeqVal();
+	}
 
 }

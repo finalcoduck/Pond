@@ -57,9 +57,14 @@ public class InviteController {
 	 */
 	@RequestMapping("/group/invite/input")
 	public String invitedMem(Model model, MemDto memDto, String inviteCode) {
+		System.out.println("@@@@@@@@@"+inviteCode);
 		inviteCode = inviteCode.trim();
 		Map<String, Object> map = inviteSerivce.findGroupNum(inviteCode);
 		GroupVo groupVo = (GroupVo)map.get("groupVo");
+		if(groupVo==null) {
+			model.addAttribute("msg", "유효한 코드가 아닙니다.");
+			return "forward:/selectgroup/index";
+		}
 		//강퇴당한 회원 여부 체크
 		KickHistory kh = managerSerivce.checkKickedMem(groupVo.getGroupNum(), memDto.getMemVo().getMemEmail());
 		if(kh != null) {

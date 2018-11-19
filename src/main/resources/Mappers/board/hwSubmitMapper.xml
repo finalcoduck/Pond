@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Mappers.hwSubmitMapper">
+  	<insert id="insertHwSubmit" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
+		INSERT INTO HW_SUBMIT
+		    (
+			    HW_SUBMIT_GROUP_NUM,
+			    HW_SUBMIT_WRITER, 
+			    HW_TEACHER_ID,
+			    HW_SUBMIT_SCORE, 
+			    HW_SUBMIT
+		    )
+		VALUES
+		    (
+			    #{hwSubmitGroupNum}, 
+			    #{hwSubmitWriter},
+			    #{hwTeacherId},
+			    0, 
+			    'F'
+		    )
+  	</insert>
+  	
+  	<update id="updateHwScore" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
+  		update hw_submit HW_SUBMIT_SCORE = #{hwSubmitScore} where BOARD_NUM = #{boardNum}
+  	</update>
+  </mapper>

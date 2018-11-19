@@ -43,7 +43,7 @@
 				sysdate,
 				#{hwMaxScore},
 				#{subjectTitle},
-				#{boardType}
+				'H'
 			)
 	</insert>
 	
@@ -56,5 +56,9 @@
 	<delete id="deleteNotice" parameterType="int">
 		
 	</delete>
+	
+	<select id="selectBoardSeqVal" resultType="int">
+		select last_number from user_sequences where sequence_name = 'GROUP_BOARD_SEQ'
+	</select>
 	
 </mapper> 

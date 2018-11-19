@@ -24,4 +24,24 @@ public class RandomCodeUtility {
 		}
 		return randomCode;
 	}
+	
+	public static String makeRandomCode(int length) {
+		Random rnd = new Random();
+		String randomCode = "";
+		for (int i = 0; i < length; i++) {
+			if(rnd.nextBoolean()) {
+				randomCode += String.valueOf(rnd.nextInt(10));
+			}else {
+				if(rnd.nextBoolean()) {
+					char lower = (char)(((int)rnd.nextInt(26))+97);
+					randomCode += lower;
+				}else {
+					char upper = (char)(((int)rnd.nextInt(26))+65);
+					randomCode += upper;
+				}
+			}
+		}
+		return randomCode;
+	}
+	
 }

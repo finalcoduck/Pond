@@ -19,7 +19,8 @@
 		 	INVITE_CODE_M, 
 		 	INVITE_CODE_STATUS, 
 		 	GROUP_IMAGE, 
-		 	GROUP_DESCRIPTION
+		 	GROUP_DESCRIPTION,
+		 	ATTENDED_QR_CODE
 		 ) 
 		 VALUES 
 		 (
@@ -32,7 +33,8 @@
 		 	#{inviteCodeM}, 
 		 	#{inviteCodeStatus}, 
 		 	#{groupImage}, 
-		 	'그룹 소개를 작성해주세요.'
+		 	'그룹 소개를 작성해주세요.',
+		 	#{attendedQRCode}
 		 )
 	</insert>
 	
@@ -90,4 +92,34 @@
 	 	select * from group_mem g, mem m where g.mem_email = m.mem_email and g.group_num = #{value} and g.status = 'S'
 	</select>
 	
-</mapper> 
+	<!-- POND_GROUP 테이블에 주소 정보와 x,y 좌표 정보 넣기 -->
+	<update id="updateGroupAddress" parameterType="map">
+		update pond_group set longitude = #{longitude} , latitude = #{latitude}, group_addr = #{groupAddr} where group_num = #{groupNum}
+	</update>
+	
+	<!-- POND_GROUP 핸드폰 번호 정보 넣기 -->
+	<update id="updateGroupPhone" parameterType="map">
+		update pond_group set group_phone_num = #{groupPhoneNum} where group_num = #{groupNum}
+	</update>	
+	
+	<!-- POND_GROUP QRcode update -->
+	<update id="updateAttendedQRCode" parameterType="com.coduck.pond.group.vo.GroupVo">
+		UPDATE 
+			POND_GROUP
+		SET
+			ATTENDED_QR_CODE = #{attendedQRCode}
+		WHERE
+			GROUP_NUM = #{groupNum}
+	</update>	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+ 

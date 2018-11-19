@@ -19,7 +19,7 @@
 					<div class="card-body">
 						<h4 class="card-title">중앙HTA 1803기</h4>
 						<p class="card-text">멤버 28</p>
-						<a href="#" class="">학원 정보 상세보기</a>
+						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
 				<div class="card mb-3">
@@ -198,7 +198,7 @@
 					<ul class="score_area">
 						<li>
 							<span class="txt">점수</span>
-							<input type="text" name="hwMaxScore" placeholder="100">
+							<input type="text" name="hwMaxScore" placeholder="100" maxlength="3">
 						</li>
 						<li>
 							<span class="txt">마감일</span>
@@ -548,9 +548,9 @@
         			contentType : "application/json; charset=UTF-8",
         			success : function(data){
         				editorDiv.text('');
-			            var commentQuill = new Quill('#editor-test-'+boardNum,{
+			             var commentQuill = new Quill('#editor-test-'+boardNum,{
 			            	placeholder: '댓글을 입력하세요',
-			            });					
+			            });	 			
         			}
         		});
         	});
@@ -829,8 +829,7 @@
     		
     		var homeworakData = $('#homeworkForm').serializeObject();
     		var dataStr = JSON.stringify(homeworakData);
-    		console.log(homeworakData);
-    		/*
+    		//console.log(homeworakData);
     		$.ajax({
     			url : "${pageContext.request.contextPath}/board/insert/homework/proc",
     			method : "post",
@@ -846,7 +845,6 @@
     				window.location.reload()
     			}
     		});
-    		*/
     	}        
         
         

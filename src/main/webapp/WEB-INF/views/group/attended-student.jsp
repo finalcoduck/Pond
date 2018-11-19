@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/vendor/fullcalendar/fullcalendar.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath }/resources/vendor/instascan/js/instascan.min.js" type="text/javascript"></script>
 
 
@@ -38,11 +38,6 @@
 				<video id="preview" class="max-vw85"></video>		
 			</div>
 	
-			<!-- Modal footer -->
-			<div class="modal-footer justify-content-right">
-				<a href="" class="text-muted" data-dismiss="modal">취소</a>
-				<button type="submit" class="text-muted btn btn-out-secondary" >추가</button>
-			</div>
 		</div>
 	</div>
 </div>
@@ -54,7 +49,24 @@
 
 <script>
 
-let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+let opts = {
+		  // Whether to scan continuously for QR codes. If false, use scanner.scan() to manually scan.
+		  // If true, the scanner emits the "scan" event when a QR code is scanned. Default true.
+		  continuous: true,
+		  video: document.getElementById('preview'),
+		  mirror: false,
+		  captureImage: false,
+		  backgroundScan: true,
+		  
+		  // Only applies to continuous mode. The period, in milliseconds, before the same QR code
+		  // will be recognized in succession. Default 5000 (5 seconds).
+		  refractoryPeriod: 5000,
+		  
+		  // Only applies to continuous mode. The period, in rendered frames, between scans. A lower scan period
+		  // increases CPU usage but makes scan response faster. Default 1 (i.e. analyze every frame).
+		  scanPeriod: 5
+		};
+let scanner = new Instascan.Scanner(opts);
 var attendedStatus = false;
 //getLocation();
 
@@ -90,6 +102,7 @@ $(document).ready(function(){
 			showNonCurrentDates: false,
 			themeSystem:'bootstrap4',
 			contentHeight: 'auto',
+			eventLimit : true,
 			viewRender: function(view, element) {
 				// 달력이 그려질때마다 해당 월의 첫번째 1일을 SrchDate로 넘겨줌
 				srchAttended(new Date(view.start._i));
@@ -207,7 +220,7 @@ function srchAttended(date){
 }
 function attendedIn(qrCode){
 	
-	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : 'ABCD'};
+	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : qrCode};
 	var dataStr = JSON.stringify(data); 
 	
 	$.ajax({
@@ -229,8 +242,9 @@ function attendedIn(qrCode){
 }
 function attendedOut(qrCode){
 	
-	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : 'ABCD'};
+	var data = {groupNum : '${groupVo.groupNum}',attendedQRCode : qrCode};
 	var dataStr = JSON.stringify(data); 
+	
 	
 	$.ajax({
    		url : "${pageContext.request.contextPath}/group/attended/out/proc"

@@ -18,10 +18,35 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
     
 <section id="" class="bg-primary">
-<c:if test="${!empty changePwdMsg}"><script type="text/javascript">alert('비밀번호 변경 성공!');</script></c:if>
-<c:if test="${!empty loginFail }"><script type="text/javascript">alert('${loginFail}');</script></c:if>
-<c:if test="${!empty dpMsg }"><script type="text/javascript">alert('${dpMsg}');</script></c:if>
-<c:if test="${!empty changeMsg }"><script type="text/javascript">alert('새로운 비밀번호로 변경되었습니다.');</script></c:if>
+<c:if test="${!empty changePwdMsg}"><script type="text/javascript">
+swal({
+	type : 'success',
+	title : '비밀번호 변경 성공!',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
+<c:if test="${!empty loginFail }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이메일 혹은 비밀번호를 확인해주세요.',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
+<c:if test="${!empty dpMsg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이미 가입된 이메일 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if>
+<c:if test="${!empty changeMsg }"><script type="text/javascript">
+swal({
+	type : 'success',
+	title : '새로운 비밀번호로 변경되었습니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">
@@ -52,12 +77,14 @@
                                     stroke-linejoin="round" />
                             </g>
                         </svg>
-                        <input type="email" placeholder="email@domain.com" name="memEmail">
+                        <input type="text" placeholder="email@domain.com" name="memEmail">
                         <input type="password" placeholder="Password" name="memPwd">
                         <input type="submit" class="btn btn-dark text-white" value="로그인">
-                        <a href="${pageContext.request.contextPath }/login/sendMail">비밀번호를 잊어버렸습니다.</a>
-                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
-                        <img class="input-img" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
+                        <div class="align_c mt10">
+                        	<a href="${pageContext.request.contextPath }/login/sendMail">비밀번호 찾기</a>
+                        </div>
+                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
+                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
                     </form>
                 </div>
             </div>
@@ -76,4 +103,3 @@
         </div>
     </section>
     <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script> 
-   

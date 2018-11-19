@@ -20,4 +20,7 @@ public interface BoardService {
 	public HashMap<String, Object> insertHomeworkBoard(HwBoardVo hwBoardVo);
 
 	public HwBoardVo detailHomeworkBoard(int boardNum);
+	
+	// board seq 현재값 얻어오기
+	public Integer selectBoardSeqVal();
 }
