@@ -49,10 +49,12 @@ public class AttendedController {
 		return null;
 	}
 	
+	//QRcode 생성 페이지 리턴
 	@RequestMapping(value="/group/attended/qrgenerator")
-	public String attendedGenerator(int groupNum, MemDto memDto) {
+	public String attendedGenerator(int groupNum, MemDto memDto,Model model) {
 		
-		
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "/group/attended/qrgenerator";
 	}
@@ -64,10 +66,7 @@ public class AttendedController {
 	public @ResponseBody Map<String,Object> srchAttended(@RequestBody SrchAttendedDto srchAttendedDto, MemDto memDto) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		
-		
-		
 		srchAttendedDto.setMemEmail(memDto.getMemVo().getMemEmail());
-		
 		
 		List<AttendedVo> attendedVoList = attendedService.selectMonthAttended(srchAttendedDto);
 		
@@ -119,6 +118,22 @@ public class AttendedController {
 	
 	@RequestMapping(value="/group/attended/out/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String,Object> attendedOut(@RequestBody AttendedVo attendedVo,MemDto memDto){
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		
+		//그룹 출석 QR코드와 일치 하지 않으면 Failure code return
+		if(!groupService.isQRcodeCorrect(attendedVo)) {
+			resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.FAILURE);
+			return resultMap;
+		}
+		
+		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
+		resultMap = attendedService.attendedOut(attendedVo);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/group/attended/generate/qr/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> generateQRcode(@RequestBody AttendedVo attendedVo,MemDto memDto){
 		HashMap<String,Object> resultMap = new HashMap<String, Object>();
 		
 		//그룹 출석 QR코드와 일치 하지 않으면 Failure code return
