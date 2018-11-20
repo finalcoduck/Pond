@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.utils.GetMemDtoUtility;
+import com.coduck.pond.core.utils.PropertyUtility;
 import com.coduck.pond.member.service.MemberJoinService;
 import com.coduck.pond.member.service.MemberLoginServiceImpl;
 import com.coduck.pond.member.service.ProfileService;
@@ -43,8 +44,8 @@ public class MemberLoginController {
 	@RequestMapping("/login/navercallback")
 	// 네이버 로그인 연동후 사용자 정보 요청후 디비 작업
 	public String naverCallback(String code, String state, Model model, HttpSession session, RedirectAttributes ra) {
-		String clientId = "cXnG4ZMsAU0UT9_rvvIe";//애플리케이션 클라이언트 아이디값";
-		String clientSecret = "lwPvvFgpsq";//애플리케이션 클라이언트 시크릿값";
+		String clientId = new PropertyUtility().getPropertiesValue("naverClientId", "naver.properties");
+		String clientSecret = new PropertyUtility().getPropertiesValue("naverClientSecret", "naver.properties");
 		try {
 		String apiURL;
 		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&;";

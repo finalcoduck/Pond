@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
+import com.coduck.pond.core.utils.RandomCodeUtility;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemAttendedDto;
@@ -49,10 +50,12 @@ public class AttendedController {
 		return null;
 	}
 	
+	//QRcode 생성 페이지 리턴
 	@RequestMapping(value="/group/attended/qrgenerator")
-	public String attendedGenerator(int groupNum, MemDto memDto) {
+	public String attendedGenerator(int groupNum, MemDto memDto,Model model) {
 		
-		
+		GroupVo groupVo = groupService.selectGroup(groupNum);
+		model.addAttribute("groupVo", groupVo);
 		
 		return "/group/attended/qrgenerator";
 	}
@@ -64,10 +67,7 @@ public class AttendedController {
 	public @ResponseBody Map<String,Object> srchAttended(@RequestBody SrchAttendedDto srchAttendedDto, MemDto memDto) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		
-		
-		
 		srchAttendedDto.setMemEmail(memDto.getMemVo().getMemEmail());
-		
 		
 		List<AttendedVo> attendedVoList = attendedService.selectMonthAttended(srchAttendedDto);
 		
@@ -112,7 +112,14 @@ public class AttendedController {
 		
 		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
+		
 		resultMap = attendedService.attendedIn(attendedVo);
+		
+		// QR코드 초기화
+		GroupVo groupVo = new GroupVo();
+		groupVo.setGroupNum(attendedVo.getGroupNum());
+		groupVo.setAttendedQRCode("");
+		groupService.updateQRcode(groupVo);
 		
 		return resultMap;
 	}
@@ -129,6 +136,39 @@ public class AttendedController {
 		
 		attendedVo.setMemEmail(memDto.getMemVo().getMemEmail());
 		resultMap = attendedService.attendedOut(attendedVo);
+		
+		// QR코드 초기화
+		GroupVo groupVo = new GroupVo();
+		groupVo.setGroupNum(attendedVo.getGroupNum());
+		groupVo.setAttendedQRCode("");
+		groupService.updateQRcode(groupVo);
+		
+		return resultMap;
+	}
+	
+	
+	@RequestMapping(value="/group/attended/generate/qr/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> generateQRcode(@RequestBody GroupVo groupVo,MemDto memDto){
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		
+		String attendedQRCode = RandomCodeUtility.makeRandomCode(10);
+		groupVo.setAttendedQRCode(attendedQRCode);
+		groupService.updateQRcode(groupVo);
+		
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
+		resultMap.put("attendedQRCode", attendedQRCode);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/group/attended/search/qr/proc",method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> searchQRcode(@RequestBody GroupVo groupVo ,MemDto memDto){
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		
+		GroupVo selectedGroupVo = groupService.selectGroup(groupVo.getGroupNum());
+		
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY, ErrorCodeConstant.SUCCESS);
+		resultMap.put("attendedQRCode", selectedGroupVo.getAttendedQRCode());
 		
 		return resultMap;
 	}

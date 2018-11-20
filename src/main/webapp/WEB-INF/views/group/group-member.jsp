@@ -11,7 +11,9 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h6>선생님</h6>
+                            <c:if test="${status == 'M'.charAt(0) }">
                             <a id="inviteTeacherBtn" href="" data-toggle="modal" data-target="#inviteTeacherModal"><i class="fas fa-user-plus"><!--선생님초대아이콘--></i></a>
+                            </c:if>
                         </div>
                         <ul class="list-group list-group-flush">
                         	<c:forEach items="${mList }" var="vo">
@@ -45,7 +47,7 @@
 	                                        <a class="dropdown-item" href="#">삭제</a>
 	                                        <a class="dropdown-item" href="#">수업 소유자로 지정</a>
 	                                    </div>
-	                                </div>                               
+	                                </div>  
                                     </c:if>
                                 </c:if>
                             </li>
@@ -55,7 +57,9 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h6>학생</h6>
+                            <c:if test="${status == 'M'.charAt(0) }">
                             <a href="" id="inviteStudentBtn" data-toggle="modal" data-target="#inviteStudentModal"><i class="fas fa-user-plus"></i></a>
+                            </c:if>
                         </div>
                         <ul class="list-group list-group-flush">
 								<!-- <li class="list-group-item d-flex justify-content-between">
@@ -85,6 +89,7 @@
 	                                    </h6>
 	                                </div>
 	                                <c:if test="${!empty boss}">
+	                                	<c:if test="${status == 'M'.charAt(0) }">
 		                                <div class="dropdown dropleft">
 		                                    <a href="" class="" data-toggle="dropdown">
 		                                        <i class="fas fa-ellipsis-v"></i>
@@ -93,6 +98,7 @@
 		                                        <a class="dropdown-item" href="${pageContext.request.contextPath }/group/member-kick?groupNum=${groupVo.groupNum}&memEmail=${vo.memEmail}">삭제</a>
 		                                    </div>
 		                                </div>
+		                                </c:if>
 	                                </c:if>
 	                            </li>
                             </c:forEach>

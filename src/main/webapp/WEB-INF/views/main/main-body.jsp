@@ -18,10 +18,35 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
     
 <section id="" class="bg-primary">
-<c:if test="${!empty changePwdMsg}"><script type="text/javascript">alert('비밀번호 변경 성공!');</script></c:if>
-<c:if test="${!empty loginFail }"><script type="text/javascript">alert('${loginFail}');</script></c:if>
-<c:if test="${!empty dpMsg }"><script type="text/javascript">alert('${dpMsg}');</script></c:if>
-<c:if test="${!empty changeMsg }"><script type="text/javascript">alert('새로운 비밀번호로 변경되었습니다.');</script></c:if>
+<c:if test="${!empty changePwdMsg}"><script type="text/javascript">
+swal({
+	type : 'success',
+	title : '비밀번호 변경 성공!',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
+<c:if test="${!empty loginFail }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이메일 혹은 비밀번호를 확인해주세요.',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
+<c:if test="${!empty dpMsg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이미 가입된 이메일 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if>
+<c:if test="${!empty changeMsg }"><script type="text/javascript">
+swal({
+	type : 'success',
+	title : '새로운 비밀번호로 변경되었습니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">
@@ -77,4 +102,4 @@
             </div>
         </div>
     </section>
-    <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script> 

@@ -17,20 +17,32 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.utils.PropertyUtility;
 import com.coduck.pond.group.dao.GroupDao;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.service.GroupUpdateService;
 import com.fasterxml.jackson.core.JsonParser;
 
 @Controller
 public class KakaoApiController {
 	@Autowired
 	private GroupService groupSerivce;
+	@Autowired
+	private GroupUpdateService groupUpdateSerivce;
+	
+	/*
+	 * 최초에 주소 입력과 수정 같이 처리
+	 * updateOk 라는 컬럼으로 분개
+	 */
 	
 	@RequestMapping("/group/kakao/addr")
-	public String kakao(String address, String groupNum, HttpServletResponse response) {
+	public String kakao(String address, String groupNum, @RequestParam(defaultValue="false",value="updateOk") String updateOk, HttpServletResponse response, Model model) {
+		String kakaoKey = new PropertyUtility().getPropertiesValue("kakaoKey", "kakao.properties");
 		Map<String, String> map = new HashMap<>();
 		try {
 			String query = URLEncoder.encode(address , "UTF-8");
@@ -38,7 +50,7 @@ public class KakaoApiController {
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
-			con.setRequestProperty("Authorization", "KakaoAK 4367b0083ebf24a0e998f59f87f01bdf");
+			con.setRequestProperty("Authorization", "KakaoAK "+kakaoKey);
 			int responseCode = con.getResponseCode();
 			System.out.println(responseCode);
 			InputStream is;
@@ -55,11 +67,12 @@ public class KakaoApiController {
 			     rsp += line;
 			}
 			
-			System.out.println(rsp);
+			/*
+			 * 코드 너무 지저분 나중에 리펙토링 연습 ㄱㄱ
+			 */
 			JSONParser parser = new JSONParser();
 			JSONObject jsonObj = (JSONObject)parser.parse(rsp);
 			JSONArray jsonArr = (JSONArray)jsonObj.get("documents");
-			System.out.println(jsonArr);
 			JSONObject jsonObj2 = (JSONObject)jsonArr.get(0);
 			JSONObject jsonObj3 = (JSONObject)jsonObj2.get("address");
 			String x = (String)jsonObj3.get("x");
@@ -67,7 +80,13 @@ public class KakaoApiController {
 			reader.close();
 			
 			try {
-				groupSerivce.updateGroupAddr(x, y, address, groupNum);
+				if(updateOk.equals("false")) {
+					groupSerivce.updateGroupAddr(x, y, address, groupNum);
+				}else {
+					groupUpdateSerivce.updateGroupAddr(address,x,y, groupNum);
+					model.addAttribute("updateMsg","ok");
+					return "forward:/group/detail/setting";
+				}
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -76,13 +95,5 @@ public class KakaoApiController {
 		}
 		return "forward:/";
 	}
-	
-	public String updateGroupPhone(String groupPhoneNum, String groupNum) {
-		try {
-			groupSerivce.updateGroupPhone(groupPhoneNum, groupNum);
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "forward:/";
-	}
+
 }

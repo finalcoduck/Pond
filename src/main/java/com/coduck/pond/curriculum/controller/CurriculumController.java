@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.coduck.pond.curriculum.service.CurriculumSerivce;
 import com.coduck.pond.curriculum.vo.CurriculumVo;
+import com.coduck.pond.group.vo.GroupVo;
+import com.coduck.pond.member.vo.MemDto;
 
 @Controller
 public class CurriculumController {
@@ -18,10 +20,15 @@ public class CurriculumController {
 	private CurriculumSerivce curriculumService;
 	
 	@RequestMapping("/group/curriculum")
-	public String defaultCRC(@RequestParam(value="groupNum")int groupNum, Model model) {
+	public String defaultCRC(@RequestParam(value="groupNum")int groupNum, Model model, MemDto memDto) {
+		GroupVo groupVo = new GroupVo();
+		groupVo.setGroupNum(groupNum);
+		char status = memDto.getMemGroupMap().get(groupNum);
 		List<CurriculumVo> list = curriculumService.getAllCurriculum(groupNum);
 		model.addAttribute("list", list);
+		model.addAttribute("groupVo", groupVo);
 		model.addAttribute("groupNum", groupNum);
+		model.addAttribute("status", status);
 		return "/group/curriculum";
 	}
 	

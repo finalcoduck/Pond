@@ -102,6 +102,16 @@
 		update pond_group set group_phone_num = #{groupPhoneNum} where group_num = #{groupNum}
 	</update>	
 	
+	<!-- POND_GROUP QRcode update -->
+	<update id="updateAttendedQRCode" parameterType="com.coduck.pond.group.vo.GroupVo">
+		UPDATE 
+			POND_GROUP
+		SET
+			ATTENDED_QR_CODE = #{attendedQRCode}
+		WHERE
+			GROUP_NUM = #{groupNum}
+	</update>	
+	
 </mapper>
 
 

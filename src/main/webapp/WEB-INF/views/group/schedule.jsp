@@ -20,9 +20,10 @@
 <div class="container mt20">
 	<div>
 		<div id='calendar'></div>
-		
-		<div class="align_c mt20">
-			<button type="button" id="addCal" class="btn btn-success">일정 등록</button>
+	<div class="align_c mt20">
+		<c:if test="${status == 'M'.charAt(0) }">
+		  <button type="button" id="addCal" class="btn btn-success">일정 등록</button>
+		</c:if>
 		</div>
 	</div>
 	<div id="testRow">
@@ -98,6 +99,7 @@ $(function() {
                }, 
              </c:forEach>  
             ] ,
+            <c:if test="${status == 'M'.charAt(0) }">
          eventClick:function(event){
         	 if(confirm('수정하시겠습니까?')){
         		 var num = event.num;
@@ -109,6 +111,7 @@ $(function() {
         		 updateSchedule(num, start, end);
         	 }
          },
+         </c:if>
          eventMouseover:function(calEvent,jsEvent){
 			$(this).css('background-color','black').css('cursor','pointer').css('color','white');
          },
