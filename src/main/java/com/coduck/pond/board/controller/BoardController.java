@@ -43,7 +43,7 @@ public class BoardController {
 	//과제 등록
 	@RequestMapping(value = "/board/insert/homework/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody Map<String, Object> map, MemDto memDto){
-	
+		
 		HwBoardVo hwBoardVo = new HwBoardVo();
 		hwBoardVo.setGroupNum(Integer.parseInt((String)map.get("groupNum")));
 		hwBoardVo.setBoardWriter((String)(memDto.getMemVo().getMemEmail()));
@@ -66,7 +66,6 @@ public class BoardController {
 			hwSubmitVo.setHwSubmitGroupNum(seq_val);		
 			hwSubmitVo.setHwSubmitWriter((String)student_list.get(i));
 			hwSubmitVo.setHwTeacherId(memDto.getMemVo().getMemEmail());
-			System.out.println(hwSubmitVo);
 			hwSubmitService.insertSubmitBoard(hwSubmitVo);
 		}
 		
@@ -75,15 +74,20 @@ public class BoardController {
 	
 	//과제 상세
 	@RequestMapping(value = "/group/view", method = RequestMethod.GET)
-	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {
-		HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
-		
-		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
-		
-		model.addAttribute(hwBoardVo);
-		model.addAttribute("sList", map.get("sList"));
+	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {	
 	
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
+			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
+			
+			List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
+			
+			Map<String, List<HwSubmitVo>> map = hwSubmitService.getSubmitList(String.valueOf(groupNum));
+			
+			model.addAttribute("hwBoardVo", hwBoardVo);
+			model.addAttribute("hwSubmitVo", hwSubmitVo);
+			
+			model.addAttribute("studentList", map.get("student_list"));
+			
 			return "/group/view-teacher";
 		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
 			return "/group/view-student";
@@ -137,14 +141,10 @@ public class BoardController {
 			return resultMap;
 		}
 		
-	//채점점수 업데이트
-	@RequestMapping(value = "/board/update", method = RequestMethod.POST)
-	public String update(HwSubmitVo hwSubmitVo) {
-		try {
+		//채점점수 업데이트
+		@RequestMapping(value = "/board/update/homework/proc", method = RequestMethod.POST)
+		public String updateHwScore(HwSubmitVo hwSubmitVo) {
 			hwSubmitService.updateHwScore(hwSubmitVo);
-			return "0000";
-		}catch(Exception e) {
-			return "E001";
+			return "forward:/group/view-teacher";
 		}
-	}
 }
