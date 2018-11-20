@@ -20,6 +20,7 @@ import com.coduck.pond.board.service.HwSubmitService;
 import com.coduck.pond.board.vo.BoardSrchDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
+import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
@@ -79,14 +80,14 @@ public class BoardController {
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
-			List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
+			//List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
 			
-			Map<String, List<HwSubmitVo>> map = hwSubmitService.getSubmitList(String.valueOf(groupNum));
+			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
 			model.addAttribute("hwBoardVo", hwBoardVo);
-			model.addAttribute("hwSubmitVo", hwSubmitVo);
+			//model.addAttribute("hwSubmitVo", hwSubmitVo);
 			
-			model.addAttribute("studentList", map.get("student_list"));
+			model.addAttribute("studentList", map.get("studentList"));
 			
 			return "/group/view-teacher";
 		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
