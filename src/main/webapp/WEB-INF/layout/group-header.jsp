@@ -11,7 +11,7 @@
             </h1>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="" style="font-size:20px;">스트림</a>
+                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/group-main?groupNum=${groupVo.groupNum}" style="font-size:20px;">스트림</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}" style="font-size:20px;">사용자</a>
