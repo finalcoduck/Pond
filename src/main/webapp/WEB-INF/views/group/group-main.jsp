@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/datedropper.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/my-style.css">	
 
 <!-- content -->
 <section id="main">
@@ -347,7 +347,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8 comment_con">
@@ -364,7 +364,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8">
@@ -464,10 +464,10 @@
 	</div>
 </script>
 <!-- Card Template -->
-<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
 
 <!-- datepicker 플러그인 -->
-<script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
+<script src="${pageContext.request.contextPath}/build/js/datedropper.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;

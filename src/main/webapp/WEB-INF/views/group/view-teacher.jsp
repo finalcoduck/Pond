@@ -61,7 +61,7 @@
 		<ul class="student_list">
 			<c:forEach items="${studentList }" var="vo">
 				<li>
-					<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="">
+					<img src="${pageContext.request.contextPath }/build/image/user.png" alt="">
 					<span class="name">${vo.memName }</span>
 					<span class="status">할당됨</span>
 				</li>
