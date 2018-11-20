@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
+	href="${pageContext.request.contextPath}/build/css/group_main.css">
 
 <!-- content -->
 <section id="main">

@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css">
 
 <!-- content -->
 <section id="main">
@@ -249,7 +249,7 @@
 </script>
 <!-- Card Template -->
 
-<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
 
 
 <script>    

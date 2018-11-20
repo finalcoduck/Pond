@@ -12,7 +12,7 @@
 				<c:forEach items="${sList }" var="vo">
 					<li>
 						<span class="profile">
-							<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="" />
+							<img src="${pageContext.request.contextPath }/build/image/user.png" alt="" />
 							<span class="name">${vo.memName }</span>
 						</span>
 						<form method="post" action="<c:url value='/board/insert/homework/proc' />">
@@ -60,7 +60,7 @@
 		<ul class="student_list">
 			<c:forEach items="${sList }" var="vo">
 				<li>
-					<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="">
+					<img src="${pageContext.request.contextPath }/build/image/user.png" alt="">
 					<span class="name">${vo.memName }</span>
 					<span class="status">할당됨</span>
 				</li>

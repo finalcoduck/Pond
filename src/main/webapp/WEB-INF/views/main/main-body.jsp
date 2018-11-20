@@ -15,7 +15,7 @@
     apiURL += "&state=" + state;
 	session.setAttribute("state", state);
 %>     
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
     
 <section id="" class="bg-primary">
 <c:if test="${!empty changePwdMsg}"><script type="text/javascript">
@@ -83,8 +83,8 @@ swal({
                         <div class="align_c mt10">
                         	<a href="${pageContext.request.contextPath }/login/sendMail">비밀번호 찾기</a>
                         </div>
-                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
-                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/resources/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
+                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/build/image/btn_google_signin_light.png" alt="google login" onclick="location.href='${google_url}'">
+                        <img class="input-img cursor-pointer" src="${pageContext.request.contextPath}/build/image/naver-green.PNG" alt="naver login" onclick="location.href='<%= apiURL %>'">
                     </form>
                 </div>
             </div>
@@ -102,4 +102,13 @@ swal({
             </div>
         </div>
     </section>
-    <script src="${pageContext.request.contextPath}/resources/build/js/login_script.js"></script> 
+    <script src="${pageContext.request.contextPath}/build/js/login_script.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+         .register('${pageContext.request.contextPath}/service-worker.js')
+         .then(function() { 
+            console.log('Service Worker Registered'); 
+          });
+      }
+    </script> 

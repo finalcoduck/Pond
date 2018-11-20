@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/build/css/group.css?ver=3">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/build/css/group.css?ver=3">
 <style>
 #view_student .card .homework .file_list .wrapper .thumbnail:after{
 	background-color: transparent;
@@ -25,7 +25,7 @@
 						<div class="file_list">
 							<div class="wrapper">
 								<div class="thumbnail">
-									<img src="${pageContext.request.contextPath }/resources/build/image/filetype/${vo.fileType }.png" alt=""
+									<img src="${pageContext.request.contextPath }/build/image/filetype/${vo.fileType }.png" alt=""
 									style="">
 								</div>
 							</div>

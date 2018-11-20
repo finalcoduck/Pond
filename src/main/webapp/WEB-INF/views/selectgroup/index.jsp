@@ -5,10 +5,10 @@
     <style type="text/css">
 		*, a{color:#333;}
 		.group-list li.group-make span{
-			background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_plus.png);
+			background-image:url(${pageContext.request.contextPath}/build/image/ico_plus.png);
 		}
 	</style>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group.css">
 
 <c:if test="${!empty msg }"><script type="text/javascript">
 swal({
@@ -32,7 +32,7 @@ swal({
 				<li class="group">
 					<a href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 						<span class="wrapper">
-							<img src="${pageContext.request.contextPath}/resources/upload/group-photo/${groupVo.groupImage}" alt="" style="width: 100%; height: 100%;"/>
+							<img src="${pageContext.request.contextPath}/upload/group-photo/${groupVo.groupImage}" alt="" style="width: 100%; height: 100%;"/>
 						</span>
 						<span class="info">
 							<span class="group_name">

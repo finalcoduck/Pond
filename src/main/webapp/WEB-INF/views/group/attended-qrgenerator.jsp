@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/login_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
 
 <section id="main">
 	<div class="container bg-primary">
@@ -61,10 +61,10 @@
 		</div>
 	</div>
 </section>
-<script src="${pageContext.request.contextPath }/resources/vendor/qrcodejs/qrcode.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/vendor/qrcodejs/qrcode.min.js" type="text/javascript"></script>
 <script>
 <!-- Autoplay is allowed. -->
-var alertSound = new Audio('${pageContext.request.contextPath }/resources/audio/barcode.mp3'); // 오디오 객체 생성
+var alertSound = new Audio('${pageContext.request.contextPath }/audio/barcode.mp3'); // 오디오 객체 생성
 $(document).ready(function(){
 
 	//alertSound.play();
