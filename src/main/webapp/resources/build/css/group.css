@@ -158,7 +158,7 @@ h2.sub_title span.num{color:#007bff;}
 #view .left .student_list ul li > span.profile .name{display:inline-block; vertical-align:middle; font-size:14px; margin-left:10px;}
 
 
-#view .left .student_list ul li > form span.score{width:45%; text-align:center;}
+#view .left .student_list ul li > form{width:45%; text-align:center;}
 #view .left .student_list ul li > form span.score span.input_wrap input[type=text]{display:inline-block; vertical-align:middle; width:50px; margin-right:5px; border:0; outline:0; height:30px; box-sizing:border-box; text-align:right; background-color:transparent;}
 #view .left .student_list ul li > form span.score span.input_wrap input[type=text]:focus{border-bottom:1px solid #333; box-sizing:border-box;}
 #view .left .student_list ul li > form span.score span.input_wrap input[type=submit]{display:inline-block; vertical-align:middle; font-size:14px; margin-left:10px;}

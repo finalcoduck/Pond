@@ -15,15 +15,27 @@
 		    )
 		VALUES
 		    (
-			    #{hwSubmitGroupNum}, 
+			    #{hwSubmitGroupNum},
 			    #{hwSubmitWriter},
 			    #{hwTeacherId},
 			    0, 
-			    'F'
+			    'B'
 		    )
   	</insert>
   	
   	<update id="updateHwScore" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
-  		update hw_submit HW_SUBMIT_SCORE = #{hwSubmitScore} where BOARD_NUM = #{boardNum}
+  		update hw_submit set 
+  		HW_SUBMIT_SCORE = #{hwSubmitScore}
+  		where HW_SUBMIT_WRITER = #{hwSubmitWriter} and BOARD_NUM = #{boardNum}
   	</update>
+  	
+  	<select id="detailHw" resultType="int" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
+		select * from hw_submit where HW_SUBMIT_GROUP_NUM = #{hwSubmitGroupNum}
+  	</select>
+  	
+  	<select id="getSubmitList" parameterType="string" resultType="com.coduck.pond.board.vo.HwSubmitVo">
+		select HW_SUBMIT_WRITER, HW_SUBMIT_SCORE, HW_SUBMIT, HW_SUBMIT_GROUP_NUM, MEM_NAME
+		from HW_SUBMIT join MEM
+		on HW_SUBMIT_WRITER = MEM_NAME and HW_SUBMIT_GROUP_NUM = #{hwSubmitGroupNum}
+  	</select>
   </mapper>
