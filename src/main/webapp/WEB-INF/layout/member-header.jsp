@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <header	class="group-header bg-primary">
 	<div class="inner">
-		<nav class="navbar shadow">
+		<nav class="navbar shadow vh7">
 			<h1>
 				<a href="${pageContext.request.contextPath }/">
 					<b class="text-white">POND</b>
