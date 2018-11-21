@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coduck.pond.board.dao.HwSubmitDao;
+import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 
 @Service
@@ -30,8 +31,8 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	}
 
 	@Override
-	public Map<String, List<HwSubmitVo>> getSubmitList(String groupNum) {
-		return hwSubmitDao.getSubmitList(groupNum);
+	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum) {
+		return hwSubmitDao.getSubmitList(hwSubmitGroupNum);
 	}
 	
 	

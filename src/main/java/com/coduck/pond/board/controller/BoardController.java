@@ -11,15 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.coduck.pond.board.dao.HwSubmitDao;
 import com.coduck.pond.board.service.BoardService;
 import com.coduck.pond.board.service.HwSubmitService;
 import com.coduck.pond.board.vo.BoardSrchDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
+import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
@@ -73,20 +72,21 @@ public class BoardController {
 	}
 	
 	//과제 상세
-	@RequestMapping(value = "/group/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/group/view", method = {RequestMethod.GET, RequestMethod.POST})
 	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {	
 	
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
-			List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
+			//List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
 			
-			Map<String, List<HwSubmitVo>> map = hwSubmitService.getSubmitList(String.valueOf(groupNum));
+			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
 			model.addAttribute("hwBoardVo", hwBoardVo);
-			model.addAttribute("hwSubmitVo", hwSubmitVo);
-			
-			model.addAttribute("studentList", map.get("student_list"));
+			//model.addAttribute("hwSubmitVo", hwSubmitVo);
+			model.addAttribute("boardNum", boardNum);
+			model.addAttribute("groupNum", groupNum);
+			model.addAttribute("studentList", map.get("studentList"));
 			
 			return "/group/view-teacher";
 		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
@@ -143,8 +143,8 @@ public class BoardController {
 		
 		//채점점수 업데이트
 		@RequestMapping(value = "/board/update/homework/proc", method = RequestMethod.POST)
-		public String updateHwScore(HwSubmitVo hwSubmitVo) {
+		public String updateHwScore(HwSubmitVo hwSubmitVo, String hwBoardNum, String groupNum) {
 			hwSubmitService.updateHwScore(hwSubmitVo);
-			return "forward:/group/view-teacher";
+			return "redirect:/group/view?groupNum=" + groupNum + "&boardNum=" + hwBoardNum;
 		}
 }
