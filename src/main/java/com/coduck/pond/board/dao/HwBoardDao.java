@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.coduck.pond.board.vo.BoardSrchDto;
+import com.coduck.pond.board.vo.BoardUserDto;
 import com.coduck.pond.board.vo.HwBoardVo;
 
 @Repository
@@ -18,6 +19,10 @@ public class HwBoardDao {
 	
 	public List<HwBoardVo> selectHwBoardList(BoardSrchDto boardSrchDto){
 		return session.selectList(NAMESPACE+"selectHwBoardList",boardSrchDto);
+	}
+	
+	public List<BoardUserDto> selectHWUserList(BoardSrchDto boardSrchDto){
+		return session.selectList(NAMESPACE+"selectHWUserList",boardSrchDto);
 	}
 	
 	public void insertHwBoard(HwBoardVo hwBoardVo ) {
