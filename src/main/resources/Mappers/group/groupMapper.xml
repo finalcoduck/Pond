@@ -77,6 +77,16 @@
 			and C.mem_email = #{value}
 	</select>
 	
+	<!-- 해당 그룹 회원 숫자 가져오기 -->
+	<select id="getGroupMemCount" parameterType="int" resultType="com.coduck.pond.group.vo.GroupMemNumDto">
+		SELECT
+			COUNT(*) GROUP_MEM_NUM
+		FROM
+			GROUP_MEM
+		WHERE
+			GROUP_NUM = #{groupNum}
+	</select>
+	
 	<!-- 초대코드 입력시 중복 확인용 -->
 	<select id="dupliInviteCode" parameterType="map" resultType="com.coduck.pond.group.vo.GroupMemVo">
 		select * from group_mem where group_num = #{groupNum} and mem_email = #{memEmail}

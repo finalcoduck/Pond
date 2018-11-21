@@ -6,7 +6,7 @@
 
     <section>
         <div class="container fill-vh60">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-5">
                 <div class="col-12 col-md-8">
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">

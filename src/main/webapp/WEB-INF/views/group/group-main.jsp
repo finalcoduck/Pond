@@ -13,10 +13,10 @@
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
 				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
+					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/group-photo/${groupVo.groupImage}" alt="Card image">
 					<div class="card-body">
-						<h4 class="card-title">중앙HTA 1803기</h4>
-						<p class="card-text">멤버 28</p>
+						<h4 class="card-title">${groupVo.groupName}</h4>
+						<p class="card-text">멤버 ${groupMemCount}</p>
 						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
@@ -24,8 +24,8 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 출결</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="fas fa-layer-group"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="fas fa-clipboard-check"></i> 출결</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">

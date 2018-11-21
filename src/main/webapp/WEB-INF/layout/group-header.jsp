@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group.css"> 
 	<header class="group-header">
-        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary">
+        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary shadow">
             <h1>
                 <a class=" text-white" href="${pageContext.request.contextPath }/">
                     <b>POND</b>
@@ -11,7 +11,7 @@
             </h1>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="" style="font-size:20px;">스트림</a>
+                    <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/group-main?groupNum=${groupVo.groupNum}" style="font-size:20px;">스트림</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="${pageContext.request.contextPath }/group/member?groupNum=${groupVo.groupNum}" style="font-size:20px;">사용자</a>
