@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <header	class="group-header bg-primary">
 	<div class="inner">
-		<nav class="navbar shadow">
+		<nav class="navbar shadow vh7">
 			<h1>
 				<a href="${pageContext.request.contextPath }/">
 					<b class="text-white">POND</b>
@@ -18,8 +18,7 @@
 						<c:otherwise>
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/group-photo/img1.jpg" alt="">
-							<%-- <img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt=""> --%>	
+							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
 						</c:otherwise>			
 					</c:choose>
 				</button>

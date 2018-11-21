@@ -6,8 +6,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath }/build/css/crc_style.css">
 		<link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
     <body>
+    
        <div class="cover" style="background-image: url('${pageContext.request.contextPath}/build/image/images/cover.png')">
-	       	<h1 class="cover-title">
+	       	<h1 class="text-white cover-title">
 	       		Curriculum
 	       	</h1>
        </div>

@@ -12,6 +12,9 @@
 <meta name="Keywords" content="">
 <meta name="Description" content="">
 <meta name="theme-color" content="#007cff">
+<link rel="apple-touch-icon" sizes="180x180" href="/build/image/icons/icon-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/build/image/icons/icon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="/build/image/icons/icon-16x16.png">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/general.css">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"

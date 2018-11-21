@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/build/css/group.css" />
 <c:if test="${!empty updateMsg }">
 <script type="text/javascript">
 swal({
@@ -22,29 +23,49 @@ swal({
 				<!-- Text input-->
 				<div class="form-group">
 				  <label class="control-label" for="textinput">학원 이름</label>  
-				  <input id="groupName" name="textinput" type="text" placeholder="placeholder" class="form-control input-md" value='${groupVo.groupName }'>
+				  <input id="groupName" name="textinput" type="text" placeholder="placeholder" class="form-control input-md cursor-pointer" value='${groupVo.groupName }'>
 				</div>
 				
 				<!-- Textarea -->
 				<div class="form-group">
 				  <label class="control-label" for="textarea">학원 소개</label>
-				    <textarea class="form-control" id="groupDescription" name="textarea">${groupVo.groupDescription }</textarea>
+				    <textarea class="form-control cursor-pointer" id="groupDescription" name="textarea">${groupVo.groupDescription }</textarea>
 				</div>
 				
 				<!-- Text input-->
 				<div class="form-group">
 				  <label class="control-label" for="textinput">학원 전화 번호</label>  
-				  <input id="groupPhoneNum" name="textinput" type="text" placeholder="placeholder" class="form-control input-md" value='${groupVo.groupPhoneNum }'>
+				  <input id="groupPhoneNum" name="textinput" type="text" placeholder="placeholder" class="form-control input-md cursor-pointer" value='${groupVo.groupPhoneNum }'>
 				</div>
 				
 				<div class="form-group">
 				  <label class="control-label" for="textinput">학원 주소</label>  
 				  	<input type="text" id="sample4_postcode" placeholder="우편번호" style="display: none">
-					<input type="text" id="sample4_roadAddress" placeholder="도로명주소" value='${groupVo.groupAddr }'>
+					<input type="text" id="sample4_roadAddress" placeholder="도로명주소" value='${groupVo.groupAddr }' class="cursor-pointer">
 					<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="display: none">
 					<span id="guide" style="color:#999"></span>
 
 				</div>
+				
+				<div class="profile">
+					<div class="myProfile">
+						<p class="txt">그룹 사진</p>
+						<div class="profileArea">
+							<ul>
+								<li>
+									<div class="profileImg">
+												<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/group-photo/${groupVo.groupImage }" alt="">	
+									</div>
+									<div class="profileBtn">
+										<button type="button" data-toggle="modal" data-target="#myModal">
+											수정
+										</button>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>				
 				
 				</fieldset>
 				</form>
@@ -52,6 +73,36 @@ swal({
 		</div>
 	</div>
 </section>
+
+	<!-- 그룹사진수정 모달 -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">그룹사진 수정</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="profileImg">
+						<span>
+							<img src="${pageContext.request.contextPath }/resources/upload/group-photo/${groupVo.groupImage }" alt="" class="snImg">
+						</span>
+						<form action="${pageContext.request.contextPath }/fileupload/insert-profile-pic" enctype="multipart/form-data" method="post" name="filefrm">
+							<input type="file" id="imgUpdate" accept="image/png, image/jpg, image/jpeg" name="file">
+						</form>
+						<label for="imgUpdate" style="background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_camera_w.png);">사진</label>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="align_c" style="padding:1rem;">
+					<button type="button" class="btn btn-secondary" id="change-img-btn">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //그룹사진수정 모달 -->
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
