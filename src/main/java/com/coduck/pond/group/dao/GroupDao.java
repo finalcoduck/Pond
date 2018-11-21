@@ -50,6 +50,11 @@ public class GroupDao {
 		return session.selectList(NAMESPACE+"getGroupMemNum", memEmail);
 	}
 	
+	public GroupMemNumDto getGroupMemCount(int groupNum){
+		return session.selectOne(NAMESPACE+"getGroupMemCount", groupNum);
+	}
+	
+	
 	public GroupMemVo dupliInviteCode(Map<String, String> map) {
 		return session.selectOne(NAMESPACE+"dupliInviteCode", map);
 	}

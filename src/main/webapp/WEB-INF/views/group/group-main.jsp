@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/datedropper.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/my-style.css">	
 
 <!-- content -->
 <section id="main">
@@ -15,10 +15,10 @@
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
 				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
+					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/group-photo/${groupVo.groupImage}" alt="Card image">
 					<div class="card-body">
-						<h4 class="card-title">중앙HTA 1803기</h4>
-						<p class="card-text">멤버 28</p>
+						<h4 class="card-title">${groupVo.groupName}</h4>
+						<p class="card-text">멤버 ${groupMemCount}</p>
 						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
@@ -26,8 +26,8 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 출결</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="fas fa-layer-group"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="fas fa-clipboard-check"></i> 출결</a></li>
 					</ul>
 				</div>
 				<div class="card mb-3">
@@ -347,7 +347,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8 comment_con">
@@ -364,7 +364,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8">
@@ -464,10 +464,10 @@
 	</div>
 </script>
 <!-- Card Template -->
-<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
 
 <!-- datepicker 플러그인 -->
-<script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
+<script src="${pageContext.request.contextPath}/build/js/datedropper.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;

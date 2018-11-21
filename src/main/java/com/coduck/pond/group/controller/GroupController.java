@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.coduck.pond.board.service.SubjectService;
 import com.coduck.pond.board.vo.SubjectVo;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupMemNumDto;
 import com.coduck.pond.group.vo.GroupMem_smDto;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
@@ -48,11 +49,11 @@ public class GroupController {
 		//넘겨 주어야할 정보 과제글, 공지글 , 주제 
 		List<SubjectVo> subjecList = subjectService.selectSubjectList(groupNum);
 		GroupVo groupVo = groupService.selectGroup(groupNum);
-		
+		GroupMemNumDto groupMemNumDto = groupService.getGroupMemCount(groupNum);
 		
 		model.addAttribute("subjectList", subjecList);
 		model.addAttribute("groupVo", groupVo);
-		
+		model.addAttribute("groupMemCount", groupMemNumDto.getGroupMemNum());
 		Map<String, List<GroupMem_smDto>> map = groupService.getGroupMemList(String.valueOf(groupNum));
 		model.addAttribute("sList", map.get("sList")); // 학생 등급 회원들
 		

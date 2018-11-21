@@ -9,13 +9,16 @@
 		</p>
 		<div class="student_list">
 			<ul>
-				<c:forEach items="${sList }" var="vo">
+				<c:forEach items="${studentList }" var="vo">
 					<li>
 						<span class="profile">
-							<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="" />
+							<img src="${pageContext.request.contextPath }/build/image/user.png" alt="" />
 							<span class="name">${vo.memName }</span>
 						</span>
-						<form method="post" action="<c:url value='/board/insert/homework/proc' />">
+						<form method="post" action="<c:url value='/board/update/homework/proc' />">							
+							<input type="hidden" value="${hwSubmitVo.boardNum }">
+							<input type="hidden" value="${hwSubmitVo.hwSubmitWriter }">							
+							<input type="hidden" value="${hwSubmitVo.hwSubmitGroupNum }">
 							<span class="score">
 								<span class="input_wrap">
 									<input type="text" id="score" value="${hwSubmitVo.hwSubmitScore }">
@@ -60,7 +63,7 @@
 		<ul class="student_list">
 			<c:forEach items="${sList }" var="vo">
 				<li>
-					<img src="${pageContext.request.contextPath }/resources/build/image/user.png" alt="">
+					<img src="${pageContext.request.contextPath }/build/image/user.png" alt="">
 					<span class="name">${vo.memName }</span>
 					<span class="status">할당됨</span>
 				</li>

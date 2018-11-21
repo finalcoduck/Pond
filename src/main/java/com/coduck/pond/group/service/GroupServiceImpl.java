@@ -137,4 +137,9 @@ public class GroupServiceImpl implements GroupService{
 		groupDao.updateAttendedQRCode(groupVo);
 	}
 
+	@Override
+	public GroupMemNumDto getGroupMemCount(int groupNum) {
+		return groupDao.getGroupMemCount(groupNum);
+	}
+
 }
