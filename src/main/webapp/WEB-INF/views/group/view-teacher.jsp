@@ -16,10 +16,12 @@
 							<span class="name">${vo.memName }</span>
 						</span>
 						<form method="post" action="<c:url value='/board/update/homework/proc' />">							
-							<input type="hidden" value="${vo.boardNum }">
+							<input type="hidden" value="${vo.boardNum }" name="boardNum">
+							<input type="hidden" value="${groupNum }" name="groupNum">
+							<input type="hidden" value="${boardNum }" name="hwBoardNum">
 							<span class="score">
 								<span class="input_wrap">
-									<input type="text" id="score" value="${vo.hwSubmitScore }">
+									<input type="text" id="score" value="${vo.hwSubmitScore }" name="hwSubmitScore">
 									<span> / ${hwBoardVo.hwMaxScore }</span>
 									<input type="submit" value="채점" class="btn btn-primary">
 								</span>
