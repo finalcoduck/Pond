@@ -33,7 +33,7 @@
 	<!-- ///////////////////////// main //////////////////////////// -->
 	<definition name="/email-confirm" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/email-confirm.jsp" />
-		<put-attribute name="body" value="/WEB-INF/layout/group-footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/group-footer.jsp" />
 	</definition>
 	<definition name="/*" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
