@@ -19,14 +19,12 @@
 			</div>
 		</div>
 		<div class="card-body homework">
-			<form id="submitForm" action="<c:url value='/insert/homework/proc' />" method="post">
+			<form id="submitForm" action="${pageContext.request.contextPath}/board/submit/homework" method="post">
 				<input type="hidden" name="boardNum" value="${hwBoardVo.boardNum }">
 				<input type="hidden" value="${groupNum }" name="groupNum">
-				<input type="hidden" value="${boardNum }" name="hwBoardNum">
 				<h5 class="card-title">${hwBoardVo.boardTitle }</h5>
 				<p>${hwBoardVo.boardContent }</p>
-				<div class="homework_con">	
-				
+				<div class="homework_con">
 					<span class="status before">할당됨</span>
 					<input name="hwSubmitContent" type="hidden" id="hwSubmit" value="">
 					<div id=hwSubmitContent>
@@ -62,7 +60,7 @@
 						</div>
 					</div>
 					<div class="btn_wrap">
-						<input type="submit" value="제출" class="btn btn-info" id="homeworkSubmit">
+						<input type="submit" value="제출" class="btn btn-info">
 						<input type="file" id="homework_file">
 						<label for="homework_file" class="btn btn-danger">파일첨부</label>
 					</div>	
@@ -84,13 +82,13 @@
 		placeholder: '과제 내용'
 	});
 	
+	hwSubmitQill.setContents(${hwSubmitVo.hwSubmitContent});
 
 	var form = document.querySelector('form');
 	form.onsubmit = function() {
 	  var hwSubmitContent = document.querySelector('input[name=hwSubmitContent]');
 	  hwSubmitContent.value = JSON.stringify(hwSubmitQill.getContents());
-	  
-	  return false;
+	  return true;
 	};
 	
 </script>
