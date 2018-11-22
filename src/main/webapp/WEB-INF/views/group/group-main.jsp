@@ -469,7 +469,7 @@
 </script>
 <!-- Card Template -->
 <script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
@@ -699,9 +699,11 @@
 			.done(function(data){
 				console.log(data);
 				$("#loading").remove();
+				
 				if(data.boardList === null){
 					console.log("게시물이 없습니다.")
 				}else{
+					
 					console.log(data.boardSrchDto);
 					//마지막 페이지 여부 받아오기 
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
@@ -715,8 +717,9 @@
 					
 					// 카드 추가
 					data.boardList.forEach(function(item){
+						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
 						item.boardContent = quillGetHTML(item.boardContent);
-						item.boardRegdate = new Date(item.boardRegdate);
+						
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
