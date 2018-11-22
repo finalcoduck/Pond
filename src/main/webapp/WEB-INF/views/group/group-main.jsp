@@ -200,7 +200,7 @@
 						</li>
 						<li>
 							<span class="txt">마감일</span>
-							<input type="date" name="" class="form-control">
+							<input type="date" name="hwEndDate" class="form-control">
 						</li>
 						<li>
 							<span class="txt">주제</span>

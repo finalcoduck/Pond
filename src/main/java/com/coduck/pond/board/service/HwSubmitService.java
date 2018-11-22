@@ -1,6 +1,7 @@
 package com.coduck.pond.board.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,5 +16,7 @@ public interface HwSubmitService {
 	public List<HwSubmitVo> detailHwBoard(int boardNum);
 	
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum);
+	
+	public HashMap<String, Object> insertHw(HwSubmitVo hwSubmitVo);
 	
 }

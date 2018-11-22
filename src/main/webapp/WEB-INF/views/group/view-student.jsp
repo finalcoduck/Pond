@@ -21,10 +21,11 @@
 		<div class="card-body homework">
 			<h5 class="card-title">내 과제</h5>
 			<div class="homework_con">
-				<form id="submitForm" action="">
+				<form id="submitForm" action="/insert/homework/proc" method="post">
+					<input type="hidden" name="boardNum" value="${vo.boardNum }">
 					<span class="status before">할당됨</span>
-					<input name="hwSubmitContent" type="hidden" id="hwSubmitContent">
-					<div id="hwSubmitContent">
+					<input name="hwSubmitContent" type="hidden" id="hwSubmit">
+					<div id=hwSubmitContent>
 					</div>
 					<div class="file_wrap">
 						<div class="file_list">
@@ -57,7 +58,7 @@
 						</div>
 					</div>
 					<div class="btn_wrap">
-						<input type="button" value="제출" class="btn btn-info" id="homeworkSubmit">
+						<input type="submit" value="제출" class="btn btn-info" id="homeworkSubmit">
 						<input type="file" id="homework_file">
 						<label for="homework_file" class="btn btn-danger">파일첨부</label>
 					</div>
@@ -83,37 +84,10 @@
 	});
 	
 	function insertHomeWork(){
-		var hwContent = document.querySelector("#hwSubmitContent");
+		var hwContent = document.querySelector("#hwSubmit");
 		hwContent.value = JSON.stringify(hwSubmitQill.getContents());
 		
 		var submitData = $("#submitForm").serializeObject();
 		var dataStr = JSON.stringify(submitData);
-		$.ajax({
-			url : "${pageContext.request.contextPath}/insert/homework/proc",
-			method : "post",
-			dataType 'json',
-			data : dataStr,
-			processData : true,
-			contentType : "application/json; charset=UTF-8"			
-		}).done(function(data){
-			if(data.errC === "0000"){
-				$("#before").hide();
-				//새로고침
-				window.location.reload()
-			}
-		});
-	}
-	
-	$(function(){
-		$("#homeworkSubmit").on("click", insertHomeWork);
-	})
-	
-	
-	//과제 제출
-	function makeHomeSubmit(data){
-		var source = $("#homeworkSubmit").html();
-    	var template = Handlebars.compile(source);
-    	var html = template(data);
-    	return html;
 	}
 </script>

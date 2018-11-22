@@ -1,5 +1,6 @@
 package com.coduck.pond.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.coduck.pond.board.dao.HwSubmitDao;
 import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
+import com.coduck.pond.core.constant.ErrorCodeConstant;
 
 @Service
 public class HwSubmitServiceImpl implements HwSubmitService{
@@ -33,6 +35,16 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	@Override
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum) {
 		return hwSubmitDao.getSubmitList(hwSubmitGroupNum);
+	}
+
+	@Override
+	public HashMap<String, Object> insertHw(HwSubmitVo hwSubmitVo) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		hwSubmitDao.insertHw(hwSubmitVo);
+		
+		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
+		
+		return resultMap;
 	}
 	
 	

@@ -37,4 +37,8 @@ public class HwSubmitDao {
 		return map;
 	}
 	
+	public void insertHw(HwSubmitVo hwSubmitVo) {
+		session.insert(NAMESPACE + "insertHw", hwSubmitVo);
+	}
+	
 }
