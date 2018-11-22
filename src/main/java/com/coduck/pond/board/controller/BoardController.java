@@ -23,8 +23,6 @@ import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.group.service.GroupService;
-import com.coduck.pond.group.vo.GroupMem_smDto;
-import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -49,7 +47,7 @@ public class BoardController {
 		hwBoardVo.setBoardTitle((String)(map.get("boardTitle")));
 		hwBoardVo.setBoardContent((String)(map.get("boardContent")));
 		hwBoardVo.setBoardRegdate((Date)(map.get("hwRegdate")));
-		hwBoardVo.setHwEndDate((Date)(map.get("hwEndDate")));
+		hwBoardVo.setHwEndDate((String)(map.get("hwEndDate")));
 		hwBoardVo.setHwMaxScore(Integer.parseInt((String)(map.get("hwMaxScore"))));
 		hwBoardVo.setSubjectTitle((String)(map.get("subjectTitle")));
 		
