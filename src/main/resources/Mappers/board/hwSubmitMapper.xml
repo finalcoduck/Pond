@@ -40,18 +40,9 @@
   	</select>
   	
   	
-  	<insert id="insertHw" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
-  		insert into hw_board
-  			(
-  				BOARD_NUM,
-  				HW_SUBMIT_CONTENT,
-  				HW_SUBMIT
-  			)
-  		values
-  			(	
-  				#{boardNum},
-  				#{hwSubmitContent},
-  				'P'
-  			)
-  	</insert>
+  	<update id="insertHw" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
+  		update hw_submit set
+  		HW_SUBMIT_CONTENT = #{hwSubmitContent}, HW_SUBMIT = 'P'
+  		where BOARD_NUM = #{boardNum}
+  	</update>
   </mapper>

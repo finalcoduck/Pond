@@ -75,12 +75,9 @@ public class BoardController {
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
-			//List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
-			
 			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
 			model.addAttribute("hwBoardVo", hwBoardVo);
-			//model.addAttribute("hwSubmitVo", hwSubmitVo);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("studentList", map.get("studentList"));
@@ -127,8 +124,9 @@ public class BoardController {
 
 	//과제 제출
 	@RequestMapping(value = "/insert/homework/proc", method = RequestMethod.POST)
-	public String insertHw(HwSubmitVo hwSubmitVo) {
-		return "/insert/homework/proc";
+	public String insertHw(HwSubmitVo hwSubmitVo, String groupNum, String hwBoardNum) {
+		hwSubmitService.insertHw(hwSubmitVo);
+		return "/";
 	}
 	
 	

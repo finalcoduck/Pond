@@ -17,6 +17,6 @@ public interface HwSubmitService {
 	
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum);
 	
-	public void insertHw(HwSubmitVo hwSubmitVo);
+	public int insertHw(HwSubmitVo hwSubmitVo);
 	
 }

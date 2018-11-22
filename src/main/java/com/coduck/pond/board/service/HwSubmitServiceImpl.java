@@ -38,8 +38,8 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	}
 
 	@Override
-	public void insertHw(HwSubmitVo hwSubmitVo) {
-		hwSubmitDao.insertHw(hwSubmitVo);
+	public int insertHw(HwSubmitVo hwSubmitVo) {
+		return hwSubmitDao.insertHw(hwSubmitVo);
 	}
 	
 	

@@ -19,13 +19,16 @@
 			</div>
 		</div>
 		<div class="card-body homework">
-			<form id="submitForm" action="/insert/homework/proc" method="post">
+			<form id="submitForm" action="<c:url value='/insert/homework/proc' />" method="post">
 				<input type="hidden" name="boardNum" value="${hwBoardVo.boardNum }">
+				<input type="hidden" value="${groupNum }" name="groupNum">
+				<input type="hidden" value="${boardNum }" name="hwBoardNum">
 				<h5 class="card-title">${hwBoardVo.boardTitle }</h5>
 				<p>${hwBoardVo.boardContent }</p>
 				<div class="homework_con">	
+				
 					<span class="status before">할당됨</span>
-					<input name="hwSubmitContent" type="hidden" id="hwSubmit">
+					<input name="hwSubmitContent" type="hidden" id="hwSubmit" value="">
 					<div id=hwSubmitContent>
 					</div>
 					<div class="file_wrap">
@@ -66,11 +69,7 @@
 				</div>		
 			</form>
 		</div>
-		
 	</div>
-
-	<script id="homeworkSubmit" type="text/x-handlebars-template">
-	</script>
 
 	<div class="my_score shadow">
 		<span class="score">50</span>
@@ -85,11 +84,13 @@
 		placeholder: '과제 내용'
 	});
 	
-	function insertHomeWork(){
-		var hwContent = document.querySelector("#hwSubmit");
-		hwContent.value = JSON.stringify(hwSubmitQill.getContents());
-		
-		var submitData = $("#submitForm").serializeObject();
-		var dataStr = JSON.stringify(submitData);
-	}
+
+	var form = document.querySelector('form');
+	form.onsubmit = function() {
+	  var hwSubmitContent = document.querySelector('input[name=hwSubmitContent]');
+	  hwSubmitContent.value = JSON.stringify(hwSubmitQill.getContents());
+	  
+	  return false;
+	};
+	
 </script>
