@@ -721,7 +721,6 @@
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
-							item.boardTitle = quillGetHTML(item.boardTitle);
 							$("#center").append(makeHWCard(item));	
 						}
 						
