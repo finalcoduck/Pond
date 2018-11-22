@@ -12,7 +12,7 @@
 		<div class="row">
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
-				<div class="card mb-3" style="width: 100%;">
+				<div class="card mb-3 shadow" style="width: 100%;">
 					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/group-photo/${groupVo.groupImage}" alt="Card image">
 					<div class="card-body">
 						<h4 class="card-title">${groupVo.groupName}</h4>
@@ -20,7 +20,7 @@
 						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
@@ -28,7 +28,7 @@
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="fas fa-clipboard-check"></i> 출결</a></li>
 					</ul>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
 	
@@ -286,7 +286,7 @@
 
 <!-- Card Template -->
 <script id="notice-card" type="text/x-handlebars-template">
-<div class="card mb-3">
+<div class="card mb-3 shadow">
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="d-flex justify-content-between align-items-center">
@@ -376,7 +376,7 @@
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
-	<div class="card mb-3">
+	<div class="card mb-3 shadow">
 		<div class="card-header">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
