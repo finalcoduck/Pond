@@ -4,9 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/datedropper.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/my-style.css">	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">	
 
 <!-- content -->
 <section id="main">
@@ -202,7 +200,7 @@
 						</li>
 						<li>
 							<span class="txt">마감일</span>
-							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+							<input type="date" name="" class="form-control">
 						</li>
 						<li>
 							<span class="txt">주제</span>
@@ -293,11 +291,10 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="mr-2">
-					<img class="rounded-circle profile-img"
-						src="https://picsum.photos/50/50" alt="">
+					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{boardWriter}}</div>
+					<div class="h5 m-0">{{memName}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
 			</div>
@@ -384,11 +381,11 @@
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="mr-2">
-						<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+						<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 					</div>
 					<div class="ml-2">
 						<div class="h5 m-0">
-							{{boardWriter}}
+							{{memName}}
 						</div>
 						<div class="h7 text-muted">
 							{{boardRegdate}}
@@ -431,13 +428,13 @@
 					<ul>
 						<li>
 							<a href="#">
-								<span class="num">0</span>
+								<span class="num">{{proposeCount}}</span>
 								<span class="txt">제출함</span>
 							</a>
 						</li>
 						<li>
 							<a href="#">
-								<span class="num">0</span>									
+								<span class="num">{{submitCount}}</span>									
 								<span class="txt">할당 완료</span>
 							</a>
 						</li>
@@ -466,8 +463,6 @@
 <!-- Card Template -->
 <script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
 
-<!-- datepicker 플러그인 -->
-<script src="${pageContext.request.contextPath}/build/js/datedropper.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
@@ -621,9 +616,6 @@
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
-            
-			//datepicker 플러그인 적용
-			$('.datepicker').dateDropper();
 
 			//과제 할당학생 체크
 			var $allChk = $('#allChk');
@@ -820,6 +812,7 @@
 			});
         }
         
+        //과제 생성 ajax
     	function insertHomeworkBoard(){
     		var hwTitle = document.querySelector('#homeworkTitle');
     		hwTitle.value = JSON.stringify(HomeworkTitleQuill.getContents());

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group.css"> 
 	<header class="group-header">
-        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary shadow">
+        <nav class="navbar d-flex justify-content-between navbar-expand bg-primary shadow vh7">
             <h1>
                 <a class=" text-white" href="${pageContext.request.contextPath }/">
                     <b>POND</b>
@@ -20,8 +20,8 @@
             <div class="mr-2">
                 <button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
-							<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="" style="width:50px; height:50px;">
-							<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
+							<img class="rounded-circle nav-profile-img" src="${memDto.memVo.memProfilePic }" alt="">
+							<img class="rounded-circle nav-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
                 </button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 					<a class="dropdown-item" href="${pageContext.request.contextPath }/member/profile">마이페이지</a>

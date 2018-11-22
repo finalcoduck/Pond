@@ -1,8 +1,8 @@
-attended-header.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<header>
-	    <nav class="shadow navbar bg-primary text-white text-uppercase justify-content-between vh7 mb-3">
+	    <nav class="shadow navbar text-white text-uppercase justify-content-between vh7" style="background-color:rgba(0,0,255,0.4) !important;">
 	        <h1>
 	            <a class="text-white" href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 	                <i class="fas fa-arrow-left"></i>

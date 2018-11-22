@@ -3,7 +3,7 @@ package com.coduck.pond.board.vo;
 import java.util.Date;
 
 //그룹 과제 게시판 파일게시판
-public class HwBoardVo {
+public class BoardUserDto {
 
  // 과제글번호 글번호
  private Integer boardNum;
@@ -35,6 +35,23 @@ public class HwBoardVo {
  // BOARD TYPE 보드 타입
  private char boardType;
 
+ private String memName;
+ 
+ //작성자 프로필 이미지 
+ private String memProfilePic;
+ //첨부파일개수
+ int fileCount;
+ 
+ //댓글개수
+ int commentCount;
+ 
+ //제출함 개수
+ int proposeCount;
+ 
+ //할당 완료 개수
+ int submitCount;
+ 
+ 
  public Integer getBoardNum() {
      return boardNum;
  }
@@ -111,31 +128,67 @@ public class HwBoardVo {
      return boardType;
  }
 
- public void setBoardType(char boardType) {
-     this.boardType = boardType;
- }
+	 public void setBoardType(char boardType) {
+	     this.boardType = boardType;
+	 }
+	
+	public String getMemName() {
+		return memName;
+	}
+	
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	
+	public String getMemProfilePic() {
+		return memProfilePic;
+	}
+	
+	public void setMemProfilePic(String memProfilePic) {
+		this.memProfilePic = memProfilePic;
+	}
+	
+	public int getFileCount() {
+		return fileCount;
+	}
+	
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
+	}
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	
+	public int getProposeCount() {
+		return proposeCount;
+	}
+	
+	public void setProposeCount(int proposeCount) {
+		this.proposeCount = proposeCount;
+	}
+	
+	public int getSubmitCount() {
+		return submitCount;
+	}
+	
+	public void setSubmitCount(int submitCount) {
+		this.submitCount = submitCount;
+	}
 
- // HwBoard 모델 복사
- public void CopyData(HwBoardVo param)
- {
-     this.boardNum = param.getBoardNum();
-     this.groupNum = param.getGroupNum();
-     this.boardWriter = param.getBoardWriter();
-     this.boardTitle = param.getBoardTitle();
-     this.boardContent = param.getBoardContent();
-     this.boardRegdate = param.getBoardRegdate();
-     this.hwEndDate = param.getHwEndDate();
-     this.hwMaxScore = param.getHwMaxScore();
-     this.subjectTitle = param.getSubjectTitle();
-     this.boardType = param.getBoardType();
- }
+	@Override
+	public String toString() {
+		return "BoardUserDto [boardNum=" + boardNum + ", groupNum=" + groupNum + ", boardWriter=" + boardWriter
+				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardRegdate=" + boardRegdate
+				+ ", hwEndDate=" + hwEndDate + ", hwMaxScore=" + hwMaxScore + ", subjectTitle=" + subjectTitle
+				+ ", boardType=" + boardType + ", memName=" + memName + ", memProfilePic=" + memProfilePic + ", fileCount="
+				+ fileCount + ", commentCount=" + commentCount + ", proposeCount=" + proposeCount + ", submitCount="
+				+ submitCount + "]";
+	}
 
-@Override
-public String toString() {
-	return "HwBoardVo [boardNum=" + boardNum + ", groupNum=" + groupNum + ", boardWriter=" + boardWriter
-			+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardRegdate=" + boardRegdate
-			+ ", hwEndDate=" + hwEndDate + ", hwMaxScore=" + hwMaxScore + ", subjectTitle=" + subjectTitle
-			+ ", boardType=" + boardType + "]";
-}
  
 }

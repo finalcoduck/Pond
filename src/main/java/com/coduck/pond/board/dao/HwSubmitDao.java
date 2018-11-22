@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 
 @Repository
@@ -29,9 +30,9 @@ public class HwSubmitDao {
 		return session.selectList(NAMESPACE + "detailHw", boardNum);
 	}
 	
-	public Map<String, List<HwSubmitVo>> getSubmitList(String groupNum){
-		List<HwSubmitVo> studentList = session.selectList(NAMESPACE + "getSubmitList", groupNum);
-		Map<String, List<HwSubmitVo>> map = new HashMap<>();
+	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum){
+		List<HwSubmitDto> studentList = session.selectList(NAMESPACE + "getSubmitList", hwSubmitGroupNum);
+		Map<String, List<HwSubmitDto>> map = new HashMap<>();
 		map.put("studentList", studentList);
 		return map;
 	}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.coduck.pond.board.vo.BoardSrchDto;
+import com.coduck.pond.board.vo.BoardUserDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
 
@@ -28,5 +29,7 @@ public class NoticeDao {
 	public void deleteNotice(int boardNum) {
 		session.delete(NAMESPACE+"deleteNotice",boardNum);
 	}
-	
+	public List<BoardUserDto> selectNoticeUserList(BoardSrchDto boardSrchDto) {
+		return session.selectList(NAMESPACE+"selectNoticeUserList",boardSrchDto);
+	}
 }
