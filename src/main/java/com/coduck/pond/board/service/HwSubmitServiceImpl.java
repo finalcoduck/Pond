@@ -38,13 +38,8 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	}
 
 	@Override
-	public HashMap<String, Object> insertHw(HwSubmitVo hwSubmitVo) {
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+	public void insertHw(HwSubmitVo hwSubmitVo) {
 		hwSubmitDao.insertHw(hwSubmitVo);
-		
-		resultMap.put(ErrorCodeConstant.ERR_C_KEY,ErrorCodeConstant.SUCCESS);
-		
-		return resultMap;
 	}
 	
 	

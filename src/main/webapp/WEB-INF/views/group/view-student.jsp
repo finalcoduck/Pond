@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
 <section id="view_student">
-	<div class="card mb-3 mt20" id="before">
+	<div class="card mb-3 mt20 shadow" id="before">
 		<div class="card-header">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
@@ -19,10 +19,11 @@
 			</div>
 		</div>
 		<div class="card-body homework">
-			<h5 class="card-title">내 과제</h5>
-			<div class="homework_con">
-				<form id="submitForm" action="/insert/homework/proc" method="post">
-					<input type="hidden" name="boardNum" value="${vo.boardNum }">
+			<form id="submitForm" action="/insert/homework/proc" method="post">
+				<input type="hidden" name="boardNum" value="${hwBoardVo.boardNum }">
+				<h5 class="card-title">${hwBoardVo.boardTitle }</h5>
+				<p>${hwBoardVo.boardContent }</p>
+				<div class="homework_con">	
 					<span class="status before">할당됨</span>
 					<input name="hwSubmitContent" type="hidden" id="hwSubmit">
 					<div id=hwSubmitContent>
@@ -61,16 +62,17 @@
 						<input type="submit" value="제출" class="btn btn-info" id="homeworkSubmit">
 						<input type="file" id="homework_file">
 						<label for="homework_file" class="btn btn-danger">파일첨부</label>
-					</div>
-				</form>
-			</div>		
+					</div>	
+				</div>		
+			</form>
 		</div>
+		
 	</div>
 
 	<script id="homeworkSubmit" type="text/x-handlebars-template">
 	</script>
 
-	<div class="my_score">
+	<div class="my_score shadow">
 		<span class="score">50</span>
 		<span class="bar"></span>
 		<span class="total">100</span>

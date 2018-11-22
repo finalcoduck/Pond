@@ -87,11 +87,12 @@ public class BoardController {
 			model.addAttribute("studentList", map.get("studentList"));
 			
 			return "/group/view-teacher";
+			
 		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
-			List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
+			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
-			model.addAttribute("hwSubmitVo", hwSubmitVo);
+			model.addAttribute("hwBoardVo", hwBoardVo);
 			return "/group/view-student";
 		}
 		return null;
@@ -127,10 +128,8 @@ public class BoardController {
 		
 	//과제 제출
 	@RequestMapping(value = "/insert/homework/proc", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, Object> insertHw(@RequestBody HwSubmitVo hwSubmitVo) {
-		HashMap<String, Object> resultMap = hwSubmitService.insertHw(hwSubmitVo);
-		
-		return resultMap;
+	public String insertHw(HwSubmitVo hwSubmitVo) {
+		return "/insert/homework/proc";
 	}
 	
 	
