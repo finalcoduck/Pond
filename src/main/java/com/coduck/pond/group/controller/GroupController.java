@@ -43,6 +43,7 @@ public class GroupController {
 		
 		//로그인 한 아이디가 해당 그룹에 유효한지 체크
 		if(!memDto.getMemGroupMap().containsKey(groupNum)) {
+			System.out.println("여긴가?");
 			return "forward:/selectgroup/index";
 		}			
 		

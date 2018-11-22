@@ -15,7 +15,7 @@ public class MailService {
 		.append("<h2>인증을 완료 해주세요.</h2>")
 		.append("<button style=\"width: 100px; background-color: #2E64FE; border: none; color: #fff; padding: 15px 0; text-align: center;\r\n" + 
 				"	text-decoration: none; display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;\">")
-		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/pond/join/emailConfirm?key=")
+		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/join/emailConfirm?key=")
 		.append(authKey)
 		.append("&email=")
 		.append(email)
@@ -33,7 +33,7 @@ public class MailService {
 		.append("<h2>인증을 완료 해주세요.</h2>")
 		.append("<button style=\"width: 100px; background-color: #2E64FE; border: none; color: #fff; padding: 15px 0; text-align: center;\r\n" + 
 				"	text-decoration: none; display: inline-block; font-size: 15px; margin: 4px; cursor: pointer;\">")
-		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/pond/member/login/emailConfirmNewPwd?key=")
+		.append("<a style=\"text-decoration: none; color:white;\" href='http://localhost:8090/member/login/emailConfirmNewPwd?key=")
 		.append(authKey)
 		.append("&email=")
 		.append(email)

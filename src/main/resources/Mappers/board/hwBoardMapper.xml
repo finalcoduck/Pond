@@ -55,6 +55,7 @@
 				BOARD_TITLE,
 				BOARD_CONTENT,
 				BOARD_REGDATE,
+				HW_END_DATE,
 				HW_MAX_SCORE,
 				SUBJECT_TITLE,
 				BOARD_TYPE
@@ -66,6 +67,7 @@
 				#{boardTitle},
 				#{boardContent},
 				sysdate,
+				#{hwEndDate},
 				#{hwMaxScore},
 				#{subjectTitle},
 				'H'

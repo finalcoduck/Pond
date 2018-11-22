@@ -28,16 +28,9 @@
 								<ul>
 									<li>
 										<div class="profileImg">
-											<c:choose>
-												<c:when test="${memDto.memVo.memProfilePic == null}">
-													<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/build/image/img1.jpg" alt="">	
-												</c:when>
-												<c:otherwise>
 												<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 													<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
 													<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
-												</c:otherwise>			
-											</c:choose>
 											<span class="name">${memDto.memVo.memName }</span>
 										</div>
 										<div class="profileBtn">
@@ -169,16 +162,9 @@
 				<div class="modal-body">
 					<div class="profileImg">
 						<span>
-							<c:choose>
-								<c:when test="${memDto.memVo.memProfilePic == null}">
-									<img src="${pageContext.request.contextPath }/build/image/img1.jpg" alt="" class="snImg">	
-								</c:when>
-								<c:otherwise>
 								<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 									<img src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="" class="snImg">
 									<img src="${memDto.memVo.memProfilePic }" alt="" class="snImg">	
-								</c:otherwise>			
-							</c:choose>
 						</span>
 						<form action="${pageContext.request.contextPath }/fileupload/insert-profile-pic" enctype="multipart/form-data" method="post" name="filefrm">
 							<input type="file" id="imgUpdate" accept="image/png, image/jpg, image/jpeg" name="file">

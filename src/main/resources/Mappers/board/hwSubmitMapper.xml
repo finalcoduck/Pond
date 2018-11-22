@@ -10,7 +10,7 @@
 			    HW_SUBMIT_GROUP_NUM,
 			    HW_SUBMIT_WRITER, 
 			    HW_TEACHER_ID,
-			    HW_SUBMIT_SCORE, 
+			    HW_SUBMIT_SCORE,
 			    HW_SUBMIT
 		    )
 		VALUES
@@ -30,7 +30,7 @@
   	</update>
   	
   	<select id="detailHw" resultType="int" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
-		select * from hw_submit where HW_SUBMIT_GROUP_NUM = #{hwSubmitGroupNum}
+		select * from hw_submit where BOARD_NUM = #{boardNum}
   	</select>
   	
   	<select id="getSubmitList" parameterType="int" resultType="com.coduck.pond.board.vo.HwSubmitDto">
@@ -38,4 +38,20 @@
 		from HW_SUBMIT join MEM
 		on HW_SUBMIT_WRITER = MEM_EMAIL and HW_SUBMIT_GROUP_NUM = #{hwSubmitGroupNum}
   	</select>
+  	
+  	
+  	<insert id="insertHw" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
+  		insert into hw_board
+  			(
+  				BOARD_NUM,
+  				HW_SUBMIT_CONTENT,
+  				HW_SUBMIT
+  			)
+  		values
+  			(	
+  				#{boardNum},
+  				#{hwSubmitContent},
+  				'P'
+  			)
+  	</insert>
   </mapper>

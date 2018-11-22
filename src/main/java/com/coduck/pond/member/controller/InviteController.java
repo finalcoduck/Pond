@@ -3,6 +3,8 @@ package com.coduck.pond.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -10,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.constant.CommonConstant;
+import com.coduck.pond.core.utils.GetMemDtoUtility;
 import com.coduck.pond.core.utils.mail.MailService;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.vo.GroupMemVo;
 import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.service.InviteSerivce;
 import com.coduck.pond.member.service.MemberManageService;
+import com.coduck.pond.member.service.ProfileService;
 import com.coduck.pond.member.vo.KickHistory;
 import com.coduck.pond.member.vo.MemDto;
 
@@ -29,6 +34,8 @@ public class InviteController {
 	private GroupService groupService;
 	@Autowired
 	private MemberManageService managerSerivce;
+	@Autowired
+	private ProfileService profileService;
 	
 	/*
 	 *  초대코드 메일 보내기 컨트롤러
@@ -56,7 +63,7 @@ public class InviteController {
 	 *  초대코드 입력 컨트롤러
 	 */
 	@RequestMapping("/group/invite/input")
-	public String invitedMem(Model model, MemDto memDto, String inviteCode) {
+	public String invitedMem(Model model, MemDto memDto, String inviteCode, HttpSession session) {
 		System.out.println("@@@@@@@@@"+inviteCode);
 		inviteCode = inviteCode.trim();
 		Map<String, Object> map = inviteSerivce.findGroupNum(inviteCode);
@@ -81,6 +88,9 @@ public class InviteController {
 		groupMemVo = new GroupMemVo(0, groupVo.getGroupNum(), memDto.getMemVo().getMemEmail(), (Character)map.get("status"));
 		try {
 			inviteSerivce.insertGroupMem(groupMemVo);
+			Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memDto.getMemVo().getMemEmail());
+			memDto = GetMemDtoUtility.getMemDto(memDto.getMemVo(), memGroupMap);
+			session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
