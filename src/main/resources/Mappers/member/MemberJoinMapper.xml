@@ -13,7 +13,7 @@
 	</insert>
 	<!-- 인증된 회원 인서트 -->
 	<insert id="insertMember" parameterType="com.coduck.pond.member.vo.PreMemVo">
-		insert into mem values(#{preEmail},#{prePassword},#{preName},#{prePhone},'V','0',sysdate,null)
+		insert into mem values(#{preEmail},#{prePassword},#{preName},#{prePhone},'V','0',sysdate,'user.png')
 	</insert>
 	<!-- 네이버 연동 회원 인서트 -->
 	<insert id="naverToInsertMember" parameterType="map">
