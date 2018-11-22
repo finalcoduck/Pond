@@ -194,8 +194,10 @@ $(function() {
 		<span class="cal_date">{start} ~ {end}</span>
 	</div>
 	<div class="btn_wrap">
+		<c:if test="${status == 'M'.charAt(0) }">
 		<button type="button" class="btn" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
 		<button type="button" class="btn btn-info" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
+		</c:if>
 	</div>
 </div>
 </script>
