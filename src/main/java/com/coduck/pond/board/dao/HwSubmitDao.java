@@ -26,8 +26,8 @@ public class HwSubmitDao {
 		return session.update(NAMESPACE + "updateHwScore", hwSubmitVo);
 	}
 	
-	public List<HwSubmitVo> detailHwBoard(int boardNum) {
-		return session.selectList(NAMESPACE + "detailHw", boardNum);
+	public HwSubmitVo detailHwBoard(HwSubmitVo hwSubmitVo) {
+		return session.selectOne(NAMESPACE + "detailHw", hwSubmitVo);
 	}
 	
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum){
@@ -37,8 +37,8 @@ public class HwSubmitDao {
 		return map;
 	}
 	
-	public void insertHw(HwSubmitVo hwSubmitVo) {
-		session.insert(NAMESPACE + "insertHw", hwSubmitVo);
+	public int insertHw(HwSubmitVo hwSubmitVo) {
+		return session.insert(NAMESPACE + "insertHw", hwSubmitVo);
 	}
 	
 }
