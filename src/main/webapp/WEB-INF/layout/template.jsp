@@ -15,6 +15,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/build/image/icons/icon-180x180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/build/image/icons/icon-32x32.png"> 
 <link rel="icon" type="image/png" sizes="16x16" href="/build/image/icons/icon-16x16.png">
+<link rel="manifest" href="${pageContext.request.contextPath}/manifest.json">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/general.css">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
@@ -27,7 +28,8 @@
 <script src="${pageContext.request.contextPath}/build/js/commonConstant.js"></script>
 <script src="${pageContext.request.contextPath}/build/js/commonFunction.js"></script>
 <script src="${pageContext.request.contextPath}/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
-<link rel="manifest" href="${pageContext.request.contextPath}/manifest.json">
+<script src="${pageContext.request.contextPath}/vendor/easeScroll/jquery.easeScroll.js"></script>
+
 <title>POND</title>
 
 </head>
@@ -38,4 +40,9 @@
 	
 	<tiles:insertAttribute name="footer" />
 </body>
+<script>
+
+$("html").easeScroll();
+
+</script>
 </html>
