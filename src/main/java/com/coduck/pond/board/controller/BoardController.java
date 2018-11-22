@@ -1,6 +1,5 @@
 package com.coduck.pond.board.controller;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +23,6 @@ import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.group.service.GroupService;
-import com.coduck.pond.group.vo.GroupMem_smDto;
-import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -43,8 +40,7 @@ public class BoardController {
 	//과제 등록
 	@RequestMapping(value = "/board/insert/homework/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, Object> insertHomeworkBoard (@RequestBody Map<String, Object> map, MemDto memDto){
-
-		System.out.println(map.get("hwEndDate"));
+		
 		HwBoardVo hwBoardVo = new HwBoardVo();
 		hwBoardVo.setGroupNum(Integer.parseInt((String)map.get("groupNum")));
 		hwBoardVo.setBoardWriter((String)(memDto.getMemVo().getMemEmail()));
@@ -79,9 +75,12 @@ public class BoardController {
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
+			//List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
+			
 			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
 			model.addAttribute("hwBoardVo", hwBoardVo);
+			//model.addAttribute("hwSubmitVo", hwSubmitVo);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("studentList", map.get("studentList"));
@@ -93,6 +92,7 @@ public class BoardController {
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("hwBoardVo", hwBoardVo);
+
 			return "/group/view-student";
 		}
 		return null;
@@ -124,8 +124,7 @@ public class BoardController {
 		
 		return resultMap;
 	}
-	
-		
+
 	//과제 제출
 	@RequestMapping(value = "/insert/homework/proc", method = RequestMethod.POST)
 	public String insertHw(HwSubmitVo hwSubmitVo) {
@@ -133,6 +132,7 @@ public class BoardController {
 	}
 	
 	
+
 	//그룹 게시물 삭제
 	@RequestMapping(value = "/board/delete/proc", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String,Object> deleteBoard (@RequestBody GroupNoticeVo groupNoticeVo,MemDto memDto) {
@@ -158,5 +158,4 @@ public class BoardController {
 		hwSubmitService.updateHwScore(hwSubmitVo);
 		return "redirect:/group/view?groupNum=" + groupNum + "&boardNum=" + hwBoardNum;
 	}
-
 }

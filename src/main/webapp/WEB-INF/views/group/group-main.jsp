@@ -12,7 +12,7 @@
 		<div class="row">
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
-				<div class="card mb-3" style="width: 100%;">
+				<div class="card mb-3 shadow" style="width: 100%;">
 					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/group-photo/${groupVo.groupImage}" alt="Card image">
 					<div class="card-body">
 						<h4 class="card-title">${groupVo.groupName}</h4>
@@ -20,7 +20,7 @@
 						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
@@ -28,7 +28,7 @@
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="fas fa-clipboard-check"></i> 출결</a></li>
 					</ul>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
 	
@@ -61,6 +61,13 @@
 			<div id="center" class="col-12 col-md-8">
 				<!-- Post /////-->
 				<!-- Post /////-->
+				<div class="actionCon text-center">
+					<div class="actionType5_1">
+						<div class="loding1"></div>
+						<div class="loding2"></div>
+						<div class="loding3"></div>
+					</div>
+				</div>
 			</div>
 			<!--           center            -->
 			
@@ -286,7 +293,7 @@
 
 <!-- Card Template -->
 <script id="notice-card" type="text/x-handlebars-template">
-<div class="card mb-3">
+<div class="card mb-3 shadow">
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="d-flex justify-content-between align-items-center">
@@ -376,7 +383,7 @@
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
-	<div class="card mb-3">
+	<div class="card mb-3 shadow">
 		<div class="card-header">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
@@ -462,7 +469,7 @@
 </script>
 <!-- Card Template -->
 <script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
@@ -485,7 +492,6 @@
         var quillArr = [];
         
         $(document).ready(function () {
-            
         	// 첫페이지 조회
 	    	searchBoard();
         	
@@ -520,6 +526,7 @@
         		var cmntNum = sptArr[1].trim();
         		
         		deleteComment(cmntNum, refBoardNum);
+        		
         	});
         	
         	//댓글 작성 버튼
@@ -597,9 +604,11 @@
             
             //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
             $(window).scroll(function(){
-                var scrolltop = $(window).scrollTop(); 
+                var scrolltop = $(window).scrollTop();
+                
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
                 		boardSrchDto.nxtPageFl === "T"){
+                	$('#center').append('<div id="loading" class="actionCon"><div class="actionType5_1"><div class="loding1"></div><div class="loding2"></div><div class="loding3"></div></div></div>');	
                 	searchBoard();
                 }
             });
@@ -689,9 +698,12 @@
 			})
 			.done(function(data){
 				console.log(data);
+				$("#loading").remove();
+				
 				if(data.boardList === null){
 					console.log("게시물이 없습니다.")
 				}else{
+					
 					console.log(data.boardSrchDto);
 					//마지막 페이지 여부 받아오기 
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
@@ -705,8 +717,9 @@
 					
 					// 카드 추가
 					data.boardList.forEach(function(item){
+						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
 						item.boardContent = quillGetHTML(item.boardContent);
-						item.boardRegdate = new Date(item.boardRegdate);
+						
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
@@ -722,7 +735,8 @@
 			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
-		        	$(".delModalBtn").on("click",showDelBoardModal)  
+		        	$(".delModalBtn").on("click",showDelBoardModal)
+		        	
 				}
 		   	});
 		}
