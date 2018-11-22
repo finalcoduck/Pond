@@ -291,11 +291,10 @@
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="mr-2">
-					<img class="rounded-circle profile-img"
-						src="https://picsum.photos/50/50" alt="">
+					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{boardWriter}}</div>
+					<div class="h5 m-0">{{memName}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
 			</div>
@@ -382,11 +381,11 @@
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="mr-2">
-						<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+						<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 					</div>
 					<div class="ml-2">
 						<div class="h5 m-0">
-							{{boardWriter}}
+							{{memName}}
 						</div>
 						<div class="h7 text-muted">
 							{{boardRegdate}}
@@ -429,13 +428,13 @@
 					<ul>
 						<li>
 							<a href="#">
-								<span class="num">0</span>
+								<span class="num">{{proposeCount}}</span>
 								<span class="txt">제출함</span>
 							</a>
 						</li>
 						<li>
 							<a href="#">
-								<span class="num">0</span>									
+								<span class="num">{{submitCount}}</span>									
 								<span class="txt">할당 완료</span>
 							</a>
 						</li>

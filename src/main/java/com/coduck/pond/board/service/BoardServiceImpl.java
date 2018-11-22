@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.coduck.pond.board.dao.HwBoardDao;
 import com.coduck.pond.board.dao.NoticeDao;
 import com.coduck.pond.board.vo.BoardSrchDto;
+import com.coduck.pond.board.vo.BoardUserDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.core.constant.CommonConstant;
@@ -29,18 +30,21 @@ public class BoardServiceImpl implements BoardService{
 	NoticeDao noticeDao;
 	
 	@Override
-	public List<HwBoardVo> selectBoardList(BoardSrchDto boardSrchDto) {
+	public List<BoardUserDto> selectBoardList(BoardSrchDto boardSrchDto) {
 		
 		//과제게시물과 공지 게시물을 불러와 리스트 하나에 합침
-		List<HwBoardVo> boardList = hwBoardDao.selectHwBoardList(boardSrchDto);
-		List<HwBoardVo> noticeList = noticeDao.selectNoticeList(boardSrchDto);
+		
+		
+		List<BoardUserDto> noticeList = noticeDao.selectNoticeUserList(boardSrchDto);
+		List<BoardUserDto> boardList = hwBoardDao.selectHWUserList(boardSrchDto);
+		
 		
 		boardList.addAll(noticeList);
 		
 		// 게시물 번호 순으로 정렬
-		Collections.sort(boardList,new Comparator<HwBoardVo>(){
+		Collections.sort(boardList,new Comparator<BoardUserDto>(){
 			@Override
-			public int compare(HwBoardVo o1, HwBoardVo o2) {
+			public int compare(BoardUserDto o1, BoardUserDto o2) {
 				return o2.getBoardNum().compareTo(o1.getBoardNum());
 			}
 		});
