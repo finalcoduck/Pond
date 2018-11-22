@@ -126,7 +126,7 @@ public class BoardController {
 	@RequestMapping(value = "/insert/homework/proc", method = RequestMethod.POST)
 	public String insertHw(HwSubmitVo hwSubmitVo, String groupNum, String hwBoardNum) {
 		hwSubmitService.insertHw(hwSubmitVo);
-		return "/";
+		return "redirect:/group/view?groupNum=" + groupNum + "&boardNum=" + hwBoardNum;
 	}
 	
 	
