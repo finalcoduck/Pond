@@ -61,6 +61,13 @@
 			<div id="center" class="col-12 col-md-8">
 				<!-- Post /////-->
 				<!-- Post /////-->
+				<div class="actionCon text-center">
+					<div class="actionType5_1">
+						<div class="loding1"></div>
+						<div class="loding2"></div>
+						<div class="loding3"></div>
+					</div>
+				</div>
 			</div>
 			<!--           center            -->
 			
@@ -485,7 +492,6 @@
         var quillArr = [];
         
         $(document).ready(function () {
-            
         	// 첫페이지 조회
 	    	searchBoard();
         	
@@ -520,6 +526,7 @@
         		var cmntNum = sptArr[1].trim();
         		
         		deleteComment(cmntNum, refBoardNum);
+        		
         	});
         	
         	//댓글 작성 버튼
@@ -597,9 +604,11 @@
             
             //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
             $(window).scroll(function(){
-                var scrolltop = $(window).scrollTop(); 
+                var scrolltop = $(window).scrollTop();
+                
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
                 		boardSrchDto.nxtPageFl === "T"){
+                	$('#center').append('<div id="loading" class="actionCon"><div class="actionType5_1"><div class="loding1"></div><div class="loding2"></div><div class="loding3"></div></div></div>');	
                 	searchBoard();
                 }
             });
@@ -689,6 +698,7 @@
 			})
 			.done(function(data){
 				console.log(data);
+				$("#loading").remove();
 				if(data.boardList === null){
 					console.log("게시물이 없습니다.")
 				}else{
@@ -722,7 +732,8 @@
 			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
-		        	$(".delModalBtn").on("click",showDelBoardModal)  
+		        	$(".delModalBtn").on("click",showDelBoardModal)
+		        	
 				}
 		   	});
 		}
