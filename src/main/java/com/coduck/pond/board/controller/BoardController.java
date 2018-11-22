@@ -49,7 +49,7 @@ public class BoardController {
 		hwBoardVo.setBoardTitle((String)(map.get("boardTitle")));
 		hwBoardVo.setBoardContent((String)(map.get("boardContent")));
 		hwBoardVo.setBoardRegdate((Date)(map.get("hwRegdate")));
-		hwBoardVo.setHwEndDate((Date)(map.get("hwEndDate")));
+		hwBoardVo.setHwEndDate((String)(map.get("hwEndDate")));
 		hwBoardVo.setHwMaxScore(Integer.parseInt((String)(map.get("hwMaxScore"))));
 		hwBoardVo.setSubjectTitle((String)(map.get("subjectTitle")));
 		

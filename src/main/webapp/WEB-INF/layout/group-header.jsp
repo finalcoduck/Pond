@@ -25,9 +25,37 @@
                 </button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 					<a class="dropdown-item" href="${pageContext.request.contextPath }/member/profile">마이페이지</a>
-					<a class="dropdown-item" href="#">초대코드 입력</a>
+					<a class="dropdown-item cursor-pointer" id="inviteCodeInput">초대코드 입력</a>
 					<a class="dropdown-item" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 				</div>                
             </div>
         </nav>
     </header>
+<script type="text/javascript">
+$('#inviteCodeInput').on('click',function(){
+	swal({
+		title : '초대코드 입력',
+		input : 'text',
+		inputAttributes: {
+			autocapitalize : 'off'
+		},
+		showCancelButton: true,
+		confirmButtonText: '입력',
+		cancelButtonText: '취소',
+		showLoaderOnConfirm: true,
+		preConfirm:(inviteCode) => {
+			location.href = "${pageContext.request.contextPath}/group/invite/input?inviteCode="+inviteCode;
+		},
+		allowOutsideClick: () => !swql.isLoading(),
+		width : 640,
+		padding: '3em',
+		background: '#fff',
+	    backdrop: `
+			rgba(0,0,123,0.4)
+		    url("${pageContext.request.contextPath}/build/image/loverduck.gif")
+		    center top
+		    repeat
+		  `
+	})
+})
+</script>

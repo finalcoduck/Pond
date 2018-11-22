@@ -33,7 +33,8 @@
 				autocapitalize : 'off'
 			},
 			showCancelButton: true,
-			confirmButtonText: '발송',
+			confirmButtonText: '입력',
+			cancelButtonText: '취소',
 			showLoaderOnConfirm: true,
 			preConfirm:(inviteCode) => {
 				location.href = "${pageContext.request.contextPath}/group/invite/input?inviteCode="+inviteCode;
