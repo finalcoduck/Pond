@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.coduck.pond.member.service.MemberJoinService;
+import com.coduck.pond.member.vo.MemVo;
 import com.coduck.pond.member.vo.PreMemVo;
 
 @Controller
@@ -20,6 +21,11 @@ public class MemberJoinController {
 	@RequestMapping(value="/joinOk", method=RequestMethod.POST)
 	public String join(PreMemVo vo, Model model) {
 		try {
+			MemVo memVo = memberJoinService.checkDupli(vo.getPreEmail());
+			if(memVo != null) {
+				model.addAttribute("msg","이미 존재하는 아이디입니다.");
+				return "forward:/";
+			}
 			memberJoinService.insertPreMember(vo);
 		}catch (Exception e) {
 			return "error";

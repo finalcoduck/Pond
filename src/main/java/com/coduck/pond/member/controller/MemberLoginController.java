@@ -153,7 +153,7 @@ public class MemberLoginController {
 				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 				session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
-				return "forward:/selectgroup/index";
+				return "redirect:/selectgroup/index";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 				return "redirect:/";
