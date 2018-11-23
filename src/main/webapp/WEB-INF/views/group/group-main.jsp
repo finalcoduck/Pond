@@ -302,8 +302,12 @@
 					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{memName}}</div>
-					<div class="h7 text-muted">{{boardRegDate}}</div>
+					<div class="h5 m-0">
+							{{memName}}
+						</div>
+						<div class="h7 text-muted">
+							{{boardRegdate}}
+						</div>
 				</div>
 			</div>
 			<div>
@@ -403,9 +407,8 @@
 
                 <div>
                 	<div class="dropdown">
-                    	<button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        	<i class="fas fa-ellipsis-v"></i>
-                        </button>
+                    	<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 							<a class="dropdown-item cursor-pointer">수정</a>
 							<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
@@ -451,8 +454,8 @@
 			</div>
 		</div>
 
-		<div class="card-footer align_r">
-			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+		<div class="card-footer align_ㅣ">
+			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 		</div>
 		<div class="comment-list" id="comment-{{boardNum}}"></div>
 		<div class="card-footer d-flex" >
