@@ -31,16 +31,17 @@
 				<div class="card mb-3 shadow">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-	
-						<div class="dropdown">
-							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-							<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
-								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+						<c:if test="${userGroupStatus == 'M'.charAt(0)}">
+							<div class="dropdown">
+								<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+								<div class="dropdown-menu dropdown-menu-right"
+											aria-labelledby="gedf-drop1">
+									<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
+									<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
 						<li class="cursor-pointer list-group-item">
@@ -268,7 +269,7 @@
 </div>
 
 <!-- The Modal -->
-
+<c:if test="${userGroupStatus == 'M'.charAt(0)}">
 <!-- floating Button-->
 <div id="floatingBtnDiv" class="material-button-anim">
 	<ul class="list-inline" id="options">
@@ -290,7 +291,7 @@
 		<span class="fa fa-plus" aria-hidden="true"></span>
 	</button>
 </div>
-
+</c:if>
 <!-- Card Template -->
 <script id="notice-card" type="text/x-handlebars-template">
 <div class="card mb-3 shadow">
@@ -473,7 +474,7 @@
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
-
+		const USER_GROUP_STATUS = '${userGroupStatus}';
         
         var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
@@ -525,7 +526,7 @@
         		var cmntNum = sptArr[1].trim();
         		
         		deleteComment(cmntNum, refBoardNum);
-ㅛ        	});
+        	});
         	
         	//댓글 작성 버튼
         	$(document).on('click','.comment-btn',function(event){
@@ -554,48 +555,11 @@
         		});
         	});
         	
-	    	 //floating Button
-	        $("#floatingBtn").on("click", function () {
-	            setTimeout(function () {
-	                if($("#floatingBtn").hasClass("open")){
-	                    $("#homeworkBtn").popover('show');
-	                    $("#noticeBtn").popover('show');
-	                }else{
-	                    $("#homeworkBtn").popover('hide');
-	                    $("#noticeBtn").popover('hide');
-	                }
-	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
-	        });
-        	
-            $('.material-button-toggle').on("click", function () {
-            	
-                $(this).toggleClass('open');
-                $('.option').toggleClass('scale-on');
-            });
-
-            $("#homeworkBtn").on("click", function () {
-                $("#homeworkModal").modal('show')       
-                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });	            
-            
-            $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show');       
-                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });
-
-			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
-				$("#floatingBtn").trigger("click");
-			});
-
-			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
-				if ($("body").css("padding-right") !== "0px") {
-					$("#floatingBtnDiv").addClass("add-right");
-				}
-			});
-			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
-				$("#floatingBtnDiv").removeClass("add-right")
-			});
-
+        	if(USER_GROUP_STATUS === 'M'){
+        		//플로팅버튼 초기화
+            	floatingBtnInitialize();	
+        	}
+	    	
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
             
@@ -695,9 +659,10 @@
 			})
 			.done(function(data){
 				console.log(data);
-				$("#loading").remove();
+				
 				
 				if(data.boardList === null){
+					$("#loading").remove();
 					console.log("게시물이 없습니다.")
 				}else{
 					
@@ -711,7 +676,7 @@
 					}
 
 					boardSrchDto.nxt1KeyVal += 1;
-					
+					$("#loading").remove();
 					// 카드 추가
 					data.boardList.forEach(function(item){
 						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
@@ -878,6 +843,51 @@
 		    	var html = template(data);
 		    	return html;				
 			}
-		}		
+		}
+		
+		//플로팅 버튼 초기화
+		function floatingBtnInitialize(){
+			 //floating Button
+	        $("#floatingBtn").on("click", function () {
+	            setTimeout(function () {
+	                if($("#floatingBtn").hasClass("open")){
+	                    $("#homeworkBtn").popover('show');
+	                    $("#noticeBtn").popover('show');
+	                }else{
+	                    $("#homeworkBtn").popover('hide');
+	                    $("#noticeBtn").popover('hide');
+	                }
+	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
+	        });
+        	
+            $('.material-button-toggle').on("click", function () {
+            	
+                $(this).toggleClass('open');
+                $('.option').toggleClass('scale-on');
+            });
+
+            $("#homeworkBtn").on("click", function () {
+                $("#homeworkModal").modal('show')       
+                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });	            
+            
+            $("#noticeBtn").on("click", function () {
+                $("#noticeModal").modal('show');       
+                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
+
+			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
+				$("#floatingBtn").trigger("click");
+			});
+
+			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
+				if ($("body").css("padding-right") !== "0px") {
+					$("#floatingBtnDiv").addClass("add-right");
+				}
+			});
+			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
+				$("#floatingBtnDiv").removeClass("add-right")
+			});
+		}
 		
     </script>
