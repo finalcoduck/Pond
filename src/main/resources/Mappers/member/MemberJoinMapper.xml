@@ -17,7 +17,7 @@
 	</insert>
 	<!-- 네이버 연동 회원 인서트 -->
 	<insert id="naverToInsertMember" parameterType="map">
-		insert into mem values(#{email},'naver',#{name},'0','V',#{id},sysdate,#{profilePic})
+		insert into mem values(#{email},'naver',#{name},'0','V',#{id},sysdate,'user.png')
 	</insert>
 	<!-- 인증키 확인 후 삭제 -->
 	<delete id="deletePreMem" parameterType="com.coduck.pond.member.vo.MemAuthVo">
