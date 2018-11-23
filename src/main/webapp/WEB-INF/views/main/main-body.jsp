@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
     
 <section id="" class="bg-primary">
-<c:if test="${!empty changePwdMsg}"><script type="text/javascript">
+<c:if test="${!empty changeMsg}"><script type="text/javascript">
 swal({
 	type : 'success',
 	title : '비밀번호 변경 성공!',

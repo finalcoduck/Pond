@@ -5,7 +5,7 @@
 	<header class="group-header">
         <nav class="navbar d-flex justify-content-between navbar-expand bg-primary shadow vh7">
             <h1>
-                <a class=" text-white" href="${pageContext.request.contextPath }/">
+                <a class=" text-white" href="${pageContext.request.contextPath }/selectgroup/index">
                     <b>POND</b>
                 </a>
             </h1>
