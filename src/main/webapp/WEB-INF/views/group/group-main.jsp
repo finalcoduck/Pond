@@ -525,8 +525,7 @@
         		var cmntNum = sptArr[1].trim();
         		
         		deleteComment(cmntNum, refBoardNum);
-        		
-        	});
+ㅛ        	});
         	
         	//댓글 작성 버튼
         	$(document).on('click','.comment-btn',function(event){

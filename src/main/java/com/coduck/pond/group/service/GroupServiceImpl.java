@@ -26,8 +26,10 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	@Transactional
 	public void insertGorup(GroupVo groupVo) {
+		String attendedQRCode = RandomCodeUtility.makeRandomCode(10);
 		String inviteCodeS = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
 		String inviteCodeM = RandomCodeUtility.makeRandomCode(); // 랜덤 코드 생성
+		groupVo.setAttendedQRCode(attendedQRCode);
 		groupVo.setInviteCodeS(inviteCodeS);
 		groupVo.setInviteCodeM(inviteCodeM);
 		groupVo.setInviteCodeStatus('O');

@@ -50,7 +50,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value="/fileupload/insertfile", method=RequestMethod.POST)
 	public String fileInsert(int groupNum,int refBoardNum,MultipartFile file, HttpSession session) {
-		String uploadPath = session.getServletContext().getRealPath("/upload");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		System.out.println("uploadPath:"+uploadPath);
 		
 		String orgFileName = file.getOriginalFilename(); //전송된 파일명
@@ -80,7 +80,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value="/fileupload/insertfiles", method=RequestMethod.POST)
 	public String filesInsert(int groupNum,int refBoardNum, HttpSession session, MultipartHttpServletRequest mhsRequest) {
-		String uploadPath = session.getServletContext().getRealPath("/upload");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		System.out.println("uploadPath:"+uploadPath);
 		List<MultipartFile> fileList = mhsRequest.getFiles("file"); //전송된 파일 모두 받아서 리스트에 저장
 		
@@ -94,7 +94,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value="/fileupload/insert-profile-pic", method=RequestMethod.POST)
 	public String file(MultipartFile file, HttpSession session, String email) {
-		String uploadPath = session.getServletContext().getRealPath("/upload/mem-photo");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/mem-photo");
 		System.out.println("uploadPath:"+uploadPath);
 		
 		String orgFileName = file.getOriginalFilename(); //전송된 파일명
@@ -123,7 +123,7 @@ public class FileUploadController {
 	 */
 	@RequestMapping(value="/fileupload/group-pic-upload", method=RequestMethod.POST)
 	public String groupFile(MultipartFile file, HttpSession session, GroupVo groupVo, MemDto memDto) {
-		String uploadPath = session.getServletContext().getRealPath("/upload/group-photo");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/group-photo");
 		System.out.println("uploadPath:"+uploadPath);
 		
 		String orgFileName = file.getOriginalFilename(); //전송된 파일명

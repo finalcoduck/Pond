@@ -32,6 +32,8 @@ public class MemberMoveController {
 	
 	@RequestMapping(value = "/", method = {RequestMethod.POST, RequestMethod.GET})
 	public String home(Model model, HttpServletResponse response, String dpMsg, String loginFail, MemDto memDto, HttpServletRequest request) {
+		System.out.println("씨빠");
+		System.out.println("memDtoooo : "+ memDto);
 		if(memDto != null) {
 			return "forward:/selectgroup/index";
 		}
