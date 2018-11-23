@@ -10,7 +10,7 @@
 	        </h1>
 	        <h5>출석</h5>
 	        <ul class="navbar-nav">
-	            <li class="nav-item"><i class="fas fa-cog"></i> <a class="text-white" href="${pageContext.request.contextPath }/join">설정</a></li>
+	            <li class="nav-item"></li>
 	        </ul>
 	    </nav>
     </header>

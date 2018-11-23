@@ -25,10 +25,15 @@
 .card-footer .btn{padding:5px 10px; font-size:15px;}
 
 
-.actionType5_1,
 
+.actionType5_1  {
+	 float:left;
+	 text-align:center;
+	 margin:132px 0;
+	 width:100%;
+}
 .actionType5_1 > div {
-	 	display:inline-block;
+	 display:inline-block;
 	 width:20px;
 	 height:20px;
 	 margin-right:15px;
