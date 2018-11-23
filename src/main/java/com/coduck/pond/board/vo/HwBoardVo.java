@@ -24,7 +24,7 @@ public class HwBoardVo {
  private Date boardRegdate;
 
  // 마감일 
- private Date hwEndDate;
+ private String hwEndDate;
 
  // 최대부여점수 
  private Integer hwMaxScore;
@@ -83,11 +83,11 @@ public class HwBoardVo {
      this.boardRegdate = boardRegdate;
  }
 
- public Date getHwEndDate() {
+ public String getHwEndDate() {
      return hwEndDate;
  }
 
- public void setHwEndDate(Date hwEndDate) {
+ public void setHwEndDate(String hwEndDate) {
      this.hwEndDate = hwEndDate;
  }
 

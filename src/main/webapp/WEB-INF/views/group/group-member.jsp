@@ -6,7 +6,7 @@
 
     <section>
         <div class="container fill-vh60">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-5">
                 <div class="col-12 col-md-8">
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
@@ -19,7 +19,7 @@
                         	<c:forEach items="${mList }" var="vo">
                             <li class="list-group-item d-flex justify-content-between">
                                 <div class="d-flex">
-                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
+                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${vo.memProfilePic}" alt="">
                                     <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
                                     <c:choose>
                                     	<c:when test="${groupVo.memEmail eq vo.memEmail }">
@@ -81,7 +81,7 @@
 	                            <li class="list-group-item d-flex justify-content-between">
 	                                <div class="d-flex align-items-center">
 	                                    <input type="checkbox" class="mr-1" value="">
-	                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${vo.memProfilePic}" alt="">
+	                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${vo.memProfilePic}" alt="">
 	                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
                                     	<h6>
 	                                    	<span>${vo.memName }&nbsp;&nbsp;&nbsp;</span>

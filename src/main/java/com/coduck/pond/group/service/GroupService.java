@@ -33,6 +33,9 @@ public interface GroupService {
 	//모든 그룹 멤버 숫자 가져오기
 	public List<GroupMemNumDto> getGroupMemNum(String memEmail);
 
+	//해당 그룹의 멤버 숫자 가져오기
+	public GroupMemNumDto getGroupMemCount(int groupNum);
+	
 	//초대코드 중복확인
 	GroupMemVo dupliInviteCode(String memEmail, String groupNum);
 	

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<header>
-	    <nav class="navbar bg-primary text-white text-uppercase justify-content-between vh5 mb-3">
+	    <nav class="shadow navbar bg-primary text-white text-uppercase justify-content-between vh7 mb-3">
 	        <h1>
 	            <a class="text-white" href="${pageContext.request.contextPath}/group/group-main?groupNum=${groupVo.groupNum}">
 	                <i class="fas fa-arrow-left"></i>
@@ -10,7 +10,7 @@
 	        </h1>
 	        <h5>출석</h5>
 	        <ul class="navbar-nav">
-	            <li class="nav-item"><i class="fas fa-cog"></i> <a class="text-white" href="${pageContext.request.contextPath }/join">설정</a></li>
+	            <li class="nav-item"></li>
 	        </ul>
 	    </nav>
     </header>

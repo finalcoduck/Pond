@@ -8,7 +8,7 @@ dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,
 
 html,body{word-break:break-word;}
 
-body{font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222; background-color:#f7f7f7;}
+body{font-family: 'NotoKrR' !important; font-size:15px; color:#222; background-color:#f7f7f7;}
 
 h1{font-size:24px;}
 ul, li, ol { list-style: none; }
@@ -20,7 +20,7 @@ a:hover{text-decoration:none;}
 caption{font-size:0}
 table{border-collapse:collapse;border-spacing:0}
 em, i, address{font-style:normal;}
-input[type=text], input[type=password], select, textarea, button {font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif; font-size:15px; color:#222;;}
+input[type=text], input[type=password], select, textarea, button {font-family: 'NotoKrR' !important; font-size:15px; color:#222;;}
 button{cursor:pointer;}
 select{background-color:#FFF;}
 
@@ -76,6 +76,7 @@ select{background-color:#FFF;}
 .mr90{margin-right:90px !important;}.pr90{padding-right:90px !important;}
 
 .vh5{height:5vh !important}
+.vh7{height:7vh !important}
 .vh10{height:10vh !important}
 .vh20{height:20vh !important}
 .vh30{height:30vh !important}

@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/floating_btn.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/quill/quill.snow.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/group_main.css?ver=2">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/datedropper.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/build/css/my-style.css">	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">	
 
 <!-- content -->
 <section id="main">
@@ -14,35 +12,36 @@
 		<div class="row">
 			<!--           left side            -->
 			<div class="col-12 col-md-3">
-				<div class="card mb-3" style="width: 100%;">
-					<img class="card-img-top" src="https://picsum.photos/50/50" alt="Card image">
+				<div class="card mb-3 shadow" style="width: 100%;">
+					<img class="card-img-top" src="${pageContext.request.contextPath }/upload/group-photo/${groupVo.groupImage}" alt="Card image">
 					<div class="card-body">
-						<h4 class="card-title">중앙HTA 1803기</h4>
-						<p class="card-text">멤버 28</p>
+						<h4 class="card-title">${groupVo.groupName}</h4>
+						<p class="card-text">멤버 ${groupMemCount}</p>
 						<a href="${pageContext.request.contextPath }/group/detail?groupNum=${groupVo.groupNum}" class="">학원 정보 상세보기</a>
 					</div>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/filelist?groupNum=${groupVo.groupNum}"><i class="far fa-folder-open"></i> 수업 자료실</a></li>
 						<li class="list-group-item"><a href="${pageContext.request.contextPath }/schedule/info?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 일정</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 커리큘럼</a></li>
-						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="far fa-calendar-alt"></i> 출결</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/curriculum?groupNum=${groupVo.groupNum}"><i class="fas fa-layer-group"></i> 커리큘럼</a></li>
+						<li class="list-group-item"><a href="${pageContext.request.contextPath }/group/attended?groupNum=${groupVo.groupNum}"><i class="fas fa-clipboard-check"></i> 출결</a></li>
 					</ul>
 				</div>
-				<div class="card mb-3">
+				<div class="card mb-3 shadow">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-	
-						<div class="dropdown">
-							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-							<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
-								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+						<c:if test="${userGroupStatus == 'M'.charAt(0)}">
+							<div class="dropdown">
+								<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+								<div class="dropdown-menu dropdown-menu-right"
+											aria-labelledby="gedf-drop1">
+									<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
+									<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
 						<li class="cursor-pointer list-group-item">
@@ -63,6 +62,13 @@
 			<div id="center" class="col-12 col-md-8">
 				<!-- Post /////-->
 				<!-- Post /////-->
+				<div class="actionCon text-center">
+					<div class="actionType5_1">
+						<div class="loding1"></div>
+						<div class="loding2"></div>
+						<div class="loding3"></div>
+					</div>
+				</div>
 			</div>
 			<!--           center            -->
 			
@@ -125,7 +131,7 @@
 			<!-- Modal Header -->
 			<div class="modal-header">
 				<h4 class="modal-title">주제 추가</h4>
-				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
 			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
@@ -202,7 +208,7 @@
 						</li>
 						<li>
 							<span class="txt">마감일</span>
-							<input type="text" class="datepicker" data-large-mode="true" data-translate-mode="true" data-theme="my-style"/>
+							<input type="date" name="hwEndDate" class="form-control">
 						</li>
 						<li>
 							<span class="txt">주제</span>
@@ -263,7 +269,7 @@
 </div>
 
 <!-- The Modal -->
-
+<c:if test="${userGroupStatus == 'M'.charAt(0)}">
 <!-- floating Button-->
 <div id="floatingBtnDiv" class="material-button-anim">
 	<ul class="list-inline" id="options">
@@ -285,19 +291,18 @@
 		<span class="fa fa-plus" aria-hidden="true"></span>
 	</button>
 </div>
-
+</c:if>
 <!-- Card Template -->
 <script id="notice-card" type="text/x-handlebars-template">
-<div class="card mb-3">
+<div class="card mb-3 shadow">
 	<div class="card-header">
 		<div class="d-flex justify-content-between align-items-center">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="mr-2">
-					<img class="rounded-circle profile-img"
-						src="https://picsum.photos/50/50" alt="">
+					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{boardWriter}}</div>
+					<div class="h5 m-0">{{memName}}</div>
 					<div class="h7 text-muted">{{boardRegDate}}</div>
 				</div>
 			</div>
@@ -347,7 +352,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8 comment_con">
@@ -355,7 +360,7 @@
 			{{{cmntContent}}}
 		</div>
 		<div class="col-3 align_r">
-			<button class="btn btn-danger" id="delete-{{cmntNum}}" value="delete">삭제</button>
+			<button class="btn btn-outline-danger" id="delete-{{cmntNum}}" value="delete">삭제</button>
 			<input type="hidden" value="{{refBoardNum}}"/>
 		</div>
 	</div>
@@ -364,7 +369,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/resources/upload/mem-photo/{{memProfilePic}}" alt="" -->
+			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
 			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
 		</div>
 		<div class="col-8">
@@ -379,16 +384,16 @@
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
-	<div class="card mb-3">
+	<div class="card mb-3 shadow">
 		<div class="card-header">
 			<div class="d-flex justify-content-between align-items-center">
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="mr-2">
-						<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+						<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 					</div>
 					<div class="ml-2">
 						<div class="h5 m-0">
-							{{boardWriter}}
+							{{memName}}
 						</div>
 						<div class="h7 text-muted">
 							{{boardRegdate}}
@@ -431,13 +436,13 @@
 					<ul>
 						<li>
 							<a href="#">
-								<span class="num">0</span>
+								<span class="num">{{proposeCount}}</span>
 								<span class="txt">제출함</span>
 							</a>
 						</li>
 						<li>
 							<a href="#">
-								<span class="num">0</span>									
+								<span class="num">{{submitCount}}</span>									
 								<span class="txt">할당 완료</span>
 							</a>
 						</li>
@@ -464,14 +469,12 @@
 	</div>
 </script>
 <!-- Card Template -->
-<script src="${pageContext.request.contextPath}/resources/vendor/quill/quill.min.js"></script>
-
-<!-- datepicker 플러그인 -->
-<script src="${pageContext.request.contextPath}/resources/build/js/datedropper.js"></script>
+<script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
-
+		const USER_GROUP_STATUS = '${userGroupStatus}';
         
         var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
@@ -490,7 +493,6 @@
         var quillArr = [];
         
         $(document).ready(function () {
-            
         	// 첫페이지 조회
 	    	searchBoard();
         	
@@ -519,7 +521,6 @@
         	//댓글 삭제 버튼
         	$(document).on('click','button[value=delete]',function(event){
         		var refBoardNum = $(this).next().val();
-        		console.log(refBoardNum+"@@");
         		var idValue = $(this).prop('id');
         		var sptArr = idValue.split('-');
         		var cmntNum = sptArr[1].trim();
@@ -533,9 +534,9 @@
         		var boardNum = indexBoardNum.split('-')[1]; //해당 카드섹션 boardNum
         		var commentQuill = quillArr[boardNum];
         		
-        		var content = commentQuill.getContents();
-        		var quillContent = JSON.stringify(content);
-        		var cmntInput = $('#cmntForm-'+boardNum+'').children('input[name=cmntContent]').val(quillContent);
+        		var content = document.querySelector("#editor-test-"+boardNum).firstChild.innerHTML;
+        		
+        		var cmntInput = $('#cmntForm-'+boardNum+'').children('input[name=cmntContent]').val(content);
         		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
         		var commentDataStr = JSON.stringify(commentData);
         		var editorDiv = $('#editor-test-'+boardNum+'');
@@ -547,64 +548,28 @@
         			type : "post",
         			contentType : "application/json; charset=UTF-8",
         			success : function(data){
-        				editorDiv.text('');
-			             var commentQuill = new Quill('#editor-test-'+boardNum,{
-			            	placeholder: '댓글을 입력하세요',
-			            });	 			
+        				commentQuill.setText('');
+        				$('#comment-'+boardNum+'').empty();
+        				getCommentAJAX(boardNum);	
         			}
         		});
         	});
         	
-	    	 //floating Button
-	        $("#floatingBtn").on("click", function () {
-	            setTimeout(function () {
-	                if($("#floatingBtn").hasClass("open")){
-	                    $("#homeworkBtn").popover('show');
-	                    $("#noticeBtn").popover('show');
-	                }else{
-	                    $("#homeworkBtn").popover('hide');
-	                    $("#noticeBtn").popover('hide');
-	                }
-	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
-	        });
-        	
-            $('.material-button-toggle').on("click", function () {
-            	
-                $(this).toggleClass('open');
-                $('.option').toggleClass('scale-on');
-            });
-
-            $("#homeworkBtn").on("click", function () {
-                $("#homeworkModal").modal('show')       
-                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });	            
-            
-            $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show');       
-                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });
-
-			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
-				$("#floatingBtn").trigger("click");
-			});
-
-			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
-				if ($("body").css("padding-right") !== "0px") {
-					$("#floatingBtnDiv").addClass("add-right");
-				}
-			});
-			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
-				$("#floatingBtnDiv").removeClass("add-right")
-			});
-
+        	if(USER_GROUP_STATUS === 'M'){
+        		//플로팅버튼 초기화
+            	floatingBtnInitialize();	
+        	}
+	    	
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
             
             //스크롤을 밑으로 내릴때 다음 키값에 해당하는 게시물 불러옴
             $(window).scroll(function(){
-                var scrolltop = $(window).scrollTop(); 
+                var scrolltop = $(window).scrollTop();
+                
                 if( scrolltop >= $(document).height()-$(window).height()-2 &&
                 		boardSrchDto.nxtPageFl === "T"){
+                	$('#center').append('<div id="loading" class="actionCon"><div class="actionType5_1"><div class="loding1"></div><div class="loding2"></div><div class="loding3"></div></div></div>');	
                 	searchBoard();
                 }
             });
@@ -621,9 +586,6 @@
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
-            
-			//datepicker 플러그인 적용
-			$('.datepicker').dateDropper();
 
 			//과제 할당학생 체크
 			var $allChk = $('#allChk');
@@ -672,8 +634,8 @@
     			data : {refBoardNum:boardNum},
     			success : function(data){
     				$.each(data.list, function(i, elt) {
-    					console.log("memEmail:"+data.memEmail);
-    					data.list[i].cmntContent = quillGetHTML(data.list[i].cmntContent);
+    					console.log(data);
+    					
     					var bn = data.list[i].refBoardNum;
     					$('#comment-'+bn+'').append(makeCommentCard(data.list[i],data.memEmail));
     					//makeCommentCard
@@ -697,9 +659,13 @@
 			})
 			.done(function(data){
 				console.log(data);
+				
+				
 				if(data.boardList === null){
+					$("#loading").remove();
 					console.log("게시물이 없습니다.")
 				}else{
+					
 					console.log(data.boardSrchDto);
 					//마지막 페이지 여부 받아오기 
 					boardSrchDto.nxtPageFl = data.boardSrchDto.nxtPageFl;
@@ -710,15 +676,15 @@
 					}
 
 					boardSrchDto.nxt1KeyVal += 1;
-					
+					$("#loading").remove();
 					// 카드 추가
 					data.boardList.forEach(function(item){
-						item.boardContent = quillGetHTML(item.boardContent);
-						item.boardRegdate = new Date(item.boardRegdate);
+						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
+						item.boardContent = item.boardContent;
+						
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
-							item.boardTitle = quillGetHTML(item.boardTitle);
 							$("#center").append(makeHWCard(item));	
 						}
 						
@@ -726,11 +692,11 @@
 			            	placeholder: '댓글을 입력하세요',
 			            });
 			            var indexBoardNum = item.boardNum;
-			            console.log(indexBoardNum);
 			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
-		        	$(".delModalBtn").on("click",showDelBoardModal)  
+		        	$(".delModalBtn").on("click",showDelBoardModal)
+		        	
 				}
 		   	});
 		}
@@ -797,7 +763,8 @@
         function insertNoticeBoard(){
         	
             var about = document.querySelector('input[name=boardContent]');
-            about.value = JSON.stringify(NoticeQuill.getContents());
+            
+            about.value = document.querySelector("#notice-editor-container").firstChild.innerHTML;
             var noticeData = $('#noticeForm').serializeObject()
         	var dataStr = JSON.stringify(noticeData);
         	$.ajax({
@@ -820,12 +787,13 @@
 			});
         }
         
+        //과제 생성 ajax
     	function insertHomeworkBoard(){
     		var hwTitle = document.querySelector('#homeworkTitle');
-    		hwTitle.value = JSON.stringify(HomeworkTitleQuill.getContents());
+    		hwTitle.value = document.querySelector("#homeworkTitleContainer").firstChild.innerHTML;;
 
     		var hwContent = document.querySelector('#homeworkContent');
-    		hwContent.value = JSON.stringify(HomeworkContentQuill.getContents());
+    		hwContent.value = document.querySelector("#homeworkContentContainer").firstChild.innerHTML;;
     		
     		var homeworakData = $('#homeworkForm').serializeObject();
     		var dataStr = JSON.stringify(homeworakData);
@@ -875,6 +843,51 @@
 		    	var html = template(data);
 		    	return html;				
 			}
-		}		
+		}
+		
+		//플로팅 버튼 초기화
+		function floatingBtnInitialize(){
+			 //floating Button
+	        $("#floatingBtn").on("click", function () {
+	            setTimeout(function () {
+	                if($("#floatingBtn").hasClass("open")){
+	                    $("#homeworkBtn").popover('show');
+	                    $("#noticeBtn").popover('show');
+	                }else{
+	                    $("#homeworkBtn").popover('hide');
+	                    $("#noticeBtn").popover('hide');
+	                }
+	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
+	        });
+        	
+            $('.material-button-toggle').on("click", function () {
+            	
+                $(this).toggleClass('open');
+                $('.option').toggleClass('scale-on');
+            });
+
+            $("#homeworkBtn").on("click", function () {
+                $("#homeworkModal").modal('show')       
+                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });	            
+            
+            $("#noticeBtn").on("click", function () {
+                $("#noticeModal").modal('show');       
+                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
+
+			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
+				$("#floatingBtn").trigger("click");
+			});
+
+			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
+				if ($("body").css("padding-right") !== "0px") {
+					$("#floatingBtnDiv").addClass("add-right");
+				}
+			});
+			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
+				$("#floatingBtnDiv").removeClass("add-right")
+			});
+		}
 		
     </script>

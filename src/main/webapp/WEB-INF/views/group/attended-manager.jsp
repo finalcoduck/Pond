@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
+<link href="<c:url value='/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
 
 <section id="main">
 	
@@ -22,9 +22,9 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/gcal.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath }/resources/vendor/fullcalendar/locale/ko.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/vendor/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/vendor/fullcalendar/gcal.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath }/vendor/fullcalendar/locale/ko.js" type="text/javascript"></script>
 
 <script>
 

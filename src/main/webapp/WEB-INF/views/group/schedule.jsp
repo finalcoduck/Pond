@@ -14,9 +14,9 @@
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<link href="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
-<script src="<c:url value='/resources/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
-<script src="<c:url value='/resources/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
+<link href="<c:url value='/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
+<script src="<c:url value='/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
 <div class="container mt20">
 	<div>
 		<div id='calendar'></div>
@@ -194,8 +194,10 @@ $(function() {
 		<span class="cal_date">{start} ~ {end}</span>
 	</div>
 	<div class="btn_wrap">
+		<c:if test="${status == 'M'.charAt(0) }">
 		<button type="button" class="btn" onclick="deleteSchedule({num},'{start}')">일정삭제</button>
 		<button type="button" class="btn btn-info" onclick="updateSchedule({num},'{start}','{end}')">일정수정</button>
+		</c:if>
 	</div>
 </div>
 </script>

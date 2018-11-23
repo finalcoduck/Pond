@@ -1,0 +1,17 @@
+{
+  "name": "POND",
+  "short_name": "POND",
+  "icons": [{
+      "src": "/build/image/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },{
+      "src": "/build/image/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#007bff",
+  "theme_color": "#007bff"
+}

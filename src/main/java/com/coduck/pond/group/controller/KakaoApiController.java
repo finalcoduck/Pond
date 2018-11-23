@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +41,7 @@ public class KakaoApiController {
 	 */
 	
 	@RequestMapping("/group/kakao/addr")
-	public String kakao(String address, String groupNum, @RequestParam(defaultValue="false",value="updateOk") String updateOk, HttpServletResponse response) {
+	public String kakao(String address, String groupNum, @RequestParam(defaultValue="false",value="updateOk") String updateOk, HttpServletResponse response, Model model) {
 		String kakaoKey = new PropertyUtility().getPropertiesValue("kakaoKey", "kakao.properties");
 		Map<String, String> map = new HashMap<>();
 		try {
@@ -83,7 +84,8 @@ public class KakaoApiController {
 					groupSerivce.updateGroupAddr(x, y, address, groupNum);
 				}else {
 					groupUpdateSerivce.updateGroupAddr(address,x,y, groupNum);
-					return "forward:/";
+					model.addAttribute("updateMsg","ok");
+					return "forward:/group/detail/setting";
 				}
 			}catch (Exception e) {
 				System.out.println(e.getMessage());

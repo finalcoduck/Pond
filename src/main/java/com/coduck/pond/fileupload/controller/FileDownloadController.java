@@ -13,7 +13,7 @@ public class FileDownloadController {
 	//파일 다운로드
 	@RequestMapping("/group/filedownload")
 	public String downloadFile(String saveFileName, String orgFileName,HttpSession session, Model model) throws Exception {
-		String filePath = session.getServletContext().getRealPath("resources/upload/") + saveFileName;
+		String filePath = session.getServletContext().getRealPath("/resources/upload/") + saveFileName;
 		System.out.println("filePath:"+filePath);
 		File ff = new File(filePath);
 		if(!ff.canRead()) {

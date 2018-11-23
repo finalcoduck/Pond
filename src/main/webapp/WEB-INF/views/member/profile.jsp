@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/build/css/group.css" />    
+<link rel="stylesheet" href="${pageContext.request.contextPath }/build/css/group.css" />    
 	<style type="text/css">
 		*, a{color:#333;}
 	</style>
@@ -28,16 +28,9 @@
 								<ul>
 									<li>
 										<div class="profileImg">
-											<c:choose>
-												<c:when test="${memDto.memVo.memProfilePic == null}">
-													<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="">	
-												</c:when>
-												<c:otherwise>
 												<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
 													<img class="rounded-circle profile-img" src="${memDto.memVo.memProfilePic }" alt="">
-													<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
-												</c:otherwise>			
-											</c:choose>
+													<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
 											<span class="name">${memDto.memVo.memName }</span>
 										</div>
 										<div class="profileBtn">
@@ -110,10 +103,10 @@
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'naver' }">
 												<span class="txt" style="color:green;">네이버</span>
-												<img src="${pageContext.request.contextPath }/resources/build/image/naver_on.png" style="border:0;">
+												<img src="${pageContext.request.contextPath }/build/image/naver_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<img src="${pageContext.request.contextPath }/resources/build/image/naver_off.png" style="border:0;">
+												<img src="${pageContext.request.contextPath }/build/image/naver_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -122,10 +115,10 @@
 										<div class="profileInfo">
 										<c:choose>
 											<c:when test="${memDto.memVo.memPwd eq 'google' }">
-												<img src="${pageContext.request.contextPath }/resources/build/image/google_on.png" style="border:0;">
+												<img src="${pageContext.request.contextPath }/build/image/google_on.png" style="border:0;">
 											</c:when>
 											<c:otherwise>
-												<img src="${pageContext.request.contextPath }/resources/build/image/google_off.png" style="border:0;">
+												<img src="${pageContext.request.contextPath }/build/image/google_off.png" style="border:0;">
 											</c:otherwise>
 										</c:choose>
 										</div>
@@ -142,7 +135,7 @@
 								<c:forEach items="${memDto.keySet }" var="groupNum">
 									<li>
 										<div class="profileInfo"><!-- 그룹이미지 나중에 처리 -->
-											<img src="${pageContext.request.contextPath }/resources/upload/group-photo/${groupMap[groupNum].groupImage }" alt="" style="width: 50px; height: 50px;"/>
+											<img src="${pageContext.request.contextPath }/upload/group-photo/${groupMap[groupNum].groupImage }" alt="" style="width: 50px; height: 50px;"/>
 											<span class="txt group_name">${groupMap[groupNum].groupName }</span>
 										</div>
 									</li>
@@ -169,22 +162,15 @@
 				<div class="modal-body">
 					<div class="profileImg">
 						<span>
-							<c:choose>
-								<c:when test="${memDto.memVo.memProfilePic == null}">
-									<img src="${pageContext.request.contextPath }/resources/build/image/img1.jpg" alt="" class="snImg">	
-								</c:when>
-								<c:otherwise>
 								<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
-									<img src="${pageContext.request.contextPath }/resources/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="" class="snImg">
+									<img src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="" class="snImg">
 									<img src="${memDto.memVo.memProfilePic }" alt="" class="snImg">	
-								</c:otherwise>			
-							</c:choose>
 						</span>
 						<form action="${pageContext.request.contextPath }/fileupload/insert-profile-pic" enctype="multipart/form-data" method="post" name="filefrm">
 							<input type="file" id="imgUpdate" accept="image/png, image/jpg, image/jpeg" name="file">
 							<input type="hidden" name="email" value='${memDto.memVo.memEmail }'/>
 						</form>
-						<label for="imgUpdate" style="background-image:url(${pageContext.request.contextPath}/resources/build/image/ico_camera_w.png);">사진</label>
+						<label for="imgUpdate" style="background-image:url(${pageContext.request.contextPath}/build/image/ico_camera_w.png);">사진</label>
 					</div>
 					<input type="text" value="${memDto.memVo.memName }" class="profileInput" disabled="disabled" readonly="readonly">
 				</div>
@@ -233,8 +219,8 @@
 	</div>
 	<!-- //비밀번호 수정 모달 -->
 	
-	<script	src="${pageContext.request.contextPath }/resources/build/js/joinValidityCheck.js"></script>
-	<script	src="${pageContext.request.contextPath }/resources/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
+	<script	src="${pageContext.request.contextPath }/build/js/joinValidityCheck.js"></script>
+	<script	src="${pageContext.request.contextPath }/vendor/handlebars-v4.0.12/js/handlebars-v4.0.12.js"></script>
 	<script type="text/javascript">
 		$('#updatePhoneBtn').on('click',function(){
 			var phoneNum = $('#phoneNum').val();

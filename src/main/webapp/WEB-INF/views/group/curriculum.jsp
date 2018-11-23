@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/build/css/crc_style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath }/build/css/crc_style.css">
 		<link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
     <body>
-       <div class="cover" style="background-image: url('${pageContext.request.contextPath}/resources/build/image/images/cover.png')">
-	       	<h1 class="cover-title">
+    
+       <div class="cover" style="background-image: url('${pageContext.request.contextPath}/build/image/images/cover.png')">
+	       	<h1 class="text-white cover-title">
 	       		Curriculum
 	       	</h1>
        </div>
@@ -21,7 +22,7 @@
 	       <c:forEach items="${list }" var="vo">
 	       	<li class="timeline-item">
 	       		<div class="card">
-					<img src="${pageContext.request.contextPath }/resources/build/image/images/1.png" alt="" class="card-icon" />
+					<img src="${pageContext.request.contextPath }/build/image/images/1.png" alt="" class="card-icon" />
 					<h2 class="card-title">
 						20<fmt:formatDate value="${vo.crcStartDate }" pattern="yy"/>
 						<div style="color:#A9F5F2;"><fmt:formatDate value="${vo.crcStartDate }" pattern="MM/dd"/> ~ <fmt:formatDate value="${vo.crcEndDate }" pattern="MM/dd"/></div>

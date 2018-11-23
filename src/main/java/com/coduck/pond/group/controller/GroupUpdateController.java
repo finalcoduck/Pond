@@ -21,6 +21,6 @@ public class GroupUpdateController {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "forward:/";
+		return "forward:/group/detail/setting";
 	}
 }

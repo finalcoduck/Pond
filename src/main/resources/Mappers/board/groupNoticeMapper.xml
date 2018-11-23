@@ -20,6 +20,29 @@
 		</if>
 	</select>
 	
+	
+	<!-- 유저+공지+댓글개수+파일개수 리스트  -->
+	<select id="selectNoticeUserList" 
+	parameterType="com.coduck.pond.board.vo.BoardSrchDto"
+	resultType="com.coduck.pond.board.vo.BoardUserDto">
+	SELECT
+		GN.BOARD_NUM BOARD_NUM, GN.GROUP_NUM, GN.BOARD_WRITER, GN.BOARD_CONTENT, GN.BOARD_REGDATE, GN.SUBJECT_TITLE, GN.BOARD_TYPE,
+        M.MEM_NAME, M.MEM_PROFILE_PIC,
+        UF.FILE_COUNT, BC.COMMENT_COUNT
+	FROM
+		GROUP_NOTICE GN,
+		MEM M,
+		(SELECT REF_BOARD_NUM, COUNT(FILE_NUM) FILE_COUNT FROM UPLOAD_FILE UF GROUP BY REF_BOARD_NUM) UF,
+		(SELECT REF_BOARD_NUM, COUNT(CMNT_NUM) COMMENT_COUNT FROM BOARD_COMMENT GROUP BY REF_BOARD_NUM) BC
+	WHERE
+		GN.GROUP_NUM = #{groupNum}
+        AND GN.BOARD_WRITER = M.MEM_EMAIL
+        AND BC.REF_BOARD_NUM(+) = GN.BOARD_NUM
+        AND UF.REF_BOARD_NUM(+) = GN.BOARD_NUM
+		<if test="srchWord != ''">
+			AND SUBJECT_TITLE = #{srchWord}
+		</if>
+	</select>
 	<!-- 공지 생성 -->
 	<insert id="insertNotice" parameterType="com.coduck.pond.board.vo.GroupNoticeVo">
 		INSERT INTO 

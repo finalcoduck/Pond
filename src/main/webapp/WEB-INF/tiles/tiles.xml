@@ -31,7 +31,10 @@
 	</definition>
 	
 	<!-- ///////////////////////// main //////////////////////////// -->
-	
+	<definition name="/email-confirm" extends="main.definition">
+		<put-attribute name="body" value="/WEB-INF/views/main/email-confirm.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/group-footer.jsp" />
+	</definition>
 	<definition name="/*" extends="main.definition">
 		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
 	</definition>
@@ -60,9 +63,17 @@
 		<put-attribute name="header" value="/WEB-INF/layout/detail-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/group/detail.jsp" />
 	</definition>
+	<definition name="/group/curriculum" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/curriculum-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/curriculum.jsp" />
+	</definition>
 	<definition name="/group/detail/setting" extends="group.definition">
 		<put-attribute name="header" value="/WEB-INF/layout/detailsetting-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/group/detail-setting.jsp" />
+	</definition>
+	<definition name="/group/schedule" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/schedule-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/schedule.jsp" />
 	</definition>
 	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
