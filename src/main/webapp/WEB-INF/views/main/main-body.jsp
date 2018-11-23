@@ -47,6 +47,14 @@ swal({
 	showConfirmButton: true,
 	timer : 1500,
 })</script></c:if>
+<c:if test="${!empty msg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이미 가입된 이메일 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">
