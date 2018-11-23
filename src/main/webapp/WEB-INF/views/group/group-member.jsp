@@ -20,7 +20,6 @@
                             <li class="list-group-item d-flex justify-content-between">
                                 <div class="d-flex">
                                     <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${vo.memProfilePic}" alt="">
-                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
                                     <c:choose>
                                     	<c:when test="${groupVo.memEmail eq vo.memEmail }">
 	                                    	<h6>

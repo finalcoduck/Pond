@@ -28,6 +28,7 @@ public class FileListController {
 			vo.setFileSize(newFileSize);
 		}
 		model.addAttribute("fileList",list);
+		model.addAttribute("groupNum", groupNum);
 		return "/group/file-list";
 	}
 }
