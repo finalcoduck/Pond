@@ -23,7 +23,7 @@ public class FileDeleteController {
 	public String deleteFiles(int fileNum, HttpSession session) {
 		FileUploadVo vo = fileUploadService.getFileByNum(fileNum);
 		String fileName = vo.getSaveFileName();
-		String uploadPath = session.getServletContext().getRealPath("/upload/");
+		String uploadPath = session.getServletContext().getRealPath("/resources/upload/");
 		String filePath = uploadPath + fileName; // 파일 실제 경로
 		
 		if(FileUtils.deleteFile(filePath)) {
