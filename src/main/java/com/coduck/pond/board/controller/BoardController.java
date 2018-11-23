@@ -70,17 +70,14 @@ public class BoardController {
 	
 	//과제 상세
 	@RequestMapping(value = "/group/view", method = {RequestMethod.GET, RequestMethod.POST})
-	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {	
+	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum, char hwSubmit) {	
 	
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
-			//List<HwSubmitVo> hwSubmitVo = hwSubmitService.detailHwBoard(boardNum);
-			
 			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
 			model.addAttribute("hwBoardVo", hwBoardVo);
-			//model.addAttribute("hwSubmitVo", hwSubmitVo);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("studentList", map.get("studentList"));
@@ -89,9 +86,19 @@ public class BoardController {
 			
 		}else if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT){
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
+			HwSubmitVo hwSubmitVo = new HwSubmitVo();
+			hwSubmitVo.setHwSubmitWriter(memDto.getMemVo().getMemEmail());
+			
+			hwSubmitVo.setBoardNum(boardNum);
+			
+			//hwSubmitVo.setHwSubmit(hwSubmit);
+			
+			hwSubmitVo = hwSubmitService.detailHwBoard(hwSubmitVo);
+			
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("hwBoardVo", hwBoardVo);
+			model.addAttribute("hwSubmitVo", hwSubmitVo);
 
 			return "/group/view-student";
 		}
@@ -126,9 +133,13 @@ public class BoardController {
 	}
 
 	//과제 제출
-	@RequestMapping(value = "/insert/homework/proc", method = RequestMethod.POST)
-	public String insertHw(HwSubmitVo hwSubmitVo) {
-		return "/insert/homework/proc";
+	@RequestMapping(value = "/board/submit/homework", method = RequestMethod.POST)
+	public String insertHw(HwSubmitVo hwSubmitVo, MemDto memDto, int groupNum) {
+		hwSubmitVo.setHwSubmitWriter(memDto.getMemVo().getMemEmail());
+		
+		hwSubmitService.insertHw(hwSubmitVo);
+		
+		return "redirect:/group/view?groupNum=" + groupNum + "&boardNum=" + hwSubmitVo.getBoardNum();
 	}
 	
 	

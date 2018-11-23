@@ -13,10 +13,10 @@ public interface HwSubmitService {
 	
 	public int updateHwScore(HwSubmitVo hwSubmitVo);
 	
-	public List<HwSubmitVo> detailHwBoard(int boardNum);
+	public HwSubmitVo detailHwBoard(HwSubmitVo hwSubmitVo);
 	
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum);
 	
-	public void insertHw(HwSubmitVo hwSubmitVo);
+	public int insertHw(HwSubmitVo hwSubmitVo);
 	
 }

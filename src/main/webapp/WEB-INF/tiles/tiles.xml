@@ -71,6 +71,10 @@
 		<put-attribute name="header" value="/WEB-INF/layout/detailsetting-header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/group/detail-setting.jsp" />
 	</definition>
+	<definition name="/group/schedule" extends="group.definition">
+		<put-attribute name="header" value="/WEB-INF/layout/schedule-header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/group/schedule.jsp" />
+	</definition>
 	<definition name="/group/*" extends="group.definition">
 		<put-attribute name="body" value="/WEB-INF/views/group/{1}.jsp" />
 	</definition>

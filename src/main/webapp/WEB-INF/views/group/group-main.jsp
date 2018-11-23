@@ -359,7 +359,7 @@
 			{{{cmntContent}}}
 		</div>
 		<div class="col-3 align_r">
-			<button class="btn btn-danger" id="delete-{{cmntNum}}" value="delete">삭제</button>
+			<button class="btn btn-outline-danger" id="delete-{{cmntNum}}" value="delete">삭제</button>
 			<input type="hidden" value="{{refBoardNum}}"/>
 		</div>
 	</div>
@@ -520,7 +520,6 @@
         	//댓글 삭제 버튼
         	$(document).on('click','button[value=delete]',function(event){
         		var refBoardNum = $(this).next().val();
-        		console.log(refBoardNum+"@@");
         		var idValue = $(this).prop('id');
         		var sptArr = idValue.split('-');
         		var cmntNum = sptArr[1].trim();
@@ -534,9 +533,9 @@
         		var boardNum = indexBoardNum.split('-')[1]; //해당 카드섹션 boardNum
         		var commentQuill = quillArr[boardNum];
         		
-        		var content = commentQuill.getContents();
-        		var quillContent = JSON.stringify(content);
-        		var cmntInput = $('#cmntForm-'+boardNum+'').children('input[name=cmntContent]').val(quillContent);
+        		var content = document.querySelector("#editor-test-"+boardNum).firstChild.innerHTML;
+        		
+        		var cmntInput = $('#cmntForm-'+boardNum+'').children('input[name=cmntContent]').val(content);
         		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
         		var commentDataStr = JSON.stringify(commentData);
         		var editorDiv = $('#editor-test-'+boardNum+'');
@@ -548,10 +547,9 @@
         			type : "post",
         			contentType : "application/json; charset=UTF-8",
         			success : function(data){
-        				editorDiv.text('');
-			             var commentQuill = new Quill('#editor-test-'+boardNum,{
-			            	placeholder: '댓글을 입력하세요',
-			            });	 			
+        				commentQuill.setText('');
+        				$('#comment-'+boardNum+'').empty();
+        				getCommentAJAX(boardNum);	
         			}
         		});
         	});
@@ -672,8 +670,8 @@
     			data : {refBoardNum:boardNum},
     			success : function(data){
     				$.each(data.list, function(i, elt) {
-    					console.log("memEmail:"+data.memEmail);
-    					data.list[i].cmntContent = quillGetHTML(data.list[i].cmntContent);
+    					console.log(data);
+    					
     					var bn = data.list[i].refBoardNum;
     					$('#comment-'+bn+'').append(makeCommentCard(data.list[i],data.memEmail));
     					//makeCommentCard
@@ -717,12 +715,11 @@
 					// 카드 추가
 					data.boardList.forEach(function(item){
 						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
-						item.boardContent = quillGetHTML(item.boardContent);
+						item.boardContent = item.boardContent;
 						
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
-							item.boardTitle = quillGetHTML(item.boardTitle);
 							$("#center").append(makeHWCard(item));	
 						}
 						
@@ -730,7 +727,6 @@
 			            	placeholder: '댓글을 입력하세요',
 			            });
 			            var indexBoardNum = item.boardNum;
-			            console.log(indexBoardNum);
 			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
@@ -802,7 +798,8 @@
         function insertNoticeBoard(){
         	
             var about = document.querySelector('input[name=boardContent]');
-            about.value = JSON.stringify(NoticeQuill.getContents());
+            
+            about.value = document.querySelector("#notice-editor-container").firstChild.innerHTML;
             var noticeData = $('#noticeForm').serializeObject()
         	var dataStr = JSON.stringify(noticeData);
         	$.ajax({
@@ -828,10 +825,10 @@
         //과제 생성 ajax
     	function insertHomeworkBoard(){
     		var hwTitle = document.querySelector('#homeworkTitle');
-    		hwTitle.value = JSON.stringify(HomeworkTitleQuill.getContents());
+    		hwTitle.value = document.querySelector("#homeworkTitleContainer").firstChild.innerHTML;;
 
     		var hwContent = document.querySelector('#homeworkContent');
-    		hwContent.value = JSON.stringify(HomeworkContentQuill.getContents());
+    		hwContent.value = document.querySelector("#homeworkContentContainer").firstChild.innerHTML;;
     		
     		var homeworakData = $('#homeworkForm').serializeObject();
     		var dataStr = JSON.stringify(homeworakData);
