@@ -179,6 +179,8 @@ public class MemberLoginController {
 		return "forward:/selectgroup/index";
 	}
 	
+	
+	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
 	@RequestMapping("/member/login/sendEmail")
 	public String changeEmail(String memEmail, Model model) {
@@ -212,6 +214,7 @@ public class MemberLoginController {
 	@ResponseStatus(value=HttpStatus.OK)
 	public String changePwd(String newPwd, String email, Model model) {
 		 String encPwd = passwordEncoder.encode(newPwd);
+		 System.out.println("@@"+email);
 		 try {
 			 memberLoginService.changeNewPwd(email, encPwd);
 			 model.addAttribute("changeMsg","success");
