@@ -39,7 +39,7 @@
 					<input name="hwSubmitContent" type="hidden">
 					<div id=hwSubmitContent>
 					</div>
-					<div class="file_wrap">
+					<!-- <div class="file_wrap">
 						<div class="file_list">
 							<div class="wrapper">
 								<div class="thumbnail">
@@ -68,11 +68,11 @@
 								<i class="fas fa-times"></i>
 							</button>
 						</div>
-					</div>
+					</div> -->
 					<div class="btn_wrap">
 						<input type="submit" value="제출" class="btn btn-info">
-						<input type="file" id="homework_file">
-						<label for="homework_file" class="btn btn-danger">파일첨부</label>
+						<!-- <input type="file" id="homework_file">
+						<label for="homework_file" class="btn btn-danger">파일첨부</label> -->
 					</div>	
 				</div>		
 			</form>

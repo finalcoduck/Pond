@@ -29,7 +29,7 @@
 				<div id=submitContent style="border:1px solid #ccc; padding:15px; margin-top:20px;">
 					
 				</div>
-				<div class="file_wrap">
+				<!-- <div class="file_wrap">
 					<div class="file_list">
 						<div class="wrapper">
 							<div class="thumbnail">
@@ -58,7 +58,7 @@
 							<i class="fas fa-cloud-download-alt" onclick=""></i>
 						</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

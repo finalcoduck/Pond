@@ -59,10 +59,8 @@ swal({
 </script></c:if>
         <div class="container">
             <div class="row align-items-center">
-                <div class="mt-5 col-12 col-md-6 order-2 order-md-1">
-                    <h2 class="text-white">오직</h2>
-                    <h2 class="text-white">학원을 위한 커뮤니티</h2>
-                    <p class="lead text-white">출결 관리, 공지, 학원생들을 위한 커뮤니티 지원</p>
+                <div class="col-12 col-md-6 order-2 order-md-1">
+                    <img src="${pageContext.request.contextPath}/build/image/main_section.png" style="width:100%;">
                 </div>
                 <div class="col-12 col-md-6 order-1 order-md-2 justify-content-center">
                     <form class="justify-content-center" action="${pageContext.request.contextPath }/login/normal" method="post">
