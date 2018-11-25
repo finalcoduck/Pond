@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,9 @@ public class BoardCommentController {
 	private CommentService commentSerivce;
 	
 	@RequestMapping(value="/board/insert/comment/proc", method = {RequestMethod.POST,RequestMethod.GET})
-	public @ResponseBody Map<String, Object> insertComment(@RequestBody CommentVo commentVo){
+	public @ResponseBody Map<String, Object> insertComment(@RequestBody CommentVo commentVo, MemDto memDto){
+		String memEmail = memDto.getMemVo().getMemEmail();
+		commentVo.setCmntWriter(memEmail);
 		Map<String, Object> map = new HashMap<>();
 		try {
 		commentSerivce.insertComment(commentVo);
@@ -40,6 +44,7 @@ public class BoardCommentController {
 		List<MemCommentDto> list = commentSerivce.getMemComment(refBoardNum);
 		map.put("list", list);
 		map.put("memEmail", memDto.getMemVo().getMemEmail());
+		map.put("memProfilePic", memDto.getMemVo().getMemProfilePic());
 		return map;
 	}
 	

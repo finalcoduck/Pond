@@ -200,7 +200,11 @@
         		dataType : 'json',
         		success : function(data){
         			if(data.msg == 'success'){
-        				alert('메일 전송 완료');
+        				swal(
+        						  '메일 전송 완료!',
+        						  'You clicked the button!',
+        						  'success'
+        						);
         				$('#inviteTeacherModal').modal('hide');
         				$('#inviteStudentModal').modal('hide');
         				mailArr = [];
