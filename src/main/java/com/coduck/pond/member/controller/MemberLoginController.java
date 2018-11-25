@@ -153,7 +153,7 @@ public class MemberLoginController {
 				Map<Integer, Character> memGroupMap = profileService.getMemberGroupInfo(memVo.getMemEmail());
 				MemDto memDto = GetMemDtoUtility.getMemDto(memVo, memGroupMap);
 				session.setAttribute(CommonConstant.USER_SESSION_KEY, memDto);
-				return "forward:/selectgroup/index";
+				return "redirect:/selectgroup/index";
 			}else {
 				ra.addAttribute("loginFail","이메일 혹은 비밀번호를 확인해주세요");
 				return "redirect:/";
@@ -178,6 +178,8 @@ public class MemberLoginController {
 		memberLoginService.updatePhone(memEmail, memPhone);
 		return "forward:/selectgroup/index";
 	}
+	
+	
 	
 	//비밀번호 찾기 이메일 보내기 컨트롤러
 	@RequestMapping("/member/login/sendEmail")
@@ -212,6 +214,7 @@ public class MemberLoginController {
 	@ResponseStatus(value=HttpStatus.OK)
 	public String changePwd(String newPwd, String email, Model model) {
 		 String encPwd = passwordEncoder.encode(newPwd);
+		 System.out.println("@@"+email);
 		 try {
 			 memberLoginService.changeNewPwd(email, encPwd);
 			 model.addAttribute("changeMsg","success");

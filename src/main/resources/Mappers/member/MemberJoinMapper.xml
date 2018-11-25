@@ -17,7 +17,7 @@
 	</insert>
 	<!-- 네이버 연동 회원 인서트 -->
 	<insert id="naverToInsertMember" parameterType="map">
-		insert into mem values(#{email},'naver',#{name},'0','V',#{id},sysdate,#{profilePic})
+		insert into mem values(#{email},'naver',#{name},'0','V',#{id},sysdate,'user.png')
 	</insert>
 	<!-- 인증키 확인 후 삭제 -->
 	<delete id="deletePreMem" parameterType="com.coduck.pond.member.vo.MemAuthVo">
@@ -36,5 +36,9 @@
 	<!-- 구글 이메일 아이디 값으로 가져오기 -->
 	<select id="getGoogleMem" parameterType="string" resultType="com.coduck.pond.member.vo.MemVo">
 		select * from mem where mem_id = #{value}
+	</select>
+	<!-- 일반 회원 아이디 중복 확인 -->
+	<select id="checkDupli" parameterType="string" resultType="com.coduck.pond.member.vo.MemVo">
+		select * from mem where mem_email = #{value}
 	</select>
 </mapper>

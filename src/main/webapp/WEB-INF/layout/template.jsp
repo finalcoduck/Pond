@@ -11,7 +11,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="Keywords" content="">
 <meta name="Description" content="">
-<meta name="theme-color" content="#007cff">
+<meta name="theme-color" content="#00448B">
 <link rel="apple-touch-icon" sizes="180x180" href="/build/image/icons/icon-180x180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/build/image/icons/icon-32x32.png"> 
 <link rel="icon" type="image/png" sizes="16x16" href="/build/image/icons/icon-16x16.png">

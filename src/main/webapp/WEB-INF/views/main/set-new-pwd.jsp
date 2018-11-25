@@ -14,7 +14,8 @@
                             <label for="password">비밀번호 :</label>
                             <input type="password" class="form-control" id="newPwd" name="newPwd">
                             <label for="password">비밀번호 확인 :</label>
-                            <input type="password" class="form-control" id="newPwd2" name="newPwd2">                            
+                            <input type="password" class="form-control" id="newPwd2" name="newPwd2">
+                            <input type="hidden" name="email" value="${email }" />                            
                         </div>
                         <button type="button" class="mt-5 btn btn-block btn-outline-primary" id="newPwdBtn">확인</button>
                     </form>

@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
     
 <section id="" class="bg-primary">
-<c:if test="${!empty changePwdMsg}"><script type="text/javascript">
+<c:if test="${!empty changeMsg}"><script type="text/javascript">
 swal({
 	type : 'success',
 	title : '비밀번호 변경 성공!',
@@ -47,6 +47,14 @@ swal({
 	showConfirmButton: true,
 	timer : 1500,
 })</script></c:if>
+<c:if test="${!empty msg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이미 가입된 이메일 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if>
         <div class="container">
             <div class="row align-items-center">
                 <div class="mt-5col-12 col-md-6">

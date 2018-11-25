@@ -5,7 +5,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">	
+<style>
 
+</style>
 <!-- content -->
 <section id="main">
 	<div class="container mt20">
@@ -31,16 +33,17 @@
 				<div class="card mb-3 shadow">
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<div class="h6">주제</div>
-	
-						<div class="dropdown">
-							<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-							<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="gedf-drop1">
-								<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
-								<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+						<c:if test="${userGroupStatus == 'M'.charAt(0)}">
+							<div class="dropdown">
+								<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+								<div class="dropdown-menu dropdown-menu-right"
+											aria-labelledby="gedf-drop1">
+									<a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#subjectModal">추가</a>
+									<a href="${pageContext.request.contextPath }/group/setting-subject?groupNum=${groupVo.groupNum}" class="dropdown-item">편집</a>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</div>
 					<ul id="subjectList" class="list-group list-group-flush">
 						<li class="cursor-pointer list-group-item">
@@ -130,7 +133,7 @@
 			<!-- Modal Header -->
 			<div class="modal-header">
 				<h4 class="modal-title">주제 추가</h4>
-				<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
 			<form action="${pageContext.request.contextPath}/board/insert/subject" method="post">
@@ -268,7 +271,7 @@
 </div>
 
 <!-- The Modal -->
-
+<c:if test="${userGroupStatus == 'M'.charAt(0)}">
 <!-- floating Button-->
 <div id="floatingBtnDiv" class="material-button-anim">
 	<ul class="list-inline" id="options">
@@ -290,7 +293,7 @@
 		<span class="fa fa-plus" aria-hidden="true"></span>
 	</button>
 </div>
-
+</c:if>
 <!-- Card Template -->
 <script id="notice-card" type="text/x-handlebars-template">
 <div class="card mb-3 shadow">
@@ -301,8 +304,12 @@
 					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{memName}}</div>
-					<div class="h7 text-muted">{{boardRegDate}}</div>
+					<div class="h5 m-0">
+							{{memName}}
+						</div>
+						<div class="h7 text-muted">
+							{{boardRegdate}}
+						</div>
 				</div>
 			</div>
 			<div>
@@ -326,8 +333,8 @@
 		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
 		<p class="card-text">{{{boardContent}}}</p>
 	</div>
-	<div class="card-footer align_r">
-		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+	<div class="card-footer align_ㅣ">
+		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 	</div>
 	<div class="comment-list" id="comment-{{boardNum}}">
 
@@ -351,8 +358,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8 comment_con">
 			<span class="name">{{memName}}</span>
@@ -368,8 +374,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8">
 			<span>{{memName}}</span>
@@ -402,9 +407,8 @@
 
                 <div>
                 	<div class="dropdown">
-                    	<button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        	<i class="fas fa-ellipsis-v"></i>
-                        </button>
+                    	<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 							<a class="dropdown-item cursor-pointer">수정</a>
 							<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
@@ -450,8 +454,8 @@
 			</div>
 		</div>
 
-		<div class="card-footer align_r">
-			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+		<div class="card-footer align_ㅣ">
+			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 		</div>
 		<div class="comment-list" id="comment-{{boardNum}}"></div>
 		<div class="card-footer d-flex" >
@@ -473,7 +477,7 @@
 
 <script>    
         const SLIDE_EXCUTION_TIME = 178;
-
+		const USER_GROUP_STATUS = '${userGroupStatus}';
         
         var boardSrchDto= {groupNum:"${groupVo.groupNum}", srchWord:"",nxt1KeyVal:1,pagePercnt:"5",nxtPageFl:""};
         
@@ -525,7 +529,6 @@
         		var cmntNum = sptArr[1].trim();
         		
         		deleteComment(cmntNum, refBoardNum);
-        		
         	});
         	
         	//댓글 작성 버튼
@@ -540,6 +543,7 @@
         		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
         		var commentDataStr = JSON.stringify(commentData);
         		var editorDiv = $('#editor-test-'+boardNum+'');
+        		console.log(commentDataStr);
         		//editor-test-{{boardNum}}
         		$.ajax({
         			url : "${pageContext.request.contextPath}/board/insert/comment/proc",
@@ -555,48 +559,11 @@
         		});
         	});
         	
-	    	 //floating Button
-	        $("#floatingBtn").on("click", function () {
-	            setTimeout(function () {
-	                if($("#floatingBtn").hasClass("open")){
-	                    $("#homeworkBtn").popover('show');
-	                    $("#noticeBtn").popover('show');
-	                }else{
-	                    $("#homeworkBtn").popover('hide');
-	                    $("#noticeBtn").popover('hide');
-	                }
-	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
-	        });
-        	
-            $('.material-button-toggle').on("click", function () {
-            	
-                $(this).toggleClass('open');
-                $('.option').toggleClass('scale-on');
-            });
-
-            $("#homeworkBtn").on("click", function () {
-                $("#homeworkModal").modal('show')       
-                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });	            
-            
-            $("#noticeBtn").on("click", function () {
-                $("#noticeModal").modal('show');       
-                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
-            });
-
-			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
-				$("#floatingBtn").trigger("click");
-			});
-
-			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
-				if ($("body").css("padding-right") !== "0px") {
-					$("#floatingBtnDiv").addClass("add-right");
-				}
-			});
-			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
-				$("#floatingBtnDiv").removeClass("add-right")
-			});
-
+        	if(USER_GROUP_STATUS === 'M'){
+        		//플로팅버튼 초기화
+            	floatingBtnInitialize();	
+        	}
+	    	
 
             $(".ql-editor").addClass("max-vh50"); // 텍스트 박스 길이 제한
             
@@ -696,9 +663,10 @@
 			})
 			.done(function(data){
 				console.log(data);
-				$("#loading").remove();
+				
 				
 				if(data.boardList === null){
+					$("#loading").remove();
 					console.log("게시물이 없습니다.")
 				}else{
 					
@@ -712,7 +680,7 @@
 					}
 
 					boardSrchDto.nxt1KeyVal += 1;
-					
+					$("#loading").remove();
 					// 카드 추가
 					data.boardList.forEach(function(item){
 						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
@@ -879,6 +847,51 @@
 		    	var html = template(data);
 		    	return html;				
 			}
-		}		
+		}
+		
+		//플로팅 버튼 초기화
+		function floatingBtnInitialize(){
+			 //floating Button
+	        $("#floatingBtn").on("click", function () {
+	            setTimeout(function () {
+	                if($("#floatingBtn").hasClass("open")){
+	                    $("#homeworkBtn").popover('show');
+	                    $("#noticeBtn").popover('show');
+	                }else{
+	                    $("#homeworkBtn").popover('hide');
+	                    $("#noticeBtn").popover('hide');
+	                }
+	            }, SLIDE_EXCUTION_TIME) // floating button의 animation이 끝난 후 실행
+	        });
+        	
+            $('.material-button-toggle').on("click", function () {
+            	
+                $(this).toggleClass('open');
+                $('.option').toggleClass('scale-on');
+            });
+
+            $("#homeworkBtn").on("click", function () {
+                $("#homeworkModal").modal('show')       
+                $("#homeworkBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });	            
+            
+            $("#noticeBtn").on("click", function () {
+                $("#noticeModal").modal('show');       
+                $("#noticeBtn").popover('show'); // 공지버튼 클릭시 popper 사라지는거 방지용
+            });
+
+			$('#noticeModal, #homeworkModal').on('show.bs.modal', function(e) {
+				$("#floatingBtn").trigger("click");
+			});
+
+			$('#noticeModal, #homeworkModal').on('shown.bs.modal', function(e) {
+				if ($("body").css("padding-right") !== "0px") {
+					$("#floatingBtnDiv").addClass("add-right");
+				}
+			});
+			$('#noticeModal, #homeworkModal').on('hidden.bs.modal', function(e) {
+				$("#floatingBtnDiv").removeClass("add-right")
+			});
+		}
 		
     </script>

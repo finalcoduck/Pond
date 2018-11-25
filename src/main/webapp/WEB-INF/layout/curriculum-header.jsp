@@ -8,7 +8,7 @@
 	                <i class="fas fa-arrow-left"></i>
 	            </a>
 	        </h1>
-	        <h5>상세보기</h5>
+	        <h5>커리큘럼</h5>
 	        <ul class="navbar-nav">
 	            <li id="detailSettingBtn" class="nav-item"></li>
 	        </ul>

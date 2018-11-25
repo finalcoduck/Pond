@@ -5,7 +5,7 @@
 	<header class="group-header">
         <nav class="navbar d-flex justify-content-between navbar-expand bg-primary shadow vh7">
             <h1>
-                <a class=" text-white" href="${pageContext.request.contextPath }/">
+                <a class=" text-white" href="${pageContext.request.contextPath }/selectgroup/index">
                     <b>POND</b>
                 </a>
             </h1>
@@ -20,7 +20,6 @@
             <div class="mr-2">
                 <button class="btn" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<!-- url 이미지 주소일때와 서버에 저장한 이미지 파일인 경우 -->
-							<img class="rounded-circle nav-profile-img" src="${memDto.memVo.memProfilePic }" alt="">
 							<img class="rounded-circle nav-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${memDto.memVo.memProfilePic }" alt="">	
                 </button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
