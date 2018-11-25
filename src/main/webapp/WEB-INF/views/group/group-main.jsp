@@ -358,8 +358,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8 comment_con">
 			<span class="name">{{memName}}</span>
@@ -375,8 +374,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8">
 			<span>{{memName}}</span>
@@ -545,6 +543,7 @@
         		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
         		var commentDataStr = JSON.stringify(commentData);
         		var editorDiv = $('#editor-test-'+boardNum+'');
+        		console.log(commentDataStr);
         		//editor-test-{{boardNum}}
         		$.ajax({
         			url : "${pageContext.request.contextPath}/board/insert/comment/proc",
