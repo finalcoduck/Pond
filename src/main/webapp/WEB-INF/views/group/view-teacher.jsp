@@ -16,9 +16,9 @@
 							<span class="name">
 								<c:choose>
 									<c:when test="${vo.hwSubmit == 'B'.charAt(0) }">
-										<a href="#">
+										<span style="color:red;">
 											${vo.memName }
-										</a>
+										</span>
 									</c:when>
 									<c:when test="${vo.hwSubmit == 'P'.charAt(0) }">
 										<a href="${pageContext.request.contextPath }/group/submit?boardNum=${vo.boardNum }">
