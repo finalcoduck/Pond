@@ -414,9 +414,6 @@
 		<p>{{name}}</p>
 		<span>{{size}}</span>
 	</div>
-	<button type="button">
-		&times;
-	</button>
 </div>
 </script>
 
@@ -463,10 +460,6 @@
 					<a href="${pageContext.request.contextPath }/group/view?boardNum={{boardNum}}&groupNum=${groupVo.groupNum}">
 						{{{boardContent}}}
 					</a>
-					<br>
-					<span>
-						최대부여점수 : {{hwMaxScore}}
-					</span>
 				</div>
 				<div class="person">
 					<ul>
