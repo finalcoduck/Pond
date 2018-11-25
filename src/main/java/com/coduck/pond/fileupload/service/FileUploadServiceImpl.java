@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.core.utils.file.FileUtils;
 import com.coduck.pond.fileupload.dao.FileUploadDao;
 import com.coduck.pond.fileupload.vo.FileListVo;
@@ -33,7 +34,11 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 		return fileList;
 	}
-	
+	public List<FileListVo> getFilesByGroupBoard(HwBoardVo hwBoardVo){
+		List<FileListVo> fileList = fileUploadDao.getFilesByGroupBoard(hwBoardVo);
+		
+		return fileList;
+	}
 	public void deleteFile(int fileNum) {
 		fileUploadDao.deleteFile(fileNum);
 	}

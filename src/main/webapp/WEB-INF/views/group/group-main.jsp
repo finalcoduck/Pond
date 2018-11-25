@@ -97,8 +97,8 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-			<form id="noticeForm" action="" enctype="multipart/form-data">
-				<input class="d-none" id='noticeFile' type='file' name='file[]' multiple="multiple">
+			<form id="noticeForm" method="post" action="${pageContext.request.contextPath}/board/insert/notice" enctype="multipart/form-data">
+				<input class="d-none" id='noticeFile' type='file' name='files' multiple="multiple">
 				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
@@ -119,15 +119,13 @@
 						</div>
 					</div>
 					<section id="view_student" class="mt30">
-						<div class="card">
-							<div class="card-body homework">
+							<div class="homework">
 								<div class="homework_con">
 									<div id="noticeFileWrap" class="file_wrap">
 
 									</div>
 								</div>
 							</div>
-						</div>
 					</section>
 				</form>
 			</div>
@@ -350,6 +348,15 @@
 	<div class="card-body">
 		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
 		<p class="card-text">{{{boardContent}}}</p>
+		<section id="view_student" class="mt30">
+			<div class="homework">
+				<div class="homework_con">
+					<div id="noticeFileWrap-{{boardNum}}" class="file_wrap">
+
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
 	<div class="card-footer align_ㅣ">
 		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
@@ -546,7 +553,12 @@
 	    		}
 	    	})
         	//공지 글 추가 버튼
-        	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	//$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	$("#noticeSubmitBtn").on("click",function(){
+        		 var about = document.querySelector('input[name=boardContent]');
+                 about.value = document.querySelector("#notice-editor-container").firstChild.innerHTML;
+        		$("#noticeForm").submit();
+        	})
         	
 			//과제 글 추가 버튼
 			$("#homeworkSubmitBtn").on("click", insertHomeworkBoard)	        	
@@ -735,7 +747,7 @@
 					data.boardList.forEach(function(item){
 						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
 						item.boardContent = item.boardContent;
-						
+						//id = noticeFileWrap-{{boardNum}}
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
@@ -747,6 +759,8 @@
 			            });
 			            var indexBoardNum = item.boardNum;
 			            quillArr[indexBoardNum]=commentQuill;
+			            
+			            //function (boardnum,groupnum)
 					})
 					
 					// 모달 삭제 버튼 클릭 이벤트
@@ -755,6 +769,25 @@
 				}
 		   	});
 		}
+        
+        function searchFileList(boardNum,groupNum){
+        	
+        	var data = {boardNum:boardNum,groupNum:groupNum};
+        	var dataStr = JSON.stringify(data);
+        	
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/group/filelist/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				console.log(data);
+			});
+        }
+        
         function searchSubject(){
         	
         	//boardSrchDto에 검색 주제 추가후
