@@ -16,7 +16,9 @@
 	session.setAttribute("state", state);
 %>     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
-    
+<style>
+	#footer{margin-top:0;}
+</style>
 <section id="" class="bg-primary">
 <c:if test="${!empty changeMsg}"><script type="text/javascript">
 swal({
@@ -99,16 +101,7 @@ swal({
         </div>
     </section>
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-5">
-
-                </div>
-                <div class="col-12 col-md-5">
-
-                </div>
-            </div>
-        </div>
+    	<img src="${pageContext.request.contextPath}/build/image/main_image.png" style="width:100%;">
     </section>
     <script src="${pageContext.request.contextPath}/build/js/login_script.js"></script>
     <script>

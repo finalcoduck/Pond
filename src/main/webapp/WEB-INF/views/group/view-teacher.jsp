@@ -20,7 +20,7 @@
 											${vo.memName }
 										</span>
 									</c:when>
-									<c:when test="${vo.hwSubmit == 'P'.charAt(0) }">
+									<c:when test="${vo.hwSubmit == 'P'.charAt(0) || vo.hwSubmit == 'C'.charAt(0)  }">
 										<a href="${pageContext.request.contextPath }/group/submit?boardNum=${vo.boardNum }">
 											${vo.memName }
 										</a>
