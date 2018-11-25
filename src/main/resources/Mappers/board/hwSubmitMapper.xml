@@ -25,7 +25,8 @@
   	
   	<update id="updateHwScore" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
   		update hw_submit set 
-  		HW_SUBMIT_SCORE = #{hwSubmitScore}
+  		HW_SUBMIT_SCORE = #{hwSubmitScore},
+  		HW_SUBMIT = 'C'
   		where BOARD_NUM = #{boardNum}
   	</update>
   	
@@ -39,9 +40,16 @@
 		on HW_SUBMIT_WRITER = MEM_EMAIL and HW_SUBMIT_GROUP_NUM = #{hwSubmitGroupNum}
   	</select>
   	
+  	<!-- 과제 제출 -->
   	<update id="insertHw" parameterType="com.coduck.pond.board.vo.HwSubmitVo">
   		update hw_submit set
   		HW_SUBMIT_CONTENT = #{hwSubmitContent}, HW_SUBMIT = 'P'
   		where HW_SUBMIT_GROUP_NUM = #{boardNum} and HW_SUBMIT_WRITER = #{hwSubmitWriter} 
   	</update>
+  	
+  	
+  	<!--  -->
+  	<select id="detailSubmit" parameterType="int" resultType="com.coduck.pond.board.vo.HwSubmitVo">
+  		select * from hw_submit where BOARD_NUM = #{boardNum}
+  	</select>
   </mapper>

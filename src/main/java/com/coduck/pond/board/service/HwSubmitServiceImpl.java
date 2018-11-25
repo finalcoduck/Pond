@@ -7,7 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coduck.pond.board.dao.HwBoardDao;
 import com.coduck.pond.board.dao.HwSubmitDao;
+import com.coduck.pond.board.vo.BoardUserDto;
+import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
@@ -16,6 +19,9 @@ import com.coduck.pond.core.constant.ErrorCodeConstant;
 public class HwSubmitServiceImpl implements HwSubmitService{
 	@Autowired
 	HwSubmitDao hwSubmitDao;
+	
+	@Autowired
+	HwBoardDao hwBoardDao;
 
 	@Override
 	public void insertSubmitBoard(HwSubmitVo hwSubmitVo) {
@@ -40,6 +46,16 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	@Override
 	public int insertHw(HwSubmitVo hwSubmitVo) {
 		return hwSubmitDao.insertHw(hwSubmitVo);
+	}
+
+	@Override
+	public BoardUserDto selectHWUserOne(HwBoardVo hwBoardVo) {
+		return hwBoardDao.selectHWUserOne(hwBoardVo);
+	}
+
+	@Override
+	public HwSubmitVo detailSubmit(int boardNum) {
+		return hwSubmitDao.detailSubmit(boardNum);
 	}
 	
 	

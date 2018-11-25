@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.coduck.pond.board.vo.BoardUserDto;
+import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.board.vo.HwSubmitDto;
 import com.coduck.pond.board.vo.HwSubmitVo;
 
@@ -18,5 +20,9 @@ public interface HwSubmitService {
 	public Map<String, List<HwSubmitDto>> getSubmitList(int hwSubmitGroupNum);
 	
 	public int insertHw(HwSubmitVo hwSubmitVo);
+	
+	public BoardUserDto selectHWUserOne(HwBoardVo hwBoardVo);
+	
+	public HwSubmitVo detailSubmit(int boardNum);
 	
 }

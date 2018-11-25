@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.coduck.pond.board.service.BoardService;
 import com.coduck.pond.board.service.HwSubmitService;
 import com.coduck.pond.board.vo.BoardSrchDto;
+import com.coduck.pond.board.vo.BoardUserDto;
 import com.coduck.pond.board.vo.GroupNoticeVo;
 import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.board.vo.HwSubmitDto;
@@ -70,16 +71,19 @@ public class BoardController {
 	
 	//과제 상세
 	@RequestMapping(value = "/group/view", method = {RequestMethod.GET, RequestMethod.POST})
-	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum, char hwSubmit) {	
+	public String detailHwBoard(Model model, int boardNum, MemDto memDto, int groupNum) {	
 	
 		if(memDto.getMemGroupMap().get(groupNum) == CommonConstant.MANAGER) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			
 			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 			
+			BoardUserDto boardUserDto = hwSubmitService.selectHWUserOne(hwBoardVo);
+			
 			model.addAttribute("hwBoardVo", hwBoardVo);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
+			model.addAttribute("boardUserDto", boardUserDto);
 			model.addAttribute("studentList", map.get("studentList"));
 			
 			return "/group/view-teacher";
@@ -91,9 +95,8 @@ public class BoardController {
 			
 			hwSubmitVo.setBoardNum(boardNum);
 			
-			//hwSubmitVo.setHwSubmit(hwSubmit);
-			
 			hwSubmitVo = hwSubmitService.detailHwBoard(hwSubmitVo);
+			
 			
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
@@ -103,6 +106,15 @@ public class BoardController {
 			return "/group/view-student";
 		}
 		return null;
+	}
+	
+	@RequestMapping(value = "/group/submit", method = RequestMethod.GET)
+	public String detailSubmit(int boardNum, Model model) {
+		HwSubmitVo hwSubmitVo = hwSubmitService.detailSubmit(boardNum);
+		
+		model.addAttribute("hwSubmitVo", hwSubmitVo);
+		
+		return "/group/submit";
 	}
 	
 	//그룹 게시글 조회

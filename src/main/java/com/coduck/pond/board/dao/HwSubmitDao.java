@@ -41,4 +41,8 @@ public class HwSubmitDao {
 		return session.insert(NAMESPACE + "insertHw", hwSubmitVo);
 	}
 	
+	public HwSubmitVo detailSubmit(int boardNum) {
+		return session.selectOne(NAMESPACE + "detailSubmit", boardNum);
+	}
+	
 }

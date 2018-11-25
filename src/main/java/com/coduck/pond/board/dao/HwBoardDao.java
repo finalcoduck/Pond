@@ -41,4 +41,8 @@ public class HwBoardDao {
 		return session.selectOne(NAMESPACE+"selectBoardSeqVal");
 	}
 	
+	public BoardUserDto selectHWUserOne(HwBoardVo hwBoardVo){
+		return session.selectOne(NAMESPACE+"selectHWUserOne",hwBoardVo);
+	}
+	
 }

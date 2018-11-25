@@ -93,20 +93,3 @@
 		</c:otherwise>
 	</c:choose>
 </section>
-
-<script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
-<script type="text/javascript">
-	var hwSubmitQill = new Quill('#hwSubmitContent', {
-		placeholder: '과제 내용'
-	});
-	
-	hwSubmitQill.setContents(${hwSubmitVo.hwSubmitContent});
-
-	var form = document.querySelector('form');
-	form.onsubmit = function() {
-	  var hwSubmitContent = document.querySelector('input[name=hwSubmitContent]');
-	  hwSubmitContent.value = JSON.stringify(hwSubmitQill.getContents());
-	  return true;
-	};
-	
-</script>
