@@ -23,9 +23,10 @@ h2.sub_title span.num{color:#007bff;}
 
 .group-list li.group a span.wrapper{display:block; position:relative; padding-top:75%; overflow:hidden;}
 .group-list li.group a span.wrapper img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; display:block;}
-.group-list li.group a span.info{display:block; padding:10px 10px 20px;}
+.group-list li.group a span.info{position:relative; display:block; padding:10px 10px 20px;}
 .group-list li.group a span.info span{display:block; text-align:left;}
-.group-list li.group a span.info span.group_name{font-size:15px; color:#222; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.group-list li.group a span.info span.grade{position:absolute; bottom:20px; right:10px; font-size:12px;}
+.group-list li.group a span.info span.group_name{font-size:15px; color:#222; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; margin-bottom:5px;}
 .group-list li.group a span.info span.num{font-size:13px; color:#999}
 
 .coverSelect{margin-left:0; margin-right:0; position:relative; overflow:hidden;}
@@ -274,6 +275,6 @@ div.datedropper.picker-lg .picker .pick-btns .pick-btn.pick-btn-sz{background-im
 }
 
 @media only screen and (max-width:480px){
-	.group-list li a{height:160px;}
-	.group-list li.group-make a{padding:39.5px 0;}
+	.group-list li a{height:185px;}
+	.group-list li.group-make a{padding:52px 0;}
 }

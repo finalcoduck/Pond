@@ -121,3 +121,9 @@
 	 -webkit-transform:scale(1,2.3);
 	 -moz-transform:scale(1,2.3);
 }}
+
+
+@media only screen and (max-width:480px){
+	.homework_con .con_area{display:block; width:100%;}
+	.homework_con .person{display:block; width:100%;}
+}
