@@ -188,28 +188,28 @@ h2.sub_title span.num{color:#007bff;}
 #view .right .student_list li > span.status{display:block; color:#666; margin-top:10px;}
 
 #view_student{position:relative; max-width:700px; margin:0 auto;}
-#view_student .card .card-body{padding:1.25rem 1.25rem 5rem;}
-#view_student .card .homework{position:relative;}
-#view_student .card .homework span.status{position:absolute; top:1.25rem; right:1.25rem; line-height:24px;}
-#view_student .card .homework span.status.before{color:#007bff}
-#view_student .card .homework span.status.after{color:#666}
-#view_student .card .homework span.status.finish{color:#666}
-#view_student .card .homework .btn_wrap{position:absolute; right:1.25rem; bottom:1.25rem;}
-#view_student .card .homework .btn_wrap input[type=file]{display:none;}
-#view_student .card .homework #editor-container{padding-right:100px;}
+#view_student .card-body{padding:1.25rem 1.25rem 5rem;}
+#view_student .homework{position:relative;}
+#view_student .homework span.status{position:absolute; top:1.25rem; right:1.25rem; line-height:24px;}
+#view_student .homework span.status.before{color:#007bff}
+#view_student .homework span.status.after{color:#666}
+#view_student .homework span.status.finish{color:#666}
+#view_student .homework .btn_wrap{position:absolute; right:1.25rem; bottom:1.25rem;}
+#view_student .homework .btn_wrap input[type=file]{display:none;}
+#view_student .homework #editor-container{padding-right:100px;}
 
-#view_student .card .homework .file_list{position:relative; font-size:0; border:1px solid #ccc; background-color:#f7f7f7; margin-top:15px;}
-#view_student .card .homework .file_list .wrapper{display:inline-block; vertical-align:middle; width:15%;}
-#view_student .card .homework .file_list .wrapper .thumbnail{position:relative; padding-top:75%; overflow:hidden; background-color:#f7f7f7; border-right:1px solid #ccc;}
-#view_student .card .homework .file_list .wrapper .thumbnail img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; z-index:1;}
-#view_student .card .homework .file_list .wrapper .thumbnail:after{content:''; position:absolute; top:0; right:0; bottom:0; left:0; background-color:rgba(255,255,255,0.5); z-index:2;}
+#view_student .homework .file_list{position:relative; font-size:0; border:1px solid #ccc; background-color:#f7f7f7; margin-top:15px;}
+#view_student .homework .file_list .wrapper{display:inline-block; vertical-align:middle; width:15%;}
+#view_student .homework .file_list .wrapper .thumbnail{position:relative; padding-top:75%; overflow:hidden; background-color:#f7f7f7; border-right:1px solid #ccc;}
+#view_student .homework .file_list .wrapper .thumbnail img{position:absolute; top:0; right:0; bottom:0; left:0; max-width:100%; height:auto; z-index:1;}
+#view_student .homework .file_list .wrapper .thumbnail:after{content:''; position:absolute; top:0; right:0; bottom:0; left:0; background-color:rgba(255,255,255,0.5); z-index:2;}
 
-#view_student .card .homework .file_list .file_name{display:inline-block; vertical-align:middle; width:85%; padding-left:15px; box-sizing:border-box;}
-#view_student .card .homework .file_list .file_name p{font-size:15px; color:#222;}
-#view_student .card .homework .file_list .file_name span{font-size:13px; color:#999}
-#view_student .card .homework .file_list button{position:absolute; top:50%; right:20px; width:30px; height:30px; margin:-15px 0 0 0; border:0; cursor:pointer; background-color:transparent; font-size:20px; outline:0;}
-#view_student .card .homework .file_list button i{opacity:0.6;}
-#view_student .card .homework .file_list button:hover i{opacity:1;}
+#view_student .homework .file_list .file_name{display:inline-block; vertical-align:middle; width:85%; padding-left:15px; box-sizing:border-box;}
+#view_student .homework .file_list .file_name p{font-size:15px; color:#222;}
+#view_student .homework .file_list .file_name span{font-size:13px; color:#999}
+#view_student .homework .file_list button{position:absolute; top:50%; right:20px; width:30px; height:30px; margin:-15px 0 0 0; border:0; cursor:pointer; background-color:transparent; font-size:20px; outline:0;}
+#view_student .homework .file_list button i{opacity:0.6;}
+#view_student .homework .file_list button:hover i{opacity:1;}
 
 #view_student .my_score{position:absolute; top:0; right:-12rem; width:8rem; height:8rem; border-radius:50%; background-color:#0050cb; font-size:20px;}
 #view_student .my_score .score{position:absolute; bottom:50%; margin-bottom:5px; color:#fff; width:100%; text-align:center;}
