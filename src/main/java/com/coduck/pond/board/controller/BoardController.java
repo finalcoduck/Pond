@@ -109,10 +109,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/group/submit", method = RequestMethod.GET)
-	public String detailSubmit(int boardNum, Model model) {
-		HwSubmitVo hwSubmitVo = hwSubmitService.detailSubmit(boardNum);
+	public String detailSubmit(int boardNum, Model model, MemDto memDto) {
+		HwSubmitDto hwSubmitDto = hwSubmitService.detailSubmit(boardNum);
+		hwSubmitDto.setMemName(memDto.getMemVo().getMemName());
 		
-		model.addAttribute("hwSubmitVo", hwSubmitVo);
+		model.addAttribute("hwSubmitDto", hwSubmitDto);
 		
 		return "/group/submit";
 	}

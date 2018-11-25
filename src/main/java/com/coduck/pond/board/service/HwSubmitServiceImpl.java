@@ -54,7 +54,7 @@ public class HwSubmitServiceImpl implements HwSubmitService{
 	}
 
 	@Override
-	public HwSubmitVo detailSubmit(int boardNum) {
+	public HwSubmitDto detailSubmit(int boardNum) {
 		return hwSubmitDao.detailSubmit(boardNum);
 	}
 	

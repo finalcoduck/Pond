@@ -14,9 +14,18 @@
 						<span class="profile">
 							<img src="${pageContext.request.contextPath }/build/image/user.png" alt="" />
 							<span class="name">
-								<a href="${pageContext.request.contextPath }/group/view-submit?boardNum=${vo.boardNum }">
-									${vo.memName }
-								</a>
+								<c:choose>
+									<c:when test="${vo.hwSubmit == 'B'.charAt(0) }">
+										<a href="#">
+											${vo.memName }
+										</a>
+									</c:when>
+									<c:when test="${vo.hwSubmit == 'P'.charAt(0) }">
+										<a href="${pageContext.request.contextPath }/group/submit?boardNum=${vo.boardNum }">
+											${vo.memName }
+										</a>
+									</c:when>
+								</c:choose>
 							</span>
 						</span>
 						<form method="post" action="<c:url value='/board/update/homework/proc' />">							

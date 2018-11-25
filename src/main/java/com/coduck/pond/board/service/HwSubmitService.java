@@ -23,6 +23,6 @@ public interface HwSubmitService {
 	
 	public BoardUserDto selectHWUserOne(HwBoardVo hwBoardVo);
 	
-	public HwSubmitVo detailSubmit(int boardNum);
+	public HwSubmitDto detailSubmit(int boardNum);
 	
 }

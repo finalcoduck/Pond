@@ -49,7 +49,11 @@
   	
   	
   	<!--  -->
-  	<select id="detailSubmit" parameterType="int" resultType="com.coduck.pond.board.vo.HwSubmitVo">
-  		select * from hw_submit where BOARD_NUM = #{boardNum}
+  	<select id="detailSubmit" parameterType="int" resultType="com.coduck.pond.board.vo.HwSubmitDto">
+		select s.HW_SUBMIT_CONTENT, b.BOARD_TITLE, b.BOARD_CONTENT, b.BOARD_REGDATE 
+			from HW_SUBMIT s
+			inner join HW_BOARD b
+			on b.BOARD_NUM = s.HW_SUBMIT_GROUP_NUM
+		where s.BOARD_NUM = #{boardNum}	 
   	</select>
   </mapper>
