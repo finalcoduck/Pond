@@ -81,7 +81,6 @@
 	                                <div class="d-flex align-items-center">
 	                                    <input type="checkbox" class="mr-1" value="">
 	                                    <img class="rounded-circle sm-profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/${vo.memProfilePic}" alt="">
-	                                    <img class="rounded-circle sm-profile-img" src="${vo.memProfilePic}" alt="">
                                     	<h6>
 	                                    	<span>${vo.memName }&nbsp;&nbsp;&nbsp;</span>
 											${vo.memEmail }                                    	
@@ -165,12 +164,15 @@
                         <a href="#" data-dismiss="modal">취소</a>
                         <a href="#" class="invite-btn">초대하기</a>
                     </div>
-    
                 </div>
             </div>
         </div>
+        <div id="loadingDiv" style="position: absolute; z-index: 9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin: auto; padding: 0;">
+        <img src="${pageContext.request.contextPath }/build/image/loading.gif" alt="" style="width:50px; height:50px;"/>
+        </div>
     <!-- The Modal -->
     <script>
+    	$('#loadingDiv').hide();
     	var mailArr = [];
     	var inviteCode = '';
     	
@@ -198,11 +200,38 @@
         		dataType : 'json',
         		success : function(data){
         			if(data.msg == 'success'){
-        				$('#inviteStudentModal').modal('hide');
         				alert('메일 전송 완료');
+        				$('#inviteTeacherModal').modal('hide');
+        				$('#inviteStudentModal').modal('hide');
         				mailArr = [];
         	        	$('.mailsText').remove();
         			}
+        		},
+        		beforeSend: function(){
+                    var width = 0;
+                    var height = 0;
+                    var left = 0;
+                    var top = 0;
+
+                    width = 50;
+                    height = 50;
+
+                    top = ( $(window).height() - height ) / 2 + $(window).scrollTop();
+                    left = ( $(window).width() - width ) / 2 + $(window).scrollLeft();
+
+                    if($("#loadingDiv").length != 0) {
+                           $("#loadingDiv").css({
+                                  "top": top+"px",
+                                  "left": left+"px"
+                           });
+                           $("#loadingDiv").show();
+                    }
+                    else {
+                        $('body').append('<div id="loadingDiv" style="position:absolute; top:' + top + 'px; left:' + left + 'px; width:' + width + 'px; height:' + height + 'px; z-index:9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; "><img src="${pageContext.request.contextPath}/resources/build/image/loading.gif" style="width:50px; height:50px;"></div>');
+                 }
+        		},
+        		complete: function(){
+        			$('#loadingDiv').hide();
         		}
         	});
         });
