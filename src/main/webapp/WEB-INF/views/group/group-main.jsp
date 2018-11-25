@@ -333,8 +333,8 @@
 		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
 		<p class="card-text">{{{boardContent}}}</p>
 	</div>
-	<div class="card-footer align_r">
-		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+	<div class="card-footer align_ㅣ">
+		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 	</div>
 	<div class="comment-list" id="comment-{{boardNum}}">
 
