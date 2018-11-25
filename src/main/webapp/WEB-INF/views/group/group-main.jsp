@@ -6,7 +6,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">	
 <style>
-
+#view_student .card .homework .file_list .wrapper .thumbnail:after{
+	background-color: transparent;
+}
+#view_student .card .homework .file_list .wrapper .thumbnail img{
+	top:50%; left:50%;
+	transform:translate(-50%, -50%);
+}
 </style>
 <!-- content -->
 <section id="main">
@@ -91,7 +97,8 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-			<form id="noticeForm" action="">
+			<form id="noticeForm" action="" enctype="multipart/form-data">
+				<input class="d-none" id='noticeFile' type='file' name='file[]' multiple="multiple">
 				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
@@ -111,14 +118,25 @@
 						  </select>
 						</div>
 					</div>
-					</form>
+					<section id="view_student" class="mt30">
+						<div class="card">
+							<div class="card-body homework">
+								<div class="homework_con">
+									<div id="noticeFileWrap" class="file_wrap">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
 				<div id="iconBox">
-					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href="">
-					<i class="fas fa-link"></i></a>
+					<a id="fileAddBtn" class="cursor-pointer"><i class="far fa-folder-open mr-3"></i></a> 
+					<a href=""><i class="fas fa-link"></i></a>
 				</div>
 				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
 			</div>
@@ -170,7 +188,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form id="homeworkForm" action="">
+				<form id="homeworkForm" action="" enctype="multipart/form-data">
 					<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 					<input name="boardType" type="hidden" value="H">
 					<div class="chk_area">
@@ -384,7 +402,22 @@
 	</div>
 </script>
  
-<script type="text/javascript">
+ <!--  file card Template -->
+<script id="fileCard" type="text/x-handlebars-template">
+<div class="file_list">
+	<div class="wrapper">
+		<div class="thumbnail">
+			<img src="" class="thumbImg">
+		</div>
+	</div>
+	<div class="file_name">
+		<p>{{name}}</p>
+		<span>{{size}}</span>
+	</div>
+	<button type="button">
+		&times;
+	</button>
+</div>
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
@@ -495,10 +528,30 @@
         
         var quillArr = [];
         
+        
+        
         $(document).ready(function () {
         	// 첫페이지 조회
 	    	searchBoard();
         	
+	    	const noticeFile = document.querySelector("#noticeFile");
+	    	
+	    	noticeFile.addEventListener("change", function(evt) {	    		
+	    		console.log(evt.target.files);
+	    		var files = evt.target.files;
+	    		var length = files.length;
+	    		var tempFile = {size:'',name:''};
+	    		$("#noticeFileWrap").html('');
+	    		for(var i=0;i<length;i++){
+	    			tempFile.size = bytesToSize(files[i].size); 
+	    			tempFile.name = files[i].name
+	    			console.log();
+	    			
+	    			$("#noticeFileWrap").append(makeFileCard(tempFile));
+	    			var elImage = $(".thumbImg:last");
+		            elImage[0].src = window.URL.createObjectURL(files[i]);
+	    		}
+	    	})
         	//공지 글 추가 버튼
         	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
         	
@@ -587,6 +640,10 @@
             	$("#setSubjectModal").modal("show");
             })
             
+            //파일 추가 버튼 클릭 이벤트 설정
+            $("#fileAddBtn").on("click",function(){
+            	$("#noticeFile").click();
+            });
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
@@ -699,6 +756,7 @@
 			            quillArr[indexBoardNum]=commentQuill;
 					})
 					
+					// 모달 삭제 버튼 클릭 이벤트
 		        	$(".delModalBtn").on("click",showDelBoardModal)
 		        	
 				}
@@ -819,6 +877,13 @@
     		});
     	}        
         
+        //파일 카드 만들기
+        function makeFileCard(data){
+        	var source = $("#fileCard").html();
+	    	var template = Handlebars.compile(source);
+	    	var html = template(data);
+	    	return html;
+        }
         
         //공지 카드 만들기
 		function makeNoticeCard(data){
