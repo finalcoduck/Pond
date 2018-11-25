@@ -268,7 +268,7 @@ div.datedropper.picker-lg .picker .pick-btns .pick-btn.pick-btn-sz{background-im
 @media only screen and (max-width:769px){
 	.group-list li{width:49%; margin-right:0; margin-left:2%;}
 	.group-list li:nth-child(2n+1){margin-left:0;}
-	.group-wrap .inner{max-width:80%;}
+	.group-wrap .inner{max-width:100%;}
 	.group-list li a{height:210px;}
 	.group-list li.group-make a{padding:64.5px 0;}
 }
