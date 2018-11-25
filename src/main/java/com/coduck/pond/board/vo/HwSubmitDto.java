@@ -1,5 +1,7 @@
 package com.coduck.pond.board.vo;
 
+import java.util.Date;
+
 public class HwSubmitDto {
 
     // 글번호
@@ -13,6 +15,12 @@ public class HwSubmitDto {
 
     // 과제글번호 그룹번호
     private Integer hwSubmitGroupNum;
+    
+    // 과제 제목 글제목
+    private String boardTitle;
+
+    // 과제 내용 글내용
+    private String boardContent;
 
     // 제출자ID 작성자
     private String hwSubmitWriter;
@@ -22,6 +30,9 @@ public class HwSubmitDto {
 
     // 과제 답안 내용 글내용
     private String hwSubmitContent;
+    
+    // 과제 등록일 
+    private Date boardRegdate;
 
     // 부여점수 
     private int hwSubmitScore;
@@ -40,7 +51,31 @@ public class HwSubmitDto {
         this.boardNum = boardNum;
     }
     
-    public String getMemName() {
+    public Date getBoardRegdate() {
+		return boardRegdate;
+	}
+
+	public void setBoardRegdate(Date boardRegdate) {
+		this.boardRegdate = boardRegdate;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
+	public String getBoardContent() {
+		return boardContent;
+	}
+
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
+	}
+
+	public String getMemName() {
 		return memName;
 	}
 

@@ -25,8 +25,18 @@
 				<h5 class="card-title">${hwBoardVo.boardTitle }</h5>
 				<p>${hwBoardVo.boardContent }</p>
 				<div class="homework_con">
-					<span class="status before">할당됨</span>
-					<input name="hwSubmitContent" type="hidden" id="hwSubmit" value="">
+					<c:choose>
+						<c:when test="${hwSubmitVo.hwSubmit == 'B'.charAt(0) }">
+							<span class="status before">할당됨</span>
+						</c:when>
+						<c:when test="${hwSubmitVo.hwSubmit == 'P'.charAt(0) }">
+							<span class="status propose">제출함</span>
+						</c:when>
+						<c:when test="${hwSubmitVo.hwSubmit == 'C'.charAt(0) }">
+							<span class="status compleate">채점완료</span>
+						</c:when>
+					</c:choose>
+					<input name="hwSubmitContent" type="hidden">
 					<div id=hwSubmitContent>
 					</div>
 					<div class="file_wrap">
@@ -69,11 +79,19 @@
 		</div>
 	</div>
 
-	<div class="my_score shadow">
-		<span class="score">50</span>
-		<span class="bar"></span>
-		<span class="total">100</span>
-	</div>
+	<c:choose>
+		<c:when test="${hwSubmitVo.hwSubmit == 'C'.charAt(0) }">
+			<div class="my_score shadow" style="display:block;">
+				<span class="score">${hwSubmitVo.hwSubmitScore }</span>
+				<span class="bar"></span>
+				<span class="total">${hwBoardVo.hwMaxScore }</span>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="my_score shadow" style="display:none;">
+			</div>
+		</c:otherwise>
+	</c:choose>
 </section>
 
 <script src="${pageContext.request.contextPath}/vendor/quill/quill.min.js"></script>
