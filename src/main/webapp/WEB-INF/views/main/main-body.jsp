@@ -16,6 +16,7 @@
 	session.setAttribute("state", state);
 %>     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css">
 <style>
 	#footer{margin-top:0;}
 </style>
@@ -105,7 +106,7 @@ swal({
 	    	<p style="font-size:22px; margin-bottom:30px;">
 	    		PC 태블릿 모바일 화면 지원
 	    	</p>
-	    	<img src="${pageContext.request.contextPath}/build/image/main_section.png" >
+	    	<img src="${pageContext.request.contextPath}/build/image/main_section.png" class="main_img">
     	</div>
     </section>
     <section>
