@@ -108,6 +108,7 @@ swal({
 	    	<img src="${pageContext.request.contextPath}/build/image/main_section.png" >
     	</div>
     </section>
+
     <section>
     	<img src="${pageContext.request.contextPath}/build/image/main_image.png" style="width:100%;">
     </section>

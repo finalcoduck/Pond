@@ -12,6 +12,16 @@
 		select * from upload_file u, group_notice t where u.ref_board_num = t.board_num and
 		  u.group_num = t.group_num and u.group_num = #{value}
 	</select>
+	<!-- 그룹별 파알 정보 가져오기 -->
+	<select id="getFilesByGroupBoard" resultType="com.coduck.pond.fileupload.vo.FileListVo" parameterType="com.coduck.pond.board.vo.HwBoardVo">
+		SELECT
+			*
+		FROM
+			UPLOAD_FILE
+		WHERE
+			GROUP_NUM = #{groupNum}
+			AND REF_BOARD_NUM = #{boardNum}
+	</select>
 	<!-- 파일번호로 파일 정보 가져오기 -->
 	<select id="getFileByNum" resultType="com.coduck.pond.fileupload.vo.FileUploadVo">
 		select * from upload_file where file_num = #{value}

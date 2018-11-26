@@ -46,12 +46,6 @@ public class FileListController {
 		
 		
 		List<FileListVo> list = fileUploadService.getFilesByGroupBoard(hwBoardVo);
-		// 파일 사이즈 KB 혹은 MB 단위로 변환
-		for (FileListVo vo : list) {
-			long fileSize = vo.getFileSize();
-			long newFileSize = FileUtils.changeFileSize(fileSize);
-			vo.setFileSize(newFileSize);
-		}
 		resultMap.put("fileList", list);
 		
 		return resultMap;

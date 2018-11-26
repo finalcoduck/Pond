@@ -423,7 +423,23 @@
 	</div>
 </div>
 </script>
-
+ <!--  file card Template -->
+<script id="fileDownCard" type="text/x-handlebars-template">
+<div class="file_list">
+	<div class="wrapper">
+		<div class="thumbnail">
+			<img src="${pageContext.request.contextPath }/build/image/filetype/{{fileType}}.png">
+		</div>
+	</div>
+	<div class="file_name">
+		<p>{{orgFileName}}</p>
+		<span>{{fileSize}}</span>
+	</div>
+	<button type="button">
+		<i class="fas fa-cloud-download-alt" onclick="location.href='${pageContext.request.contextPath}/group/filedownload?saveFileName={{saveFileName}}&orgFileName={{orgFileName }}'"></i>
+	</button>
+</div>
+</script>
 <script id="hw-card" type="text/x-handlebars-template">
 	<div class="card mb-3 shadow">
 		<div class="card-header">
@@ -761,6 +777,10 @@
 			            quillArr[indexBoardNum]=commentQuill;
 			            
 			            //function (boardnum,groupnum)
+			            if(item.fileCount!==0){
+			            	searchFileList(item.boardNum,item.groupNum);	
+			            }
+			            
 					})
 					
 					// 모달 삭제 버튼 클릭 이벤트
@@ -785,6 +805,10 @@
 			})
 			.done(function(data){
 				console.log(data);
+				data.fileList.forEach(function(item){
+					item.fileSize = bytesToSize(item.fileSize);
+					$("#noticeFileWrap-"+item.refBoardNum).append(makeFileDownCard(item));
+				});
 			});
         }
         
@@ -906,6 +930,14 @@
         //파일 카드 만들기
         function makeFileCard(data){
         	var source = $("#fileCard").html();
+	    	var template = Handlebars.compile(source);
+	    	var html = template(data);
+	    	return html;
+        }
+        
+      //파일 카드 만들기
+        function makeFileDownCard(data){
+        	var source = $("#fileDownCard").html();
 	    	var template = Handlebars.compile(source);
 	    	var html = template(data);
 	    	return html;

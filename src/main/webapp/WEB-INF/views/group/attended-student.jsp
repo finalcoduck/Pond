@@ -48,7 +48,7 @@
 <script src="${pageContext.request.contextPath }/vendor/fullcalendar/locale/ko.js" type="text/javascript"></script>
 
 <script>
-
+getLocation();
 let opts = {
 		  // Whether to scan continuously for QR codes. If false, use scanner.scan() to manually scan.
 		  // If true, the scanner emits the "scan" event when a QR code is scanned. Default true.
@@ -117,11 +117,11 @@ $(document).ready(function(){
 function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
-	      alert(position.coords.latitude + ' ' + position.coords.longitude);
+	      //alert(position.coords.latitude + ' ' + position.coords.longitude);
 	    }, function(error) {
 	      console.error(error);
 	    }, {
-	      enableHighAccuracy: false,
+	      enableHighAccuracy: true,
 	      maximumAge: 0,
 	      timeout: Infinity
 	    });
