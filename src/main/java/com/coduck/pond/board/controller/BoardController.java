@@ -87,12 +87,15 @@ public class BoardController {
 			Map<String, List<HwSubmitDto>> map = hwSubmitService.getSubmitList(boardNum);
 
 			BoardUserDto boardUserDto = hwSubmitService.selectHWUserOne(hwBoardVo);
+			
+			GroupVo groupVo = new GroupVo();
 
 			model.addAttribute("hwBoardVo", hwBoardVo);
 			model.addAttribute("boardNum", boardNum);
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("boardUserDto", boardUserDto);
 			model.addAttribute("studentList", map.get("studentList"));
+			model.addAttribute("groupVo", groupVo);
 
 			return "/group/view-teacher";
 
