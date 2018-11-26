@@ -29,6 +29,7 @@ import com.coduck.pond.core.constant.CommonConstant;
 import com.coduck.pond.core.constant.ErrorCodeConstant;
 import com.coduck.pond.fileupload.service.FileUploadService;
 import com.coduck.pond.group.service.GroupService;
+import com.coduck.pond.group.vo.GroupVo;
 import com.coduck.pond.member.vo.MemDto;
 
 @Controller
@@ -98,7 +99,12 @@ public class BoardController {
 		} else if (memDto.getMemGroupMap().get(groupNum) == CommonConstant.STUDENT) {
 			HwBoardVo hwBoardVo = boardService.detailHomeworkBoard(boardNum);
 			HwSubmitVo hwSubmitVo = new HwSubmitVo();
+			GroupVo groupVo = new GroupVo();
+			
 			hwSubmitVo.setHwSubmitWriter(memDto.getMemVo().getMemEmail());
+			
+			groupVo.setGroupNum(groupNum);
+			
 
 			hwSubmitVo.setBoardNum(boardNum);
 
@@ -108,6 +114,7 @@ public class BoardController {
 			model.addAttribute("groupNum", groupNum);
 			model.addAttribute("hwBoardVo", hwBoardVo);
 			model.addAttribute("hwSubmitVo", hwSubmitVo);
+			model.addAttribute("groupVo", groupVo);
 
 			return "/group/view-student";
 		}
