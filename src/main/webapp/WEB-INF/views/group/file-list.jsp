@@ -31,7 +31,7 @@
 							</div>
 							<div class="file_name">
 								<p>${vo.orgFileName }</p>
-								<span>${vo.fileSize }MB  <fmt:formatDate value="${vo.boardRegdate }" pattern="yyyy년MM월"/>  ${vo.boardWriter }
+								<span>${vo.fileSize }MB  <fmt:formatDate value="${vo.boardRegdate }" pattern="yyyy년MM월"/> <br> ${vo.boardWriter }
 								<br><a href="#">원글 보기</a></span>
 							</div>
 							<button type="button">

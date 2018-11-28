@@ -16,9 +16,12 @@
 	session.setAttribute("state", state);
 %>     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/login_style.css">
-    
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css">
+<style>
+	#footer{margin-top:0;}
+</style>
 <section id="" class="bg-primary">
-<c:if test="${!empty changePwdMsg}"><script type="text/javascript">
+<c:if test="${!empty changeMsg}"><script type="text/javascript">
 swal({
 	type : 'success',
 	title : '비밀번호 변경 성공!',
@@ -47,9 +50,17 @@ swal({
 	showConfirmButton: true,
 	timer : 1500,
 })</script></c:if>
+<c:if test="${!empty msg }"><script type="text/javascript">
+swal({
+	type : 'error',
+	title : '이미 가입된 이메일 입니다.',
+	showConfirmButton: true,
+	timer : 1500,
+})
+</script></c:if>
         <div class="container">
             <div class="row align-items-center">
-                <div class="mt-5col-12 col-md-6">
+                <div class="mt-5 col-12 col-md-6">
                     <h2 class="text-white">오직</h2>
                     <h2 class="text-white">학원을 위한 커뮤니티</h2>
                     <p class="lead text-white">출결 관리, 공지, 학원생들을 위한 커뮤니티 지원</p>
@@ -90,17 +101,16 @@ swal({
             </div>
         </div>
     </section>
+    <section style="padding:100px 0;">
+    	<div class="container align_c">
+	    	<p style="font-size:22px; margin-bottom:30px;">
+	    		PC 태블릿 모바일 화면 지원
+	    	</p>
+	    	<img src="${pageContext.request.contextPath}/build/image/main_section.png" class="main_img">
+    	</div>
+    </section>
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-5">
-
-                </div>
-                <div class="col-12 col-md-5">
-
-                </div>
-            </div>
-        </div>
+    	<img src="${pageContext.request.contextPath}/build/image/main_image.png" style="width:100%;">
     </section>
     <script src="${pageContext.request.contextPath}/build/js/login_script.js"></script>
     <script>

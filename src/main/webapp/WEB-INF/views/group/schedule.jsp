@@ -15,6 +15,7 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <link href="<c:url value='/vendor/fullcalendar/fullcalendar.min.css'/>" rel="stylesheet">
+<link href="<c:url value='/build/css/group.css'/>" rel="stylesheet">
 <script src="<c:url value='/vendor/fullcalendar/fullcalendar.min.js'/>" type="text/javascript"></script>
 <script src="<c:url value='/vendor/fullcalendar/gcal.js'/>" type="text/javascript"></script>
 <div class="container mt20">

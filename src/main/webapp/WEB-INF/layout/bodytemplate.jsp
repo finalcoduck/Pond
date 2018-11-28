@@ -11,7 +11,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="Keywords" content="">
 <meta name="Description" content="">
-<meta name="theme-color" content="#007cff">
+<meta name="theme-color" content="#00448B">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/bootstrap-4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/general.css">
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"

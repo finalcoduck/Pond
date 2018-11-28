@@ -5,7 +5,7 @@
 	<div class="inner">
 		<nav class="navbar shadow vh7">
 			<h1>
-				<a href="${pageContext.request.contextPath }/">
+				<a href="${pageContext.request.contextPath }/selectgroup/index">
 					<b class="text-white">POND</b>
 				</a>
 			</h1>

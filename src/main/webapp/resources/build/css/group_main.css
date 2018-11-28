@@ -121,3 +121,13 @@
 	 -webkit-transform:scale(1,2.3);
 	 -moz-transform:scale(1,2.3);
 }}
+@media only screen and (max-width:850px){
+	.main_img{width:100%;}
+}
+@media only screen and (max-width:480px){
+	.homework_con .con_area{display:block; width:100%;}
+	.homework_con .person{display:block; width:100%; margin-left:0; margin-top:20px;}
+	.homework_con .person ul li:before{display:none;}
+	.homework_con .person ul li{width:30%;}
+	.homework_con .person ul li a span.num{font-size:22px;}
+}

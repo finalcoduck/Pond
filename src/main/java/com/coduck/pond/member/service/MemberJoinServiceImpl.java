@@ -12,6 +12,7 @@ import com.coduck.pond.core.utils.mail.MailService;
 import com.coduck.pond.core.utils.mail.TempKey;
 import com.coduck.pond.member.dao.MemberJoinDao;
 import com.coduck.pond.member.vo.MemAuthVo;
+import com.coduck.pond.member.vo.MemVo;
 import com.coduck.pond.member.vo.PreMemVo;
 
 @Service
@@ -61,6 +62,11 @@ public class MemberJoinServiceImpl implements MemberJoinService{
 	@Override
 	public void naverToInsertMember(Map<String, String> map) {
 		memberJoinDao.naverToInsertMember(map);
+	}
+
+	@Override
+	public MemVo checkDupli(String memEmail) {
+		return memberJoinDao.checkDupli(memEmail);
 	}
 }
 

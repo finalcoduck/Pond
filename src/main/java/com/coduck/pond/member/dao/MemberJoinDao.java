@@ -48,4 +48,8 @@ public class MemberJoinDao {
 	public MemVo getGoogleMem(String id) {
 		return session.selectOne(NAMESPACE+"getGoogleMem", id);
 	}
+	
+	public MemVo checkDupli(String memEmail) {
+		return session.selectOne(NAMESPACE+"checkDupli", memEmail);
+	}
 }

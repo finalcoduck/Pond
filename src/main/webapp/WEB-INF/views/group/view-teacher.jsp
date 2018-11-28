@@ -13,7 +13,20 @@
 					<li>
 						<span class="profile">
 							<img src="${pageContext.request.contextPath }/build/image/user.png" alt="" />
-							<span class="name">${vo.memName }</span>
+							<span class="name">
+								<c:choose>
+									<c:when test="${vo.hwSubmit == 'B'.charAt(0) }">
+										<span style="color:red;">
+											${vo.memName }
+										</span>
+									</c:when>
+									<c:when test="${vo.hwSubmit == 'P'.charAt(0) || vo.hwSubmit == 'C'.charAt(0)  }">
+										<a href="${pageContext.request.contextPath }/group/submit?boardNum=${vo.boardNum }">
+											${vo.memName }
+										</a>
+									</c:when>
+								</c:choose>
+							</span>
 						</span>
 						<form method="post" action="<c:url value='/board/update/homework/proc' />">							
 							<input type="hidden" value="${vo.boardNum }" name="boardNum">
@@ -38,13 +51,13 @@
 			<ul>
 				<li>
 					<a href="#">
-						<span class="num">0</span>
+						<span class="num">${boardUserDto.proposeCount }</span>
 						<span class="txt">제출함</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<span class="num">0</span>
+						<span class="num">${boardUserDto.submitCount }</span>
 						<span class="txt">할당 완료</span>
 					</a>
 				</li>
@@ -65,7 +78,17 @@
 				<li>
 					<img src="${pageContext.request.contextPath }/build/image/user.png" alt="">
 					<span class="name">${vo.memName }</span>
-					<span class="status">할당됨</span>
+					<c:choose>
+						<c:when test="${vo.hwSubmit == 'B'.charAt(0) }">
+							<span class="status">할당됨</span>
+						</c:when>
+						<c:when test="${vo.hwSubmit == 'P'.charAt(0) }">
+							<span class="status">제출함</span>
+						</c:when>
+						<c:when test="${vo.hwSubmit == 'C'.charAt(0) }">
+							<span class="status">채점완료</span>
+						</c:when>
+					</c:choose>
 				</li>
 			</c:forEach>
 		</ul>

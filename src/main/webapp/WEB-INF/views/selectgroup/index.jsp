@@ -37,12 +37,16 @@ swal({
 						<span class="info">
 							<span class="group_name">
 								${groupVo.groupName} 
-								<c:if test="${groupVo.status == 'M'.charAt(0)}"><span style="color:red;">매니저</span></c:if>
-								<c:if test="${groupVo.status == 'S'.charAt(0)}"><span style="color:blue;">학생</span></c:if>
-							</span>
+							</span>						
 							<span class="num">
 								멤버 ${groupVo.groupMemNum }명
 							</span>
+							<c:if test="${groupVo.status == 'M'.charAt(0)}">
+								<span class="badge badge-pill badge-danger grade">매니저</span>
+							</c:if>
+							<c:if test="${groupVo.status == 'S'.charAt(0)}">
+								<span class="badge badge-pill badge-success grade">학생</span>
+							</c:if>	
 						</span>
 					</a>
 				</li>

@@ -5,7 +5,15 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/floating_btn.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/quill/quill.snow.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/build/css/group_main.css?ver=2">	
-
+<style>
+#view_student .card .homework .file_list .wrapper .thumbnail:after{
+	background-color: transparent;
+}
+#view_student .card .homework .file_list .wrapper .thumbnail img{
+	top:50%; left:50%;
+	transform:translate(-50%, -50%);
+}
+</style>
 <!-- content -->
 <section id="main">
 	<div class="container mt20">
@@ -89,7 +97,8 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-			<form id="noticeForm" action="">
+			<form id="noticeForm" method="post" action="${pageContext.request.contextPath}/board/insert/notice" enctype="multipart/form-data">
+				<input class="d-none" id='noticeFile' type='file' name='files' multiple="multiple">
 				<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 				<input name="boardType" type="hidden" value="N">
 					<div class="form-group">
@@ -109,14 +118,23 @@
 						  </select>
 						</div>
 					</div>
-					</form>
+					<section id="view_student" class="mt30">
+							<div class="homework">
+								<div class="homework_con">
+									<div id="noticeFileWrap" class="file_wrap">
+
+									</div>
+								</div>
+							</div>
+					</section>
+				</form>
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer justify-content-between">
 				<div id="iconBox">
-					<a href=""><i class="far fa-folder-open mr-3"></i></a> <a href="">
-					<i class="fas fa-link"></i></a>
+					<a id="fileAddBtn" class="cursor-pointer"><i class="far fa-folder-open mr-3"></i></a> 
+					<a href=""><i class="fas fa-link"></i></a>
 				</div>
 				<button id="noticeSubmitBtn" type="button" class="btn btn-out-secondary" >제출</button>
 			</div>
@@ -168,7 +186,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form id="homeworkForm" action="">
+				<form id="homeworkForm" action="" enctype="multipart/form-data">
 					<input name="groupNum" type="hidden" value="${groupVo.groupNum}">
 					<input name="boardType" type="hidden" value="H">
 					<div class="chk_area">
@@ -302,8 +320,12 @@
 					<img class="rounded-circle profile-img" src="${pageContext.request.contextPath }/upload/mem-photo/{{memProfilePic}}" alt="">
 				</div>
 				<div class="ml-2">
-					<div class="h5 m-0">{{memName}}</div>
-					<div class="h7 text-muted">{{boardRegDate}}</div>
+					<div class="h5 m-0">
+							{{memName}}
+						</div>
+						<div class="h7 text-muted">
+							{{boardRegdate}}
+						</div>
 				</div>
 			</div>
 			<div>
@@ -326,9 +348,18 @@
 	<div class="card-body">
 		<h5><span class="badge badge-secondary">{{subjectTitle}}</span></h5>
 		<p class="card-text">{{{boardContent}}}</p>
+		<section id="view_student" class="mt30">
+			<div class="homework">
+				<div class="homework_con">
+					<div id="noticeFileWrap-{{boardNum}}" class="file_wrap">
+
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
-	<div class="card-footer align_r">
-		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+	<div class="card-footer align_ㅣ">
+		<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 	</div>
 	<div class="comment-list" id="comment-{{boardNum}}">
 
@@ -352,8 +383,7 @@
 <script id="comment-card" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-1 align_c">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8 comment_con">
 			<span class="name">{{memName}}</span>
@@ -369,8 +399,7 @@
 <script id="comment-card-no" type="text/x-handlebars-template">
 	<div class="card-footer d-flex">
 		<div class="col-2">
-			<!-- img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="" -->
-			<img class="rounded-circle profile-img" src="https://picsum.photos/50/50" alt="">
+			<img class="rounded-circle profile-img" src="${pageContext.request.contextPath}/upload/mem-photo/{{memProfilePic}}" alt="">
 		</div>
 		<div class="col-8">
 			<span>{{memName}}</span>
@@ -380,7 +409,19 @@
 	</div>
 </script>
  
-<script type="text/javascript">
+ <!--  file card Template -->
+<script id="fileCard" type="text/x-handlebars-template">
+<div class="file_list">
+	<div class="wrapper">
+		<div class="thumbnail">
+			<img src="" class="thumbImg">
+		</div>
+	</div>
+	<div class="file_name">
+		<p>{{name}}</p>
+		<span>{{size}}</span>
+	</div>
+</div>
 </script>
 
 <script id="hw-card" type="text/x-handlebars-template">
@@ -403,9 +444,8 @@
 
                 <div>
                 	<div class="dropdown">
-                    	<button class="btn btn-link" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        	<i class="fas fa-ellipsis-v"></i>
-                        </button>
+                    	<i class="fas fa-ellipsis-v cursor-pointer" id="gedf-drop1"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
 							<a class="dropdown-item cursor-pointer">수정</a>
 							<a class="dropdown-item cursor-pointer delModalBtn">삭제</a>
@@ -427,10 +467,6 @@
 					<a href="${pageContext.request.contextPath }/group/view?boardNum={{boardNum}}&groupNum=${groupVo.groupNum}">
 						{{{boardContent}}}
 					</a>
-					<br>
-					<span>
-						최대부여점수 : {{hwMaxScore}}
-					</span>
 				</div>
 				<div class="person">
 					<ul>
@@ -451,8 +487,8 @@
 			</div>
 		</div>
 
-		<div class="card-footer align_r">
-			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글</a>
+		<div class="card-footer align_ㅣ">
+			<a class="card-link cmt-btn cursor-pointer" id="{{boardNum}}"><i class="fa fa-comment"></i> 댓글 {{commentCount}}개</a>
 		</div>
 		<div class="comment-list" id="comment-{{boardNum}}"></div>
 		<div class="card-footer d-flex" >
@@ -492,12 +528,37 @@
         
         var quillArr = [];
         
+        
+        
         $(document).ready(function () {
         	// 첫페이지 조회
 	    	searchBoard();
         	
+	    	const noticeFile = document.querySelector("#noticeFile");
+	    	
+	    	noticeFile.addEventListener("change", function(evt) {	    		
+	    		console.log(evt.target.files);
+	    		var files = evt.target.files;
+	    		var length = files.length;
+	    		var tempFile = {size:'',name:''};
+	    		$("#noticeFileWrap").html('');
+	    		for(var i=0;i<length;i++){
+	    			tempFile.size = bytesToSize(files[i].size); 
+	    			tempFile.name = files[i].name
+	    			console.log();
+	    			
+	    			$("#noticeFileWrap").append(makeFileCard(tempFile));
+	    			var elImage = $(".thumbImg:last");
+		            elImage[0].src = window.URL.createObjectURL(files[i]);
+	    		}
+	    	})
         	//공지 글 추가 버튼
-        	$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	//$("#noticeSubmitBtn").on("click",insertNoticeBoard)
+        	$("#noticeSubmitBtn").on("click",function(){
+        		 var about = document.querySelector('input[name=boardContent]');
+                 about.value = document.querySelector("#notice-editor-container").firstChild.innerHTML;
+        		$("#noticeForm").submit();
+        	})
         	
 			//과제 글 추가 버튼
 			$("#homeworkSubmitBtn").on("click", insertHomeworkBoard)	        	
@@ -540,6 +601,7 @@
         		var commentData = $('#cmntForm-'+boardNum+'').serializeObject();
         		var commentDataStr = JSON.stringify(commentData);
         		var editorDiv = $('#editor-test-'+boardNum+'');
+        		console.log(commentDataStr);
         		//editor-test-{{boardNum}}
         		$.ajax({
         			url : "${pageContext.request.contextPath}/board/insert/comment/proc",
@@ -583,6 +645,10 @@
             	$("#setSubjectModal").modal("show");
             })
             
+            //파일 추가 버튼 클릭 이벤트 설정
+            $("#fileAddBtn").on("click",function(){
+            	$("#noticeFile").click();
+            });
             
             //게시물 삭제 이벤트
             $("#delBoardBtn").on("click",sendDelBoard);
@@ -681,7 +747,7 @@
 					data.boardList.forEach(function(item){
 						item.boardRegdate = moment(item.boardRegdate).add(9,'hours').format("YYYY년 MM월 DD일 HH:mm");
 						item.boardContent = item.boardContent;
-						
+						//id = noticeFileWrap-{{boardNum}}
 						if(item.boardType === NOTICE){
 							$("#center").append(makeNoticeCard(item));	
 						}else if(item.boardType === HW_BOARD){
@@ -693,13 +759,35 @@
 			            });
 			            var indexBoardNum = item.boardNum;
 			            quillArr[indexBoardNum]=commentQuill;
+			            
+			            //function (boardnum,groupnum)
 					})
 					
+					// 모달 삭제 버튼 클릭 이벤트
 		        	$(".delModalBtn").on("click",showDelBoardModal)
 		        	
 				}
 		   	});
 		}
+        
+        function searchFileList(boardNum,groupNum){
+        	
+        	var data = {boardNum:boardNum,groupNum:groupNum};
+        	var dataStr = JSON.stringify(data);
+        	
+        	$.ajax({
+		   		url : "${pageContext.request.contextPath}/group/filelist/proc"
+				, method : "post"
+		   		, dataType : 'json'
+		   		, data : dataStr
+		   		, processData : true
+		   		, contentType : "application/json; charset=UTF-8"
+			})
+			.done(function(data){
+				console.log(data);
+			});
+        }
+        
         function searchSubject(){
         	
         	//boardSrchDto에 검색 주제 추가후
@@ -815,6 +903,13 @@
     		});
     	}        
         
+        //파일 카드 만들기
+        function makeFileCard(data){
+        	var source = $("#fileCard").html();
+	    	var template = Handlebars.compile(source);
+	    	var html = template(data);
+	    	return html;
+        }
         
         //공지 카드 만들기
 		function makeNoticeCard(data){

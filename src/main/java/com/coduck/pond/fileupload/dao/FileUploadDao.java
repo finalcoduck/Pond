@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.coduck.pond.board.vo.HwBoardVo;
 import com.coduck.pond.fileupload.vo.FileListVo;
 import com.coduck.pond.fileupload.vo.FileUploadVo;
 
@@ -23,7 +24,9 @@ public class FileUploadDao {
 	public List<FileListVo> getFilesByGroup(int groupNum){
 		return session.selectList(NAMPSPACE+"getFilesByGroup", groupNum);
 	}
-	
+	public List<FileListVo> getFilesByGroupBoard(HwBoardVo hwBoardVo){
+		return session.selectList(NAMPSPACE+"getFilesByGroupBoard", hwBoardVo);
+	}
 	public void deleteFile(int fileNum) {
 		session.delete(NAMPSPACE+"deleteFile", fileNum);
 	}
