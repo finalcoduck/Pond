@@ -38,7 +38,6 @@ public class MemberMoveController {
 		}
 		oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthenticateUrl(GrantType.AUTHORIZATION_CODE, googleOauth2Parameters);
-		System.out.println("/googleLogin, url" + url);
 		model.addAttribute("google_url", url);
 		model.addAttribute("dpMsg", dpMsg);
 		model.addAttribute("loginFail", loginFail);
