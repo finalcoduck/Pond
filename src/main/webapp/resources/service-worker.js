@@ -10,7 +10,7 @@ if (workbox) {
 	  }
 	]);
     
-  const articleHandler = workbox.strategies.networkFirst({
+  const articleHandler = workbox.strategies.cacheFirst({
 	    cacheName: 'articles-cache',
 	    plugins: [
 	      new workbox.expiration.Plugin({
@@ -22,7 +22,7 @@ if (workbox) {
 	  workbox.routing.registerRoute('/', args => {
 	    return articleHandler.handle(args);
 	  });
-	  const curriHandler = workbox.strategies.networkFirst({
+	  const curriHandler = workbox.strategies.cacheFirst({
 		    cacheName: 'curri-cache',
 		    plugins: [
 		      new workbox.expiration.Plugin({

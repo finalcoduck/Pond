@@ -109,12 +109,19 @@ swal({
 	    	<img src="${pageContext.request.contextPath}/build/image/main_section.png" class="main_img">
     	</div>
     </section>
+    <section>
+    	<div id="offline">
+    		
+    	</div>
+    </section>
 
     <section>
     	<img src="${pageContext.request.contextPath}/build/image/main_image.png" style="width:100%;">
     </section>
     <script src="${pageContext.request.contextPath}/build/js/login_script.js"></script>
+
     <script>
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
          .register('${pageContext.request.contextPath}/service-worker.js')
