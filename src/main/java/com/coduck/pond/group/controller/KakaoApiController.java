@@ -3,7 +3,6 @@ package com.coduck.pond.group.controller;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -12,21 +11,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coduck.pond.core.utils.JsonParseString;
 import com.coduck.pond.core.utils.PropertyUtility;
-import com.coduck.pond.group.dao.GroupDao;
 import com.coduck.pond.group.service.GroupService;
 import com.coduck.pond.group.service.GroupUpdateService;
-import com.fasterxml.jackson.core.JsonParser;
 
 @Controller
 public class KakaoApiController {
@@ -67,17 +61,10 @@ public class KakaoApiController {
 			     rsp += line;
 			}
 			
-			/*
-			 * 코드 너무 지저분 나중에 리펙토링 연습 ㄱㄱ
-			 */
-			JSONParser parser = new JSONParser();
-			JSONObject jsonObj = (JSONObject)parser.parse(rsp);
-			JSONArray jsonArr = (JSONArray)jsonObj.get("documents");
-			JSONObject jsonObj2 = (JSONObject)jsonArr.get(0);
-			JSONObject jsonObj3 = (JSONObject)jsonObj2.get("address");
-			String x = (String)jsonObj3.get("x");
-			String y = (String)jsonObj3.get("y");
+			String x = new JsonParseString().parseWord("\"x\"", rsp.toString());
+			String y = new JsonParseString().parseWord("\"y\"", rsp.toString());
 			reader.close();
+			
 			
 			try {
 				if(updateOk.equals("false")) {
