@@ -13,6 +13,6 @@
 ### Contact
 JHTA 1803기 3조 Team Co-duck
 
-[__강덕영__](https://github.com/soulstrk)
-[__이재용__](https://github.com/PaDuckk)
+[__강덕영__](https://github.com/PaDuckk)
+[__이재용__](https://github.com/soulstrk)
 [__배재정__](https://github.com/bjj9804)
